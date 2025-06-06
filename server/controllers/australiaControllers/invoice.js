@@ -97,35 +97,6 @@ function processData(data) {
     });
 }
 
-
-// function removeInvalidRows(data) {
-//     return data.filter(row => {
-//         const unitPrice = row["Unit Price/Rate"];
-//         const accountName = row["Account"];
-//         // Remove if Account is "receivables"
-//         if ((row["Account"] || "").toLowerCase().includes("receivables")) {
-//             return false;
-//         }
-//         // Clean and check Unit Price/Rate
-//         if (unitPrice !== undefined && unitPrice !== null) {
-//             const unitPriceStr = unitPrice.toString().trim(); // convert to clean string
-
-//             // 1. If contains % symbol
-//             if (unitPriceStr.includes("%")) {
-//                 return false;
-//             }
-
-//             // 2. If is a small number between 0 and 1 (e.g., 0.1 for 10%)
-//             const unitPriceNum = parseFloat(unitPriceStr.replace("%", "")); // remove % if somehow present
-//             if (!isNaN(unitPriceNum) && unitPriceNum > 0 && unitPriceNum < 1) {
-//                 return false;
-//             }
-//         }
-
-//         return true;
-//     });
-// }
-
 function removeInvalidRows(data) {
     return data.filter(row => {
         const accountName = (row["Account"] || "").toLowerCase();
