@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 
 const LoginForm = ({ setToken, onAdminLogin }) => {
@@ -33,7 +34,7 @@ const LoginForm = ({ setToken, onAdminLogin }) => {
       setToken(data.token);
       navigate('/dashboard');
     } else {
-      alert(data.error || 'Login failed');
+      toast.error(data.error);
     }
   };
 

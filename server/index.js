@@ -12,6 +12,7 @@ import globalMultiCurrencyRoutes from './routes/globalMultiCurrencyRoutes.js'; /
 import fileRoutesSheet from './routes/fileRoutesSheet.js'; // Import file routes for saving downloaded sheets
 import file from './routes/files.js';
 import fileShowRoutes from './routes/fileShowRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 // other setup ...
 
@@ -26,6 +27,7 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(cors());
 app.use(express.json()); // Parses incoming JSON
 
+app.use('/api', userRoutes);
 app.use('/api/files', fileShowRoutes);
 app.use('/api', fileRoutesSheet);
 app.use('/api/files', file);
