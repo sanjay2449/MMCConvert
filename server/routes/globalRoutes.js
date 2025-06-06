@@ -113,7 +113,4 @@ router.get("/download-estimates", asyncHandler(downloadEstimates));
 router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder));
 
 
-// router.post("/process-bill", asyncHandler(processMultiCurrencyBill));
-
-
 export default router;

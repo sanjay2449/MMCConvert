@@ -25,6 +25,8 @@ import { downloadInvoicePayment, processInvoicePayment, uploadInvoicePayment } f
 import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/australiaControllers/billPaymentCreditCard.js";
 import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } from "../controllers/australiaControllers/openingBalance.js";
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/australiaControllers/journalEntry.js";
+import{ downloadEstimates, processEstimates, uploadEstimates } from "../controllers/australiaControllers/estimates.js"; 
+import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/australiaControllers/purchaseOrder.js"
 
 
 // Utility to wrap async route handlers and catch errors
@@ -54,6 +56,8 @@ router.post("/upload-invoicepayment", upload.single("file"), asyncHandler(upload
 router.post("/upload-billpaymentcreditcard", upload.single("file"), asyncHandler(uploadBillPaymentCreditCard));
 router.post("/upload-openingbalance", upload.single("file"), asyncHandler(uploadOpeningBalance));
 router.post("/upload-journalentry", upload.single("file"), asyncHandler(uploadJournalEntry));
+router.post("/upload-estimates", upload.single("file"), asyncHandler(uploadEstimates));
+router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadPurchaseOrder));
 
 
 // Convert routes
@@ -79,6 +83,8 @@ router.post("/process-invoicepayment", asyncHandler(processInvoicePayment));
 router.post("/process-billpaymentcreditcard", asyncHandler(processBillPaymentCreditCard));
 router.post("/process-openingbalance", asyncHandler(processOpeningBalance));
 router.post("/process-journalentry", asyncHandler(processJournalEntry));
+router.post("/process-estimates", asyncHandler(processEstimates));
+router.post("/process-purchaseorder", asyncHandler(processPurchaseOrder));
 
 // Download routes
 router.get("/download-coa", asyncHandler(downloadCoa));
@@ -103,4 +109,6 @@ router.get("/download-invoicepayment", asyncHandler(downloadInvoicePayment));
 router.get("/download-billpaymentcreditcard", asyncHandler(downloadBillPaymentCreditCard));
 router.get("/download-openingbalance", asyncHandler(downloadOpeningBalance));
 router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
+router.get("/download-estimates", asyncHandler(downloadEstimates)); 
+router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder)); 
 export default router;
