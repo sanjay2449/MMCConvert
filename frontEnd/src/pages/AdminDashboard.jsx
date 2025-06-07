@@ -1,3 +1,4 @@
+// export default AdminDashboard;
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpForm from '../components/SignUpForm';
@@ -13,11 +14,18 @@ const AdminDashboard = () => {
         const [search, setSearch] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
         const [userToDelete, setUserToDelete] = useState(null);
-        const usersPerPage = 5;
+        const usersPerPage = 10;
         const navigate = useNavigate();
 
+        // ✅ Admin auth check: redirect if no token
         useEffect(() => {
-                fetchUsers();
+                const token = localStorage.getItem('adminToken');
+                if (!token || token !== 'MMC_ADMIN_AUTHORIZED') {
+                        toast.error('Unauthorized access. Please login first.');
+                        navigate('/');
+                } else {
+                        fetchUsers();
+                }
         }, []);
 
         const fetchUsers = async () => {
@@ -65,14 +73,20 @@ const AdminDashboard = () => {
         );
         const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
+        // ✅ Logout function
+        const logout = () => {
+                localStorage.removeItem('adminToken');
+                navigate('/');
+        };
+
         return (
                 <div className="min-h-screen gradient-bg p-8 relative">
 
-                        {/* Top-left Exit Icon */}
+                        {/* 🔒 Logout Button (Top Left) */}
                         <button
-                                onClick={() => navigate('/')}
+                                onClick={logout}
                                 className="absolute text-white text-2xl hover:text-red-400 transition duration-200"
-                                title="Back to Login"
+                                title="Logout"
                         >
                                 <FaSignOutAlt />
                         </button>
@@ -116,7 +130,6 @@ const AdminDashboard = () => {
                                                                 <div>
                                                                         <p><strong>👤 Name:</strong> {user.name}</p>
                                                                         <p><strong>📧 Email:</strong> {user.email}</p>
-                                                                        {/* <p><strong>🔑 Password:</strong> {user.password}</p> */}
                                                                 </div>
                                                                 <button
                                                                         onClick={() => setUserToDelete(user)}
@@ -125,9 +138,7 @@ const AdminDashboard = () => {
                                                                         Delete
                                                                 </button>
                                                         </li>
-
                                                 ))}
-
                                         </ul>
                                 ) : (
                                         <p className="text-white text-center">No users found.</p>
@@ -154,7 +165,7 @@ const AdminDashboard = () => {
 
                         {/* Add User Modal */}
                         {isModalOpen && (
-                                <div className="fixed inset-0 z-50 gradient-bg  bg-opacity-40 flex justify-center items-center">
+                                <div className="fixed inset-0 z-50 gradient-bg bg-opacity-40 flex justify-center items-center">
                                         <div className="gradient-bg rounded-xl shadow-lg p-6 relative w-full max-w-md">
                                                 <button
                                                         onClick={handleCloseModal}
@@ -162,9 +173,6 @@ const AdminDashboard = () => {
                                                 >
                                                         &times;
                                                 </button>
-                                                {/* <h2 className="text-xl font-bold text-white mb-4 text-center">
-                                                        {editingUser ? 'Edit User' : 'Add New User'}
-                                                </h2> */}
                                                 <SignUpForm user={editingUser} onSuccess={handleCloseModal} />
                                         </div>
                                 </div>

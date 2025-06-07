@@ -8,11 +8,14 @@ const Home = ({ setToken }) => {
   const navigate = useNavigate();
 
   const handleLogin = (email, password) => {
+    // Admin credential check
     if (email === 'Admin@mmcconvert.com' && password === 'MMCConvert2025') {
       setIsAdmin(true);
-      navigate('/admin'); // Navigate to Admin Dashboard
+      localStorage.setItem('adminToken', 'MMC_ADMIN_AUTHORIZED'); // Store flag
+      navigate('/admin'); // Redirect to AdminDashboard
       return true;
     }
+
     return false;
   };
 
