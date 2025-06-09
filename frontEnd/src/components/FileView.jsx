@@ -232,16 +232,46 @@ const FileView = () => {
     }
   };
 
+  // const handleHistoryDownload = async (entry) => {
+  //   const currencyPath = getCurrencyPath(); // 🔁 New logic
+  //   try {
+  //     const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${entry.routeUsed}`);
+  //     if (!response.ok) throw new Error("Download failed");
+
+  //     const blob = await response.blob();
+  //     const url = window.URL.createObjectURL(blob);
+  //     const link = document.createElement("a");
+  //     link.href = url;
+  //     link.setAttribute("download", entry.fileName);
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+
+  //     toast.success("Downloaded again");
+  //   } catch (error) {
+  //     toast.error("Download failed");
+  //     console.error(error);
+  //   }
+  // };
   const handleHistoryDownload = async (entry) => {
+    const currencyPath = getCurrencyPath();
+
     try {
-      const response = await fetch(`/api/${combinedRoutePrefix}/download-${entry.routeUsed}`);
+      // `entry.routeUsed` is something like 'invoice' — no need to strip anything
+      const route = entry.routeUsed;
+
+      const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`);
       if (!response.ok) throw new Error("Download failed");
 
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", entry.fileName);
+
+      // Recreate filename if it's missing
+      const fileName = entry.fileName || `${file?.fileName || 'Export'}__${route}.xlsx`;
+
+      link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -249,9 +279,10 @@ const FileView = () => {
       toast.success("Downloaded again");
     } catch (error) {
       toast.error("Download failed");
-      console.error(error);
+      console.error("Error in handleHistoryDownload:", error);
     }
   };
+
 
   const handleHistoryDelete = async (index) => {
     try {
@@ -382,9 +413,6 @@ const FileView = () => {
       setLoading(false);
     }
   };
-
-
-
   const handleConvert = async () => {
     const route = currentFunctionRoutes[selectedSection]?.[selectedFunction];
     if (!route || !countryRoute) return;
