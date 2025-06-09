@@ -5,6 +5,7 @@ import SignUpForm from '../components/SignUpForm';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AdminDashboard = () => {
         const [users, setUsers] = useState([]);
@@ -38,6 +39,38 @@ const AdminDashboard = () => {
                         console.error(error);
                 }
         };
+
+        const PasswordField = ({ password }) => {
+                const [show, setShow] = useState(false);
+                const [isAdmin, setIsAdmin] = useState(false);
+
+                useEffect(() => {
+                        const token = localStorage.getItem('adminToken');
+                        if (token === 'MMC_ADMIN_AUTHORIZED') {
+                                setIsAdmin(true);
+                        }
+                }, []);
+
+                if (!isAdmin) {
+                        return <span className="italic text-gray-300">Hidden</span>;
+                }
+
+                return (
+                        <span className="flex items-center gap-2">
+                                <span className={`transition-all ${show ? 'text-white' : 'tracking-widest text-gray-300'}`}>
+                                        {show ? password : '•'.repeat(password.length)}
+                                </span>
+                                <button
+                                        onClick={() => setShow(!show)}
+                                        className="text-white hover:text-blue-300 transition duration-300 transform hover:scale-110"
+                                        title={show ? 'Hide Password' : 'Show Password'}
+                                >
+                                        {show ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                        </span>
+                );
+        };
+
 
         const handleSearch = (query) => {
                 setSearch(query);
@@ -121,25 +154,37 @@ const AdminDashboard = () => {
                         {/* Users List */}
                         <div className="shadow-md rounded-lg p-4 bg-white/10 backdrop-blur">
                                 {paginatedUsers.length > 0 ? (
-                                        <ul className="space-y-3">
+                                        <div className="w-full rounded-lg overflow-hidden overflow-x-auto">
+                                                {/* Header */}
+                                                <div className="flex font-bold text-white bg-blue-800 py-3 px-4 border-b border-white/30">
+                                                        <div className="w-1/4 flex items-center gap-2"><span>👤</span>Name</div>
+                                                        <div className="w-1/4 flex items-center gap-2"><span>📧</span>Email</div>
+                                                        <div className="w-1/4 flex items-center gap-2"><span>🔒</span>Password</div>
+                                                        <div className="w-1/4 text-end">Action</div>
+                                                </div>
+
+                                                {/* Rows */}
                                                 {paginatedUsers.map((user) => (
-                                                        <li
+                                                        <div
                                                                 key={user._id}
-                                                                className="border-b border-white/20 text-md text-white font-serif rounded-md px-4 py-3 bg-white/5 flex justify-between items-start"
+                                                                className="flex items-center text-white font-serif py-3 px-4 border-b border-white/10 hover:bg-white/10 transition"
                                                         >
-                                                                <div>
-                                                                        <p><strong>👤 Name:</strong> {user.name}</p>
-                                                                        <p><strong>📧 Email:</strong> {user.email}</p>
+                                                                <div className="w-1/4 truncate">{user.name}</div>
+                                                                <div className="w-1/4 truncate">{user.email}</div>
+                                                                <div className="w-1/4"><PasswordField password={user.password} /></div>
+                                                                <div className="w-1/4 flex justify-end">
+                                                                        <button
+                                                                                onClick={() => setUserToDelete(user)}
+                                                                                className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700"
+                                                                        >
+                                                                                Delete
+                                                                        </button>
                                                                 </div>
-                                                                <button
-                                                                        onClick={() => setUserToDelete(user)}
-                                                                        className="text-white bg-red-600 h-fit px-3 py-1 rounded hover:bg-red-700"
-                                                                >
-                                                                        Delete
-                                                                </button>
-                                                        </li>
+                                                        </div>
                                                 ))}
-                                        </ul>
+                                        </div>
+
+
                                 ) : (
                                         <p className="text-white text-center">No users found.</p>
                                 )}
