@@ -7,7 +7,7 @@ const type = "invoice";
 const { excelFilePath, outputJsonPath, modifiedExcelPath } = getPaths(type);
 
 const changeColumnName = {
-    "No.": "Invoice No",
+    "Num": "Invoice No",
     "Name": "Customer",
     "Date": "Invoice Date",
     "Due Date": "Due Date",
@@ -140,7 +140,7 @@ function processInvoiceMultiCurrencyData(data, currencyCode) {
 function removeInvalidRows(data) {
     return data.filter(row => {
         const accountName = (row["Account"] || "").toLowerCase();
-        if (accountName.includes("receivables")) return false;
+        if (accountName.includes("receivables") ||accountName.includes("receivable")) return false;
         if (accountName.includes("tax payable") || accountName.includes("gst payable") || accountName.includes("vat payable")) return false;
         return true;
     });

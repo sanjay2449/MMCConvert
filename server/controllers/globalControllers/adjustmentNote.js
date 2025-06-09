@@ -7,7 +7,7 @@ const type = "Adjustmentnote";
 const { excelFilePath, outputJsonPath, modifiedExcelPath } = getPaths(type);
 
 const changeColumnName = {
-    "No.": "Adjustment Note No",
+    "Num": "Adjustment Note No",
     "Name": "Customer",
     "Date": "Adjustment Note Date",
     "Service Date": "Service Date",
