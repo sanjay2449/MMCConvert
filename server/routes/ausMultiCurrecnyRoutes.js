@@ -11,7 +11,7 @@ import { downloadItem, processItem, uploadItem } from "../controllers/australiaC
 import { downloadtrackedItem, processtrackedItem, uploadtrackedItem, } from "../controllers/australiaControllers/trackedItems.js";
 import { downloadOpenAR, processOpenAR, uploadOpenAR } from "../controllers/australiaControllers/openAR.js";
 import { downloadOpenAP, processOpenAP, uploadOpenAP } from "../controllers/australiaControllers/openAP.js";
-import { downloadInvoice, processInvoice, uploadInvoice } from "../controllers/australiaControllers/invoice.js";
+import { downloadInvoice, processMultiCurrencyInvoice, uploadInvoice } from "../controllers/australiaControllers/invoice.js";
 import { downloadAdjustmentNote, processAdjustmentNote, uploadAdjustmentNote } from "../controllers/australiaControllers/adjustmentNote.js";
 import { downloadBill, processMultiCurrencyBill, uploadBill } from "../controllers/australiaControllers/bill.js";
 import { downloadSupplierCredit, processSupplierCredit, uploadSupplierCredit } from "../controllers/australiaControllers/supplierCredit.js";
@@ -69,7 +69,7 @@ router.post("/process-item", asyncHandler(processItem));
 router.post("/process-trackeditem", asyncHandler(processtrackedItem));
 router.post("/process-openar", asyncHandler(processOpenAR));
 router.post("/process-openap", asyncHandler(processOpenAP));
-router.post("/process-invoice", asyncHandler(processInvoice));
+router.post("/process-invoice", asyncHandler(processMultiCurrencyInvoice));
 router.post("/process-adjustmentnote", asyncHandler(processAdjustmentNote));
 router.post("/process-bill", asyncHandler(processMultiCurrencyBill));
 router.post("/process-suppliercredit", asyncHandler(processSupplierCredit));

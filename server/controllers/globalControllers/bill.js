@@ -76,7 +76,7 @@ function fillDownDueDate(data) {
     });
 }
 
-function processData(data, currencyCode) {
+function processData(data) {
     return data.map(row => {
         if (row["Tax Amount"] === undefined || row["Tax Amount"] === "") {
             row["Tax Amount"] = 0;

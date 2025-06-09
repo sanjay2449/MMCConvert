@@ -24,7 +24,7 @@ const SignUpForm = () => {
       if (res.ok && data.user && data.token) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        navigate('/');
+        navigate('/admin');
         toast.success(`${data.user.name}'s Account Created successfully `);
       } else {
         toast.error(data.error || 'Registration failed')

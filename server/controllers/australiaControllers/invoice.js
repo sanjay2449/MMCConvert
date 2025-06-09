@@ -1,5 +1,5 @@
 import { move, pathExists } from "fs-extra";
-import {readExcelToJson} from "../../utils/excelReader.js";
+import { readExcelToJson } from "../../utils/excelReader.js";
 import { writeJsonToExcel, saveJsonToFile } from "../../utils/excelWriter.js";
 import { getPaths } from "../../utils/filePaths.js";
 
@@ -62,7 +62,7 @@ function fillDownDueDate(data) {
     });
 }
 
-function processData(data) {
+function processInvoiceData(data) {
     return data.map(row => {
         // Fill missing values
         if (row["Product/Service Tax Amount"] === undefined || row["Product/Service Tax Amount"] === "") {
@@ -85,6 +85,46 @@ function processData(data) {
         const debit = parseFloat(row["Debit"] || 0);
         const credit = parseFloat(row["Credit"] || 0);
         row["Product/Service Amount"] = (credit - debit).toFixed(2);
+
+        const amount = parseFloat(row["Product/Service Amount"]) || 0;
+        const quantity = parseFloat(row["Product/Service Quantity"]) || 1;
+        row["Product/Service Rate"] = quantity !== 0 ? (amount / quantity).toFixed(2) : 0;
+
+        const taxAmount = parseFloat(row["Product/Service Tax Amount"]);
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
+function processInvoiceMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        // Fill missing values
+        if (row["Product/Service Tax Amount"] === undefined || row["Product/Service Tax Amount"] === "") {
+            row["Product/Service Tax Amount"] = 0;
+        }
+        if (!row["Product/Service Quantity"]) {
+            row["Product/Service Quantity"] = 1;
+        }
+        if (!row["Product/Service Tax Code"]) {
+            row["Product/Service Tax Code"] = "Out Of Scope";
+            row["Product/Service Tax Amount"] = 0;
+        }
+
+        // Remove minus sign from Product/Service Quantity
+        if (typeof row["Product/Service Quantity"] === "string" || typeof row["Product/Service Quantity"] === "number") {
+            row["Product/Service Quantity"] = row["Product/Service Quantity"].toString().replace("-", "");
+        }
+
+        // Calculate Amount and Rate
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+        if (row["Currency Code"] === currencyCode) {
+            row["Product/Service Amount"] = (credit - debit).toFixed(2);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Product/Service Amount"] = parseFloat(row["Foreign Amount"]);
+        }
 
         const amount = parseFloat(row["Product/Service Amount"]) || 0;
         const quantity = parseFloat(row["Product/Service Quantity"]) || 1;
@@ -153,7 +193,7 @@ export async function processInvoice(req, res) {
         let jsonData = await readExcelToJson(excelFilePath);
         jsonData = renameColumns(jsonData, changeColumnName);
         jsonData = fillDownDueDate(jsonData);
-        jsonData = processData(jsonData);
+        jsonData = processInvoiceData(jsonData);
         jsonData = removeInvalidRows(jsonData);
         jsonData = normalizeInvoiceNumbers(jsonData);
         jsonData = sortByInvoiceNo(jsonData);
@@ -166,6 +206,32 @@ export async function processInvoice(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields); // 🟰 Pass numberFields
 
         console.log("✅Australia Invoice Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+export async function processMultiCurrencyInvoice(req, res) {
+    const { currencyCode } = req.body;
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = fillDownDueDate(jsonData);
+        jsonData = processInvoiceMultiCurrencyData(jsonData, currencyCode);
+        jsonData = removeInvalidRows(jsonData);
+        jsonData = normalizeInvoiceNumbers(jsonData);
+        jsonData = sortByInvoiceNo(jsonData);
+        jsonData = filterColumns(jsonData);
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+
+        const numberFields = ["Product/Service Amount", "Product/Service Rate", "Product/Service Tax Amount"]; // 🟰 Add this
+
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields); // 🟰 Pass numberFields
+
+        console.log("✅Australia Invoice Multi Currency Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

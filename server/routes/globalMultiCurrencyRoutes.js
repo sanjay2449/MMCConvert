@@ -13,7 +13,7 @@ import{ downloadtrackedItem, processtrackedItem, uploadtrackedItem } from "../co
 import { downloadOpenAR, processOpenAR, uploadOpenAR } from "../controllers/globalControllers/openAR.js";
 import { downloadOpenAP, uploadOpenAP } from "../controllers/globalControllers/openAP.js";
 import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } from "../controllers/globalControllers/openingbalance.js";
-import { downloadInvoice, processInvoice, uploadInvoice } from "../controllers/globalControllers/invoice.js";
+import { downloadInvoice, processMultiCurrencyInvoice, uploadInvoice } from "../controllers/globalControllers/invoice.js";
 import { downloadAdjustmentNote, processAdjustmentNote, uploadAdjustmentNote } from "../controllers/globalControllers/adjustmentNote.js";
 import { downloadBill, processMultiCurrencyBill, uploadBill } from "../controllers/globalControllers/bill.js";
 import { downloadSupplierCredit, processSupplierCredit, uploadSupplierCredit } from "../controllers/globalControllers/suppliercredit.js";
@@ -68,7 +68,7 @@ router.post("/process-item", asyncHandler(processItem));
 router.post("/process-trackeditem", asyncHandler(processtrackedItem));
 router.post("/process-openar", asyncHandler(processOpenAR));
 router.post("/process-openap", asyncHandler(processOpenAR));
-router.post("/process-invoice", asyncHandler(processInvoice));
+router.post("/process-invoice", asyncHandler(processMultiCurrencyInvoice));
 router.post("/process-adjustmentnote", asyncHandler(processAdjustmentNote));
 router.post("/process-bill", asyncHandler(processMultiCurrencyBill));
 router.post("/process-suppliercredit", asyncHandler(processSupplierCredit));
