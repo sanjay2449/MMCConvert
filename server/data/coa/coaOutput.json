@@ -3,95 +3,95 @@
     "Account No.": 100,
     "Account": "CAJA",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 100.01,
     "Account": "CAJA:Caja General",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 100.02,
     "Account": "CAJA:Caja Chica",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101,
     "Account": "BANCOS",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.01,
     "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001083-2",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.02,
     "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001077-8",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.03,
     "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001084-0",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.04,
     "Account": "BANCOS:(CERRADO)Cta. Ahorro 21-302-021225-3",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.05,
     "Account": "BANCOS:(CERRADO)Cta. Ahorro 21-302-021274-1",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.06,
     "Account": "BANCOS:(CERRADO)Cta. Ahorro USD 22-302-000859-9",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 101.07,
     "Account": "BANCOS:Cta.Gastos Operat-21-302-0332470",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank",
+    "Detail type": "Cash and cash equivalents",
     "Description": "Gastos Operativos"
   },
   {
     "Account No.": 101.08,
     "Account": "BANCOS:Cta.Otros Ingresos-21-302-0332488",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank",
+    "Detail type": "Cash and cash equivalents",
     "Description": "Otros Ingresos"
   },
   {
     "Account No.": 101.09,
     "Account": "BANCOS:Cta.BeneficiosLab-21-302-0332496",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank",
+    "Detail type": "Cash and cash equivalents",
     "Description": "Beneficios Laborales"
   },
   {
     "Account No.": 101.1,
     "Account": "BANCOS:Cta.Transf-USD-22-302-0013169",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank",
+    "Detail type": "Cash and cash equivalents",
     "Description": "Transferencias de EOS en USD"
   },
   {
     "Account No.": 101.11,
     "Account": "BANCOS:Cta. Ahorro-USFS 21-302-039430-0",
     "Type": "Cash and cash equivalents",
-    "Detail type": "Bank"
+    "Detail type": "Cash and cash equivalents"
   },
   {
     "Account No.": 103.01,
@@ -108,118 +108,118 @@
   {
     "Account No.": 102,
     "Account": "ANTICIPOS",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 102.01,
     "Account": "ANTICIPOS:Anticipos",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 102.02,
     "Account": "ANTICIPOS:Impuestos sobre la Renta (Pago a la cuenta)",
-    "Type": "Current assets",
-    "Detail type": "Other current assets",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets",
     "Description": "Pago a ls cuenta"
   },
   {
     "Account No.": 102.03,
     "Account": "ANTICIPOS:Impuestos sobre Ventas (Pagado)",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104,
     "Account": "INVENTARIO",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.01,
     "Account": "INVENTARIO:Inventario - Analsis de Agua",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.02,
     "Account": "INVENTARIO:Inventario  - Cloro Tabletas",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.03,
     "Account": "INVENTARIO:Inventario - Cloro Granulado (en libras)",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.04,
     "Account": "INVENTARIO:Inventario - Cloradores",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.05,
     "Account": "INVENTARIO:Inventario - Fitros",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.06,
     "Account": "INVENTARIO:Inventario - Reactivos y Kit Cloro",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 104.07,
     "Account": "INVENTARIO:Inventario - Accesorios y Otras",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 105,
     "Account": "OTROS ACTIVOS CIRCULANTES",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 105.01,
     "Account": "Prestamos a Empleados",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 105.02,
     "Account": "Deodores Varios",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 105.03,
     "Account": "OTROS ACTIVOS CIRCULANTES:Prestamo EOS",
-    "Type": "Current assets",
-    "Detail type": "Other current assets",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets",
     "Description": "Prestamo Motocicleta"
   },
   {
     "Account No.": 3004,
     "Account": "Uncategorized Asset (Activo sin categorizado)",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 3011,
     "Account": "Undeposited Funds",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 8965,
     "Account": "Inventory Asset",
-    "Type": "Current assets",
-    "Detail type": "Other current assets"
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
   },
   {
     "Account No.": 120,
@@ -272,44 +272,44 @@
   {
     "Account No.": 3012,
     "Account": "Cuentas por Pagar",
-    "Type": "Accounts Payable (A/P)",
+    "Type": "Accounts payable (A/P)",
     "Detail type": "Accounts Payable (A/P)"
   },
   {
     "Account No.": 200,
     "Account": "ACREEDORES DIVERSOS",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 201,
     "Account": "RETENCIONES POR PAGAR",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 201.01,
     "Account": "RETENCIONES POR PAGAR:Benef. y Prest. Lab. de Empleados",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 201.02,
     "Account": "RETENCIONES POR PAGAR:Fondos por Ejecutar",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 201.03,
     "Account": "RETENCIONES POR PAGAR:Transferencias no Ejecutadas",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 201.04,
     "Account": "RETENCIONES POR PAGAR:Seguros por Pagar",
-    "Type": "Current liabilities",
-    "Detail type": "Other current liabilities"
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
   },
   {
     "Account No.": 300,
@@ -496,55 +496,55 @@
     "Account No.": 500,
     "Account": "Cost of Goods Sold",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.01,
     "Account": "Insumos Analsis de Agua",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.02,
     "Account": "Insumos Cloro Tabletas",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.03,
     "Account": "Insumos Cloro Granulado (en libras)",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.04,
     "Account": "Insumos Cloradores",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.05,
     "Account": "Insumos Fitros",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.06,
     "Account": "Insumos Reactivos",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.07,
     "Account": "Insumos Accesorio y Otros",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 500.08,
     "Account": "Insumos Accesorios y Otras",
     "Type": "Cost of sales",
-    "Detail type": "Supplies and materials - COS"
+    "Detail type": "Cost of Sales"
   },
   {
     "Account No.": 3003,

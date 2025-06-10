@@ -144,6 +144,7 @@ const FileView = () => {
   const [convertComplete, setConvertComplete] = useState(false);
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [downloadReady, setDownloadReady] = useState(false);
 
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [historyData, setHistoryData] = useState([]);
@@ -347,6 +348,7 @@ const FileView = () => {
     setUploadComplete(false);
     setConvertComplete(false);
     setDownloadComplete(false);
+    setDownloadReady(false);
   };
 
 
@@ -433,6 +435,10 @@ const FileView = () => {
 
       setConvertComplete(true);
       toast.success("Converted successfully");
+
+      setTimeout(() => {
+        setDownloadReady(true);
+      }, 3000);
     } catch (error) {
       toast.error("Conversion error");
       console.error(error);
@@ -604,8 +610,11 @@ const FileView = () => {
 
               <button
                 onClick={handleDownload}
-                disabled={!convertComplete || downloadComplete || loading}
-                className={`px-4 py-2 rounded text-white transition-colors ${!convertComplete || downloadComplete || loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'}`}
+                disabled={!convertComplete || !downloadReady || downloadComplete || loading}
+                className={`px-4 py-2 rounded text-white transition-colors ${!convertComplete || !downloadReady || downloadComplete || loading
+                    ? 'bg-gray-600 cursor-not-allowed'
+                    : 'bg-purple-600 hover:bg-purple-700'
+                  }`}
               >
                 {downloadComplete ? 'Downloaded' : loading ? 'Downloading...' : 'Download'}
               </button>

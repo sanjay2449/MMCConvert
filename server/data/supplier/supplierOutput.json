@@ -1,2357 +1,2276 @@
 [
   {
-    "Display Name As": "101ELECTRICS",
-    "Currency Code": "AUD"
+    "Supplier": "101ELECTRICS"
   },
   {
-    "Display Name As": "1UP CARGO",
-    "Currency Code": "AUD"
+    "Supplier": "1UP CARGO"
   },
   {
-    "Display Name As": 259,
-    "Currency Code": "AUD"
+    "Supplier": 259
   },
   {
-    "Display Name As": "5WAYS FOODSERVICE PTY LTD",
-    "Billing Address Line 1": "15-17 QUALITY DRIVE\r\nVIC DANDENONG 3175\r\nAustralia",
-    "Billing Address Line 2": "15-17 QUALITY DRIVE",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Phone": "Phone: 395545535",
-    "Currency Code": "AUD"
+    "Supplier": "5WAYS FOODSERVICE PTY LTD",
+    "Phone Numbers": "Phone: 395545535",
+    "Address": "15-17 QUALITY DRIVE\r\nVIC DANDENONG 3175\r\nAustralia",
+    "Phone": 395545535,
+    "ABN": "55096671920",
+    "Street": "15-17 QUALITY DRIVE",
+    "City": "VIC",
+    "State/Territory": "DANDENONG",
+    "Postcode": "3175",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "A.M.HAEMEK SHACKS",
-    "Currency Code": "AUD"
+    "Supplier": "A.M.HAEMEK SHACKS"
   },
   {
-    "Display Name As": "ABADI YOSEF & SIMCHA LTD",
-    "Billing Address Line 1": "Abadi Yosef & Simcha Ltd\r\r\n10 TOZERET ST\r\nJERUSALEM 9147001\r\nIL",
-    "Billing Address Line 2": "Abadi Yosef & Simcha Ltd\r\r\n10 TOZERET ST",
-    "Billing Address City": "JERUSALEM",
-    "Billing Address Country": "IL",
-    "Currency Code": "AUD"
+    "Supplier": "ABADI YOSEF & SIMCHA LTD",
+    "Address": "Abadi Yosef & Simcha Ltd\r\r\n10 TOZERET ST\r\nJERUSALEM 9147001\r\nIL",
+    "Street": "Abadi Yosef & Simcha Ltd\r\r\n10 TOZERET ST",
+    "City": "JERUSALEM",
+    "Postcode": "9147001",
+    "Country": "IL"
   },
   {
-    "Display Name As": "ABSOLUTE STORAGE SYSTEMS PTY LDT",
-    "Currency Code": "AUD"
+    "Supplier": "ABSOLUTE STORAGE SYSTEMS PTY LDT"
   },
   {
-    "Display Name As": "ADMIRAL",
-    "Currency Code": "AUD"
+    "Supplier": "ADMIRAL"
   },
   {
-    "Display Name As": "ADMIRAL FOODS",
-    "Currency Code": "AUD"
+    "Supplier": "ADMIRAL FOODS"
   },
   {
-    "Display Name As": "ADMIRAL FOODS PTY",
-    "Currency Code": "AUD"
+    "Supplier": "ADMIRAL FOODS PTY"
   },
   {
-    "Display Name As": "ADS REFRIDGERATION",
-    "Currency Code": "AUD"
+    "Supplier": "ADS REFRIDGERATION"
   },
   {
-    "Display Name As": "ADSONE GROUP",
-    "Currency Code": "AUD"
+    "Supplier": "ADSONE GROUP"
   },
   {
-    "Display Name As": "AFFINITY PRINT",
-    "Currency Code": "AUD"
+    "Supplier": "AFFINITY PRINT"
   },
   {
-    "Display Name As": "AGAS YAROK TRADING AND SERVICES LTD",
-    "Billing Address Line 1": "NAZARETH P.O.B 50559\r\n16000\r\nIsrael",
-    "Billing Address Line 2": "NAZARETH P.O.B 50559",
-    "Billing Address Country": "Israel",
+    "Supplier": "AGAS YAROK TRADING AND SERVICES LTD",
+    "Phone Numbers": "Phone: ????",
     "Email": "info@alarz.co.il",
-    "Phone": "Phone: ????",
+    "Address": "NAZARETH P.O.B 50559\r\n16000\r\nIsrael",
+    "Phone": "????",
     "Website": "http://www.alarz.co.il",
-    "Currency Code": "AUD"
+    "ABN": "17131025602",
+    "Street": "NAZARETH P.O.B 50559",
+    "Postcode": "16000",
+    "Country": "Israel"
   },
   {
-    "Display Name As": "AGRO FOODS PL",
-    "Billing Address Line 1": "AGRO FOODS PL\r\r\n41 SUNLINE DRIVE\r\nTRUGANINA Victoria 3029\r\nAU",
-    "Billing Address Line 2": "AGRO FOODS PL\r\r\n41 SUNLINE DRIVE",
-    "Billing Address City": "TRUGANINA",
-    "Billing Address Country": "AU",
+    "Supplier": "AGRO FOODS PL",
+    "Phone Numbers": "Phone: 03 9994 6944",
     "Email": "info@agrofoods.com.au",
-    "Phone": "Phone: 03 9994 6944",
-    "Currency Code": "AUD"
+    "Address": "AGRO FOODS PL\r\r\n41 SUNLINE DRIVE\r\nTRUGANINA Victoria 3029\r\nAU",
+    "Phone": "03 9994 6944",
+    "Street": "AGRO FOODS PL\r\r\n41 SUNLINE DRIVE",
+    "City": "TRUGANINA",
+    "State/Territory": "Victoria",
+    "Postcode": "3029",
+    "Country": "AU"
   },
   {
-    "Display Name As": "ALDI",
-    "Currency Code": "AUD"
+    "Supplier": "ALDI"
   },
   {
-    "Display Name As": "ALEX BROFMAN",
-    "Email": "abro2175@bigpondnet.au",
-    "Currency Code": "AUD"
+    "Supplier": "ALEX BROFMAN",
+    "Email": "abro2175@bigpondnet.au"
   },
   {
-    "Display Name As": "ALEX GANSKY",
-    "Email": "europlus@wwe.com.au",
-    "Currency Code": "AUD"
+    "Supplier": "ALEX GANSKY",
+    "Email": "europlus@wwe.com.au"
   },
   {
-    "Display Name As": "ALEX KLUGER PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "ALEX KLUGER PTY LTD"
   },
   {
-    "Display Name As": "ALEXANDRE SAVENKOV",
-    "Currency Code": "AUD"
+    "Supplier": "ALEXANDRE SAVENKOV"
   },
   {
-    "Display Name As": "ALINTAENERGY",
-    "Currency Code": "AUD"
+    "Supplier": "ALINTAENERGY"
   },
   {
-    "Display Name As": "ALL-WAYS",
-    "Billing Address Line 1": "ISRAEL",
-    "Billing Address Line 2": "ISRAEL",
-    "Currency Code": "AUD"
+    "Supplier": "ALL-WAYS",
+    "Address": "ISRAEL",
+    "Street": "ISRAEL"
   },
   {
-    "Display Name As": "ALL4WHEELS",
-    "Currency Code": "AUD"
+    "Supplier": "ALL4WHEELS"
   },
   {
-    "Display Name As": "ALLCARGO LOGISTIC SERVICES",
-    "Billing Address Line 1": "Israel",
-    "Billing Address Country": "Israel",
+    "Supplier": "ALLCARGO LOGISTIC SERVICES",
+    "Phone Numbers": "Phone: ??2555200",
     "Email": "info@allcargo.co.il",
-    "Phone": "Phone: ??2555200",
-    "Currency Code": "AUD"
+    "Address": "Israel",
+    "Phone": "??2555200",
+    "Country": "Israel"
   },
   {
-    "Display Name As": "ALLGEN FOODS",
-    "Currency Code": "AUD"
+    "Supplier": "ALLGEN FOODS"
   },
   {
-    "Display Name As": "ALPINE TROUT FARM PTY LTD",
-    "Billing Address Line 1": "115 Mt Baw Baw Tourist Rd\r\nVic Noojee 3833\r\nAustralia",
-    "Billing Address Line 2": "115 Mt Baw Baw Tourist Rd",
-    "Billing Address City": "Vic",
-    "Billing Address Country": "Australia",
+    "Supplier": "ALPINE TROUT FARM PTY LTD",
+    "Phone Numbers": "Phone: (03) 5628 9584\r\nFax: (03) 5628 9644",
     "Email": "info@alpinetroutfarm.com.au",
-    "Phone": "Phone: (03) 5628 9584\r\nFax: (03) 5628 9644",
-    "Account No": "633-000 149471435",
-    "Currency Code": "AUD"
+    "Address": "115 Mt Baw Baw Tourist Rd\r\nVic Noojee 3833\r\nAustralia",
+    "Account No.": "633-000 149471435",
+    "Phone": "(03) 5628 9584",
+    "ABN": "40564370464",
+    "Street": "115 Mt Baw Baw Tourist Rd",
+    "City": "Vic",
+    "State/Territory": "Noojee",
+    "Postcode": "3833",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "ALPINE VALLEY FLOUR MILL PTY.LTD",
-    "Billing Address Line 1": "46 LATITUDE BLVD\r\r\n20-24 Dennis St Campbellfield VIC\r\nVIC THOMASTOWN. 3074\r\nAustralia",
-    "Billing Address Line 2": "46 LATITUDE BLVD\r\r\n20-24 Dennis St Campbellfield VIC",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
+    "Supplier": "ALPINE VALLEY FLOUR MILL PTY.LTD",
+    "Phone Numbers": "Phone: 1300 519 117",
     "Email": "info@alpinevalleyflourmill.com",
-    "Phone": "Phone: 1300 519 117",
-    "Account No": "013-243 183504948",
-    "Currency Code": "AUD"
+    "Address": "46 LATITUDE BLVD\r\r\n20-24 Dennis St Campbellfield VIC\r\nVIC THOMASTOWN. 3074\r\nAustralia",
+    "Account No.": "013-243 183504948",
+    "Phone": "1300 519 117",
+    "ABN": "40151521774",
+    "Street": "46 LATITUDE BLVD\r\r\n20-24 Dennis St Campbellfield VIC",
+    "City": "VIC",
+    "State/Territory": "THOMASTOWN.",
+    "Postcode": "3074",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "AMERICAN E CD",
-    "Currency Code": "AUD"
+    "Supplier": "AMERICAN E CD"
   },
   {
-    "Display Name As": "AMEX",
-    "Currency Code": "AUD"
+    "Supplier": "AMEX"
   },
   {
-    "Display Name As": "ANDES MILLS",
-    "Billing Address Line 1": "PO BOX 282\r\nQLD TOOWONG 4066",
-    "Billing Address Line 2": "PO BOX 282",
-    "Billing Address City": "QLD",
+    "Supplier": "ANDES MILLS",
+    "Phone Numbers": "Phone: 430577515",
     "Email": "fe.mendoza@andesmills.com.au",
-    "Phone": "Phone: 430577515",
-    "Currency Code": "AUD"
+    "Address": "PO BOX 282\r\nQLD TOOWONG 4066",
+    "Phone": 430577515,
+    "ABN": "20161859310",
+    "Street": "PO BOX 282",
+    "City": "QLD",
+    "State/Territory": "TOOWONG",
+    "Postcode": "4066"
   },
   {
-    "Display Name As": "ANL-CMA-CGM GROUP AGENCIES",
-    "Billing Address Line 1": "10 LEVEL, 30 CONVENTION CENTRE PLACE\r\nVIC SOUTH WHARF 3006\r\nAustralia",
-    "Billing Address Line 2": "10 LEVEL, 30 CONVENTION CENTRE PLACE",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Phone": "Phone: 1800207033",
-    "Currency Code": "AUD"
+    "Supplier": "ANL-CMA-CGM GROUP AGENCIES",
+    "Phone Numbers": "Phone: 1800207033",
+    "Address": "10 LEVEL, 30 CONVENTION CENTRE PLACE\r\nVIC SOUTH WHARF 3006\r\nAustralia",
+    "Phone": 1800207033,
+    "ABN": "53118314257",
+    "Street": "10 LEVEL, 30 CONVENTION CENTRE PLACE",
+    "City": "VIC",
+    "State/Territory": "SOUTH WHARF",
+    "Postcode": "3006",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "ANSON",
-    "Currency Code": "AUD"
+    "Supplier": "ANSON"
   },
   {
-    "Display Name As": "APPLE SERVICE",
-    "Currency Code": "AUD"
+    "Supplier": "APPLE SERVICE"
   },
   {
-    "Display Name As": "APR",
-    "Currency Code": "AUD"
+    "Supplier": "APR"
   },
   {
-    "Display Name As": "AQUATIC SOLUTIONS AUST. T/A YARRA VALLEY SALMON PL",
-    "Billing Address Line 1": "399 RUBICON ROAD\r\nVIC THORNTON 3712\r\nAUS",
-    "Billing Address Line 2": "399 RUBICON ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
+    "Supplier": "AQUATIC SOLUTIONS AUST. T/A YARRA VALLEY SALMON PL",
+    "Phone Numbers": "Phone: 357732596\r\nFax: 357732477\r\nMobile: 425310331",
     "Email": "yvs@virtual.net.au",
-    "Phone": "Phone: 357732596\r\nFax: 357732477\r\nMobile: 425310331",
-    "Other": "NICK GORMAN",
+    "Address": "399 RUBICON ROAD\r\nVIC THORNTON 3712\r\nAUS",
+    "Phone": 357732596,
     "Website": "http://www.yarravalleysalmon.com.au",
-    "Currency Code": "AUD"
+    "Other": "NICK GORMAN",
+    "ABN": "60113711863",
+    "Street": "399 RUBICON ROAD",
+    "City": "VIC",
+    "State/Territory": "THORNTON",
+    "Postcode": "3712",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "ARAGUI PTY.LTD",
-    "Other": "irakly",
-    "Currency Code": "AUD"
+    "Supplier": "ARAGUI PTY.LTD",
+    "Other": "irakly"
   },
   {
-    "Display Name As": "AREA SAFE",
-    "Currency Code": "AUD"
+    "Supplier": "AREA SAFE"
   },
   {
-    "Display Name As": "ARIGA PL",
-    "Currency Code": "AUD"
+    "Supplier": "ARIGA PL",
+    "ABN": "19628876237"
   },
   {
-    "Display Name As": "ARIMAR INTERNATIONAL",
-    "Currency Code": "AUD"
+    "Supplier": "ARIMAR INTERNATIONAL"
   },
   {
-    "Display Name As": "AROMA BAKERY AND CATERING",
-    "Billing Address Line 1": "20/80 MILLS ROAD\r\nVIC BRAESIDE",
-    "Billing Address Line 2": "20/80 MILLS ROAD",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 90481951\r\nMobile: 90485675",
-    "Currency Code": "AUD"
+    "Supplier": "AROMA BAKERY AND CATERING",
+    "Phone Numbers": "Phone: 90481951\r\nMobile: 90485675",
+    "Address": "20/80 MILLS ROAD\r\nVIC BRAESIDE",
+    "Phone": 90481951,
+    "ABN": "21543299189",
+    "Street": "20/80 MILLS ROAD",
+    "City": "VIC",
+    "State/Territory": "BRAESIDE"
   },
   {
-    "Display Name As": "AROMAPRODUCT",
-    "Billing Address Line 1": "17 GURAMISHVILI AVE\r\nTBILISI\r\nGeorgia",
-    "Billing Address Line 2": "17 GURAMISHVILI AVE",
-    "Billing Address Country": "Georgia",
+    "Supplier": "AROMAPRODUCT",
     "Email": "info@georgiasnatural.com",
+    "Address": "17 GURAMISHVILI AVE\r\nTBILISI\r\nGeorgia",
     "Website": "https://georgiasnatural.com/",
-    "Currency Code": "AUD"
+    "ABN": 0,
+    "Street": "17 GURAMISHVILI AVE",
+    "State/Territory": "TBILISI",
+    "Country": "Georgia"
   },
   {
-    "Display Name As": "ARSENAL",
-    "Currency Code": "AUD"
+    "Supplier": "ARSENAL",
+    "ABN": "11111111111"
   },
   {
-    "Display Name As": "ASIC",
-    "Currency Code": "AUD"
+    "Supplier": "ASIC"
   },
   {
-    "Display Name As": "ATO CIA",
-    "Currency Code": "AUD"
+    "Supplier": "ATO CIA"
   },
   {
-    "Display Name As": "AUDIO VISUAL CREATIONS",
-    "Currency Code": "AUD"
+    "Supplier": "AUDIO VISUAL CREATIONS"
   },
   {
-    "Display Name As": "AUINKSALE",
-    "Currency Code": "AUD"
+    "Supplier": "AUINKSALE"
   },
   {
-    "Display Name As": "AUR",
-    "Company": "AUSTRALIAN UNITED RETAILERS LTD",
-    "Currency Code": "AUD"
+    "Supplier": "AUR",
+    "Company Name": "AUSTRALIAN UNITED RETAILERS LTD"
   },
   {
-    "Display Name As": "AURIC TEK",
-    "Currency Code": "AUD"
+    "Supplier": "AURIC TEK",
+    "ABN": "48456260211"
   },
   {
-    "Display Name As": "AURIZON",
-    "Currency Code": "AUD"
+    "Supplier": "AURIZON"
   },
   {
-    "Display Name As": "AUSFRESH PTY LTD",
-    "Billing Address Line 1": "P.O BOX 176\r\nVIC GLENROY 3046\r\nAustralia",
-    "Billing Address Line 2": "P.O BOX 176",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Currency Code": "AUD"
+    "Supplier": "AUSFRESH PTY LTD",
+    "Address": "P.O BOX 176\r\nVIC GLENROY 3046\r\nAustralia",
+    "ABN": "20096285835",
+    "Street": "P.O BOX 176",
+    "City": "VIC",
+    "State/Territory": "GLENROY",
+    "Postcode": "3046",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "AUSSIE SERVICE CENTRE PTY.LTD",
-    "Currency Code": "AUD"
+    "Supplier": "AUSSIE SERVICE CENTRE PTY.LTD",
+    "ABN": "72177518242"
   },
   {
-    "Display Name As": "AUST POST",
-    "Currency Code": "AUD"
+    "Supplier": "AUST POST"
   },
   {
-    "Display Name As": "AUSTGROW BEVERAGES PTY LTD",
-    "Billing Address Line 1": "AUSTGROW BEVERAGES PTY LTD\r\r\n1/31 KEYSBOROUGH CL\r\nKEYSBOROUGH Victoria 3173\r\nAU",
-    "Billing Address Line 2": "AUSTGROW BEVERAGES PTY LTD\r\r\n1/31 KEYSBOROUGH CL",
-    "Billing Address City": "KEYSBOROUGH",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "AUSTGROW BEVERAGES PTY LTD",
+    "Address": "AUSTGROW BEVERAGES PTY LTD\r\r\n1/31 KEYSBOROUGH CL\r\nKEYSBOROUGH Victoria 3173\r\nAU",
+    "Street": "AUSTGROW BEVERAGES PTY LTD\r\r\n1/31 KEYSBOROUGH CL",
+    "City": "KEYSBOROUGH",
+    "State/Territory": "Victoria",
+    "Postcode": "3173",
+    "Country": "AU"
   },
   {
-    "Display Name As": "AUSTRALIAN TAXATION OFFICE",
-    "Currency Code": "AUD"
+    "Supplier": "AUSTRALIAN TAXATION OFFICE"
   },
   {
-    "Display Name As": "AUSTRALIAN UNITED RETAILERS",
-    "Currency Code": "AUD"
+    "Supplier": "AUSTRALIAN UNITED RETAILERS",
+    "ABN": "93077879782"
   },
   {
-    "Display Name As": "AUTOPLUS",
-    "Currency Code": "AUD"
+    "Supplier": "AUTOPLUS"
   },
   {
-    "Display Name As": "AUZ COUNTRY",
-    "Currency Code": "AUD"
+    "Supplier": "AUZ COUNTRY"
   },
   {
-    "Display Name As": "AWS / ABDULLA WASEF & SONS",
-    "Billing Address Line 1": "Israel",
-    "Billing Address Country": "Israel",
+    "Supplier": "AWS / ABDULLA WASEF & SONS",
     "Email": "harel3030@gmail.com",
+    "Address": "Israel",
     "Other": "Harel",
-    "Currency Code": "AUD"
+    "Country": "Israel"
   },
   {
-    "Display Name As": "B&R STORAGE",
-    "Currency Code": "AUD"
+    "Supplier": "B&R STORAGE",
+    "ABN": "38102366030"
   },
   {
-    "Display Name As": "BALKAN LLOYD LIMITED",
-    "Currency Code": "AUD"
+    "Supplier": "BALKAN LLOYD LIMITED"
   },
   {
-    "Display Name As": "BANK FEES",
-    "Currency Code": "AUD"
+    "Supplier": "BANK FEES"
   },
   {
-    "Display Name As": "BANSARD INTERNATIONAL",
-    "Currency Code": "AUD"
+    "Supplier": "BANSARD INTERNATIONAL"
   },
   {
-    "Display Name As": "BAS",
-    "Currency Code": "AUD"
+    "Supplier": "BAS"
   },
   {
-    "Display Name As": "BASILUR AUSTRALIA PTY.LTD",
-    "Billing Address Line 1": "NSW WATTLE GROVE 2173\r\nAUS",
-    "Billing Address City": "NSW",
-    "Billing Address Country": "AUS",
+    "Supplier": "BASILUR AUSTRALIA PTY.LTD",
+    "Phone Numbers": "Phone: 414750951",
     "Email": "dmitry@rostrade.com.au",
-    "Phone": "Phone: 414750951",
+    "Address": "NSW WATTLE GROVE 2173\r\nAUS",
+    "Phone": 414750951,
     "Other": "DIMA",
-    "Currency Code": "AUD"
+    "ABN": "98158863524",
+    "City": "NSW",
+    "State/Territory": "WATTLE GROVE",
+    "Postcode": "2173",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "BATCHGEO",
-    "Currency Code": "AUD"
+    "Supplier": "BATCHGEO"
   },
   {
-    "Display Name As": "BCR",
-    "Currency Code": "AUD"
+    "Supplier": "BCR",
+    "ABN": "67000711197"
   },
   {
-    "Display Name As": "BEN FURLEY FLOUR MILLS T/AS BELTAVIA PTY.LTD",
-    "Billing Address Line 1": "101-105 BRISBANE STREET\r\nNSW DUBBO 2830",
-    "Billing Address Line 2": "101-105 BRISBANE STREET",
-    "Billing Address City": "NSW",
-    "Phone": "Phone: 1800684343\r\nFax: 02-68841649\r\nMobile: 1300217134",
+    "Supplier": "BEN FURLEY FLOUR MILLS T/AS BELTAVIA PTY.LTD",
+    "Phone Numbers": "Phone: 1800684343\r\nFax: 02-68841649\r\nMobile: 1300217134",
+    "Address": "101-105 BRISBANE STREET\r\nNSW DUBBO 2830",
+    "Phone": 1800684343,
     "Other": "MICHAEL MCDONALD",
-    "Currency Code": "AUD"
+    "Street": "101-105 BRISBANE STREET",
+    "City": "NSW",
+    "State/Territory": "DUBBO",
+    "Postcode": "2830"
   },
   {
-    "Display Name As": "BENEDIKT IMPORTS",
-    "Billing Address Line 1": "2 KEYS ROAD\r\nMOORABBIN",
-    "Billing Address Line 2": "2 KEYS ROAD",
-    "Currency Code": "AUD"
+    "Supplier": "BENEDIKT IMPORTS",
+    "Address": "2 KEYS ROAD\r\nMOORABBIN",
+    "Street": "2 KEYS ROAD",
+    "State/Territory": "MOORABBIN"
   },
   {
-    "Display Name As": "BISCOTTI",
-    "Currency Code": "AUD"
+    "Supplier": "BISCOTTI"
   },
   {
-    "Display Name As": "BLOOMSPOON",
-    "Billing Address Line 1": "383 PARRAMATTA ROAD\r\nNSW LEICHHARDT 2040",
-    "Billing Address Line 2": "383 PARRAMATTA ROAD",
-    "Billing Address City": "NSW",
-    "Phone": "Phone: 295646043\r\nFax: 295686045",
-    "Currency Code": "AUD"
+    "Supplier": "BLOOMSPOON",
+    "Phone Numbers": "Phone: 295646043\r\nFax: 295686045",
+    "Address": "383 PARRAMATTA ROAD\r\nNSW LEICHHARDT 2040",
+    "Phone": 295646043,
+    "Street": "383 PARRAMATTA ROAD",
+    "City": "NSW",
+    "State/Territory": "LEICHHARDT",
+    "Postcode": "2040"
   },
   {
-    "Display Name As": "BOORAN MOTORS SALES PTY KIA",
-    "Currency Code": "AUD"
+    "Supplier": "BOORAN MOTORS SALES PTY KIA"
   },
   {
-    "Display Name As": "BORJOMI",
-    "Billing Address Line 1": "IDS BORJOMI GEORGIA, LLC\r\n10 BIDZINA KVERNADZE ST\r\nTBILISI 0171\r\nGE",
-    "Billing Address Line 2": "IDS BORJOMI GEORGIA, LLC\r\n10 BIDZINA KVERNADZE ST",
-    "Billing Address City": "TBILISI",
-    "Billing Address Country": "GE",
-    "Currency Code": "AUD"
+    "Supplier": "BORJOMI",
+    "Address": "IDS BORJOMI GEORGIA, LLC\r\n10 BIDZINA KVERNADZE ST\r\nTBILISI 0171\r\nGE",
+    "Street": "IDS BORJOMI GEORGIA, LLC\r\n10 BIDZINA KVERNADZE ST",
+    "City": "TBILISI",
+    "Postcode": "0171",
+    "Country": "GE"
   },
   {
-    "Display Name As": "BOXES&MORE",
-    "Currency Code": "AUD"
+    "Supplier": "BOXES&MORE"
   },
   {
-    "Display Name As": "BREEZE LOGISTICS",
-    "Currency Code": "AUD"
+    "Supplier": "BREEZE LOGISTICS"
   },
   {
-    "Display Name As": "BRIGHTON  RENAULT",
-    "Currency Code": "AUD"
+    "Supplier": "BRIGHTON  RENAULT",
+    "ABN": "93637069028"
   },
   {
-    "Display Name As": "BUDGET RENTAL",
-    "Currency Code": "AUD"
+    "Supplier": "BUDGET RENTAL"
   },
   {
-    "Display Name As": "BUNNINGS",
-    "Currency Code": "AUD"
+    "Supplier": "BUNNINGS"
   },
   {
-    "Display Name As": "CASH DEP",
-    "Currency Code": "AUD"
+    "Supplier": "CASH DEP"
   },
   {
-    "Display Name As": "CASH SUPPLIER",
-    "Currency Code": "AUD"
+    "Supplier": "CASH SUPPLIER"
   },
   {
-    "Display Name As": "CBS COMPLETEBUTCHERSUPPLIERS",
-    "Currency Code": "AUD"
+    "Supplier": "CBS COMPLETEBUTCHERSUPPLIERS"
   },
   {
-    "Display Name As": "CC",
-    "Currency Code": "AUD"
+    "Supplier": "CC"
   },
   {
-    "Display Name As": "CC EXP",
-    "Currency Code": "AUD"
+    "Supplier": "CC EXP"
   },
   {
-    "Display Name As": "CCT SHIPPING",
-    "Currency Code": "AUD"
+    "Supplier": "CCT SHIPPING"
   },
   {
-    "Display Name As": "CENTRE COM SUNSHINE",
-    "Currency Code": "AUD"
+    "Supplier": "CENTRE COM SUNSHINE"
   },
   {
-    "Display Name As": "CH PALLETS",
-    "Currency Code": "AUD"
+    "Supplier": "CH PALLETS"
   },
   {
-    "Display Name As": "CH ROBINSON",
-    "Currency Code": "AUD"
+    "Supplier": "CH ROBINSON"
   },
   {
-    "Display Name As": "CHABAD ON CARLIS NON",
-    "Currency Code": "AUD"
+    "Supplier": "CHABAD ON CARLIS NON"
   },
   {
-    "Display Name As": "CHADWICKFORKLIFTS",
-    "Currency Code": "AUD"
+    "Supplier": "CHADWICKFORKLIFTS"
   },
   {
-    "Display Name As": "CITY OF KINGSTONE",
-    "Currency Code": "AUD"
+    "Supplier": "CITY OF KINGSTONE"
   },
   {
-    "Display Name As": "CITYLINK",
-    "Currency Code": "AUD"
+    "Supplier": "CITYLINK"
   },
   {
-    "Display Name As": "CIVIC TRANSPORT SERVICES",
-    "Currency Code": "AUD"
+    "Supplier": "CIVIC TRANSPORT SERVICES"
   },
   {
-    "Display Name As": "CLEANWAY C&I",
-    "Currency Code": "AUD"
+    "Supplier": "CLEANWAY C&I"
   },
   {
-    "Display Name As": "CMA-CGM GROUP AGENCIES",
-    "Currency Code": "AUD"
+    "Supplier": "CMA-CGM GROUP AGENCIES"
   },
   {
-    "Display Name As": "COLD EXPRESS",
-    "Currency Code": "AUD"
+    "Supplier": "COLD EXPRESS"
   },
   {
-    "Display Name As": "COMET",
-    "Currency Code": "AUD"
+    "Supplier": "COMET"
   },
   {
-    "Display Name As": "CONTAINER UNLOAD",
-    "Currency Code": "AUD"
+    "Supplier": "CONTAINER UNLOAD"
   },
   {
-    "Display Name As": "CORPORATE OFFICE SUPPLIES",
-    "Currency Code": "AUD"
+    "Supplier": "CORPORATE OFFICE SUPPLIES",
+    "ABN": "13145549113"
   },
   {
-    "Display Name As": "COSCO SHIPPING",
-    "Currency Code": "AUD"
+    "Supplier": "COSCO SHIPPING",
+    "ABN": "29001909486"
   },
   {
-    "Display Name As": "COSTCO",
-    "Currency Code": "AUD"
+    "Supplier": "COSTCO"
   },
   {
-    "Display Name As": "COWAN DOORS",
-    "Currency Code": "AUD"
+    "Supplier": "COWAN DOORS"
   },
   {
-    "Display Name As": "COZY AUSSIE PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "COZY AUSSIE PTY LTD"
   },
   {
-    "Display Name As": "CPH LOCKSMITH",
-    "Currency Code": "AUD"
+    "Supplier": "CPH LOCKSMITH"
   },
   {
-    "Display Name As": "CRABTREES REAL ESTATE",
-    "Currency Code": "AUD"
+    "Supplier": "CRABTREES REAL ESTATE"
   },
   {
-    "Display Name As": "D&A DAILY NECESSITIES",
-    "Currency Code": "AUD"
+    "Supplier": "D&A DAILY NECESSITIES"
   },
   {
-    "Display Name As": "D&Y DELI & GRILL",
-    "Billing Address Line 1": "Glenhuntly road\r\nGlenhuntly",
-    "Billing Address Line 2": "Glenhuntly road",
-    "Currency Code": "AUD"
+    "Supplier": "D&Y DELI & GRILL",
+    "Address": "Glenhuntly road\r\nGlenhuntly",
+    "Street": "Glenhuntly road",
+    "State/Territory": "Glenhuntly"
   },
   {
-    "Display Name As": "D`COLL ENTERPRISES DOOR REPAIR",
-    "Currency Code": "AUD"
+    "Supplier": "D`COLL ENTERPRISES DOOR REPAIR",
+    "ABN": "21074102640"
   },
   {
-    "Display Name As": "DAFF",
-    "Currency Code": "AUD"
+    "Supplier": "DAFF"
   },
   {
-    "Display Name As": "DAGAN TRADING P/L T/AS AUSTRALIAN VEGIE GOURMET",
-    "Billing Address Line 1": "24 TAUNTON DRIVE\r\nVIC CHELTENHAM 3192\r\nAUS",
-    "Billing Address Line 2": "24 TAUNTON DRIVE",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
-    "Phone": "Phone: 95855968\r\nFax: 85552543",
-    "Currency Code": "AUD"
+    "Supplier": "DAGAN TRADING P/L T/AS AUSTRALIAN VEGIE GOURMET",
+    "Phone Numbers": "Phone: 95855968\r\nFax: 85552543",
+    "Address": "24 TAUNTON DRIVE\r\nVIC CHELTENHAM 3192\r\nAUS",
+    "Phone": 95855968,
+    "Street": "24 TAUNTON DRIVE",
+    "City": "VIC",
+    "State/Territory": "CHELTENHAM",
+    "Postcode": "3192",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "DALEX TRADING PTY LTD",
-    "Billing Address Line 1": "UNIT 4 24 OCEAN STREET\r\nNSW BONDI 2023\r\nAustralia",
-    "Billing Address Line 2": "UNIT 4 24 OCEAN STREET",
-    "Billing Address City": "NSW",
-    "Billing Address Country": "Australia",
+    "Supplier": "DALEX TRADING PTY LTD",
     "Email": "sales@dalextrading.com",
-    "Currency Code": "AUD"
+    "Address": "UNIT 4 24 OCEAN STREET\r\nNSW BONDI 2023\r\nAustralia",
+    "ABN": "12617784433",
+    "Street": "UNIT 4 24 OCEAN STREET",
+    "City": "NSW",
+    "State/Territory": "BONDI",
+    "Postcode": "2023",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "DALLA COSTA ALIMENTARE S.R.L",
-    "Billing Address Line 1": "DALLA COSTA ALIMENTARE S.R.L\r\r\nVIA DELLA FORNACE, 131\r\nTREVISO 31023\r\nIT",
-    "Billing Address Line 2": "DALLA COSTA ALIMENTARE S.R.L\r\r\nVIA DELLA FORNACE, 131",
-    "Billing Address City": "TREVISO",
-    "Billing Address Country": "IT",
-    "Phone": "Phone: +39 423 484 402",
-    "Currency Code": "AUD"
+    "Supplier": "DALLA COSTA ALIMENTARE S.R.L",
+    "Phone Numbers": "Phone: +39 423 484 402",
+    "Address": "DALLA COSTA ALIMENTARE S.R.L\r\r\nVIA DELLA FORNACE, 131\r\nTREVISO 31023\r\nIT",
+    "Phone": "+39 423 484 402",
+    "Street": "DALLA COSTA ALIMENTARE S.R.L\r\r\nVIA DELLA FORNACE, 131",
+    "City": "TREVISO",
+    "Postcode": "31023",
+    "Country": "IT"
   },
   {
-    "Display Name As": "DAVIDOVITCH & SONS MARKETING & SALES LTD",
-    "Currency Code": "AUD"
+    "Supplier": "DAVIDOVITCH & SONS MARKETING & SALES LTD"
   },
   {
-    "Display Name As": "DE JONG DATES TRADING LTD",
-    "Billing Address Line 1": "DE JONG DATES TRADING LTD\r\r\nMoshav Magen Shaoul 75\r\n1935200\r\nIL",
-    "Billing Address Line 2": "DE JONG DATES TRADING LTD\r\r\nMoshav Magen Shaoul 75",
-    "Billing Address Country": "IL",
+    "Supplier": "DE JONG DATES TRADING LTD",
+    "Phone Numbers": "Phone: +972-76-5479827\r\nFax: +972-77-4448724",
     "Email": "yonathan@dejong.co.il",
-    "Phone": "Phone: +972-76-5479827\r\nFax: +972-77-4448724",
-    "Currency Code": "AUD"
+    "Address": "DE JONG DATES TRADING LTD\r\r\nMoshav Magen Shaoul 75\r\n1935200\r\nIL",
+    "Phone": "+972-76-5479827",
+    "Street": "DE JONG DATES TRADING LTD\r\r\nMoshav Magen Shaoul 75",
+    "Postcode": "1935200",
+    "Country": "IL"
   },
   {
-    "Display Name As": "DEUGRO PROJECTS",
-    "Currency Code": "AUD"
+    "Supplier": "DEUGRO PROJECTS",
+    "ABN": "88092976022"
   },
   {
-    "Display Name As": "DHA",
-    "Currency Code": "AUD"
+    "Supplier": "DHA"
   },
   {
-    "Display Name As": "DHL",
-    "Currency Code": "AUD"
+    "Supplier": "DHL"
   },
   {
-    "Display Name As": "DHT",
-    "Currency Code": "AUD"
+    "Supplier": "DHT"
   },
   {
-    "Display Name As": "DIANA R",
-    "Currency Code": "AUD"
+    "Supplier": "DIANA R"
   },
   {
-    "Display Name As": "DIVERSIFIED COMMUNICATION",
-    "Currency Code": "AUD"
+    "Supplier": "DIVERSIFIED COMMUNICATION"
   },
   {
-    "Display Name As": "DIVERSIFIED COMMUNICATIONS",
-    "Currency Code": "AUD"
+    "Supplier": "DIVERSIFIED COMMUNICATIONS",
+    "ABN": "18006002286"
   },
   {
-    "Display Name As": "DIZAHAV PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "DIZAHAV PTY LTD",
+    "ABN": "27115926719"
   },
   {
-    "Display Name As": "DNATA",
-    "Currency Code": "AUD"
+    "Supplier": "DNATA"
   },
   {
-    "Display Name As": "DR.GERARD",
-    "Billing Address Line 1": "POLAND",
-    "Billing Address Country": "POLAND",
-    "Currency Code": "AUD"
+    "Supplier": "DR.GERARD",
+    "Address": "POLAND",
+    "Country": "POLAND"
   },
   {
-    "Display Name As": "E&A GANSKY",
-    "Currency Code": "AUD"
+    "Supplier": "E&A GANSKY"
   },
   {
-    "Display Name As": "EAST WEST ENGINEERING",
-    "Currency Code": "AUD"
+    "Supplier": "EAST WEST ENGINEERING",
+    "ABN": "13002235332"
   },
   {
-    "Display Name As": "EASTLINK",
-    "Currency Code": "AUD"
+    "Supplier": "EASTLINK"
   },
   {
-    "Display Name As": "EBM INSURANCE BROKERS",
-    "Currency Code": "AUD"
+    "Supplier": "EBM INSURANCE BROKERS"
   },
   {
-    "Display Name As": "ECHO CARTONS",
-    "Billing Address Line 1": "18 INDUSTRIAL DRIVE\r\nVIC BRAESIDE 3195",
-    "Billing Address Line 2": "18 INDUSTRIAL DRIVE",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 03 95877955",
-    "Currency Code": "AUD"
+    "Supplier": "ECHO CARTONS",
+    "Phone Numbers": "Phone: 03 95877955",
+    "Address": "18 INDUSTRIAL DRIVE\r\nVIC BRAESIDE 3195",
+    "Phone": "03 95877955",
+    "ABN": "80159154546",
+    "Street": "18 INDUSTRIAL DRIVE",
+    "City": "VIC",
+    "State/Territory": "BRAESIDE",
+    "Postcode": "3195"
   },
   {
-    "Display Name As": "EMPLOYSURE PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "EMPLOYSURE PTY LTD"
   },
   {
-    "Display Name As": "EPL INTERNATIONAL",
-    "Currency Code": "AUD"
+    "Supplier": "EPL INTERNATIONAL"
   },
   {
-    "Display Name As": "ERRAND TRANSPORT SERVICES",
-    "Currency Code": "AUD"
+    "Supplier": "ERRAND TRANSPORT SERVICES",
+    "ABN": "69069024657"
   },
   {
-    "Display Name As": "ERSTE KAVIAR COMPANY EKC GMBH",
-    "Email": "kundenservice@erste-kaviar-company.de",
-    "Currency Code": "AUD"
+    "Supplier": "ERSTE KAVIAR COMPANY EKC GMBH",
+    "Email": "kundenservice@erste-kaviar-company.de"
   },
   {
-    "Display Name As": "EVELYN GANSKY",
-    "Currency Code": "AUD"
+    "Supplier": "EVELYN GANSKY"
   },
   {
-    "Display Name As": "EVERGREEN LINE",
-    "Currency Code": "AUD"
+    "Supplier": "EVERGREEN LINE",
+    "ABN": "65100692313"
   },
   {
-    "Display Name As": "EXPOLCO TRANSPED",
-    "Currency Code": "AUD"
+    "Supplier": "EXPOLCO TRANSPED"
   },
   {
-    "Display Name As": "F MAYER IMPORTS PTY. LTD",
-    "Billing Address Line 1": "28 SALTA DRIVE\r\nVIC ALTONA NORTH 3025",
-    "Billing Address Line 2": "28 SALTA DRIVE",
-    "Billing Address City": "VIC",
+    "Supplier": "F MAYER IMPORTS PTY. LTD",
     "Email": "armelb@mayers.com.au",
-    "Currency Code": "AUD"
+    "Address": "28 SALTA DRIVE\r\nVIC ALTONA NORTH 3025",
+    "ABN": "51000697889",
+    "Street": "28 SALTA DRIVE",
+    "City": "VIC",
+    "State/Territory": "ALTONA NORTH",
+    "Postcode": "3025"
   },
   {
-    "Display Name As": "F MAYER PTY LTD",
-    "Billing Address Line 1": "F MAYER PTY LTD\r\r\nB1 2-8 Mcpherson St\r\nBanksmeadow\r\nNew South Wales 2019\r\nAU",
-    "Billing Address Line 2": "F MAYER PTY LTD\r\r\nB1 2-8 Mcpherson St\r\nBanksmeadow",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "F MAYER PTY LTD",
+    "Address": "F MAYER PTY LTD\r\r\nB1 2-8 Mcpherson St\r\nBanksmeadow\r\nNew South Wales 2019\r\nAU",
+    "Street": "F MAYER PTY LTD\r\r\nB1 2-8 Mcpherson St\r\nBanksmeadow",
+    "State/Territory": "New South Wales",
+    "Postcode": "2019",
+    "Country": "AU"
   },
   {
-    "Display Name As": "F.LLI POLLI S.P.A.",
-    "Billing Address Line 1": "Italy",
-    "Billing Address Country": "Italy",
-    "Currency Code": "AUD"
+    "Supplier": "F.LLI POLLI S.P.A.",
+    "Address": "Italy",
+    "Country": "Italy"
   },
   {
-    "Display Name As": "FAIR MOTORS",
-    "Billing Address Line 1": "100 MCKINNON ROAD\r\nVIC MCKINNON 3204",
-    "Billing Address Line 2": "100 MCKINNON ROAD",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 95769055\r\nFax: 95769066",
-    "Currency Code": "AUD"
+    "Supplier": "FAIR MOTORS",
+    "Phone Numbers": "Phone: 95769055\r\nFax: 95769066",
+    "Address": "100 MCKINNON ROAD\r\nVIC MCKINNON 3204",
+    "Phone": 95769055,
+    "Street": "100 MCKINNON ROAD",
+    "City": "VIC",
+    "State/Territory": "MCKINNON",
+    "Postcode": "3204"
   },
   {
-    "Display Name As": "FAIRMOTORS P/L",
-    "Currency Code": "AUD"
+    "Supplier": "FAIRMOTORS P/L"
   },
   {
-    "Display Name As": "FINELINE",
-    "Currency Code": "AUD"
+    "Supplier": "FINELINE"
   },
   {
-    "Display Name As": "FINES VIC",
-    "Currency Code": "AUD"
+    "Supplier": "FINES VIC"
   },
   {
-    "Display Name As": "FISCH CHADSTONE",
-    "Currency Code": "AUD"
+    "Supplier": "FISCH CHADSTONE"
   },
   {
-    "Display Name As": "FISHBOWL",
-    "Currency Code": "AUD"
+    "Supplier": "FISHBOWL"
   },
   {
-    "Display Name As": "FLEX",
-    "Phone": "Phone: 0452 257 740",
+    "Supplier": "FLEX",
+    "Phone Numbers": "Phone: 0452 257 740",
+    "Phone": "0452 257 740",
     "Other": "JULIE",
-    "Currency Code": "AUD"
+    "ABN": "89561909029"
   },
   {
-    "Display Name As": "FLIPSNACK",
-    "Currency Code": "AUD"
+    "Supplier": "FLIPSNACK"
   },
   {
-    "Display Name As": "FOODLEGAL PL",
-    "Currency Code": "AUD"
+    "Supplier": "FOODLEGAL PL"
   },
   {
-    "Display Name As": "FORTIGO",
-    "Currency Code": "AUD"
+    "Supplier": "FORTIGO"
   },
   {
-    "Display Name As": "FREIGT ASSIST",
-    "Currency Code": "AUD"
+    "Supplier": "FREIGT ASSIST",
+    "ABN": "77152729283"
   },
   {
-    "Display Name As": "FRESA",
-    "Currency Code": "AUD"
+    "Supplier": "FRESA",
+    "ABN": "11111111111"
   },
   {
-    "Display Name As": "FRESHLINE MARKETING",
-    "Billing Address Line 1": "5-13 JOHNS STREET\r\nTAS WESTERN JUNCTION 7212",
-    "Billing Address Line 2": "5-13 JOHNS STREET",
-    "Billing Address City": "TAS",
+    "Supplier": "FRESHLINE MARKETING",
+    "Phone Numbers": "Phone: 363918488\r\nFax: 363918806",
     "Email": "sales@freshline.net.au",
-    "Phone": "Phone: 363918488\r\nFax: 363918806",
+    "Address": "5-13 JOHNS STREET\r\nTAS WESTERN JUNCTION 7212",
+    "Phone": 363918488,
     "Other": "EMILY KING",
-    "Currency Code": "AUD"
+    "Street": "5-13 JOHNS STREET",
+    "City": "TAS",
+    "State/Territory": "WESTERN JUNCTION",
+    "Postcode": "7212"
   },
   {
-    "Display Name As": "FRIEND AND BURRELL FINE FOODS",
-    "Billing Address Line 1": "8 HILLCREST AVENUE\r\nVIC KEW 3101",
-    "Billing Address Line 2": "8 HILLCREST AVENUE",
-    "Billing Address City": "VIC",
+    "Supplier": "FRIEND AND BURRELL FINE FOODS",
+    "Phone Numbers": "Phone: 0405424860 SIMON\r\nMobile: 0409809929 BRYAN",
     "Email": "simon@friendandburrell.com.au",
-    "Phone": "Phone: 0405424860 SIMON\r\nMobile: 0409809929 BRYAN",
+    "Address": "8 HILLCREST AVENUE\r\nVIC KEW 3101",
+    "Phone": "0405424860 SIMON",
     "Website": "http://www.friendandburrell.com.au",
-    "Currency Code": "AUD"
+    "Street": "8 HILLCREST AVENUE",
+    "City": "VIC",
+    "State/Territory": "KEW",
+    "Postcode": "3101"
   },
   {
-    "Display Name As": "FTA FOOD SOLUTIONS PTY LTD",
-    "Billing Address Line 1": "41-45 Slough Rd\r\nVIC ALTONA 3018",
-    "Billing Address Line 2": "41-45 Slough Rd",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 8398 0500",
-    "Currency Code": "AUD"
+    "Supplier": "FTA FOOD SOLUTIONS PTY LTD",
+    "Phone Numbers": "Phone: 8398 0500",
+    "Address": "41-45 Slough Rd\r\nVIC ALTONA 3018",
+    "Phone": "8398 0500",
+    "ABN": "82059480054",
+    "Street": "41-45 Slough Rd",
+    "City": "VIC",
+    "State/Territory": "ALTONA",
+    "Postcode": "3018"
   },
   {
-    "Display Name As": "GAL-R",
-    "Currency Code": "AUD"
+    "Supplier": "GAL-R"
   },
   {
-    "Display Name As": "GALIL FLAVORS LTD",
-    "Billing Address Line 1": "Israel",
-    "Billing Address Country": "Israel",
-    "Currency Code": "AUD"
+    "Supplier": "GALIL FLAVORS LTD",
+    "Address": "Israel",
+    "ABN": "11111111111",
+    "Country": "Israel"
   },
   {
-    "Display Name As": "GALIL FRAVORS LTD",
-    "Billing Address Line 1": "GALIL FRAVORS LTD\r\r\nNone\r\nIL",
-    "Billing Address Line 2": "GALIL FRAVORS LTD\r\r\nNone",
-    "Billing Address Country": "IL",
-    "Currency Code": "AUD"
+    "Supplier": "GALIL FRAVORS LTD",
+    "Address": "GALIL FRAVORS LTD\r\r\nNone\r\nIL",
+    "Street": "GALIL FRAVORS LTD\r\r\nNone",
+    "Country": "IL"
   },
   {
-    "Display Name As": "GAMMA FISH",
-    "Billing Address Line 1": "UKRAINE",
-    "Billing Address Country": "UKRAINE",
-    "Currency Code": "AUD"
+    "Supplier": "GAMMA FISH",
+    "Address": "UKRAINE",
+    "Country": "UKRAINE"
   },
   {
-    "Display Name As": "GIFT",
-    "Currency Code": "AUD"
+    "Supplier": "GIFT"
   },
   {
-    "Display Name As": "GILMORES",
-    "Currency Code": "AUD"
+    "Supplier": "GILMORES"
   },
   {
-    "Display Name As": "GJ GLOBAL PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "GJ GLOBAL PTY LTD"
   },
   {
-    "Display Name As": "GLEN EIRA",
-    "Currency Code": "AUD"
+    "Supplier": "GLEN EIRA"
   },
   {
-    "Display Name As": "GLENN JONES REFRIGERATION",
-    "Currency Code": "AUD"
+    "Supplier": "GLENN JONES REFRIGERATION"
   },
   {
-    "Display Name As": "GLOBAL MARITIME SL",
-    "Currency Code": "AUD"
+    "Supplier": "GLOBAL MARITIME SL"
   },
   {
-    "Display Name As": "GLOBAL RUBBER",
-    "Currency Code": "AUD"
+    "Supplier": "GLOBAL RUBBER"
   },
   {
-    "Display Name As": "GLOBAL UNITY PTY LTD",
-    "Billing Address Line 1": "GLOBAL UNITY PTY LTD\r\r\nSVETLANSKAYA STREET 143, OF. 76\r\nPRIMORSKIY KRAY, VLADIVOSTOK 690001",
-    "Billing Address Line 2": "GLOBAL UNITY PTY LTD\r\r\nSVETLANSKAYA STREET 143, OF. 76",
-    "Billing Address City": "PRIMORSKIY KRAY, VLADIVOSTOK",
+    "Supplier": "GLOBAL UNITY PTY LTD",
+    "Phone Numbers": "Mobile: +7 (904) 629-72-30",
     "Email": "globalunityptyltd@mail.ru",
-    "Phone": "Mobile: +7 (904) 629-72-30",
+    "Address": "GLOBAL UNITY PTY LTD\r\r\nSVETLANSKAYA STREET 143, OF. 76\r\nPRIMORSKIY KRAY, VLADIVOSTOK 690001",
     "Other": "ADA KAMNEVA",
-    "Currency Code": "AUD"
+    "ABN": "11111111111",
+    "Street": "GLOBAL UNITY PTY LTD\r\r\nSVETLANSKAYA STREET 143, OF. 76",
+    "City": "PRIMORSKIY KRAY, VLADIVOSTOK",
+    "Postcode": "690001"
   },
   {
-    "Display Name As": "GLOSTRA CO",
-    "Billing Address Line 1": "34 Taunton drive\r\nCheltenham",
-    "Billing Address Line 2": "34 Taunton drive",
-    "Currency Code": "AUD"
+    "Supplier": "GLOSTRA CO",
+    "Address": "34 Taunton drive\r\nCheltenham",
+    "Street": "34 Taunton drive",
+    "State/Territory": "Cheltenham"
   },
   {
-    "Display Name As": "GO GETTER",
-    "Currency Code": "AUD"
+    "Supplier": "GO GETTER",
+    "ABN": "64393645365"
   },
   {
-    "Display Name As": "GO WORKPLACE TRAINING",
-    "Currency Code": "AUD"
+    "Supplier": "GO WORKPLACE TRAINING"
   },
   {
-    "Display Name As": "GOLDEN FRIES",
-    "Billing Address Line 1": "97 NORTHEN RD,\r\nVIC HEIDELBERG WEST\r\nAUSTRALIA",
-    "Billing Address Line 2": "97 NORTHEN RD,",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUSTRALIA",
+    "Supplier": "GOLDEN FRIES",
+    "Phone Numbers": "Phone: 399734915\r\nMobile: 424146061",
     "Email": "info@goldenfries.com.au",
-    "Phone": "Phone: 399734915\r\nMobile: 424146061",
+    "Address": "97 NORTHEN RD,\r\nVIC HEIDELBERG WEST\r\nAUSTRALIA",
+    "Phone": 399734915,
     "Website": "https://www.goldenfries.com.au",
-    "Currency Code": "AUD"
+    "ABN": "94619620218",
+    "Street": "97 NORTHEN RD,",
+    "City": "VIC",
+    "State/Territory": "HEIDELBERG WEST",
+    "Country": "AUSTRALIA"
   },
   {
-    "Display Name As": "GOLDEN FRIES PTY.LTD",
-    "Billing Address Line 1": "P.O BOX\r\nVIC COLLINGWOOD 3066\r\nAUS",
-    "Billing Address Line 2": "P.O BOX",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
-    "Phone": "Phone: 94197906",
-    "Currency Code": "AUD"
+    "Supplier": "GOLDEN FRIES PTY.LTD",
+    "Phone Numbers": "Phone: 94197906",
+    "Address": "P.O BOX\r\nVIC COLLINGWOOD 3066\r\nAUS",
+    "Phone": 94197906,
+    "Street": "P.O BOX",
+    "City": "VIC",
+    "State/Territory": "COLLINGWOOD",
+    "Postcode": "3066",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "GOLDEN LOGISTICS",
-    "Currency Code": "AUD"
+    "Supplier": "GOLDEN LOGISTICS"
   },
   {
-    "Display Name As": "GOLDENLINE",
-    "Currency Code": "AUD"
+    "Supplier": "GOLDENLINE"
   },
   {
-    "Display Name As": "GOOD YEAR",
-    "Currency Code": "AUD"
+    "Supplier": "GOOD YEAR"
   },
   {
-    "Display Name As": "GOT JUNK",
-    "Currency Code": "AUD"
+    "Supplier": "GOT JUNK"
   },
   {
-    "Display Name As": "GOURMET NUTS&FOOD",
-    "Currency Code": "AUD"
+    "Supplier": "GOURMET NUTS&FOOD"
   },
   {
-    "Display Name As": "GRANNY'S FOOD",
-    "Billing Address Line 1": "UNIT 7/27 SWIFT WAY\r\nVIC DANDENONG SOUTH 3175\r\nAustralia",
-    "Billing Address Line 2": "UNIT 7/27 SWIFT WAY",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Currency Code": "AUD"
+    "Supplier": "GRANNY'S FOOD",
+    "Address": "UNIT 7/27 SWIFT WAY\r\nVIC DANDENONG SOUTH 3175\r\nAustralia",
+    "ABN": "51742502231",
+    "Street": "UNIT 7/27 SWIFT WAY",
+    "City": "VIC",
+    "State/Territory": "DANDENONG SOUTH",
+    "Postcode": "3175",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "GS1 AUST",
-    "Currency Code": "AUD"
+    "Supplier": "GS1 AUST"
   },
   {
-    "Display Name As": "GTG PRODUCTS P/L",
-    "Billing Address Line 1": "2/62 princess street\r\nvic kew 3101",
-    "Billing Address Line 2": "2/62 princess street",
-    "Billing Address City": "vic",
+    "Supplier": "GTG PRODUCTS P/L",
+    "Phone Numbers": "Phone: TANYA",
     "Email": "info@gtgproducts.com.au",
-    "Phone": "Phone: TANYA",
+    "Address": "2/62 princess street\r\nvic kew 3101",
+    "Phone": "TANYA",
     "Other": 414540571,
-    "Currency Code": "AUD"
+    "ABN": "40111282773",
+    "Street": "2/62 princess street",
+    "City": "vic",
+    "State/Territory": "kew",
+    "Postcode": "3101"
   },
   {
-    "Display Name As": "GTG PRODUCTS PL",
-    "Billing Address Line 1": "GTG PRODUCTS PL\r\r\nNone\r\nAU",
-    "Billing Address Line 2": "GTG PRODUCTS PL\r\r\nNone",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "GTG PRODUCTS PL",
+    "Address": "GTG PRODUCTS PL\r\r\nNone\r\nAU",
+    "Street": "GTG PRODUCTS PL\r\r\nNone",
+    "Country": "AU"
   },
   {
-    "Display Name As": "GUARDIAN PROTECTIVE",
-    "Currency Code": "AUD"
+    "Supplier": "GUARDIAN PROTECTIVE"
   },
   {
-    "Display Name As": "GUNZ AUSTRALIA PTY.LTD",
-    "Billing Address Line 1": "PO. BOX 247\r\nVIC CAMPBELLFIELD 3074\r\nAUS",
-    "Billing Address Line 2": "PO. BOX 247",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
+    "Supplier": "GUNZ AUSTRALIA PTY.LTD",
+    "Phone Numbers": "Phone: 488771665\r\nMobile: 94604042",
     "Email": "anthony.hickey@gunz.cc",
-    "Phone": "Phone: 488771665\r\nMobile: 94604042",
-    "Other": "ANTHONY HICKEY",
+    "Address": "PO. BOX 247\r\nVIC CAMPBELLFIELD 3074\r\nAUS",
+    "Phone": 488771665,
     "Website": "http://www.gunz.cc",
-    "Currency Code": "AUD"
+    "Other": "ANTHONY HICKEY",
+    "Street": "PO. BOX 247",
+    "City": "VIC",
+    "State/Territory": "CAMPBELLFIELD",
+    "Postcode": "3074",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "GUS PTY.LTD",
-    "Currency Code": "AUD"
+    "Supplier": "GUS PTY.LTD",
+    "ABN": "15142337077"
   },
   {
-    "Display Name As": "GWS CHADSTONE PL",
-    "Currency Code": "AUD"
+    "Supplier": "GWS CHADSTONE PL"
   },
   {
-    "Display Name As": "HAPAG-LLOYD",
-    "Currency Code": "AUD"
+    "Supplier": "HAPAG-LLOYD",
+    "ABN": "19060348021"
   },
   {
-    "Display Name As": "Harigon Gourmet Foods",
-    "Billing Address Line 1": "Harigon Gourmet Foods\r\r\nNone\r\nAU",
-    "Billing Address Line 2": "Harigon Gourmet Foods\r\r\nNone",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "Harigon Gourmet Foods",
+    "Address": "Harigon Gourmet Foods\r\r\nNone\r\nAU",
+    "Street": "Harigon Gourmet Foods\r\r\nNone",
+    "Country": "AU"
   },
   {
-    "Display Name As": "HESTA",
-    "Currency Code": "AUD"
+    "Supplier": "HESTA"
   },
   {
-    "Display Name As": "HIGHGATE",
-    "Currency Code": "AUD"
+    "Supplier": "HIGHGATE"
   },
   {
-    "Display Name As": "HIREOO LABOUR PTY LTD",
-    "Billing Address Line 1": "8 gamaret place\r\nVIC Berwick 3806\r\nAustralia",
-    "Billing Address Line 2": "8 gamaret place",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Phone": "Phone: 4340318238",
-    "Currency Code": "AUD"
+    "Supplier": "HIREOO LABOUR PTY LTD",
+    "Phone Numbers": "Phone: 4340318238",
+    "Address": "8 gamaret place\r\nVIC Berwick 3806\r\nAustralia",
+    "Phone": "4340318238",
+    "Street": "8 gamaret place",
+    "City": "VIC",
+    "State/Territory": "Berwick",
+    "Postcode": "3806",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "HMM",
-    "Currency Code": "AUD"
+    "Supplier": "HMM"
   },
   {
-    "Display Name As": "HOTEL QLD",
-    "Currency Code": "AUD"
+    "Supplier": "HOTEL QLD"
   },
   {
-    "Display Name As": "HS CLEANING",
-    "Currency Code": "AUD"
+    "Supplier": "HS CLEANING"
   },
   {
-    "Display Name As": "HUNTER EXPRESS",
-    "Currency Code": "AUD"
+    "Supplier": "HUNTER EXPRESS"
   },
   {
-    "Display Name As": "IBD PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "IBD PTY LTD",
+    "ABN": "48683978275"
   },
   {
-    "Display Name As": "IBEX FOODS",
-    "Currency Code": "AUD"
+    "Supplier": "IBEX FOODS"
   },
   {
-    "Display Name As": "ICEMAN",
-    "Currency Code": "AUD"
+    "Supplier": "ICEMAN"
   },
   {
-    "Display Name As": "ICRS",
-    "Currency Code": "AUD"
+    "Supplier": "ICRS",
+    "ABN": "89137742280"
   },
   {
-    "Display Name As": "IDS BORJOMI GEORGIA, LLC",
-    "Billing Address Line 1": "IDS BORJOMI GEORGIA, LLC\r\r\n10 BIDZINA KVERNADZE ST\r\nTBILISI 0171\r\nGE",
-    "Billing Address Line 2": "IDS BORJOMI GEORGIA, LLC\r\r\n10 BIDZINA KVERNADZE ST",
-    "Billing Address City": "TBILISI",
-    "Billing Address Country": "GE",
-    "Currency Code": "AUD"
+    "Supplier": "IDS BORJOMI GEORGIA, LLC",
+    "Address": "IDS BORJOMI GEORGIA, LLC\r\r\n10 BIDZINA KVERNADZE ST\r\nTBILISI 0171\r\nGE",
+    "Street": "IDS BORJOMI GEORGIA, LLC\r\r\n10 BIDZINA KVERNADZE ST",
+    "City": "TBILISI",
+    "Postcode": "0171",
+    "Country": "GE"
   },
   {
-    "Display Name As": "IE SERVICE CENTRE PTY.LTD",
-    "Currency Code": "AUD"
+    "Supplier": "IE SERVICE CENTRE PTY.LTD",
+    "ABN": "72177518242"
   },
   {
-    "Display Name As": "ILC TECH",
-    "Currency Code": "AUD"
+    "Supplier": "ILC TECH"
   },
   {
-    "Display Name As": "INDUSTRIAL TRAINING",
-    "Currency Code": "AUD"
+    "Supplier": "INDUSTRIAL TRAINING"
   },
   {
-    "Display Name As": "INK STATION",
-    "Currency Code": "AUD"
+    "Supplier": "INK STATION"
   },
   {
-    "Display Name As": "INSIGNIA",
-    "Currency Code": "AUD"
+    "Supplier": "INSIGNIA"
   },
   {
-    "Display Name As": "INT EXP",
-    "Currency Code": "AUD"
+    "Supplier": "INT EXP"
   },
   {
-    "Display Name As": "INTERACTIVE PRINTER SOLUTION",
-    "Currency Code": "AUD"
+    "Supplier": "INTERACTIVE PRINTER SOLUTION"
   },
   {
-    "Display Name As": "IP AUSTRALIA",
-    "Currency Code": "AUD"
+    "Supplier": "IP AUSTRALIA"
   },
   {
-    "Display Name As": "IRINA V",
-    "Currency Code": "AUD"
+    "Supplier": "IRINA V"
   },
   {
-    "Display Name As": "IT GROUP",
-    "Currency Code": "AUD"
+    "Supplier": "IT GROUP"
   },
   {
-    "Display Name As": "ITT- JETPAK PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "ITT- JETPAK PTY LTD",
+    "ABN": "92632930291"
   },
   {
-    "Display Name As": "JACOBS-MADE IN AISTRALIA",
-    "Currency Code": "AUD"
+    "Supplier": "JACOBS-MADE IN AISTRALIA",
+    "ABN": "75347428094"
   },
   {
-    "Display Name As": "JACPAK",
-    "Currency Code": "AUD"
+    "Supplier": "JACPAK"
   },
   {
-    "Display Name As": "JAM & JAM LTD",
-    "Billing Address Line 1": "BULGARIA",
-    "Billing Address Country": "BULGARIA",
-    "Currency Code": "AUD"
+    "Supplier": "JAM & JAM LTD",
+    "Address": "BULGARIA",
+    "ABN": "11111111111",
+    "Country": "BULGARIA"
   },
   {
-    "Display Name As": "JAY WALKER",
-    "Currency Code": "AUD"
+    "Supplier": "JAY WALKER"
   },
   {
-    "Display Name As": "JAYDE TRANSPORT",
-    "Currency Code": "AUD"
+    "Supplier": "JAYDE TRANSPORT"
   },
   {
-    "Display Name As": "JB HI",
-    "Currency Code": "AUD"
+    "Supplier": "JB HI"
   },
   {
-    "Display Name As": "JETSTAR",
-    "Currency Code": "AUD"
+    "Supplier": "JETSTAR"
   },
   {
-    "Display Name As": "JIALIFT AUST",
-    "Currency Code": "AUD"
+    "Supplier": "JIALIFT AUST",
+    "ABN": "16164661956"
   },
   {
-    "Display Name As": "JIM'S CLEANING",
-    "Currency Code": "AUD"
+    "Supplier": "JIM'S CLEANING",
+    "ABN": "62274833802"
   },
   {
-    "Display Name As": "JMF(GLOBAL) PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "JMF(GLOBAL) PTY LTD"
   },
   {
-    "Display Name As": "JOBSYNC",
-    "Currency Code": "AUD"
+    "Supplier": "JOBSYNC"
   },
   {
-    "Display Name As": "JOHN MUNRO",
-    "Billing Address Line 1": "JOHN MUNRO\r\r\nN/A\r\nVIC 3941\r\nAU",
-    "Billing Address Line 2": "JOHN MUNRO\r\r\nN/A",
-    "Billing Address City": "VIC 3941",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "JOHN MUNRO",
+    "Address": "JOHN MUNRO\r\r\nN/A\r\nVIC 3941\r\nAU",
+    "Street": "JOHN MUNRO\r\r\nN/A",
+    "City": "VIC 3941",
+    "Country": "AU"
   },
   {
-    "Display Name As": "KARSTEN MARKETING",
-    "Billing Address Line 1": "KARSTEN MARKETING\r\r\nQUEEN STREET 3 / P.O. Box 2667\r\nDURBANVILLE\r\nZA",
-    "Billing Address Line 2": "KARSTEN MARKETING\r\r\nQUEEN STREET 3 / P.O. Box 2667",
-    "Billing Address City": "DURBANVILLE",
-    "Billing Address Country": "ZA",
-    "Phone": "Phone: +27219705120",
-    "Currency Code": "AUD"
+    "Supplier": "KARSTEN MARKETING",
+    "Phone Numbers": "Phone: +27219705120",
+    "Address": "KARSTEN MARKETING\r\r\nQUEEN STREET 3 / P.O. Box 2667\r\nDURBANVILLE\r\nZA",
+    "Phone": "+27219705120",
+    "Street": "KARSTEN MARKETING\r\r\nQUEEN STREET 3 / P.O. Box 2667",
+    "City": "DURBANVILLE",
+    "Country": "ZA"
   },
   {
-    "Display Name As": "KARSTEN/NATURES BRIDGE",
-    "Currency Code": "AUD"
+    "Supplier": "KARSTEN/NATURES BRIDGE"
   },
   {
-    "Display Name As": "KASOL JA KAZBERUK",
-    "Billing Address Line 1": "BIALYSTOK\r\nPOLAND",
-    "Billing Address Line 2": "BIALYSTOK",
-    "Billing Address Country": "POLAND",
-    "Currency Code": "AUD"
+    "Supplier": "KASOL JA KAZBERUK",
+    "Address": "BIALYSTOK\r\nPOLAND",
+    "ABN": "11111111111",
+    "Street": "BIALYSTOK",
+    "Country": "POLAND"
   },
   {
-    "Display Name As": "KEARLEY LEWIS",
-    "Billing Address Line 1": "P.O BOX 138 COLLINS STREET WEST MELBOURNE\r\nVIC 8007",
-    "Billing Address Line 2": "P.O BOX 138 COLLINS STREET WEST MELBOURNE",
-    "Billing Address City": "VIC",
+    "Supplier": "KEARLEY LEWIS",
+    "Phone Numbers": "Phone: 96298777",
     "Email": "accounts@kearleylewis.com.au",
-    "Phone": "Phone: 96298777",
-    "Currency Code": "AUD"
+    "Address": "P.O BOX 138 COLLINS STREET WEST MELBOURNE\r\nVIC 8007",
+    "Phone": 96298777,
+    "ABN": "56061754854",
+    "Street": "P.O BOX 138 COLLINS STREET WEST MELBOURNE",
+    "City": "VIC",
+    "Postcode": "8007"
   },
   {
-    "Display Name As": "KERRY LOGISTICS",
-    "Currency Code": "AUD"
+    "Supplier": "KERRY LOGISTICS"
   },
   {
-    "Display Name As": "KINGSTON COUNCIL",
-    "Currency Code": "AUD"
+    "Supplier": "KINGSTON COUNCIL"
   },
   {
-    "Display Name As": "KINNERET FARM LTD",
-    "Billing Address Line 1": "ISRAEL",
-    "Billing Address Line 2": "ISRAEL",
-    "Currency Code": "AUD"
+    "Supplier": "KINNERET FARM LTD",
+    "Address": "ISRAEL",
+    "ABN": "11111111111",
+    "Street": "ISRAEL"
   },
   {
-    "Display Name As": "KOGEN, ALEXANDER",
-    "Billing Address Line 1": "10/11 Hasnnah St\r\nvic Cheltenham 3192",
-    "Billing Address Line 2": "10/11 Hasnnah St",
-    "Billing Address City": "vic",
-    "Currency Code": "AUD"
+    "Supplier": "KOGEN, ALEXANDER",
+    "Address": "10/11 Hasnnah St\r\nvic Cheltenham 3192",
+    "ABN": "69742621220",
+    "Street": "10/11 Hasnnah St",
+    "City": "vic",
+    "State/Territory": "Cheltenham",
+    "Postcode": "3192"
   },
   {
-    "Display Name As": "KOL",
-    "Currency Code": "AUD"
+    "Supplier": "KOL"
   },
   {
-    "Display Name As": "KONEX-TIVA",
-    "Currency Code": "AUD"
+    "Supplier": "KONEX-TIVA",
+    "ABN": "11111111111"
   },
   {
-    "Display Name As": "Krinsky's Kosher Supermarket",
-    "Billing Address Line 1": "175 Bondi road\r\nNSW Bondi 2026\r\nAUS",
-    "Billing Address Line 2": "175 Bondi road",
-    "Billing Address City": "NSW",
-    "Billing Address Country": "AUS",
+    "Supplier": "Krinsky's Kosher Supermarket",
+    "Phone Numbers": "Phone: 02-93869021\r\nFax: 02-93691240",
     "Email": "krinskyskosher@gmail.com",
-    "Phone": "Phone: 02-93869021\r\nFax: 02-93691240",
+    "Address": "175 Bondi road\r\nNSW Bondi 2026\r\nAUS",
+    "Phone": "02-93869021",
     "Other": "Shaina Krinsky",
-    "Currency Code": "AUD"
+    "ABN": "44410677366",
+    "Street": "175 Bondi road",
+    "City": "NSW",
+    "State/Territory": "Bondi",
+    "Postcode": "2026",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "KS ENVIROMENTAL",
-    "Currency Code": "AUD"
+    "Supplier": "KS ENVIROMENTAL",
+    "ABN": "96004687709"
   },
   {
-    "Display Name As": "KTL",
-    "Currency Code": "AUD"
+    "Supplier": "KTL"
   },
   {
-    "Display Name As": "KUEHNE?",
-    "Currency Code": "AUD"
+    "Supplier": "KUEHNE?",
+    "ABN": "70000871607"
   },
   {
-    "Display Name As": "LABS FASHION",
-    "Currency Code": "AUD"
+    "Supplier": "LABS FASHION"
   },
   {
-    "Display Name As": "LANSCORP",
-    "Billing Address Line 1": "LANSCORP\r\r\nNone\r\nAU",
-    "Billing Address Line 2": "LANSCORP\r\r\nNone",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "LANSCORP",
+    "Address": "LANSCORP\r\r\nNone\r\nAU",
+    "Street": "LANSCORP\r\r\nNone",
+    "Country": "AU"
   },
   {
-    "Display Name As": "LEADER DISPLAY",
-    "Currency Code": "AUD"
+    "Supplier": "LEADER DISPLAY"
   },
   {
-    "Display Name As": "LEMBERG",
-    "Currency Code": "AUD"
+    "Supplier": "LEMBERG"
   },
   {
-    "Display Name As": "LES CHAPMAN & SON",
-    "Currency Code": "AUD"
+    "Supplier": "LES CHAPMAN & SON"
   },
   {
-    "Display Name As": "LESAFFRE AUSTRALIA PACIFIC",
-    "Currency Code": "AUD"
+    "Supplier": "LESAFFRE AUSTRALIA PACIFIC",
+    "ABN": "20061508825"
   },
   {
-    "Display Name As": "LEVTRADE CO. LTD",
-    "Billing Address Line 1": "76/143 SVETLANSKAYA ST\r\r\nPRIMORSKYI KRAY\r\nVLADIVOSTOK 690001\r\nRUSSIA",
-    "Billing Address Line 2": "76/143 SVETLANSKAYA ST\r\r\nPRIMORSKYI KRAY",
-    "Billing Address Country": "RUSSIA",
-    "Currency Code": "AUD"
+    "Supplier": "LEVTRADE CO. LTD",
+    "Address": "76/143 SVETLANSKAYA ST\r\r\nPRIMORSKYI KRAY\r\nVLADIVOSTOK 690001\r\nRUSSIA",
+    "Street": "76/143 SVETLANSKAYA ST\r\r\nPRIMORSKYI KRAY",
+    "State/Territory": "VLADIVOSTOK",
+    "Postcode": "690001",
+    "Country": "RUSSIA"
   },
   {
-    "Display Name As": "LIALIFT AUSTRALIA PTY LTD",
-    "Billing Address Line 1": "75 POWER ROAD\r\nVIC BORONIA 3144\r\nAustralia",
-    "Billing Address Line 2": "75 POWER ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
+    "Supplier": "LIALIFT AUSTRALIA PTY LTD",
+    "Phone Numbers": "Phone: 03 9720 8130",
     "Email": "sales@jialify.com.au",
-    "Phone": "Phone: 03 9720 8130",
-    "Currency Code": "AUD"
+    "Address": "75 POWER ROAD\r\nVIC BORONIA 3144\r\nAustralia",
+    "Phone": "03 9720 8130",
+    "ABN": "16164661956",
+    "Street": "75 POWER ROAD",
+    "City": "VIC",
+    "State/Territory": "BORONIA",
+    "Postcode": "3144",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "LINEAGE AUS",
-    "Currency Code": "AUD"
+    "Supplier": "LINEAGE AUS"
   },
   {
-    "Display Name As": "LINK",
-    "Currency Code": "AUD"
+    "Supplier": "LINK"
   },
   {
-    "Display Name As": "LINKT",
-    "Currency Code": "AUD"
+    "Supplier": "LINKT"
   },
   {
-    "Display Name As": "LLC TEMP",
-    "Billing Address Line 1": "RUSSIA",
-    "Billing Address Line 2": "RUSSIA",
-    "Currency Code": "AUD"
+    "Supplier": "LLC TEMP",
+    "Address": "RUSSIA",
+    "Street": "RUSSIA"
   },
   {
-    "Display Name As": "LOAN LC",
-    "Currency Code": "AUD"
+    "Supplier": "LOAN LC"
   },
   {
-    "Display Name As": "LUBA/ALPINE/RACOVOLIS",
-    "Currency Code": "AUD"
+    "Supplier": "LUBA/ALPINE/RACOVOLIS"
   },
   {
-    "Display Name As": "LUMO ENERGY",
-    "Currency Code": "AUD"
+    "Supplier": "LUMO ENERGY"
   },
   {
-    "Display Name As": "LUXPARK",
-    "Currency Code": "AUD"
+    "Supplier": "LUXPARK",
+    "ABN": "70686150535"
   },
   {
-    "Display Name As": "M&E MCCARTHY AND ELLIS",
-    "Currency Code": "AUD"
+    "Supplier": "M&E MCCARTHY AND ELLIS"
   },
   {
-    "Display Name As": "MAERSK LINE",
-    "Currency Code": "AUD"
+    "Supplier": "MAERSK LINE"
   },
   {
-    "Display Name As": "MAHROUM SWEETS",
-    "Billing Address Line 1": "NAZARETH\r\nISRAEL",
-    "Billing Address Country": "ISRAEL",
-    "Phone": "Phone: ?4-6554470\r\nFax: ?4-6562469",
+    "Supplier": "MAHROUM SWEETS",
+    "Phone Numbers": "Phone: ?4-6554470\r\nFax: ?4-6562469",
+    "Address": "NAZARETH\r\nISRAEL",
+    "Phone": "?4-6554470",
     "Other": "DIAB",
-    "Currency Code": "AUD"
+    "State/Territory": "NAZARETH",
+    "Country": "ISRAEL"
   },
   {
-    "Display Name As": "MAINFREIGHT",
-    "Currency Code": "AUD"
+    "Supplier": "MAINFREIGHT"
   },
   {
-    "Display Name As": "MARINER PTY LTD",
+    "Supplier": "MARINER PTY LTD",
+    "Phone Numbers": "Fax: 94171744",
     "Email": "marinerinternational@gmail.com",
-    "Phone": "Fax: 94171744",
     "Other": "JOHN",
-    "Currency Code": "AUD"
+    "ABN": "27007353871"
   },
   {
-    "Display Name As": "MARITINA",
-    "Currency Code": "AUD"
+    "Supplier": "MARITINA"
   },
   {
-    "Display Name As": "MARTGRAPHICS",
-    "Currency Code": "AUD"
+    "Supplier": "MARTGRAPHICS",
+    "ABN": "86250315099"
   },
   {
-    "Display Name As": "MAS IMPORTS & EXPORTS P/L",
+    "Supplier": "MAS IMPORTS & EXPORTS P/L",
+    "Phone Numbers": "Phone: 0414075355 hassan",
     "Email": "hdemirmas@gmail.com",
-    "Phone": "Phone: 0414075355 hassan",
+    "Phone": "0414075355 hassan",
     "Website": "http://ali@masimpex.com.au",
-    "Currency Code": "AUD"
+    "ABN": "77602533111"
   },
   {
-    "Display Name As": "MASSENA",
-    "Currency Code": "AUD"
+    "Supplier": "MASSENA"
   },
   {
-    "Display Name As": "MB FOODS PTY LTD",
-    "Billing Address Line 1": "MB FOODS PTY LTD\r\r\n10 KATZ WAY\r\nSOMERTON Victoria 3062\r\nAU",
-    "Billing Address Line 2": "MB FOODS PTY LTD\r\r\n10 KATZ WAY",
-    "Billing Address City": "SOMERTON",
-    "Billing Address Country": "AU",
+    "Supplier": "MB FOODS PTY LTD",
+    "Phone Numbers": "Phone: (03) 9309-9112",
     "Email": "accounts@medfoods.com.au",
-    "Phone": "Phone: (03) 9309-9112",
-    "Currency Code": "AUD"
+    "Address": "MB FOODS PTY LTD\r\r\n10 KATZ WAY\r\nSOMERTON Victoria 3062\r\nAU",
+    "Phone": "(03) 9309-9112",
+    "Street": "MB FOODS PTY LTD\r\r\n10 KATZ WAY",
+    "City": "SOMERTON",
+    "State/Territory": "Victoria",
+    "Postcode": "3062",
+    "Country": "AU"
   },
   {
-    "Display Name As": "MEAT FLOUR",
-    "Currency Code": "AUD"
+    "Supplier": "MEAT FLOUR"
   },
   {
-    "Display Name As": "MECHAALANI & SONS FOOD SERVICES PTY LTD",
-    "Phone": "Phone: 0400922654 ABDU",
-    "Currency Code": "AUD"
+    "Supplier": "MECHAALANI & SONS FOOD SERVICES PTY LTD",
+    "Phone Numbers": "Phone: 0400922654 ABDU",
+    "Phone": "0400922654 ABDU",
+    "ABN": "43093138688"
   },
   {
-    "Display Name As": "MED FOODS",
-    "Billing Address Line 1": "MED FOODS\r\r\n10 KATZ WAY\r\nSOMERTON Victoria 3062\r\nAU",
-    "Billing Address Line 2": "MED FOODS\r\r\n10 KATZ WAY",
-    "Billing Address City": "SOMERTON",
-    "Billing Address Country": "AU",
+    "Supplier": "MED FOODS",
+    "Phone Numbers": "Phone: (03) 9309-9112",
     "Email": "accounts@medfoods.com.au",
-    "Phone": "Phone: (03) 9309-9112",
-    "Currency Code": "AUD"
+    "Address": "MED FOODS\r\r\n10 KATZ WAY\r\nSOMERTON Victoria 3062\r\nAU",
+    "Phone": "(03) 9309-9112",
+    "Street": "MED FOODS\r\r\n10 KATZ WAY",
+    "City": "SOMERTON",
+    "State/Territory": "Victoria",
+    "Postcode": "3062",
+    "Country": "AU"
   },
   {
-    "Display Name As": "MEDJOOL PLUS LTD",
-    "Currency Code": "AUD"
+    "Supplier": "MEDJOOL PLUS LTD",
+    "ABN": "11111111111"
   },
   {
-    "Display Name As": "MEGA FREIGHT",
-    "Currency Code": "AUD"
+    "Supplier": "MEGA FREIGHT",
+    "ABN": "16053812123"
   },
   {
-    "Display Name As": "MELB BOLT CO",
-    "Currency Code": "AUD"
+    "Supplier": "MELB BOLT CO"
   },
   {
-    "Display Name As": "MELBOURNE CURED",
-    "Billing Address Line 1": "2B DUNLOP ROAD\r\nVIC HOPPERS CROSSING 3029\r\nAustralia",
-    "Billing Address Line 2": "2B DUNLOP ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Phone": "Phone: 435475038",
-    "Currency Code": "AUD"
+    "Supplier": "MELBOURNE CURED",
+    "Phone Numbers": "Phone: 435475038",
+    "Address": "2B DUNLOP ROAD\r\nVIC HOPPERS CROSSING 3029\r\nAustralia",
+    "Phone": 435475038,
+    "ABN": "74840236458",
+    "Street": "2B DUNLOP ROAD",
+    "City": "VIC",
+    "State/Territory": "HOPPERS CROSSING",
+    "Postcode": "3029",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "MELBOURNE NUT COMPANY PTY LTD",
-    "Billing Address Line 1": "12 BREX COURT\r\nVIC RESERVOIR 3073\r\nAUS",
-    "Billing Address Line 2": "12 BREX COURT",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
+    "Supplier": "MELBOURNE NUT COMPANY PTY LTD",
+    "Phone Numbers": "Phone: 94622929\r\nFax: 94621388",
     "Email": "info@melbournenutco.com.au",
-    "Phone": "Phone: 94622929\r\nFax: 94621388",
-    "Other": "el sheikh",
+    "Address": "12 BREX COURT\r\nVIC RESERVOIR 3073\r\nAUS",
+    "Phone": 94622929,
     "Website": "http://www.melbournenutco.com.au",
-    "Currency Code": "AUD"
+    "Other": "el sheikh",
+    "ABN": "78576785591",
+    "Street": "12 BREX COURT",
+    "City": "VIC",
+    "State/Territory": "RESERVOIR",
+    "Postcode": "3073",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "MELBOURNE OFFICE SUPPLIES",
-    "Currency Code": "AUD"
+    "Supplier": "MELBOURNE OFFICE SUPPLIES",
+    "ABN": "12485599069"
   },
   {
-    "Display Name As": "MELBOURNE PACKAGING SUPPLIES P/L",
-    "Billing Address Line 1": "UNIT 3/7 EASTSPUR COURT\r\nVIC KILSYTH 3137",
-    "Billing Address Line 2": "UNIT 3/7 EASTSPUR COURT",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 1300396835",
-    "Currency Code": "AUD"
+    "Supplier": "MELBOURNE PACKAGING SUPPLIES P/L",
+    "Phone Numbers": "Phone: 1300396835",
+    "Address": "UNIT 3/7 EASTSPUR COURT\r\nVIC KILSYTH 3137",
+    "Phone": 1300396835,
+    "ABN": "43005605952",
+    "Street": "UNIT 3/7 EASTSPUR COURT",
+    "City": "VIC",
+    "State/Territory": "KILSYTH",
+    "Postcode": "3137"
   },
   {
-    "Display Name As": "MERC AUSTRALIA PTY LTD",
-    "Billing Address Line 1": "7/10 LYN PDE\r\nPRESTONS NSW 2170",
-    "Billing Address Line 2": "7/10 LYN PDE",
-    "Billing Address City": "PRESTONS",
+    "Supplier": "MERC AUSTRALIA PTY LTD",
+    "Phone Numbers": "Phone: 04 2520 6749",
     "Email": "merc_aus@yahoo.com.au",
-    "Phone": "Phone: 04 2520 6749",
+    "Address": "7/10 LYN PDE\r\nPRESTONS NSW 2170",
+    "Phone": "04 2520 6749",
     "Other": "MICHAEL",
-    "Currency Code": "AUD"
+    "ABN": "56104963046",
+    "Street": "7/10 LYN PDE",
+    "City": "PRESTONS",
+    "State/Territory": "NSW",
+    "Postcode": "2170"
   },
   {
-    "Display Name As": "MERCHANT FEES",
-    "Currency Code": "AUD"
+    "Supplier": "MERCHANT FEES"
   },
   {
-    "Display Name As": "MICHAEL VAYNBERG",
-    "Currency Code": "AUD"
+    "Supplier": "MICHAEL VAYNBERG"
   },
   {
-    "Display Name As": "MIKHAIL BARABANOV",
-    "Currency Code": "AUD"
+    "Supplier": "MIKHAIL BARABANOV"
   },
   {
-    "Display Name As": "MINUS 1",
-    "Currency Code": "AUD"
+    "Supplier": "MINUS 1"
   },
   {
-    "Display Name As": "MINUTEMAN PRESS",
-    "Currency Code": "AUD"
+    "Supplier": "MINUTEMAN PRESS",
+    "ABN": "61129190174"
   },
   {
-    "Display Name As": "MIRA",
-    "Billing Address Line 1": "23 PLISCA STREET\r\nNOVI PAZAR\r\nBULGARIA",
-    "Billing Address Line 2": "23 PLISCA STREET",
-    "Billing Address Country": "BULGARIA",
-    "Currency Code": "AUD"
+    "Supplier": "MIRA",
+    "Address": "23 PLISCA STREET\r\nNOVI PAZAR\r\nBULGARIA",
+    "Street": "23 PLISCA STREET",
+    "State/Territory": "NOVI PAZAR",
+    "Country": "BULGARIA"
   },
   {
-    "Display Name As": "MISCHIEF BREW",
-    "Billing Address Line 1": "Mischief Brew\r\r\n18 Vintage Road\r\nUnderdale South Australia 5032\r\nAU",
-    "Billing Address Line 2": "Mischief Brew\r\r\n18 Vintage Road",
-    "Billing Address City": "Underdale",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "MISCHIEF BREW",
+    "Address": "Mischief Brew\r\r\n18 Vintage Road\r\nUnderdale South Australia 5032\r\nAU",
+    "Street": "Mischief Brew\r\r\n18 Vintage Road",
+    "City": "Underdale",
+    "State/Territory": "South Australia",
+    "Postcode": "5032",
+    "Country": "AU"
   },
   {
-    "Display Name As": "MJ CONTAINERS",
-    "Currency Code": "AUD"
+    "Supplier": "MJ CONTAINERS",
+    "ABN": "58261348713"
   },
   {
-    "Display Name As": "MOM CARLTON COLOUR COPY CENTRE",
-    "Currency Code": "AUD"
+    "Supplier": "MOM CARLTON COLOUR COPY CENTRE",
+    "ABN": "42006607923"
   },
   {
-    "Display Name As": "MOS BEVERAGES",
-    "Billing Address Line 1": "17/834 BOURKE STREET\r\nNSW WATERLOO. 2017",
-    "Billing Address Line 2": "17/834 BOURKE STREET",
-    "Billing Address City": "NSW",
-    "Phone": "Phone: 403311282",
+    "Supplier": "MOS BEVERAGES",
+    "Phone Numbers": "Phone: 403311282",
+    "Address": "17/834 BOURKE STREET\r\nNSW WATERLOO. 2017",
+    "Phone": 403311282,
     "Website": "http://www.mosbv.com.au",
-    "Currency Code": "AUD"
+    "ABN": "91609622380",
+    "Street": "17/834 BOURKE STREET",
+    "City": "NSW",
+    "State/Territory": "WATERLOO.",
+    "Postcode": "2017"
   },
   {
-    "Display Name As": "MOUNTAIN FRESH TROUT AND SALMON FARM",
-    "Billing Address Line 1": "PO BOX 459\r\nVIC BRIGHT 3741",
-    "Billing Address Line 2": "PO BOX 459",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 03 57592558\r\nFax: 357592628",
-    "Currency Code": "AUD"
+    "Supplier": "MOUNTAIN FRESH TROUT AND SALMON FARM",
+    "Phone Numbers": "Phone: 03 57592558\r\nFax: 357592628",
+    "Address": "PO BOX 459\r\nVIC BRIGHT 3741",
+    "Phone": "03 57592558",
+    "ABN": "27478093434",
+    "Street": "PO BOX 459",
+    "City": "VIC",
+    "State/Territory": "BRIGHT",
+    "Postcode": "3741"
   },
   {
-    "Display Name As": "MSC",
-    "Currency Code": "AUD"
+    "Supplier": "MSC",
+    "ABN": "12003760638"
   },
   {
-    "Display Name As": "MYFOODS IMPORT/EXPORT",
-    "Currency Code": "AUD"
+    "Supplier": "MYFOODS IMPORT/EXPORT",
+    "ABN": "53604880917"
   },
   {
-    "Display Name As": "NATAN KASPIN",
-    "Currency Code": "AUD"
+    "Supplier": "NATAN KASPIN"
   },
   {
-    "Display Name As": "NATIONAL EGGS PTY LTD",
-    "Billing Address Line 1": "375 SETTLEMENT ROAD\r\nVIC THOMASTOWN 3195",
-    "Billing Address Line 2": "375 SETTLEMENT ROAD",
-    "Billing Address City": "VIC",
+    "Supplier": "NATIONAL EGGS PTY LTD",
+    "Phone Numbers": "Phone: 84887944",
     "Email": "sales@nationaleggs.com.au",
-    "Phone": "Phone: 84887944",
-    "Account No": "083-363 944563302",
-    "Currency Code": "AUD"
+    "Address": "375 SETTLEMENT ROAD\r\nVIC THOMASTOWN 3195",
+    "Account No.": "083-363 944563302",
+    "Phone": 84887944,
+    "ABN": "97164261769",
+    "Street": "375 SETTLEMENT ROAD",
+    "City": "VIC",
+    "State/Territory": "THOMASTOWN",
+    "Postcode": "3195"
   },
   {
-    "Display Name As": "NATIONAL MEASUREMENT INSTITUTE",
-    "Currency Code": "AUD"
+    "Supplier": "NATIONAL MEASUREMENT INSTITUTE"
   },
   {
-    "Display Name As": "NATIONWIDE SEAFOODS PTY.LTD",
-    "Billing Address Line 1": "60A OAKOVER ROAD\r\nVIC PRESTON 3072\r\nAUS",
-    "Billing Address Line 2": "60A OAKOVER ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
+    "Supplier": "NATIONWIDE SEAFOODS PTY.LTD",
+    "Phone Numbers": "Phone: 94168177\r\nFax: 94169177\r\nMobile: 409138223",
     "Email": "nationwide@nationwideseafood.com.au",
-    "Phone": "Phone: 94168177\r\nFax: 94169177\r\nMobile: 409138223",
-    "Currency Code": "AUD"
+    "Address": "60A OAKOVER ROAD\r\nVIC PRESTON 3072\r\nAUS",
+    "Phone": 94168177,
+    "ABN": "88099105718",
+    "Street": "60A OAKOVER ROAD",
+    "City": "VIC",
+    "State/Territory": "PRESTON",
+    "Postcode": "3072",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "NAVIA",
-    "Currency Code": "AUD"
+    "Supplier": "NAVIA"
   },
   {
-    "Display Name As": "ND",
-    "Currency Code": "AUD"
+    "Supplier": "ND"
   },
   {
-    "Display Name As": "NEIGHBOURHOOD PEST CONTROL",
+    "Supplier": "NEIGHBOURHOOD PEST CONTROL",
     "Other": 411801016,
-    "Currency Code": "AUD"
+    "ABN": "44716704978"
   },
   {
-    "Display Name As": "NEXCACU",
-    "Currency Code": "AUD"
+    "Supplier": "NEXCACU"
   },
   {
-    "Display Name As": "NIKOLAY GUSTOV",
-    "Currency Code": "AUD"
+    "Supplier": "NIKOLAY GUSTOV",
+    "ABN": "90259164189"
   },
   {
-    "Display Name As": "NISSAN FINANCIAL",
-    "Currency Code": "AUD"
+    "Supplier": "NISSAN FINANCIAL"
   },
   {
-    "Display Name As": "NMI",
-    "Currency Code": "AUD"
+    "Supplier": "NMI"
   },
   {
-    "Display Name As": "O' BRIEN",
-    "Currency Code": "AUD"
+    "Supplier": "O' BRIEN"
   },
   {
-    "Display Name As": "OBERON",
-    "Billing Address Line 1": "BULGARIA",
-    "Billing Address Country": "BULGARIA",
-    "Currency Code": "AUD"
+    "Supplier": "OBERON",
+    "Address": "BULGARIA",
+    "Country": "BULGARIA"
   },
   {
-    "Display Name As": "OCEANS 2 OCEANS",
-    "Billing Address Line 1": "56  Healey Road\r\nDandenong South",
-    "Billing Address Line 2": "56  Healey Road",
-    "Phone": "Phone: 386691490",
-    "Currency Code": "AUD"
+    "Supplier": "OCEANS 2 OCEANS",
+    "Phone Numbers": "Phone: 386691490",
+    "Address": "56  Healey Road\r\nDandenong South",
+    "Phone": 386691490,
+    "ABN": "97747354170",
+    "Street": "56  Healey Road",
+    "State/Territory": "Dandenong South"
   },
   {
-    "Display Name As": "OFFICE SUPPLIES",
-    "Currency Code": "AUD"
+    "Supplier": "OFFICE SUPPLIES"
   },
   {
-    "Display Name As": "OFFICEWORKS",
-    "Currency Code": "AUD"
+    "Supplier": "OFFICEWORKS"
   },
   {
-    "Display Name As": "OLIVERIA WHOLESALE",
-    "Currency Code": "AUD"
+    "Supplier": "OLIVERIA WHOLESALE",
+    "ABN": "21846074350"
   },
   {
-    "Display Name As": "OLSSONS PACIFIC SALT PTY LTD",
-    "Billing Address Line 1": "19-25 NELSON RD\r\nNSW YENNORA 2161\r\nAustralia",
-    "Billing Address Line 2": "19-25 NELSON RD",
-    "Billing Address City": "NSW",
-    "Billing Address Country": "Australia",
-    "Currency Code": "AUD"
+    "Supplier": "OLSSONS PACIFIC SALT PTY LTD",
+    "Address": "19-25 NELSON RD\r\nNSW YENNORA 2161\r\nAustralia",
+    "ABN": "46000130263",
+    "Street": "19-25 NELSON RD",
+    "City": "NSW",
+    "State/Territory": "YENNORA",
+    "Postcode": "2161",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "ONE",
-    "Currency Code": "AUD"
+    "Supplier": "ONE"
   },
   {
-    "Display Name As": "ONGUS PTY.LTD",
-    "Phone": "Phone: 405988793",
+    "Supplier": "ONGUS PTY.LTD",
+    "Phone Numbers": "Phone: 405988793",
+    "Phone": 405988793,
     "Other": "NIKOLAY",
-    "Currency Code": "AUD"
+    "ABN": "15142337077"
   },
   {
-    "Display Name As": "OOCL AUSTRALIA PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "OOCL AUSTRALIA PTY LTD",
+    "ABN": "58003729244"
   },
   {
-    "Display Name As": "ORI MENACHEM",
-    "Currency Code": "AUD"
+    "Supplier": "ORI MENACHEM"
   },
   {
-    "Display Name As": "ORORA FIBRE PACKAGING",
-    "Currency Code": "AUD"
+    "Supplier": "ORORA FIBRE PACKAGING",
+    "ABN": "55004275165"
   },
   {
-    "Display Name As": "ORZEL POLSKA",
-    "Currency Code": "AUD"
+    "Supplier": "ORZEL POLSKA",
+    "ABN": "11111111111"
   },
   {
-    "Display Name As": "OVASTON ORGANICS",
-    "Billing Address Line 1": "825 LINTHORPE VALLEY ROAD\r\nQLD SOUTHBROOK 4363\r\nAUS",
-    "Billing Address Line 2": "825 LINTHORPE VALLEY ROAD",
-    "Billing Address City": "QLD",
-    "Billing Address Country": "AUS",
-    "Phone": "Phone: 746910188\r\nFax: 746910133",
-    "Currency Code": "AUD"
+    "Supplier": "OVASTON ORGANICS",
+    "Phone Numbers": "Phone: 746910188\r\nFax: 746910133",
+    "Address": "825 LINTHORPE VALLEY ROAD\r\nQLD SOUTHBROOK 4363\r\nAUS",
+    "Phone": 746910188,
+    "Street": "825 LINTHORPE VALLEY ROAD",
+    "City": "QLD",
+    "State/Territory": "SOUTHBROOK",
+    "Postcode": "4363",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "P&O FOOD GROUP PTY LTD",
-    "Billing Address Line 1": "P&O FOOD GROUP PTY LTD\r\r\n48 QUINN ST\r\nPRESTON Victoria 3072\r\nAU",
-    "Billing Address Line 2": "P&O FOOD GROUP PTY LTD\r\r\n48 QUINN ST",
-    "Billing Address City": "PRESTON",
-    "Billing Address Country": "AU",
+    "Supplier": "P&O FOOD GROUP PTY LTD",
+    "Phone Numbers": "Phone: 9290 6199",
     "Email": "accounts@pofoodgroup.com.au",
-    "Phone": "Phone: 9290 6199",
-    "Currency Code": "AUD"
+    "Address": "P&O FOOD GROUP PTY LTD\r\r\n48 QUINN ST\r\nPRESTON Victoria 3072\r\nAU",
+    "Phone": "9290 6199",
+    "ABN": "73938300786",
+    "Street": "P&O FOOD GROUP PTY LTD\r\r\n48 QUINN ST",
+    "City": "PRESTON",
+    "State/Territory": "Victoria",
+    "Postcode": "3072",
+    "Country": "AU"
   },
   {
-    "Display Name As": "PACIFIC VINTNERS",
-    "Currency Code": "AUD"
+    "Supplier": "PACIFIC VINTNERS"
   },
   {
-    "Display Name As": "PACKAGING",
-    "Currency Code": "AUD"
+    "Supplier": "PACKAGING"
   },
   {
-    "Display Name As": "PASZKOWSKI PTY.LTD",
-    "Currency Code": "AUD"
+    "Supplier": "PASZKOWSKI PTY.LTD"
   },
   {
-    "Display Name As": "PAUL COX CHILD SUPPORT",
-    "Currency Code": "AUD"
+    "Supplier": "PAUL COX CHILD SUPPORT"
   },
   {
-    "Display Name As": "PELMENI FOODS",
-    "Billing Address Line 1": "13 Teton crt\r\nvic Highett 3190",
-    "Billing Address Line 2": "13 Teton crt",
-    "Billing Address City": "vic",
+    "Supplier": "PELMENI FOODS",
+    "Phone Numbers": "Phone: 99172577\r\nMobile: 424196680",
     "Email": "mail@pelmeni.com.au",
-    "Phone": "Phone: 99172577\r\nMobile: 424196680",
+    "Address": "13 Teton crt\r\nvic Highett 3190",
+    "Phone": 99172577,
     "Website": "http://www.harigon.com.au",
-    "Currency Code": "AUD"
+    "ABN": "61089473914",
+    "Street": "13 Teton crt",
+    "City": "vic",
+    "State/Territory": "Highett",
+    "Postcode": "3190"
   },
   {
-    "Display Name As": "PHOTOROOM",
-    "Currency Code": "AUD"
+    "Supplier": "PHOTOROOM"
   },
   {
-    "Display Name As": "PLASDENE",
-    "Currency Code": "AUD"
+    "Supplier": "PLASDENE"
   },
   {
-    "Display Name As": "PM REFRIGERATION",
-    "Currency Code": "AUD"
+    "Supplier": "PM REFRIGERATION"
   },
   {
-    "Display Name As": "POLAN POLISH-FRENCH COMPANY",
-    "Billing Address Line 1": "zabro\r\npoland",
-    "Billing Address Country": "poland",
+    "Supplier": "POLAN POLISH-FRENCH COMPANY",
     "Email": "polan@polan.com",
+    "Address": "zabro\r\npoland",
     "Website": "http://www.polan.pl",
-    "Currency Code": "AUD"
+    "ABN": "11000000000",
+    "State/Territory": "zabro",
+    "Country": "poland"
   },
   {
-    "Display Name As": "POLYFOAM",
-    "Currency Code": "AUD"
+    "Supplier": "POLYFOAM"
   },
   {
-    "Display Name As": "POWERDIRECT",
-    "Currency Code": "AUD"
+    "Supplier": "POWERDIRECT"
   },
   {
-    "Display Name As": "PRI HANI PICKLES LTD",
-    "Billing Address Line 1": "ISRAEL",
-    "Billing Address Country": "ISRAEL",
+    "Supplier": "PRI HANI PICKLES LTD",
     "Email": "prihen@walla.com",
-    "Currency Code": "AUD"
+    "Address": "ISRAEL",
+    "ABN": "11111111111",
+    "Country": "ISRAEL"
   },
   {
-    "Display Name As": "PRI-CUT FRUIT AND VEGETABLES",
-    "Currency Code": "AUD"
+    "Supplier": "PRI-CUT FRUIT AND VEGETABLES"
   },
   {
-    "Display Name As": "PTA LOGISTICS AUSTRALIA",
-    "Currency Code": "AUD"
+    "Supplier": "PTA LOGISTICS AUSTRALIA",
+    "ABN": "69606991039"
   },
   {
-    "Display Name As": "QA SUPPLIES",
-    "Currency Code": "AUD"
+    "Supplier": "QA SUPPLIES"
   },
   {
-    "Display Name As": "QITAF",
-    "Billing Address Line 1": "QITAF\r\r\nJiftlik - Jericho\r\nPS",
-    "Billing Address Line 2": "QITAF\r\r\nJiftlik - Jericho",
-    "Billing Address Country": "PS",
+    "Supplier": "QITAF",
+    "Phone Numbers": "Mobile: +970598713097",
     "Email": "hassan.ish@qitafco.com",
-    "Phone": "Mobile: +970598713097",
-    "Currency Code": "AUD"
+    "Address": "QITAF\r\r\nJiftlik - Jericho\r\nPS",
+    "Street": "QITAF\r\r\nJiftlik - Jericho",
+    "Country": "PS"
   },
   {
-    "Display Name As": "QSRFRESH",
-    "Currency Code": "AUD"
+    "Supplier": "QSRFRESH",
+    "ABN": "81160439243"
   },
   {
-    "Display Name As": "QUINTESSENCE FOODS PTY LTD",
-    "Billing Address Line 1": "Quintessence Foods Pty Ltd\r\r\nProduction Precinct Beckwith Park\r\nNuriootpa South Australia 5252\r\nAU",
-    "Billing Address Line 2": "Quintessence Foods Pty Ltd\r\r\nProduction Precinct Beckwith Park",
-    "Billing Address City": "Nuriootpa",
-    "Billing Address Country": "AU",
+    "Supplier": "QUINTESSENCE FOODS PTY LTD",
+    "Phone Numbers": "Phone: +61 8 7200 2699\r\nMobile: +61 456 448 274",
     "Email": "andrew@relishthebarossa.com.au",
-    "Phone": "Phone: +61 8 7200 2699\r\nMobile: +61 456 448 274",
-    "Currency Code": "AUD"
+    "Address": "Quintessence Foods Pty Ltd\r\r\nProduction Precinct Beckwith Park\r\nNuriootpa South Australia 5252\r\nAU",
+    "Phone": "+61 8 7200 2699",
+    "Street": "Quintessence Foods Pty Ltd\r\r\nProduction Precinct Beckwith Park",
+    "City": "Nuriootpa",
+    "State/Territory": "South Australia",
+    "Postcode": "5252",
+    "Country": "AU"
   },
   {
-    "Display Name As": "R.S IMPORT EXPORT CO LTD",
-    "Billing Address Line 1": "18078\r\nJERUSALEM\r\nIsrael",
-    "Billing Address Line 2": 18078,
-    "Billing Address Country": "Israel",
+    "Supplier": "R.S IMPORT EXPORT CO LTD",
+    "Phone Numbers": "Phone: 25852552",
     "Email": "rsimport@bezeqint.net",
-    "Phone": "Phone: 25852552",
-    "Currency Code": "AUD"
+    "Address": "18078\r\nJERUSALEM\r\nIsrael",
+    "Phone": 25852552,
+    "ABN": "11111111111",
+    "Street": 18078,
+    "State/Territory": "JERUSALEM",
+    "Country": "Israel"
   },
   {
-    "Display Name As": "RACV-INSURANCE",
-    "Currency Code": "AUD"
+    "Supplier": "RACV-INSURANCE"
   },
   {
-    "Display Name As": "RAILER",
-    "Currency Code": "AUD"
+    "Supplier": "RAILER"
   },
   {
-    "Display Name As": "RASAGRA",
-    "Currency Code": "AUD"
+    "Supplier": "RASAGRA"
   },
   {
-    "Display Name As": "RED SALT AUSTRALIA P/L",
-    "Currency Code": "AUD"
+    "Supplier": "RED SALT AUSTRALIA P/L",
+    "ABN": "40512672964"
   },
   {
-    "Display Name As": "REGERA HOLDINGS",
-    "Billing Address Line 1": "21 ALLIED DRIVE\r\nVIC TULLAMARINE 3043",
-    "Billing Address Line 2": "21 ALLIED DRIVE",
-    "Billing Address City": "VIC",
+    "Supplier": "REGERA HOLDINGS",
+    "Phone Numbers": "Phone: 434095572",
     "Email": "chris_avfm@hotmail.com",
-    "Phone": "Phone: 434095572",
+    "Address": "21 ALLIED DRIVE\r\nVIC TULLAMARINE 3043",
+    "Phone": 434095572,
     "Other": "chris",
-    "Currency Code": "AUD"
+    "ABN": "12917525905",
+    "Street": "21 ALLIED DRIVE",
+    "City": "VIC",
+    "State/Territory": "TULLAMARINE",
+    "Postcode": "3043"
   },
   {
-    "Display Name As": "REGION MANOR PTY. LTD",
-    "Currency Code": "AUD"
+    "Supplier": "REGION MANOR PTY. LTD",
+    "ABN": "58860685387"
   },
   {
-    "Display Name As": "RELISH THE BAROSSA",
-    "Billing Address Line 1": "RELISH THE BAROSSA\r\r\nPRODUCTION PRECINCT BECKWITH PARK\r\nNORIOOTPA South Australia 5252\r\nAU",
-    "Billing Address Line 2": "RELISH THE BAROSSA\r\r\nPRODUCTION PRECINCT BECKWITH PARK",
-    "Billing Address City": "NORIOOTPA",
-    "Billing Address Country": "AU",
+    "Supplier": "RELISH THE BAROSSA",
+    "Phone Numbers": "Phone: +61 8 7200 2699\r\nMobile: +61 456 448 274",
     "Email": "andrew@relishthebarossa.com.au",
-    "Phone": "Phone: +61 8 7200 2699\r\nMobile: +61 456 448 274",
-    "Currency Code": "AUD"
+    "Address": "RELISH THE BAROSSA\r\r\nPRODUCTION PRECINCT BECKWITH PARK\r\nNORIOOTPA South Australia 5252\r\nAU",
+    "Phone": "+61 8 7200 2699",
+    "Street": "RELISH THE BAROSSA\r\r\nPRODUCTION PRECINCT BECKWITH PARK",
+    "City": "NORIOOTPA",
+    "State/Territory": "South Australia",
+    "Postcode": "5252",
+    "Country": "AU"
   },
   {
-    "Display Name As": "REMEDY FLOOR PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "REMEDY FLOOR PTY LTD"
   },
   {
-    "Display Name As": "RENT",
-    "Currency Code": "AUD"
+    "Supplier": "RENT"
   },
   {
-    "Display Name As": "REPCO",
-    "Currency Code": "AUD"
+    "Supplier": "REPCO"
   },
   {
-    "Display Name As": "REST-SUPER",
-    "Currency Code": "AUD"
+    "Supplier": "REST-SUPER"
   },
   {
-    "Display Name As": "RESTSUPPER",
-    "Currency Code": "AUD"
+    "Supplier": "RESTSUPPER"
   },
   {
-    "Display Name As": "RIALIA PTY LTD",
-    "Billing Address Line 1": "129 BURSWOOD ROAD\r\nWA BURSWOOD 6100\r\nAustria",
-    "Billing Address Line 2": "129 BURSWOOD ROAD",
-    "Billing Address City": "WA",
-    "Billing Address Country": "Austria",
-    "Currency Code": "AUD"
+    "Supplier": "RIALIA PTY LTD",
+    "Address": "129 BURSWOOD ROAD\r\nWA BURSWOOD 6100\r\nAustria",
+    "Street": "129 BURSWOOD ROAD",
+    "City": "WA",
+    "State/Territory": "BURSWOOD",
+    "Postcode": "6100",
+    "Country": "Austria"
   },
   {
-    "Display Name As": "RIOS LIFESTYLE PHARMA PTY. LTD",
-    "Billing Address Line 1": "PO BOX 3224\r\nVIC PRAHRAN 3181",
-    "Billing Address Line 2": "PO BOX 3224",
-    "Billing Address City": "VIC",
+    "Supplier": "RIOS LIFESTYLE PHARMA PTY. LTD",
+    "Address": "PO BOX 3224\r\nVIC PRAHRAN 3181",
     "Other": "WALLACE",
-    "Currency Code": "AUD"
+    "ABN": "88208225688",
+    "Street": "PO BOX 3224",
+    "City": "VIC",
+    "State/Territory": "PRAHRAN",
+    "Postcode": "3181"
   },
   {
-    "Display Name As": "RIPPONLEA FISH SUPPLY",
-    "Billing Address Line 1": "49 GLEN EIRA ROAD\r\nVIC RIPPONLEA 3185\r\nAUS",
-    "Billing Address Line 2": "49 GLEN EIRA ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
-    "Phone": "Phone: 95285625",
+    "Supplier": "RIPPONLEA FISH SUPPLY",
+    "Phone Numbers": "Phone: 95285625",
+    "Address": "49 GLEN EIRA ROAD\r\nVIC RIPPONLEA 3185\r\nAUS",
+    "Phone": 95285625,
     "Other": "JOHN",
-    "Currency Code": "AUD"
+    "ABN": "26735857030",
+    "Street": "49 GLEN EIRA ROAD",
+    "City": "VIC",
+    "State/Territory": "RIPPONLEA",
+    "Postcode": "3185",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "RIVERINA OILS & BIO ENERGY PTY LIMITED",
-    "Billing Address Line 1": "8/7 CHAMBERS ROAD\r\nVIC ALTONA NORTH 3025",
-    "Billing Address Line 2": "8/7 CHAMBERS ROAD",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 90788324\r\nFax: 90788325",
+    "Supplier": "RIVERINA OILS & BIO ENERGY PTY LIMITED",
+    "Phone Numbers": "Phone: 90788324\r\nFax: 90788325",
+    "Address": "8/7 CHAMBERS ROAD\r\nVIC ALTONA NORTH 3025",
+    "Phone": 90788324,
     "Website": "http://www.shermanoil.com.au",
-    "Currency Code": "AUD"
+    "ABN": "25103697703",
+    "Street": "8/7 CHAMBERS ROAD",
+    "City": "VIC",
+    "State/Territory": "ALTONA NORTH",
+    "Postcode": "3025"
   },
   {
-    "Display Name As": "RIVONA",
-    "Billing Address Line 1": "VILNUS",
-    "Currency Code": "AUD"
+    "Supplier": "RIVONA",
+    "Address": "VILNUS",
+    "State/Territory": "VILNUS"
   },
   {
-    "Display Name As": "ROADMASTER",
-    "Billing Address Line 1": "21 RIVERSTONE\r\nNSW 2765",
-    "Billing Address Line 2": "21 RIVERSTONE",
-    "Billing Address City": "NSW",
-    "Phone": "Phone: 02-98526699",
-    "Currency Code": "AUD"
+    "Supplier": "ROADMASTER",
+    "Phone Numbers": "Phone: 02-98526699",
+    "Address": "21 RIVERSTONE\r\nNSW 2765",
+    "Phone": "02-98526699",
+    "ABN": "93281087098",
+    "Street": "21 RIVERSTONE",
+    "City": "NSW",
+    "Postcode": "2765"
   },
   {
-    "Display Name As": "ROHLIG LOGISTICS",
-    "Phone": "Phone: (03) 93943799",
-    "Currency Code": "AUD"
+    "Supplier": "ROHLIG LOGISTICS",
+    "Phone Numbers": "Phone: (03) 93943799",
+    "Phone": "(03) 93943799",
+    "ABN": "51001191402"
   },
   {
-    "Display Name As": "ROSTRADE PTY LTD",
+    "Supplier": "ROSTRADE PTY LTD",
     "Email": "dmitry@rostrade.com.au",
-    "Currency Code": "AUD"
+    "ABN": "47162026253"
   },
   {
-    "Display Name As": "ROY YOUSSIEF",
-    "Currency Code": "AUD"
+    "Supplier": "ROY YOUSSIEF"
   },
   {
-    "Display Name As": "ROYAL NUT CO",
-    "Currency Code": "AUD"
+    "Supplier": "ROYAL NUT CO"
   },
   {
-    "Display Name As": "ROYAL NUT COMPANY",
-    "Billing Address Line 1": "ROYAL NUT COMPANY\r\r\n19 ROCCO DR\r\nSCORESBY Victoria 3179\r\nAU",
-    "Billing Address Line 2": "ROYAL NUT COMPANY\r\r\n19 ROCCO DR",
-    "Billing Address City": "SCORESBY",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "ROYAL NUT COMPANY",
+    "Address": "ROYAL NUT COMPANY\r\r\n19 ROCCO DR\r\nSCORESBY Victoria 3179\r\nAU",
+    "Street": "ROYAL NUT COMPANY\r\r\n19 ROCCO DR",
+    "City": "SCORESBY",
+    "State/Territory": "Victoria",
+    "Postcode": "3179",
+    "Country": "AU"
   },
   {
-    "Display Name As": "RS IMPORT EXPORT CO. LTD",
-    "Billing Address Line 1": "RS IMPORT EXPORT CO. LTD\r\r\nPO BOX 18078 JERUSALEM\r\nIL",
-    "Billing Address Line 2": "RS IMPORT EXPORT CO. LTD\r\r\nPO BOX 18078 JERUSALEM",
-    "Billing Address Country": "IL",
+    "Supplier": "RS IMPORT EXPORT CO. LTD",
+    "Phone Numbers": "Phone: 02 5852552",
     "Email": "rsimport@bezeqint.net",
-    "Phone": "Phone: 02 5852552",
-    "Currency Code": "AUD"
+    "Address": "RS IMPORT EXPORT CO. LTD\r\r\nPO BOX 18078 JERUSALEM\r\nIL",
+    "Phone": "02 5852552",
+    "Street": "RS IMPORT EXPORT CO. LTD\r\r\nPO BOX 18078 JERUSALEM",
+    "Country": "IL"
   },
   {
-    "Display Name As": "RUSSIAN BLACK PEARL",
-    "Billing Address Line 1": "NY BROOKLYN] 11204\r\nUSA",
-    "Billing Address City": "NY",
-    "Billing Address Country": "USA",
-    "Currency Code": "AUD"
+    "Supplier": "RUSSIAN BLACK PEARL",
+    "Address": "NY BROOKLYN] 11204\r\nUSA",
+    "City": "NY",
+    "State/Territory": "BROOKLYN]",
+    "Postcode": "11204",
+    "Country": "USA"
   },
   {
-    "Display Name As": "RUSSKIS DELI",
-    "Billing Address Line 1": "131 BONDI ROAD\r\nNSW BONDI 2026\r\nAUS",
-    "Billing Address Line 2": "131 BONDI ROAD",
-    "Billing Address City": "NSW",
-    "Billing Address Country": "AUS",
+    "Supplier": "RUSSKIS DELI",
+    "Phone Numbers": "Phone: 293876313",
     "Email": "info@yummyandnatural.com",
-    "Phone": "Phone: 293876313",
+    "Address": "131 BONDI ROAD\r\nNSW BONDI 2026\r\nAUS",
+    "Phone": 293876313,
     "Other": "ALAN",
-    "Currency Code": "AUD"
+    "ABN": "36105367146",
+    "Street": "131 BONDI ROAD",
+    "City": "NSW",
+    "State/Territory": "BONDI",
+    "Postcode": "2026",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "SABI Foods",
-    "Billing Address Line 1": "31-35 Letcon Drive\r\nVIC Dandenong South 3164\r\nAustralia",
-    "Billing Address Line 2": "31-35 Letcon Drive",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
+    "Supplier": "SABI Foods",
+    "Phone Numbers": "Phone: 3 9767 6666\r\nFax: 3 9767 6688",
     "Email": "sales@sabifood.com",
-    "Phone": "Phone: 3 9767 6666\r\nFax: 3 9767 6688",
-    "Currency Code": "AUD"
+    "Address": "31-35 Letcon Drive\r\nVIC Dandenong South 3164\r\nAustralia",
+    "Phone": "3 9767 6666",
+    "Street": "31-35 Letcon Drive",
+    "City": "VIC",
+    "State/Territory": "Dandenong South",
+    "Postcode": "3164",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "SADY-POLAND",
-    "Currency Code": "AUD"
+    "Supplier": "SADY-POLAND"
   },
   {
-    "Display Name As": "SAFETY XPRESS",
-    "Currency Code": "AUD"
+    "Supplier": "SAFETY XPRESS"
   },
   {
-    "Display Name As": "SALES BONUS",
-    "Currency Code": "AUD"
+    "Supplier": "SALES BONUS"
   },
   {
-    "Display Name As": "SALES CAR REGO",
-    "Currency Code": "AUD"
+    "Supplier": "SALES CAR REGO"
   },
   {
-    "Display Name As": "SALES CAR SERVICE",
-    "Currency Code": "AUD"
+    "Supplier": "SALES CAR SERVICE"
   },
   {
-    "Display Name As": "SALES TRAVEL",
-    "Currency Code": "AUD"
+    "Supplier": "SALES TRAVEL"
   },
   {
-    "Display Name As": "SAMPLES",
-    "Currency Code": "AUD"
+    "Supplier": "SAMPLES"
   },
   {
-    "Display Name As": "SANDRO PTY.LTD",
-    "Currency Code": "AUD"
+    "Supplier": "SANDRO PTY.LTD"
   },
   {
-    "Display Name As": "SANZ MARKETING GROUP PTY LTD",
+    "Supplier": "SANZ MARKETING GROUP PTY LTD",
+    "Phone Numbers": "Phone: 412609883",
     "Email": "jamal@clearanceking.com.au",
-    "Phone": "Phone: 412609883",
+    "Phone": 412609883,
     "Other": "Jamal Ganatra",
-    "Currency Code": "AUD"
+    "ABN": "80113690083"
   },
   {
-    "Display Name As": "SCANDIA FOODS ROMANIA",
-    "Currency Code": "AUD"
+    "Supplier": "SCANDIA FOODS ROMANIA"
   },
   {
-    "Display Name As": "SCORPTEC COMPUTERS",
-    "Currency Code": "AUD"
+    "Supplier": "SCORPTEC COMPUTERS"
   },
   {
-    "Display Name As": "SEACAVE ARTWORK",
-    "Currency Code": "AUD"
+    "Supplier": "SEACAVE ARTWORK"
   },
   {
-    "Display Name As": "SEAWAY",
-    "Currency Code": "AUD"
+    "Supplier": "SEAWAY"
   },
   {
-    "Display Name As": "SEEK LIMITED",
-    "Currency Code": "AUD"
+    "Supplier": "SEEK LIMITED",
+    "ABN": "46080075314"
   },
   {
-    "Display Name As": "SENSIS PTY",
-    "Currency Code": "AUD"
+    "Supplier": "SENSIS PTY"
   },
   {
-    "Display Name As": "SEVEN SEAS SEAFOODS PTY LTD",
-    "Billing Address Line 1": "24 HUGHES STREET\r\nVIC YARRAVILLE 3013",
-    "Billing Address Line 2": "24 HUGHES STREET",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 93620260\r\nFax: 93620556",
+    "Supplier": "SEVEN SEAS SEAFOODS PTY LTD",
+    "Phone Numbers": "Phone: 93620260\r\nFax: 93620556",
+    "Address": "24 HUGHES STREET\r\nVIC YARRAVILLE 3013",
+    "Phone": 93620260,
     "Other": "DAVID",
-    "Currency Code": "AUD"
+    "ABN": "36537360721",
+    "Street": "24 HUGHES STREET",
+    "City": "VIC",
+    "State/Territory": "YARRAVILLE",
+    "Postcode": "3013"
   },
   {
-    "Display Name As": "SGL AUSTRALIA",
-    "Currency Code": "AUD"
+    "Supplier": "SGL AUSTRALIA"
   },
   {
-    "Display Name As": "SHAZAMI IMPORTS PTY LTD",
-    "Phone": "Phone: 418133316",
+    "Supplier": "SHAZAMI IMPORTS PTY LTD",
+    "Phone Numbers": "Phone: 418133316",
+    "Phone": 418133316,
     "Other": "MANDY",
-    "Currency Code": "AUD"
+    "ABN": "97159699957"
   },
   {
-    "Display Name As": "SHELACH YEZAMUT LTD",
-    "Billing Address Line 1": "HAIFA\r\nAustralia",
-    "Billing Address Country": "Australia",
+    "Supplier": "SHELACH YEZAMUT LTD",
+    "Address": "HAIFA\r\nAustralia",
+    "Account No.": "012-657 321473677",
     "Other": "Shmuel",
-    "Account No": "012-657 321473677",
-    "Currency Code": "AUD"
+    "ABN": "89561909029",
+    "State/Territory": "HAIFA",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "SHERMAN FOODS PTY LTD",
-    "Billing Address Line 1": "SHERMAN FOODS PTY LTD\r\r\n7-9 CHAMBERS ROAD\r\nALTONA NORTH Victoria 3025\r\nAU",
-    "Billing Address Line 2": "SHERMAN FOODS PTY LTD\r\r\n7-9 CHAMBERS ROAD",
-    "Billing Address City": "ALTONA NORTH",
-    "Billing Address Country": "AU",
-    "Phone": "Phone: 390788324",
-    "Currency Code": "AUD"
+    "Supplier": "SHERMAN FOODS PTY LTD",
+    "Phone Numbers": "Phone: 390788324",
+    "Address": "SHERMAN FOODS PTY LTD\r\r\n7-9 CHAMBERS ROAD\r\nALTONA NORTH Victoria 3025\r\nAU",
+    "Phone": 390788324,
+    "Street": "SHERMAN FOODS PTY LTD\r\r\n7-9 CHAMBERS ROAD",
+    "City": "ALTONA NORTH",
+    "State/Territory": "Victoria",
+    "Postcode": "3025",
+    "Country": "AU"
   },
   {
-    "Display Name As": "SIA BALTAS NAKTIS",
-    "Billing Address Line 1": "SIA BALTAS NAKTIS\r\r\nBerzu iela t4, Baloii\r\nKekavas novad 2112\r\nLV",
-    "Billing Address Line 2": "SIA BALTAS NAKTIS\r\r\nBerzu iela t4, Baloii",
-    "Billing Address City": "Kekavas novad",
-    "Billing Address Country": "LV",
-    "Currency Code": "AUD"
+    "Supplier": "SIA BALTAS NAKTIS",
+    "Address": "SIA BALTAS NAKTIS\r\r\nBerzu iela t4, Baloii\r\nKekavas novad 2112\r\nLV",
+    "Street": "SIA BALTAS NAKTIS\r\r\nBerzu iela t4, Baloii",
+    "City": "Kekavas novad",
+    "Postcode": "2112",
+    "Country": "LV"
   },
   {
-    "Display Name As": "SIA SFT Seafood",
-    "Billing Address Line 1": "SIA SFT Seafood\r\r\nJtirkalnes iela 15\r\nRiga 1046\r\nLV",
-    "Billing Address Line 2": "SIA SFT Seafood\r\r\nJtirkalnes iela 15",
-    "Billing Address City": "Riga",
-    "Billing Address Country": "LV",
+    "Supplier": "SIA SFT Seafood",
+    "Phone Numbers": "Phone: +37129998231",
     "Email": "nv@sftseafood.com",
-    "Phone": "Phone: +37129998231",
-    "Currency Code": "AUD"
+    "Address": "SIA SFT Seafood\r\r\nJtirkalnes iela 15\r\nRiga 1046\r\nLV",
+    "Phone": "+37129998231",
+    "Street": "SIA SFT Seafood\r\r\nJtirkalnes iela 15",
+    "City": "Riga",
+    "Postcode": "1046",
+    "Country": "LV"
   },
   {
-    "Display Name As": "Six-Eyed Scorpion",
-    "Billing Address Line 1": "Six-Eyed Scorpion\r\r\n18 Lens St\r\nCoburg North Victoria 3058\r\nAU",
-    "Billing Address Line 2": "Six-Eyed Scorpion\r\r\n18 Lens St",
-    "Billing Address City": "Coburg North",
-    "Billing Address Country": "AU",
+    "Supplier": "Six-Eyed Scorpion",
+    "Phone Numbers": "Mobile: 0411286656",
     "Email": "info@sixeyedscorpion.com",
-    "Phone": "Mobile: 0411286656",
-    "Currency Code": "AUD"
+    "Address": "Six-Eyed Scorpion\r\r\n18 Lens St\r\nCoburg North Victoria 3058\r\nAU",
+    "Street": "Six-Eyed Scorpion\r\r\n18 Lens St",
+    "City": "Coburg North",
+    "State/Territory": "Victoria",
+    "Postcode": "3058",
+    "Country": "AU"
   },
   {
-    "Display Name As": "SKI DESIGNER LIVING",
-    "Currency Code": "AUD"
+    "Supplier": "SKI DESIGNER LIVING"
   },
   {
-    "Display Name As": "SLOMAX GROUP",
-    "Currency Code": "AUD"
+    "Supplier": "SLOMAX GROUP"
   },
   {
-    "Display Name As": "SMCA",
-    "Currency Code": "AUD"
+    "Supplier": "SMCA"
   },
   {
-    "Display Name As": "SMITH TRADING PTY LTD",
-    "Company": "SMITH TRADING PTY LTD",
-    "Billing Address Line 1": "SMITH TRADING PTY LTD\r\r\n18 MAIDA AVE\r\nSUNSHINE NORTH Victoria 3020\r\nAU",
-    "Billing Address Line 2": "SMITH TRADING PTY LTD\r\r\n18 MAIDA AVE",
-    "Billing Address City": "SUNSHINE NORTH",
-    "Billing Address Country": "AU",
-    "Currency Code": "AUD"
+    "Supplier": "SMITH TRADING PTY LTD",
+    "Address": "SMITH TRADING PTY LTD\r\r\n18 MAIDA AVE\r\nSUNSHINE NORTH Victoria 3020\r\nAU",
+    "Company Name": "SMITH TRADING PTY LTD",
+    "Street": "SMITH TRADING PTY LTD\r\r\n18 MAIDA AVE",
+    "City": "SUNSHINE NORTH",
+    "State/Territory": "Victoria",
+    "Postcode": "3020",
+    "Country": "AU"
   },
   {
-    "Display Name As": "SOGDA LIMITED,INC",
-    "Currency Code": "AUD"
+    "Supplier": "SOGDA LIMITED,INC"
   },
   {
-    "Display Name As": "SOS PEST CONTROL",
-    "Currency Code": "AUD"
+    "Supplier": "SOS PEST CONTROL",
+    "ABN": "13426606234"
   },
   {
-    "Display Name As": "SOULFRESH PTY. LTD",
-    "Billing Address Line 1": "unit 4/28-50 CYANAMID STREET\r\nVIC LAVERTON NORTH",
-    "Billing Address Line 2": "unit 4/28-50 CYANAMID STREET",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 94167165",
+    "Supplier": "SOULFRESH PTY. LTD",
+    "Phone Numbers": "Phone: 94167165",
+    "Address": "unit 4/28-50 CYANAMID STREET\r\nVIC LAVERTON NORTH",
+    "Phone": 94167165,
     "Other": "JEFF",
-    "Currency Code": "AUD"
+    "ABN": "79603119688",
+    "Street": "unit 4/28-50 CYANAMID STREET",
+    "City": "VIC",
+    "State/Territory": "LAVERTON NORTH"
   },
   {
-    "Display Name As": "SOUTH EAST WATER",
-    "Currency Code": "AUD"
+    "Supplier": "SOUTH EAST WATER"
   },
   {
-    "Display Name As": "SPEED GAS",
-    "Currency Code": "AUD"
+    "Supplier": "SPEED GAS"
   },
   {
-    "Display Name As": "STRUAN",
-    "Currency Code": "AUD"
+    "Supplier": "STRUAN"
   },
   {
-    "Display Name As": "STUDIO PHOTO EDITOR",
-    "Currency Code": "AUD"
+    "Supplier": "STUDIO PHOTO EDITOR"
   },
   {
-    "Display Name As": "SULTAN AGRO",
-    "Currency Code": "AUD"
+    "Supplier": "SULTAN AGRO"
   },
   {
-    "Display Name As": "SUNRISE EGGS PTY LTD",
-    "Billing Address Line 1": "19 NORTHPOINT DRIVE\r\nVIC EPPING 3076\r\nAustralia",
-    "Billing Address Line 2": "19 NORTHPOINT DRIVE",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Phone": "Phone: 393576624",
-    "Currency Code": "AUD"
+    "Supplier": "SUNRISE EGGS PTY LTD",
+    "Phone Numbers": "Phone: 393576624",
+    "Address": "19 NORTHPOINT DRIVE\r\nVIC EPPING 3076\r\nAustralia",
+    "Phone": 393576624,
+    "ABN": "99570665061",
+    "Street": "19 NORTHPOINT DRIVE",
+    "City": "VIC",
+    "State/Territory": "EPPING",
+    "Postcode": "3076",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "SUNSUPER",
-    "Currency Code": "AUD"
+    "Supplier": "SUNSUPER"
   },
   {
-    "Display Name As": "SUPAGAS",
-    "Currency Code": "AUD"
+    "Supplier": "SUPAGAS"
   },
   {
-    "Display Name As": "SUPER",
-    "Currency Code": "AUD"
+    "Supplier": "SUPER"
   },
   {
-    "Display Name As": "SUPERCHOICE-SUPPER",
-    "Currency Code": "AUD"
+    "Supplier": "SUPERCHOICE-SUPPER"
   },
   {
-    "Display Name As": "SUPERIOR FOOD",
-    "Currency Code": "AUD"
+    "Supplier": "SUPERIOR FOOD"
   },
   {
-    "Display Name As": "SYDNEY PACKAGING",
-    "Currency Code": "AUD"
+    "Supplier": "SYDNEY PACKAGING"
   },
   {
-    "Display Name As": "TEGRAL",
-    "Currency Code": "AUD"
+    "Supplier": "TEGRAL"
   },
   {
-    "Display Name As": "TELEFAX",
-    "Currency Code": "AUD"
+    "Supplier": "TELEFAX"
   },
   {
-    "Display Name As": "TELSTRA",
-    "Currency Code": "AUD"
+    "Supplier": "TELSTRA"
   },
   {
-    "Display Name As": "TFC FORWARDING",
-    "Currency Code": "AUD"
+    "Supplier": "TFC FORWARDING"
   },
   {
-    "Display Name As": "THAI UNION (KING OSCAR)",
-    "Billing Address Line 1": "THAI UNION (KING OSCAR)\r\r\nNOSTEGATEN 58.\r\nP.O. BOX 400\r\nBERGEN 5805\r\nNO",
-    "Billing Address Line 2": "THAI UNION (KING OSCAR)\r\r\nNOSTEGATEN 58.\r\nP.O. BOX 400",
-    "Billing Address City": "BERGEN",
-    "Billing Address Country": "NO",
-    "Phone": "Phone: +4748293000",
-    "Currency Code": "AUD"
+    "Supplier": "THAI UNION (KING OSCAR)",
+    "Phone Numbers": "Phone: +4748293000",
+    "Address": "THAI UNION (KING OSCAR)\r\r\nNOSTEGATEN 58.\r\nP.O. BOX 400\r\nBERGEN 5805\r\nNO",
+    "Phone": "+4748293000",
+    "Street": "THAI UNION (KING OSCAR)\r\r\nNOSTEGATEN 58.\r\nP.O. BOX 400",
+    "City": "BERGEN",
+    "Postcode": "5805",
+    "Country": "NO"
   },
   {
-    "Display Name As": "THE EDI CLOUD",
-    "Currency Code": "AUD"
+    "Supplier": "THE EDI CLOUD"
   },
   {
-    "Display Name As": "THE MAD RUSSIAN PTY. LTD",
-    "Phone": "Phone: 412392683",
+    "Supplier": "THE MAD RUSSIAN PTY. LTD",
+    "Phone Numbers": "Phone: 412392683",
+    "Phone": 412392683,
     "Other": "VAL",
-    "Currency Code": "AUD"
+    "ABN": "94014595426"
   },
   {
-    "Display Name As": "TICO/LABS FASH/AG&SONS",
-    "Currency Code": "AUD"
+    "Supplier": "TICO/LABS FASH/AG&SONS"
   },
   {
-    "Display Name As": "TIGERPAK",
-    "Currency Code": "AUD"
+    "Supplier": "TIGERPAK"
   },
   {
-    "Display Name As": "TIKO",
-    "Currency Code": "AUD"
+    "Supplier": "TIKO"
   },
   {
-    "Display Name As": "TIP TOP BUTCHERY PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "TIP TOP BUTCHERY PTY LTD"
   },
   {
-    "Display Name As": "TONER",
-    "Currency Code": "AUD"
+    "Supplier": "TONER"
   },
   {
-    "Display Name As": "TOTAL MIGRATION SERVICES",
-    "Billing Address Line 1": "LEVEL 1, 530 LITTLE COLLINS STREET\r\nVIC MELBOURNE 3000",
-    "Billing Address Line 2": "LEVEL 1, 530 LITTLE COLLINS STREET",
-    "Billing Address City": "VIC",
-    "Phone": "Phone: 415059105",
+    "Supplier": "TOTAL MIGRATION SERVICES",
+    "Phone Numbers": "Phone: 415059105",
+    "Address": "LEVEL 1, 530 LITTLE COLLINS STREET\r\nVIC MELBOURNE 3000",
+    "Phone": 415059105,
     "Other": "NICK",
-    "Currency Code": "AUD"
+    "ABN": "42152786279",
+    "Street": "LEVEL 1, 530 LITTLE COLLINS STREET",
+    "City": "VIC",
+    "State/Territory": "MELBOURNE",
+    "Postcode": "3000"
   },
   {
-    "Display Name As": "TRANSDIRECT NATIONAL COURIERS",
-    "Currency Code": "AUD"
+    "Supplier": "TRANSDIRECT NATIONAL COURIERS",
+    "ABN": "50111218627"
   },
   {
-    "Display Name As": "TRANSWAYS LOGISTICS INTERNATIONAL",
-    "Currency Code": "AUD"
+    "Supplier": "TRANSWAYS LOGISTICS INTERNATIONAL"
   },
   {
-    "Display Name As": "TSIMOS",
-    "Billing Address Line 1": "PO BOX2598\r\n3192 CHELTENHAM VIC",
-    "Billing Address Line 2": "PO BOX2598",
-    "Billing Address City": 3192,
-    "Currency Code": "AUD"
+    "Supplier": "TSIMOS",
+    "Address": "PO BOX2598\r\n3192 CHELTENHAM VIC",
+    "ABN": "47880114614",
+    "Street": "PO BOX2598",
+    "City": 3192,
+    "State/Territory": "CHELTENHAM",
+    "Postcode": "VIC"
   },
   {
-    "Display Name As": "TWINS PANTRY SNACK",
-    "Currency Code": "AUD"
+    "Supplier": "TWINS PANTRY SNACK"
   },
   {
-    "Display Name As": "UAB \"VICIUNAI\" ir KO",
-    "Billing Address Line 1": "UAB \"VICIUNAI\" ir KO\r\r\nKaraliaus Mindaugo pr. 38 Kaunas\r\nVAT: LT355719610\r\n44307\r\nLT",
-    "Billing Address Line 2": "UAB \"VICIUNAI\" ir KO\r\r\nKaraliaus Mindaugo pr. 38 Kaunas\r\nVAT: LT355719610",
-    "Billing Address Country": "LT",
-    "Currency Code": "AUD"
+    "Supplier": "UAB \"VICIUNAI\" ir KO",
+    "Address": "UAB \"VICIUNAI\" ir KO\r\r\nKaraliaus Mindaugo pr. 38 Kaunas\r\nVAT: LT355719610\r\n44307\r\nLT",
+    "Street": "UAB \"VICIUNAI\" ir KO\r\r\nKaraliaus Mindaugo pr. 38 Kaunas\r\nVAT: LT355719610",
+    "Postcode": "44307",
+    "Country": "LT"
   },
   {
-    "Display Name As": "UBP",
-    "Currency Code": "AUD"
+    "Supplier": "UBP"
   },
   {
-    "Display Name As": "ULAN",
-    "Billing Address Line 1": "ULAN\r\r\nNone",
-    "Billing Address Line 2": "ULAN\r\r\nNone",
-    "Currency Code": "AUD"
+    "Supplier": "ULAN",
+    "Address": "ULAN\r\r\nNone",
+    "ABN": 0,
+    "Street": "ULAN\r\r\nNone"
   },
   {
-    "Display Name As": "UNIMASTERS LOGISTICS",
-    "Currency Code": "AUD"
+    "Supplier": "UNIMASTERS LOGISTICS"
   },
   {
-    "Display Name As": "UNLIMITED BUYING POWER PTY LTD",
-    "Billing Address Line 1": "2/8-12 COORA ROAD\r\nVIC SOUTH OAKLEIGH 3166\r\nAUS",
-    "Billing Address Line 2": "2/8-12 COORA ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "AUS",
+    "Supplier": "UNLIMITED BUYING POWER PTY LTD",
+    "Phone Numbers": "Phone: 95740113\r\nFax: 95432034\r\nMobile: 412310960",
     "Email": "ubpw@tpg.com.au",
-    "Phone": "Phone: 95740113\r\nFax: 95432034\r\nMobile: 412310960",
+    "Address": "2/8-12 COORA ROAD\r\nVIC SOUTH OAKLEIGH 3166\r\nAUS",
+    "Phone": 95740113,
     "Other": "Steve",
-    "Currency Code": "AUD"
+    "ABN": "45480361077",
+    "Street": "2/8-12 COORA ROAD",
+    "City": "VIC",
+    "State/Territory": "SOUTH OAKLEIGH",
+    "Postcode": "3166",
+    "Country": "AUS"
   },
   {
-    "Display Name As": "VAGSHAL",
-    "Billing Address Line 1": "ISRAEL",
-    "Billing Address Country": "ISRAEL",
-    "Currency Code": "AUD"
+    "Supplier": "VAGSHAL",
+    "Address": "ISRAEL",
+    "Country": "ISRAEL"
   },
   {
-    "Display Name As": "VANGUARD LOGISTICS SERVICES",
-    "Currency Code": "AUD"
+    "Supplier": "VANGUARD LOGISTICS SERVICES"
   },
   {
-    "Display Name As": "VIC ROADS",
-    "Currency Code": "AUD"
+    "Supplier": "VIC ROADS"
   },
   {
-    "Display Name As": "VICIUNAI",
-    "Currency Code": "AUD"
+    "Supplier": "VICIUNAI"
   },
   {
-    "Display Name As": "VICROADS",
-    "Currency Code": "AUD"
+    "Supplier": "VICROADS"
   },
   {
-    "Display Name As": "VICTORIA POLICE",
-    "Currency Code": "AUD"
+    "Supplier": "VICTORIA POLICE"
   },
   {
-    "Display Name As": "VIVO PACKAGING",
-    "Currency Code": "AUD"
+    "Supplier": "VIVO PACKAGING",
+    "ABN": "73162955076"
   },
   {
-    "Display Name As": "VODAFONE",
-    "Currency Code": "AUD"
+    "Supplier": "VODAFONE"
   },
   {
-    "Display Name As": "VOLOVICH PARTNERS",
-    "Currency Code": "AUD"
+    "Supplier": "VOLOVICH PARTNERS"
   },
   {
-    "Display Name As": "WAGES",
-    "Currency Code": "AUD"
+    "Supplier": "WAGES"
   },
   {
-    "Display Name As": "WALMAS PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "WALMAS PTY LTD",
+    "ABN": "99122395233"
   },
   {
-    "Display Name As": "WALTER SCHIKORA",
-    "Currency Code": "AUD"
+    "Supplier": "WALTER SCHIKORA"
   },
   {
-    "Display Name As": "WAREHOUSE UBER",
-    "Currency Code": "AUD"
+    "Supplier": "WAREHOUSE UBER"
   },
   {
-    "Display Name As": "WAVERLEY FORKLIFTS",
-    "Billing Address Line 1": "74 ricketts road\r\nVIC MT WAVERLEY 3149\r\nAustralia",
-    "Billing Address Line 2": "74 ricketts road",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
+    "Supplier": "WAVERLEY FORKLIFTS",
+    "Phone Numbers": "Phone: 03 8540 4040",
     "Email": "hire@waverleyforklift.com.au",
-    "Phone": "Phone: 03 8540 4040",
-    "Currency Code": "AUD"
+    "Address": "74 ricketts road\r\nVIC MT WAVERLEY 3149\r\nAustralia",
+    "Phone": "03 8540 4040",
+    "ABN": "98632889742",
+    "Street": "74 ricketts road",
+    "City": "VIC",
+    "State/Territory": "MT WAVERLEY",
+    "Postcode": "3149",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "WEBCITY AUSTRALIAN  PTY LTD",
-    "Currency Code": "AUD"
+    "Supplier": "WEBCITY AUSTRALIAN  PTY LTD"
   },
   {
-    "Display Name As": "WESTPAC CC",
-    "Currency Code": "AUD"
+    "Supplier": "WESTPAC CC"
   },
   {
-    "Display Name As": "WFI",
-    "Currency Code": "AUD"
+    "Supplier": "WFI"
   },
   {
-    "Display Name As": "WGJ TRADING T/A SARS INVESTMENT PTY LTD",
-    "Billing Address Line 1": "po box 461\r\nBoronia",
-    "Billing Address Line 2": "po box 461",
-    "Phone": "Phone: 411148073",
-    "Currency Code": "AUD"
+    "Supplier": "WGJ TRADING T/A SARS INVESTMENT PTY LTD",
+    "Phone Numbers": "Phone: 411148073",
+    "Address": "po box 461\r\nBoronia",
+    "Phone": 411148073,
+    "ABN": "34058509032",
+    "Street": "po box 461",
+    "State/Territory": "Boronia"
   },
   {
-    "Display Name As": "WORKCOVER INSURANCE",
-    "Currency Code": "AUD"
+    "Supplier": "WORKCOVER INSURANCE"
   },
   {
-    "Display Name As": "WORLD WIDE EXPORTERS PTY LTD",
-    "Billing Address Line 1": "710 / 566 ST.KILDA ROAD\r\nVIC MELBOURNE 3004\r\nAustralia",
-    "Billing Address Line 2": "710 / 566 ST.KILDA ROAD",
-    "Billing Address City": "VIC",
-    "Billing Address Country": "Australia",
-    "Account No": "012-657 321473677",
-    "Currency Code": "AUD"
+    "Supplier": "WORLD WIDE EXPORTERS PTY LTD",
+    "Address": "710 / 566 ST.KILDA ROAD\r\nVIC MELBOURNE 3004\r\nAustralia",
+    "Account No.": "012-657 321473677",
+    "ABN": "89561909029",
+    "Street": "710 / 566 ST.KILDA ROAD",
+    "City": "VIC",
+    "State/Territory": "MELBOURNE",
+    "Postcode": "3004",
+    "Country": "Australia"
   },
   {
-    "Display Name As": "WWT/TIKO",
-    "Currency Code": "AUD"
+    "Supplier": "WWT/TIKO"
   },
   {
-    "Display Name As": "YANGMING",
-    "Currency Code": "AUD"
+    "Supplier": "YANGMING"
   },
   {
-    "Display Name As": "YARRA VALLEY SNACK FOODS PTY LTD",
-    "Phone": "Phone: 97372600",
-    "Currency Code": "AUD"
+    "Supplier": "YARRA VALLEY SNACK FOODS PTY LTD",
+    "Phone Numbers": "Phone: 97372600",
+    "Phone": 97372600
   },
   {
-    "Display Name As": "YOUI",
-    "Currency Code": "AUD"
+    "Supplier": "YOUI"
   },
   {
-    "Display Name As": "YUMMY AND NATURAL PTY LTD",
-    "Billing Address Line 1": "7-19 Coulson street\r\nNSW Erskineville",
-    "Billing Address Line 2": "7-19 Coulson street",
-    "Billing Address City": "NSW",
+    "Supplier": "YUMMY AND NATURAL PTY LTD",
+    "Phone Numbers": "Phone: 289647091",
     "Email": "accounts@yummyandnatural.com",
-    "Phone": "Phone: 289647091",
-    "Currency Code": "AUD"
+    "Address": "7-19 Coulson street\r\nNSW Erskineville",
+    "Phone": 289647091,
+    "ABN": "43344363477",
+    "Street": "7-19 Coulson street",
+    "City": "NSW",
+    "State/Territory": "Erskineville"
   },
   {
-    "Display Name As": "ZAHARNI IZDELIA",
-    "Currency Code": "AUD"
+    "Supplier": "ZAHARNI IZDELIA"
   },
   {
-    "Display Name As": "ZEBROV VYACHESLAV",
-    "Currency Code": "AUD"
+    "Supplier": "ZEBROV VYACHESLAV",
+    "ABN": "23967301178"
   },
   {
-    "Display Name As": "ZING AUSTRALIA PTY LTD",
-    "Billing Address Line 1": "UNIT 11, 2 SARTON ROAD\r\nVIC CLAYTON 3168",
-    "Billing Address Line 2": "UNIT 11, 2 SARTON ROAD",
-    "Billing Address City": "VIC",
-    "Currency Code": "AUD"
+    "Supplier": "ZING AUSTRALIA PTY LTD",
+    "Address": "UNIT 11, 2 SARTON ROAD\r\nVIC CLAYTON 3168",
+    "Street": "UNIT 11, 2 SARTON ROAD",
+    "City": "VIC",
+    "State/Territory": "CLAYTON",
+    "Postcode": "3168"
   },
   {
-    "Display Name As": "ZIV LTD",
-    "Billing Address Line 1": "Bulgaria",
-    "Billing Address Country": "Bulgaria",
-    "Currency Code": "AUD"
+    "Supplier": "ZIV LTD",
+    "Address": "Bulgaria",
+    "Country": "Bulgaria"
   }
 ]
