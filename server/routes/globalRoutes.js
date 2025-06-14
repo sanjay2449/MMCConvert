@@ -12,11 +12,11 @@ import{ downloadItem, processItem, uploadItem } from "../controllers/globalContr
 import{ downloadtrackedItem, processtrackedItem, uploadtrackedItem } from "../controllers/globalControllers/trackedItems.js";
 import { downloadOpenAR, processOpenAR, uploadOpenAR } from "../controllers/globalControllers/openAR.js";
 import { downloadOpenAP, uploadOpenAP } from "../controllers/globalControllers/openAP.js";
-import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } from "../controllers/globalControllers/openingbalance.js";
+import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } from "../controllers/globalControllers/openingBalance.js";
 import { downloadInvoice, processInvoice, uploadInvoice } from "../controllers/globalControllers/invoice.js";
 import { downloadAdjustmentNote, processAdjustmentNote, uploadAdjustmentNote } from "../controllers/globalControllers/adjustmentNote.js";
 import { downloadBill, processBill, uploadBill } from "../controllers/globalControllers/bill.js";
-import { downloadSupplierCredit, processSupplierCredit, uploadSupplierCredit } from "../controllers/globalControllers/suppliercredit.js";
+import { downloadSupplierCredit, processSupplierCredit, uploadSupplierCredit } from "../controllers/globalControllers/supplierCredit.js";
 import { downloadCheque, processCheque, uploadCheque } from "../controllers/globalControllers/cheque.js";
 import { downloadDeposit, processDeposit, uploadDeposit } from "../controllers/globalControllers/deposit.js";
 import { downloadJournal, processJournal, uploadJournal } from "../controllers/globalControllers/journal.js";
@@ -24,7 +24,7 @@ import { downloadCreditCardCharge, processCreditCardCharge, uploadCreditCardChar
 import { downloadTransfer, processTransfer, uploadTransfer } from "../controllers/globalControllers/transfer.js";
 import { downloadBillPayment, processBillPayment, uploadBillPayment } from "../controllers/globalControllers/billPayment.js";
 import { downloadInvoicePayment, processInvoicePayment, uploadInvoicePayment } from "../controllers/globalControllers/invoicePayment.js";
-import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/globalControllers/billpaymentcreditcard.js";
+import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/globalControllers/billPaymentCreditCard.js";
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/globalControllers/journalEntry.js";
 import { downloadEstimates, processEstimates, uploadEstimates } from "../controllers/globalControllers/estimates.js";
 import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/globalControllers/purchaseOrder.js"
