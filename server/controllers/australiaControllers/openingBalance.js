@@ -1,7 +1,7 @@
 import { move, pathExists } from "fs-extra";
 import xlsx from "xlsx";
 import { parse } from "date-fns";
-import {readExcelToJson} from "../../utils/excelReader.js";
+import { readExcelToJson } from "../../utils/excelReader.js";
 import { writeJsonToExcel, saveJsonToFile } from "../../utils/excelWriter.js";
 import { getPaths } from "../../utils/filePaths.js";
 
@@ -77,8 +77,11 @@ function readAndPreprocessOpeningBalance(filePath) {
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
     // 🧠 Extract and clean Journal Date from cell A3
+    // let journalDateRaw = sheet["A3"]?.v || "As of December 31, 2022";
+    // journalDateRaw = journalDateRaw.replace(/^As of\s*/i, "").trim();
     let journalDateRaw = sheet["A3"]?.v || "As of December 31, 2022";
-    journalDateRaw = journalDateRaw.replace(/^As of\s*/i, "").trim();
+    journalDateRaw = String(journalDateRaw).replace(/^As of\s*/i, "").trim();
+
 
     let parsedDate;
     try {
