@@ -1,12 +1,16 @@
 // tailwind.config.js
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // adjust based on your file structure
-  ],
-  theme: {
-    extend: {},
+export const content = [
+  "./src/**/*.{js,jsx,ts,tsx}", // adjust based on your file structure
+];
+export const theme = {
+  extend: {
+    fontFamily: {
+      serif: ['"Times New Roman"', 'serif'],
+      mono: ['"Courier New"', 'monospace'],
+      comic: ['"Comic Sans MS"', 'cursive'],
+    }
   },
-  plugins: [
-    require('tailwind-scrollbar'), // <-- Add this line
-  ],
-}
+};
+export const plugins = [
+  require('tailwind-scrollbar'), // <-- Add this line
+];

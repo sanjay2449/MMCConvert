@@ -3,9 +3,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 import SoftwareTypeModal from "./SoftwareTypeModal";
 
-// Separate country options for each software type
+// Country options by software
 const countryOptions = {
-  "qbo to qbo": ["Australia", "Global"],
+  "qbo to qbo": ["Australia"],
   "xero to xero": ["Australia"],
   "reckon desktop/hosted to xero": ["Australia"],
   "sage one to qbo": ["Australia"],
@@ -20,15 +20,15 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
   const [showSoftwareModal, setShowSoftwareModal] = useState(false);
   const [currencyStatus, setCurrencyStatus] = useState("");
 
-
   const softwareKey = softwareType.toLowerCase();
   const selectedCountries = countryOptions[softwareKey] || [];
-  const requiresCountry = ["qbo to qbo", "xero to xero", "reckon desktop/hosted to xero", "sage one to qbo", "wave to qbo", "wave to xero"].includes(softwareKey);
+  const requiresCountry = Object.keys(countryOptions).includes(softwareKey);
 
   const resetFields = () => {
     setFileName("");
     setSoftwareType("");
     setCountryName("");
+    setCurrencyStatus("");
     setIsOpen(false);
   };
 
@@ -46,11 +46,16 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
       status: "running",
     };
 
-
     onAddFile(newFile);
     toast.success("File added successfully!");
     resetFields();
   };
+
+  // 🔽 Show both currencies only for QBO TO QBO and XERO TO XERO
+  const currencyOptions =
+    softwareKey === "qbo to qbo"
+      ? ["Single Currency", "Multi Currency"]
+      : ["Single Currency"];
 
   return (
     <>
@@ -113,6 +118,7 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
                     <span className="absolute top-3 right-3 text-white pointer-events-none">▼</span>
                   </div>
                 )}
+
                 <div className="relative">
                   <select
                     value={currencyStatus}
@@ -120,15 +126,15 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
                     className="w-full appearance-none rounded-lg border border-gray-700 bg-gray-800 p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">💱 Select Currency Status</option>
-                    <option value="Single Currency" className="bg-gray-900 text-white">
-                      Single Currency
-                    </option>
-                    <option value="Multi Currency" className="bg-gray-900 text-white">
-                      Multi Currency
-                    </option>
+                    {currencyOptions.map((option) => (
+                      <option key={option} value={option} className="bg-gray-900 text-white">
+                        {option}
+                      </option>
+                    ))}
                   </select>
                   <span className="absolute top-3 right-3 text-white pointer-events-none">▼</span>
                 </div>
+
                 <div className="flex justify-end gap-3 pt-2">
                   <button
                     onClick={resetFields}
@@ -155,6 +161,7 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
           setSoftwareType(type.trim());
           setShowSoftwareModal(false);
           setCountryName(""); // reset country on software change
+          setCurrencyStatus(""); // reset currency on software change
         }}
         onClose={() => setShowSoftwareModal(false)}
       />

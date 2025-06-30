@@ -3,8 +3,13 @@ import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import { Toaster } from "react-hot-toast";
-import FileView from './components/FileView';
+// import FileView from './components/FileView';
 import AdminDashboard from './pages/AdminDashboard';
+import QboToQbo from './pages/QboToQbo';
+import SageOneToQbo from './pages/SageOneToQbo';
+import XeroTOXero from './pages/XeroTOXero';
+import ReckonDesktopHostedToXero from './pages/ReckonDesktopHostedToXero';
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -24,7 +29,11 @@ function App() {
           path="/dashboard"
           element={token ? <Dashboard /> : <Navigate to="/" />}
         />
-        <Route path="/file/:id" element={<FileView />} />
+        <Route path="/file/qbotoqbo/:id" element={<QboToQbo />} />
+        <Route path="/file/sageonetoqbo/:id" element={<SageOneToQbo />} />
+        <Route path="/file/xerotoxero/:id" element={<XeroTOXero />} />
+        <Route path="/file/reckondesktophostedtoxero/:id" element={<ReckonDesktopHostedToXero />} />
+        {/* <Route path="/file/:id" element={<FileView />} /> */}
       </Routes>
     </BrowserRouter>
   );

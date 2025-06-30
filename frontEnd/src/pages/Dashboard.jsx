@@ -19,22 +19,6 @@ const Dashboard = () => {
     fetchFiles();
   }, []);
 
-  // const fetchFiles = async () => {
-  //   const res = await fetch('http://localhost:5000/api/files');
-  //   const data = await res.json();
-  //   setFiles(data);
-  // };
-
-  // const handleCreate = async (newFile) => {
-  //   const res = await fetch('http://localhost:5000/api/files', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(newFile),
-  //   });
-  //   const data = await res.json();
-  //   setFiles([...files, data]);
-  //   setForm({ fileName: '', softwareType: '', countryName: '' });
-  // };
 
   const fetchFiles = async () => {
     try {
@@ -68,16 +52,6 @@ const Dashboard = () => {
       console.error("File creation failed:", err);
     }
   };
-
-  // const markAsRead = async (id) => {
-  //   const res = await fetch(`http://localhost:5000/api/files/${id}`, {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ status: 'completed' }),
-  //   });
-  //   const updated = await res.json();
-  //   setFiles(files.map(file => (file._id === id ? updated : file)));
-  // };
 
   const markAsRead = async (id) => {
     try {
@@ -134,7 +108,21 @@ const Dashboard = () => {
                 <p className="text-sm font-semibold font-mono text-gray-300 mb-1">{file.createdAt}</p>
                 <div className="flex gap-2">
                   <button
-                    onClick={() => navigate(`/file/${file._id}`, { state: { file } })}
+                    onClick={() => {
+                      const type = file.softwareType.toLowerCase();
+                      if (type === 'qbo to qbo') {
+                        navigate(`/file/qbotoqbo/${file._id}`, { state: { file } });
+                      } else if (type === 'sage one to qbo') {
+                        navigate(`/file/sageonetoqbo/${file._id}`, { state: { file } });
+                      } else if (type === 'xero to xero') {
+                        navigate(`/file/xerotoxero/${file._id}`, { state: { file } });
+                      } else if (type === 'reckon desktop/hosted to xero') {
+                        navigate(`/file/reckondesktophostedtoxero/${file._id}`, { state: { file } });
+                      } else {
+                        alert("Unsupported software type: " + file.softwareType);
+                        alert("type: " + type);
+                      }
+                    }}
                     className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded flex items-center gap-1"
                   >
                     <FaEye />
@@ -166,7 +154,21 @@ const Dashboard = () => {
                 <p className="text-sm font-semibold font-mono text-gray-300">{file.countryName}</p>
                 <p className="text-sm font-semibold font-mono text-gray-300 mb-1">{file.createdAt}</p>
                 <button
-                  onClick={() => navigate(`/file/${file._id}`, { state: { file } })}
+                  onClick={() => {
+                    const type = file.softwareType.toLowerCase();
+                    if (type === 'qbo to qbo') {
+                      navigate(`/file/qbotoqbo/${file._id}`, { state: { file } });
+                    } else if (type === 'sage one to qbo') {
+                      navigate(`/file/sageonetoqbo/${file._id}`, { state: { file } });
+                    } else if (type === 'xero to xero') {
+                      navigate(`/file/xerotoxero/${file._id}`, { state: { file } });
+                    } else if (type === 'reckon desktop/hosted to xero') {
+                      navigate(`/file/reckondesktophostedtoxero/${file._id}`, { state: { file } });
+                    } else {
+                      alert("Unsupported software type: " + file.softwareType);
+                      alert("type: " + type);
+                    }
+                  }}
                   className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded flex items-center gap-1"
                 >
                   <FaEye />

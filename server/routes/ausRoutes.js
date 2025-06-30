@@ -58,6 +58,13 @@ router.post("/upload-journalentry", upload.single("file"), asyncHandler(uploadJo
 router.post("/upload-estimates", upload.single("file"), asyncHandler(uploadEstimates));
 router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadPurchaseOrder));
 
+// Corrected: Accept 2 files for Tracked Invoice
+// router.post("/upload-trackedinvoice", upload.array("files", 2), asyncHandler(uploadtrackedItem));
+
+// Corrected: Accept 3 files for Tracked Bill
+// router.post("/upload-trackedbill", upload.array("files", 3), asyncHandler(uploadBill));
+
+
 
 
 // Convert routes

@@ -68,42 +68,44 @@ const Navbar = ({ userDetail }) => {
         <div className="flex items-center gap-8 text-sm md:text-base font-medium">
           <a href="/dashboard" className="hover:text-blue-400 hidden md:inline">Dashboard</a>
         </div>
-
-        {/* Center Details */}
-        {/* <div className="hidden md:flex flex-col text-center gap-1">
-          {userDetail?.name && <p>📁 File Name: <strong>{userDetail.name}</strong></p>}
-          {userDetail?.software && <p>💻 Software Type: <strong>{userDetail.software}</strong></p>}
-          {userDetail?.country && <p>🌍 Country: <strong>{userDetail.country}</strong></p>}
-        </div> */}
-
-        <div className="hidden md:flex flex-col text-center gap-1">
-          {/* First line: File Name */}
-          {userDetail?.name && (
-            <p className='font-semibold'>
-              📁 File Name: <strong  className='font-serif'>{userDetail.name}</strong>
-            </p>
+        <div className="hidden md:flex flex-col items-center gap-1 text-sm text-white">
+          {/* Software Type */}
+          {userDetail?.software && (
+            <div className="text-base font-semibold tracking-wide text-blue-300">
+              Software Type: <span className="text-white">{userDetail.software}</span>
+            </div>
           )}
 
-          {/* Second line: Software Type and Country */}
-          <div className="flex justify-center gap-8">
-            {userDetail?.software && (
-              <p  className='font-semibold'>
-                💻 Software Type: <strong  className='font-serif'>{userDetail.software}</strong>
-              </p>
+          {/* File Details */}
+          <div className="flex items-center justify-center flex-wrap gap-6 mt-1 text-sm">
+            {/* File Name */}
+            {userDetail?.name && (
+              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+                <span className="text-yellow-400">📁</span>
+                <span className="text-gray-200">File Name:</span>
+                <span className="text-white font-medium">{userDetail.name}</span>
+              </div>
             )}
+
+            {/* Country */}
             {userDetail?.country && (
-              <p  className='font-semibold'>
-                🌍 Country: <strong  className='font-serif'>{userDetail.country}</strong>
-              </p>
-            )} 
+              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+                <span className="text-green-400">🌍</span>
+                <span className="text-gray-200">Country:</span>
+                <span className="text-white font-medium">{userDetail.country}</span>
+              </div>
+            )}
+
+            {/* Currency Status */}
             {userDetail?.currencyStatus && (
-              <p  className='font-semibold'>
-                🌍 Country Status: <strong  className='font-serif'>{userDetail.currencyStatus}</strong>
-              </p>
-            )} 
+              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+                <span className="text-purple-400">💱</span>
+                <span className="text-gray-200">Currency Status:</span>
+                <span className="text-white font-medium">{userDetail.currencyStatus}</span>
+              </div>
+            )}
           </div>
         </div>
-
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">

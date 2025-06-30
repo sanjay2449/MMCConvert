@@ -1,5 +1,5 @@
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
@@ -75,7 +75,9 @@ const functionRoutesForXeroToXero = {
   Transaction: {}
 };
 const functionRoutesForSageOneToQbo = {
-  Masters: {},
+  Masters: {
+    "Chart of Accounts": "coa",
+  },
   "Open Data": {},
   Transaction: {}
 };
@@ -140,11 +142,13 @@ const FileView = () => {
   const [selectedFunction, setSelectedFunction] = useState('');
   const [currencyCode, setCurrencyCode] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState(null);
   const [uploadComplete, setUploadComplete] = useState(false);
   const [convertComplete, setConvertComplete] = useState(false);
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [downloadReady, setDownloadReady] = useState(false);
+  const fileInputRef = useRef(null);
+  const [selectedSoftware, setSelectedSoftware] = useState("qbotoqbo");
 
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [historyData, setHistoryData] = useState([]);
@@ -232,28 +236,6 @@ const FileView = () => {
       toast.error("Unable to fetch download history.");
     }
   };
-
-  // const handleHistoryDownload = async (entry) => {
-  //   const currencyPath = getCurrencyPath(); // 🔁 New logic
-  //   try {
-  //     const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${entry.routeUsed}`);
-  //     if (!response.ok) throw new Error("Download failed");
-
-  //     const blob = await response.blob();
-  //     const url = window.URL.createObjectURL(blob);
-  //     const link = document.createElement("a");
-  //     link.href = url;
-  //     link.setAttribute("download", entry.fileName);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     link.remove();
-
-  //     toast.success("Downloaded again");
-  //   } catch (error) {
-  //     toast.error("Download failed");
-  //     console.error(error);
-  //   }
-  // };
   const handleHistoryDownload = async (entry) => {
     const currencyPath = getCurrencyPath();
 
@@ -313,33 +295,44 @@ const FileView = () => {
     setUploadComplete(false);
     setConvertComplete(false);
     setDownloadComplete(false);
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    // Get accepted types string, like '.csv' or '.xlsx,.xls'
-    const acceptedTypes = getAcceptedFileTypes(softwareType, selectedFunction);
-
-    // Convert acceptedTypes string to an array of extensions without dots, e.g. ['csv'] or ['xlsx', 'xls']
-    const acceptedExtensions = acceptedTypes.split(',').map(ext => ext.trim().replace('.', '').toLowerCase());
-
-    // Get uploaded file extension
-    const fileExtension = file.name.split('.').pop().toLowerCase();
-
-    if (!acceptedExtensions.includes(fileExtension)) {
-      toast.error(`Invalid file type. Please upload a valid file: ${acceptedTypes}`);
-      setSelectedFile(null);
-      return;
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
     }
-
-    setSelectedFile(file);
-    setUploadComplete(false);
-    setConvertComplete(false);
-    setDownloadComplete(false);
   };
 
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
+
+  //   // Get accepted types string, like '.csv' or '.xlsx,.xls'
+  //   const acceptedTypes = getAcceptedFileTypes(softwareType, selectedFunction);
+
+  //   // Convert acceptedTypes string to an array of extensions without dots, e.g. ['csv'] or ['xlsx', 'xls']
+  //   const acceptedExtensions = acceptedTypes.split(',').map(ext => ext.trim().replace('.', '').toLowerCase());
+
+  //   // Get uploaded file extension
+  //   const fileExtension = file.name.split('.').pop().toLowerCase();
+
+  //   if (!acceptedExtensions.includes(fileExtension)) {
+  //     toast.error(`Invalid file type. Please upload a valid file: ${acceptedTypes}`);
+  //     setSelectedFile(null);
+  //     return;
+  //   }
+
+  //   setSelectedFile(file);
+  //   setUploadComplete(false);
+  //   setConvertComplete(false);
+  //   setDownloadComplete(false);
+  // };
+
+  const handleFileChange = (e, index) => {
+    const file = e.target.files[0];
+    setSelectedFiles((prev) => {
+      const updated = [...prev];
+      updated[index] = file;
+      return updated;
+    });
+  };
 
   const handleReset = () => {
     setSelectedFunction('');
@@ -348,7 +341,9 @@ const FileView = () => {
     setUploadComplete(false);
     setConvertComplete(false);
     setDownloadComplete(false);
-    setDownloadReady(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
   };
 
 
@@ -358,34 +353,6 @@ const FileView = () => {
     }
     return 'singlecurrency';
   };
-
-
-  // const handleUpload = async () => {
-  //   if (!selectedFile || !selectedFunction || !selectedSection || !countryRoute) return;
-  //   const route = currentFunctionRoutes[selectedSection]?.[selectedFunction];
-  //   if (!route) return;
-
-  //   setLoading(true);
-  //   const formData = new FormData();
-  //   formData.append("file", selectedFile);
-
-  //   try {
-  //     const response = await fetch(`/api/${combinedRoutePrefix}/upload-${route}`, {
-  //       method: "POST",
-  //       body: formData,
-  //     });
-  //     console.log(`Uploading file to /api/${combinedRoutePrefix}/upload-${route}`)
-  //     if (!response.ok) throw new Error("Upload failed");
-
-  //     setUploadComplete(true);
-  //     toast.success("Uploaded successfully");
-  //   } catch (error) {
-  //     toast.error("Upload error");
-  //     console.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const handleUpload = async () => {
     if (!selectedFile || !selectedFunction || !selectedSection || !countryRoute) return;
@@ -415,6 +382,7 @@ const FileView = () => {
       setLoading(false);
     }
   };
+
   const handleConvert = async () => {
     const route = currentFunctionRoutes[selectedSection]?.[selectedFunction];
     if (!route || !countryRoute) return;
@@ -435,10 +403,6 @@ const FileView = () => {
 
       setConvertComplete(true);
       toast.success("Converted successfully");
-
-      setTimeout(() => {
-        setDownloadReady(true);
-      }, 3000);
     } catch (error) {
       toast.error("Conversion error");
       console.error(error);
@@ -496,8 +460,63 @@ const FileView = () => {
       setLoading(false);
     }
   };
+  const sageHandleUpload = () => { console.log("Sage Upload"); };
+  const sageHandleConvert = () => { console.log("Sage Convert"); };
+  const sageHandleDownload = () => { console.log("Sage Download"); };
 
+  const reckonHandleUpload = () => { console.log("Reckon Upload"); };
+  const reckonHandleConvert = () => { console.log("Reckon Convert"); };
+  const reckonHandleDownload = () => { console.log("Reckon Download"); };
 
+  const xeroHandleUpload = () => { console.log("Xero Upload"); };
+  const xeroHandleConvert = () => { console.log("Xero Convert"); };
+  const xeroHandleDownload = () => { console.log("Xero Download"); };
+  const functionMap = {
+    "qbotoqbo": {
+      upload: handleUpload,
+      convert: handleConvert,
+      download: handleDownload,
+    },
+    "reckondesktop/hostedtoxero": {
+      upload: reckonHandleUpload,
+      convert: reckonHandleConvert,
+      download: reckonHandleDownload,
+    },
+    "sageonetoqbo": {
+      upload: sageHandleUpload,
+      convert: sageHandleConvert,
+      download: sageHandleDownload,
+    },
+    "xerotoxero": {
+      upload: xeroHandleUpload,
+      convert: xeroHandleConvert,
+      download: xeroHandleDownload,
+    },
+    // Add more softwareType mappings here if needed
+  };
+
+  const multiSheetFunctions = {
+    qbotoqbo: {
+      'Tracking Invoice': ['Tracking Data', 'Invoice List'],
+    },
+    sgaeonetoqbo: {
+      'Charts of account': ['Main Accounts', 'Sub Accounts', 'Account Types'],
+    }
+  };
+
+  // Helper: check how many inputs are needed
+  const getSheetCount = (software, func) => {
+    return multiSheetFunctions[software]?.[func] || 1;
+  };
+  const getSheetLabels = (software, func) => {
+    return multiSheetFunctions[software]?.[func] || ['Sheet 1'];
+  };
+
+  const sheetCount = getSheetCount(softwareType, selectedFunction);
+  
+  const sheetLabels = Array.isArray(getSheetLabels(softwareType, selectedFunction))
+  ? getSheetLabels(softwareType, selectedFunction)
+  : [];
 
   return (
     <div className="flex flex-col h-screen gradient-bg text-white overflow-hidden">
@@ -536,16 +555,6 @@ const FileView = () => {
             )}
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm text-gray-300 mb-1">File Name</label>
-            <input
-              type="text"
-              className="w-full p-2 bg-[#162447] border border-gray-500 rounded"
-              value={selectedFile ? `${selectedFile.name} (${(selectedFile.size / 1024).toFixed(2)} KB)` : ''}
-              placeholder="No file selected"
-              readOnly
-            />
-          </div>
           {file?.currencyStatus === 'Multi Currency' && (
             <div className="mb-4">
               <label className="block text-sm text-gray-300 mb-1">Currency Code</label>
@@ -560,40 +569,48 @@ const FileView = () => {
           )}
 
 
-          <div className="flex items-center justify-center w-full mb-6">
-            <label
-              htmlFor="dropzone-file"
-              className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer ${selectedFunction
-                ? 'bg-[#162447] border-gray-500 hover:border-blue-500 hover:bg-[#1f2e54]'
-                : 'bg-[#1b294a] border-gray-700 opacity-60 cursor-not-allowed'
-                } transition-colors`}
-            >
-              <div className="flex flex-col items-center justify-center pt-2 pb-2">
-                <svg className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4M17 16v-6m0 6l-4-4m4 4l4-4" />
-                </svg>
-                <p className="mb-2 text-lg text-gray-400">
-                  <span className="font-bold">Click to upload</span>
-                </p>
-                <p className="text-md text-gray-400">
-                  <span className="font-semibold"> or drag and drop</span>
-                </p>
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                accept={getAcceptedFileTypes(softwareType, selectedFunction)}
-                className="hidden"
-                onChange={handleFileChange}
-                disabled={!selectedFunction}
-              />
-            </label>
-          </div>
+          {/* Upload File Label */}
+          {selectedFunction && (
+            <div className="mb-2 text-sm text-white font-bold">
+              Upload File:__<span className="text-blue-300">{currentFunctionRoutes[selectedSection]?.[selectedFunction]}-sheet</span>
+            </div>
+          )}
 
+          {/* File Upload Input */}
+          {/* <div className="flex items-center w-full gap-4 mb-4">
+            <input
+              id="file-upload"
+              type="file"
+              accept={getAcceptedFileTypes(softwareType, selectedFunction)}
+              onChange={handleFileChange}
+              className={`w-full bg-[#162447] text-white p-2 border ${selectedFunction ? 'border-gray-500' : 'border-gray-700 opacity-60 cursor-not-allowed'} rounded`}
+              disabled={!selectedFunction}
+              ref={fileInputRef}
+            />
+          </div> */}
+          <div className="w-full mb-4">
+          {Array.isArray(sheetLabels) &&
+            sheetLabels.map((label, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    id={`file-upload-${index}`}
+                    type="file"
+                    accept={getAcceptedFileTypes(softwareType, selectedFunction)}
+                    onChange={(e) => handleFileChange(e, index)}
+                    className={`w-full bg-[#162447] text-white p-2 border ${selectedFunction ? 'border-gray-500' : 'border-gray-700 opacity-60 cursor-not-allowed'
+                      } rounded`}
+                    disabled={!selectedFunction}
+                    ref={index === 0 ? fileInputRef : null}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="flex justify-center mt-4">
             <div className="flex gap-4">
               <button
-                onClick={handleUpload}
+                onClick={() => functionMap[softwareType]?.upload()}
                 disabled={!selectedFile || uploadComplete || loading}
                 className={`px-4 py-2 rounded text-white transition-colors ${!selectedFile || uploadComplete || loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
               >
@@ -601,7 +618,7 @@ const FileView = () => {
               </button>
 
               <button
-                onClick={handleConvert}
+                onClick={() => functionMap[softwareType]?.convert()}
                 disabled={!uploadComplete || convertComplete || loading}
                 className={`px-4 py-2 rounded text-white transition-colors ${!uploadComplete || convertComplete || loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
               >
@@ -609,17 +626,15 @@ const FileView = () => {
               </button>
 
               <button
-                onClick={handleDownload}
-                disabled={!convertComplete || !downloadReady || downloadComplete || loading}
-                className={`px-4 py-2 rounded text-white transition-colors ${!convertComplete || !downloadReady || downloadComplete || loading
-                    ? 'bg-gray-600 cursor-not-allowed'
-                    : 'bg-purple-600 hover:bg-purple-700'
-                  }`}
+                onClick={() => functionMap[softwareType]?.download()}
+                disabled={!convertComplete || downloadComplete || loading}
+                className={`px-4 py-2 rounded text-white transition-colors ${!convertComplete || downloadComplete || loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'}`}
               >
                 {downloadComplete ? 'Downloaded' : loading ? 'Downloading...' : 'Download'}
               </button>
             </div>
           </div>
+
         </main>
       </div>
 
