@@ -8,9 +8,9 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
-    port: 2505,
+    port: 3000,
     proxy: {
-      '/api': 'http://localhost:2507', // Proxy API requests to the backend server
+      '/api': 'http://localhost:5000', // Proxy API requests to the backend server
     }
   }
 })
