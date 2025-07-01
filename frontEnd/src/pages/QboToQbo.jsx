@@ -418,8 +418,8 @@ const QboToQbo = () => {
               {selectedFiles.map((f, i) =>
                 f ? (
                   <div key={i}>
-                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}</p>
-                    <p><span className="font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
+                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}
+                    <span className="ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
                   </div>
                 ) : null
               )}

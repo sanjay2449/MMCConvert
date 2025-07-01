@@ -79,7 +79,7 @@ const mapTaxRate = (tax) => {
 };
 
 // 📤 Upload Excel file
-export async function uploadCoaGlobal(req, res) {
+export async function uploadCoa(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
 
     try {
@@ -93,7 +93,7 @@ export async function uploadCoaGlobal(req, res) {
 }
 
 // ⚙️ Process and convert COA data
-export async function processCoaGlobal(req, res) {
+export async function processCoa(req, res) {
     try {
         let jsonData = await readExcelToJson(excelFilePath);
 
@@ -122,7 +122,7 @@ export async function processCoaGlobal(req, res) {
         await saveJsonToFile(filteredData, outputJsonPath);
         await writeJsonToExcel(filteredData, modifiedExcelPath);
 
-        console.log("✅ GLOBAL COA  Excel processed.");
+        console.log("✅ USA COA  Excel processed.");
         res.send("COA data processed and saved.");
     } catch (error) {
         console.error("❌ Error processing COA:", error.message);
@@ -131,7 +131,7 @@ export async function processCoaGlobal(req, res) {
 }
 
 // 📥 Download processed Excel
-export async function downloadCoaGlobal(req, res) {
+export async function downloadCoa(req, res) {
     try {
         const fileExists = await pathExists(modifiedExcelPath);
 
@@ -143,7 +143,7 @@ export async function downloadCoaGlobal(req, res) {
             if (err) {
                 console.error("❌ Download error:", err.message);
             } else {
-                console.log("✅ GLOBAL COA Excel file downloaded.");
+                console.log("✅ USA COA Excel file downloaded.");
             }
         });
     } catch (err) {

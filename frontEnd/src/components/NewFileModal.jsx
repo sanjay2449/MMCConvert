@@ -5,7 +5,7 @@ import SoftwareTypeModal from "./SoftwareTypeModal";
 
 // Country options by software
 const countryOptions = {
-  "qbo to qbo": ["Australia"],
+  "qbo to qbo": ["Australia", "USA"],
   "xero to xero": ["Australia"],
   "reckon desktop/hosted to xero": ["Australia"],
   "sage one to qbo": ["Australia"],

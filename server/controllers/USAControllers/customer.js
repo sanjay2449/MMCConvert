@@ -5,7 +5,7 @@ import validator from "validator";
 const { isEmail } = validator;
 import { getPaths } from "../../utils/filePaths.js";
 
-const type = "customerglobal";
+const type = "customer";
 const { excelFilePath, outputJsonPath, modifiedExcelPath } = getPaths(type);
 
 const allowedColumns = [
@@ -137,12 +137,12 @@ const filterColumns = (data) => {
 };
 
 // ✅ Upload: move file to correct location
-export async function uploadCustomerGlobal(req, res) {
+export async function uploadCustomer(req, res) {
   if (!req.file) return res.status(400).send("No file uploaded");
 
   try {
     await move(req.file.path, excelFilePath, { overwrite: true });
-    console.log("✅ GLOBAL customer file saved at:", excelFilePath);
+    console.log("✅ USA customer file saved at:", excelFilePath);
     res.send({ message: "File uploaded and saved successfully" });
   } catch (err) {
     console.error("❌ File move error:", err.message);
@@ -151,7 +151,7 @@ export async function uploadCustomerGlobal(req, res) {
 }
 
 // 🚀 Controller: Process Excel and export filtered + modified data
-export async function processCustomerGlobal(req, res) {
+export async function processCustomer(req, res) {
   try {
     const jsonData = await readExcelToJson(excelFilePath);
     const filteredData = filterColumns(jsonData);
@@ -159,7 +159,7 @@ export async function processCustomerGlobal(req, res) {
     await saveJsonToFile(filteredData, outputJsonPath);
     await writeJsonToExcel(filteredData, modifiedExcelPath);
 
-    console.log("✅ GLOBAL customer Excel processed.");
+    console.log("✅ USA customer Excel processed.");
     res.send("Excel processed and saved with selected columns and valid emails.");
   } catch (error) {
     console.error("❌ Error processing Excel:", error.message);
@@ -168,7 +168,7 @@ export async function processCustomerGlobal(req, res) {
 }
 
 // 📥 Controller: Download modified Excel
-export async function downloadCustomerGlobal(req, res) {
+export async function downloadCustomer(req, res) {
   try {
     const exists = await pathExists(modifiedExcelPath);
 

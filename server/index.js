@@ -7,8 +7,8 @@ import authRoutes from './routes/auth.js';
 import fileRoutes from './routes/fileRoutes.js';
 import ausRoutes from './routes/ausRoutes.js'; // Import Australia-specific Excel Routes For Single Currency
 import ausMultiCurrencyRoutes from './routes/ausMultiCurrecnyRoutes.js'; // Import Australia-specific Excel Routes For Multi Currency
-import globalRoutes from './routes/globalRoutes.js'; // Import Global Excel Routes For Single Currency
-import globalMultiCurrencyRoutes from './routes/globalMultiCurrencyRoutes.js'; // Import Global Excel Routes For Multi Currency
+import USARoutes from './routes/USARoutes.js'; // Import Global Excel Routes For Single Currency
+import USAMultiCurrencyRoutes from './routes/USAMultiCurrencyRoutes.js'; // Import Global Excel Routes For Multi Currency
 import fileRoutesSheet from './routes/fileRoutesSheet.js'; // Import file routes for saving downloaded sheets
 import file from './routes/files.js';
 import fileShowRoutes from './routes/fileShowRoutes.js';
@@ -37,9 +37,9 @@ app.use('/api/files', fileRoutes);       // File upload/download routes
 // Excel processing routes For Australia Qbo to Qbo conversion 
 app.use('/api/excel-australia-qbotoqbo/singlecurrency', ausRoutes);
 app.use('/api/excel-australia-qbotoqbo/multicurrency', ausMultiCurrencyRoutes); 
-// Excel processing routes For Global Qbo to Qbo conversion
-app.use('/api/excel-global-qbotoqbo/singlecurrency', globalRoutes);  
-app.use('/api/excel-global-qbotoqbo/multicurrency', globalMultiCurrencyRoutes); 
+// Excel processing routes For USA Qbo to Qbo conversion
+app.use('/api/excel-usa-qbotoqbo/singlecurrency', USARoutes);  
+app.use('/api/excel-usa-qbotoqbo/multicurrency', USAMultiCurrencyRoutes); 
 
 
 // MongoDB connection

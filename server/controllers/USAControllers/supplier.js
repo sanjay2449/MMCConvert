@@ -102,12 +102,12 @@ const filterColumns = (data) => {
 };
 
 // ✅ Upload: move file to correct location
-export async function uploadSupplierGlobal(req, res) {
+export async function uploadSupplier(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
 
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅ GLOBAL Supplier file saved at:", excelFilePath);
+        console.log("✅ USA Supplier file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -116,7 +116,7 @@ export async function uploadSupplierGlobal(req, res) {
 }
 
 // 🚀 Controller: Process Excel and export filtered + modified data
-export async function processSupplierGlobal(req, res) {
+export async function processSupplier(req, res) {
     try {
         const jsonData = await readExcelToJson(excelFilePath);
         const filteredData = filterColumns(jsonData);
@@ -124,7 +124,7 @@ export async function processSupplierGlobal(req, res) {
         await saveJsonToFile(filteredData, outputJsonPath);
         await writeJsonToExcel(filteredData, modifiedExcelPath);
 
-        console.log("✅ GLOBAL Supplier Excel processed.");
+        console.log("✅ USA Supplier Excel processed.");
         res.send("Excel processed and saved with selected columns and valid emails.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);
@@ -133,7 +133,7 @@ export async function processSupplierGlobal(req, res) {
 }
 
 // 📥 Controller: Download modified Excel
-export async function downloadSupplierGlobal(req, res) {
+export async function downloadSupplier(req, res) {
     try {
         const exists = await pathExists(modifiedExcelPath);
 
