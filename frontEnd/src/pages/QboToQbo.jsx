@@ -38,7 +38,7 @@ const functionRoutesForQboToQbo = {
   TrackedFiles: {
     "Tracked Item": 'trackeditem',
     "Tracked Invoice": "trackedinvoice",
-    "Tracked Bill": "trackedbill",
+    // "Tracked Bill": "trackedbill",
   },
 };
 
@@ -47,8 +47,8 @@ const multiFileInputConfig = {
   "Tracked Bill": 2,
 };
 const multiFileLabels = {
-  "Tracked Invoice": ["Invoice Sheet", "COA Sheet"],
-  "Tracked Bill": ["Bill Sheet", "COA Sheet"],
+  "Tracked Invoice": ["Invoice Sheet", "Item Sheet"],
+  // "Tracked Bill": ["Bill Sheet", "COA Sheet"],
 };
 
 const sectionKeyMap = {
@@ -191,7 +191,7 @@ const QboToQbo = () => {
           toast.success('Uploaded successfully');
           setUploadComplete(true);
         } else {
-          toast.error('Upload failed');
+          toast.error(xhr.responseText || 'Upload failed');
         }
         setLoading(false);
       };
@@ -216,7 +216,11 @@ const QboToQbo = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currencyCode }),
       });
-      if (!res.ok) throw new Error('Convert failed');
+      if (!res.ok) {
+        const errorText = await res.text();  // 👈 read error message from server
+        toast.error(errorText || 'Convert failed');
+        return;
+      }
       toast.success('Converted successfully');
       setConvertComplete(true);
       setDownloadReady(true);
@@ -236,7 +240,11 @@ const QboToQbo = () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
-      if (!res.ok) throw new Error('Download failed');
+      if (!res.ok) {
+        const errorMsg = await res.text();
+        toast.error(errorMsg || 'Download failed');
+        return;
+      }
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -419,7 +427,7 @@ const QboToQbo = () => {
                 f ? (
                   <div key={i}>
                     <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}
-                    <span className="ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
+                      <span className="ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
                   </div>
                 ) : null
               )}

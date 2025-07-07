@@ -60,7 +60,6 @@ router.post("/upload-journalentry", upload.single("file"), asyncHandler(uploadJo
 router.post("/upload-estimates", upload.single("file"), asyncHandler(uploadEstimates));
 router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadPurchaseOrder));
 
-
 // Convert routes for  QBO data
 router.post("/process-coa", asyncHandler(processCoa));
 router.post("/process-customer", asyncHandler(processCustomer));
@@ -112,6 +111,5 @@ router.get("/download-openingbalance", asyncHandler(downloadOpeningBalance));
 router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
 router.get("/download-estimates", asyncHandler(downloadEstimates));
 router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder));
-
 
 export default router;

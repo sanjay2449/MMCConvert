@@ -62,10 +62,6 @@ router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadP
 // Corrected: Accept 2 files for Tracked Invoice
 router.post("/upload-trackedinvoice", upload.array("files", 2), asyncHandler(uploadTrackedInvoice));
 
-
-
-
-
 // Convert routes
 router.post("/process-coa", asyncHandler(processCoa));
 router.post("/process-customer", asyncHandler(processCustomer));
@@ -119,6 +115,5 @@ router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
 router.get("/download-estimates", asyncHandler(downloadEstimates)); 
 router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder)); 
 router.get("/download-trackedinvoice", asyncHandler(downloadTrackedInvoice));
-
 
 export default router;
