@@ -140,12 +140,32 @@ const XeroToXero = () => {
     setDownloadReady(false);
     setCurrencyCode('');
   };
-  const handleMultiFileChange = (file, index) => {
-    const allowedExtensions = ['.csv', '.CSV'];
-    const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+  const csvSheetFunctions = ["Chart of Accounts", "Customer Master", "Vendor Master", "Item Master", "Job/Tracking Class"];
+  const excelSheetFunctions = ["Manual Journal", "Spend money", "Receive money", "Bill payment", "Transfer"];
 
-    if (!allowedExtensions.includes(ext)) {
-      toast.error("Only Excel files (.xlsx) are allowed");
+  const handleMultiFileChange = (file, index) => {
+    if (!file) return;
+
+    const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+    const isCSV = ext === '.csv';
+    const isXLSX = ext === '.xlsx';
+
+    const shouldBeCSV = csvSheetFunctions.includes(selectedFunction);
+    const shouldBeExcel = excelSheetFunctions.includes(selectedFunction);
+
+    if (shouldBeCSV && !isCSV) {
+      toast.error("This function only accepts .csv files");
+      return;
+    }
+
+    if (shouldBeExcel && !isXLSX) {
+      toast.error("This function only accepts .xlsx files");
+      return;
+    }
+
+    // Optional: Reject anything else if the function isn't explicitly listed
+    if (!shouldBeCSV && !shouldBeExcel) {
+      toast.error("Unsupported file type or unknown function");
       return;
     }
 
@@ -156,6 +176,7 @@ const XeroToXero = () => {
     setConvertComplete(false);
     setDownloadReady(false);
   };
+
 
   const handleUpload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
@@ -436,7 +457,7 @@ const XeroToXero = () => {
               )}
             </div>
           )}
-          {selectedFunction && (
+          {/* {selectedFunction && (
             <>
               {multiFileInputConfig[selectedFunction] ? (
                 <div className="grid gap-4">
@@ -467,7 +488,56 @@ const XeroToXero = () => {
                 </label>
               )}
             </>
+          )} */}
+
+          {selectedFunction && (
+            <>
+              {multiFileInputConfig[selectedFunction] ? (
+                <div className="grid gap-4">
+                  {[...Array(multiFileInputConfig[selectedFunction])].map((_, index) => (
+                    <div key={index} className="w-full">
+                      <label className="block text-sm mb-1 font-semibold font-serif text-gray-300">
+                        {multiFileLabels[selectedFunction]?.[index] || `Upload File ${index + 1}`}
+                      </label>
+                      <input
+                        type="file"
+                        accept={
+                          csvSheetFunctions.includes(selectedFunction)
+                            ? '.csv, .CSV'
+                            : excelSheetFunctions.includes(selectedFunction)
+                              ? '.xlsx, .XLSX'
+                              : ''
+                        }
+                        onChange={(e) => handleMultiFileChange(e.target.files[0], index)}
+                        className="block w-full text-sm text-gray-100 bg-[#1c2a4d] rounded border border-gray-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <label
+                  htmlFor="dropzone-file"
+                  className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]"
+                >
+                  <p className="text-lg">Drag & Drop or Click to Upload</p>
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    accept={
+                      csvSheetFunctions.includes(selectedFunction)
+                        ? '.csv, .CSV'
+                        : excelSheetFunctions.includes(selectedFunction)
+                          ? '.xlsx, .XLSX'
+                          : ''
+                    }
+                    className="hidden"
+                    onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
+                  />
+                </label>
+              )}
+            </>
           )}
+
           {/* {loading && <div className="mt-4 text-center text-sm text-blue-400">Processing...</div>} */}
           {loading && (
             <div className="flex justify-center mt-4">
