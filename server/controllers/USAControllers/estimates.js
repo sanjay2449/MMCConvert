@@ -127,7 +127,7 @@ export async function uploadEstimates(req, res) {
         if (!req.file) return res.status(400).send("No file uploaded");
         try {
                 await move(req.file.path, excelFilePath, { overwrite: true });
-                console.log("Global Estimates file saved at:", excelFilePath);
+                console.log("USA Estimates file saved at:", excelFilePath);
                 res.send({ message: "File uploaded and saved successfully" });
         } catch (err) {
                 console.error("❌ File move error:", err.message);
@@ -150,7 +150,7 @@ export async function processEstimates(req, res) {
                 const dateFields = ["Estimate Date", "Expiration Date", "Accepted Date"]
                 await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
-                console.log("✅Global Estimates Excel processed.");
+                console.log("USA Estimates Excel processed.");
                 res.send("Excel processed successfully with all business rules applied.");
         } catch (error) {
                 console.error("❌ Error processing Excel:", error.message);
@@ -163,7 +163,7 @@ export async function downloadEstimates(req, res) {
         try {
                 const exists = await pathExists(modifiedExcelPath);
                 if (exists) {
-                        res.download(modifiedExcelPath, "modifiedCreditCardCharge.xlsx", (err) => {
+                        res.download(modifiedExcelPath, "modifiedEstimates.xlsx", (err) => {
                                 if (err) console.error("❌ Download error:", err.message);
                                 else console.log("✅ Excel file downloaded.");
                         });

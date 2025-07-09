@@ -103,7 +103,7 @@ export async function uploadJournal(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅Global Journal file saved at:", excelFilePath);
+        console.log("USA Journal file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -126,7 +126,7 @@ export async function processJournal(req, res) {
         const dateFields = ["Journal Date"]
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
-        console.log("✅Global Journal Excel processed.");
+        console.log("USA Journal Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);
