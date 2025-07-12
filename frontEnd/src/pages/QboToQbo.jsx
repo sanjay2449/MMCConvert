@@ -237,9 +237,7 @@ const QboToQbo = () => {
   const confirmDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
     if (!route) return;
-
     setLoading(true);
-
     try {
       // 1. Fetch the file
       const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);

@@ -85,7 +85,7 @@ const infoObject = {
   "Opening Balance": 'Xero',
   Invoice: 'QBO',
   "Adjustment Note": 'QBO',
-  Bill: 'QBO',  
+  Bill: 'QBO',
   "Supplier Credit": 'QBO',
   Cheque: 'TOOL',
   Deposit: 'TOOL',
@@ -141,42 +141,42 @@ const XeroToXero = () => {
     setDownloadReady(false);
     setCurrencyCode('');
   };
-  const csvSheetFunctions = ["Chart of Accounts", "Customer Master", "Vendor Master", "Item Master", "Job/Tracking Class", "Conversion balance", "Invoice", "Creditnote", "Bill-Direct" , "Invoice payment"];
-  const excelSheetFunctions = ["AR", "AP", "Manual Journal", "Receive money","Spend money", "Bill payment", "Transfer","Paid-Bill", "Auth Bill", "Paid-Invoice", "Auth Invoice", "Paid credit note", "Auth Credit note", "Auth bill credit", "Paid bill credit"];
+  const csvSheetFunctions = ["Chart of Accounts", "Customer Master", "Vendor Master", "Item Master", "Job/Tracking Class", "Conversion balance", "Invoice", "Creditnote", "Bill-Direct", "Invoice payment"];
+  const excelSheetFunctions = ["AR", "AP", "Manual Journal", "Receive money", "Spend money", "Bill payment", "Transfer", "Paid-Bill", "Auth Bill", "Paid-Invoice", "Auth Invoice", "Paid credit note", "Auth Credit note", "Auth bill credit", "Paid bill credit"];
 
   const handleMultiFileChange = (file, index) => {
-  if (!file) return;
- 
-  const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-  const isCSV = ext === '.csv';
-  const isXLSX = ext === '.xlsx' || ext === '.xls'; // ✅ Fixed here
+    if (!file) return;
 
-  const shouldBeCSV = csvSheetFunctions.includes(selectedFunction);
-  const shouldBeExcel = excelSheetFunctions.includes(selectedFunction);
+    const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+    const isCSV = ext === '.csv';
+    const isXLSX = ext === '.xlsx' || ext === '.xls'; // ✅ Fixed here
 
-  if (shouldBeCSV && !isCSV) {
-    toast.error("This function only accepts .csv files");
-    return;
-  }
+    const shouldBeCSV = csvSheetFunctions.includes(selectedFunction);
+    const shouldBeExcel = excelSheetFunctions.includes(selectedFunction);
 
-  if (shouldBeExcel && !isXLSX) {
-    toast.error("This function only accepts .xls or .xlsx files");
-    return;
-  }
+    if (shouldBeCSV && !isCSV) {
+      toast.error("This function only accepts .csv files");
+      return;
+    }
 
-  if (!shouldBeCSV && !shouldBeExcel) {
-    toast.error("Unsupported file type or unknown function");
-    return;
-  }
+    if (shouldBeExcel && !isXLSX) {
+      toast.error("This function only accepts .xls or .xlsx files");
+      return;
+    }
 
-  const newFiles = [...selectedFiles];
-  newFiles[index] = file;
-  setSelectedFiles(newFiles);
-  setUploadComplete(false);
-  setConvertComplete(false);
-  setDownloadReady(false);
-};
-const handleUpload = async () => {
+    if (!shouldBeCSV && !shouldBeExcel) {
+      toast.error("Unsupported file type or unknown function");
+      return;
+    }
+
+    const newFiles = [...selectedFiles];
+    newFiles[index] = file;
+    setSelectedFiles(newFiles);
+    setUploadComplete(false);
+    setConvertComplete(false);
+    setDownloadReady(false);
+  };
+  const handleUpload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
     if (!route) return;
 
@@ -267,9 +267,17 @@ const handleUpload = async () => {
     if (!route) return;
     setLoading(true);
     try {
+      // 1. Fetch the file
       const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
-      if (!res.ok) throw new Error('Download failed');
+      if (!res.ok) {
+        const errorMsg = await res.text();
+        toast.error(errorMsg || 'Download failed');
+        return;
+      }
+
       const blob = await res.blob();
+
+      // 2. Build a structured filename
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -277,27 +285,33 @@ const handleUpload = async () => {
       const now = new Date();
       const pad = (n) => String(n).padStart(2, '0');
       const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+
       const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
       const namePart = sanitize(file?.fileName);
       const softwarePart = sanitize(file?.softwareType);
       const countryPart = sanitize(file?.countryName);
       const routePart = sanitize(route);
 
-      // ✅ Changed extension to .csv instead of .xlsx
-      const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
+      const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.xlsx`;
 
-      link.setAttribute('download', fileName);
+      link.setAttribute('download', generatedSheetName);
       document.body.appendChild(link);
       link.click();
       link.remove();
 
+      // 3. Save the sheet under routeUsed group
       await fetch(`/api/files/${file._id}/save-sheet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName, routeUsed: route })
+        body: JSON.stringify({
+          routeUsed: route,
+          sheetName: generatedSheetName
+        })
       });
+
       setDownloadReady(false);
       toast.success('Downloaded successfully');
+
     } catch (err) {
       toast.error('Download failed');
     } finally {
@@ -305,13 +319,21 @@ const handleUpload = async () => {
       setLoading(false);
     }
   };
-
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
       const data = await res.json();
-      // setHistoryData(data.downloadedSheets || []);
-      const sortedData = (data.downloadedSheets || []).sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Flatten the grouped sheets into a single array
+      const flatData = (data.downloadedSheets || []).flatMap(group =>
+        (group.sheets || []).map(sheet => ({
+          routeUsed: group.routeUsed,
+          sheetName: sheet.sheetName,
+          downloadedAt: sheet.downloadedAt
+        }))
+      );
+      // Sort by downloadedAt descending
+      const sortedData = flatData.sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Update state
       setHistoryData(sortedData);
     } catch (err) {
       toast.error("Failed to fetch history");
@@ -577,7 +599,6 @@ const handleUpload = async () => {
             <h2 className="text-2xl font-bold mb-6 text-white border-b border-blue-300 pb-2 font-serif">
               {file?.fileName || 'File'} History
             </h2>
-
             <div className="max-h-[400px] overflow-y-auto pr-2 custom-scroll">
               {historyData.length > 0 ? (
                 historyData.map((entry, index) => (
@@ -587,7 +608,7 @@ const handleUpload = async () => {
                   >
                     <div>
                       <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
-                      <div className="text-sm text-white">File: {entry.fileName}</div>
+                      <div className="text-sm text-white">Sheet: {entry.sheetName}</div>
                       <div className="text-sm text-white">
                         Processed on {new Date(entry.downloadedAt).toISOString().split('T')[0]}
                       </div>

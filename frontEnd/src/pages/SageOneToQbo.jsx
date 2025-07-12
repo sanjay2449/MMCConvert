@@ -149,103 +149,100 @@ const SageOneToQbo = () => {
     setDownloadReady(false);
   };
 
-const handleUpload = async () => {
-  const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-  if (!route) return;
+  const handleUpload = async () => {
+    const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+    if (!route) return;
 
-  const requiredFiles = multiFileInputConfig[selectedFunction] || 1;
-  const hasAllFiles = selectedFiles.length === requiredFiles && selectedFiles.every(f => f);
+    const requiredFiles = multiFileInputConfig[selectedFunction] || 1;
+    const hasAllFiles = selectedFiles.length === requiredFiles && selectedFiles.every(f => f);
 
-  if (!hasAllFiles) {
-    toast.error(`Please upload ${requiredFiles} valid Excel file(s)`);
-    return;
-  }
-
-  setLoading(true);
-  setUploadProgress(0);
-  const formData = new FormData();
-
-  // 🧠 Smart field naming based on selectedFunction
-  if (requiredFiles > 1) {
-    if (selectedFunction === "Chart of Accounts") {
-      formData.append("coa", selectedFiles[0]);
-      formData.append("bankcard", selectedFiles[1]);
-    } else if (selectedFunction === "Bill Payment") {
-      formData.append("payment", selectedFiles[0]);
-      formData.append("supplier", selectedFiles[1]);
-      formData.append("coa", selectedFiles[2]);
-    } else if (selectedFunction === "Tax Invoice") {
-      formData.append("item", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-      formData.append("tax", selectedFiles[2]);
-      formData.append("invoice", selectedFiles[3]);
-    } else if (selectedFunction === "Credit Note") {
-      formData.append("invoice", selectedFiles[0]);
-      formData.append("item", selectedFiles[1]);
-      formData.append("coa", selectedFiles[2]);
-      formData.append("tax", selectedFiles[3]);
-    } else if (selectedFunction === "Invoice payment") {
-      formData.append("payment", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-    } else if (selectedFunction === "Bill") {
-      formData.append("invoice", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-      formData.append("tax", selectedFiles[2]);
-    } else if (selectedFunction === "Expense") {
-      formData.append("invoice", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-      formData.append("tax", selectedFiles[2]);
-    } else if (selectedFunction === "Deposit") {
-      formData.append("deposit", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-      formData.append("tax", selectedFiles[2]);
-    } else if (selectedFunction === "Vendor credit") {
-      formData.append("invoice", selectedFiles[0]);
-      formData.append("coa", selectedFiles[1]);
-      formData.append("tax", selectedFiles[2]);
-    } else {
-      // fallback for unknown multi-file inputs
-      selectedFiles.forEach((file, index) => {
-        formData.append(`file${index + 1}`, file);
-      });
+    if (!hasAllFiles) {
+      toast.error(`Please upload ${requiredFiles} valid Excel file(s)`);
+      return;
     }
-  } else {
-    formData.append("file", selectedFiles[0]); // single file
-  }
 
-  formData.append("currencyCode", currencyCode);
+    setLoading(true);
+    setUploadProgress(0);
+    const formData = new FormData();
 
-  try {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', `/api/${combinedRoutePrefix}/${getCurrencyPath()}/upload-${route}`);
-    xhr.upload.onprogress = (event) => {
-      if (event.lengthComputable) {
-        const percent = Math.round((event.loaded / event.total) * 100);
-        setUploadProgress(percent);
-      }
-    };
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        toast.success('Uploaded successfully');
-        setUploadComplete(true);
+    // 🧠 Smart field naming based on selectedFunction
+    if (requiredFiles > 1) {
+      if (selectedFunction === "Chart of Accounts") {
+        formData.append("coa", selectedFiles[0]);
+        formData.append("bankcard", selectedFiles[1]);
+      } else if (selectedFunction === "Bill Payment") {
+        formData.append("payment", selectedFiles[0]);
+        formData.append("supplier", selectedFiles[1]);
+        formData.append("coa", selectedFiles[2]);
+      } else if (selectedFunction === "Tax Invoice") {
+        formData.append("item", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+        formData.append("tax", selectedFiles[2]);
+        formData.append("invoice", selectedFiles[3]);
+      } else if (selectedFunction === "Credit Note") {
+        formData.append("invoice", selectedFiles[0]);
+        formData.append("item", selectedFiles[1]);
+        formData.append("coa", selectedFiles[2]);
+        formData.append("tax", selectedFiles[3]);
+      } else if (selectedFunction === "Invoice payment") {
+        formData.append("payment", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+      } else if (selectedFunction === "Bill") {
+        formData.append("invoice", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+        formData.append("tax", selectedFiles[2]);
+      } else if (selectedFunction === "Expense") {
+        formData.append("invoice", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+        formData.append("tax", selectedFiles[2]);
+      } else if (selectedFunction === "Deposit") {
+        formData.append("deposit", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+        formData.append("tax", selectedFiles[2]);
+      } else if (selectedFunction === "Vendor credit") {
+        formData.append("invoice", selectedFiles[0]);
+        formData.append("coa", selectedFiles[1]);
+        formData.append("tax", selectedFiles[2]);
       } else {
-        toast.error('Upload failed');
+        // fallback for unknown multi-file inputs
+        selectedFiles.forEach((file, index) => {
+          formData.append(`file${index + 1}`, file);
+        });
       }
-      setLoading(false);
-    };
-    xhr.onerror = () => {
+    } else {
+      formData.append("file", selectedFiles[0]); // single file
+    }
+
+    formData.append("currencyCode", currencyCode);
+
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `/api/${combinedRoutePrefix}/${getCurrencyPath()}/upload-${route}`);
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          setUploadProgress(percent);
+        }
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          toast.success('Uploaded successfully');
+          setUploadComplete(true);
+        } else {
+          toast.error('Upload failed');
+        }
+        setLoading(false);
+      };
+      xhr.onerror = () => {
+        toast.error('Upload failed');
+        setLoading(false);
+      };
+      xhr.send(formData);
+    } catch (err) {
       toast.error('Upload failed');
       setLoading(false);
-    };
-    xhr.send(formData);
-  } catch (err) {
-    toast.error('Upload failed');
-    setLoading(false);
-  }
-};
-
-
-
+    }
+  };
 
   const handleConvert = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
@@ -276,9 +273,17 @@ const handleUpload = async () => {
     if (!route) return;
     setLoading(true);
     try {
+      // 1. Fetch the file
       const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
-      if (!res.ok) throw new Error('Download failed');
+      if (!res.ok) {
+        const errorMsg = await res.text();
+        toast.error(errorMsg || 'Download failed');
+        return;
+      }
+
       const blob = await res.blob();
+
+      // 2. Build a structured filename
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -286,26 +291,33 @@ const handleUpload = async () => {
       const now = new Date();
       const pad = (n) => String(n).padStart(2, '0');
       const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+
       const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
       const namePart = sanitize(file?.fileName);
       const softwarePart = sanitize(file?.softwareType);
       const countryPart = sanitize(file?.countryName);
       const routePart = sanitize(route);
 
-      const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.xlsx`;
+      const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.xlsx`;
 
-      link.setAttribute('download', fileName);
+      link.setAttribute('download', generatedSheetName);
       document.body.appendChild(link);
       link.click();
       link.remove();
 
+      // 3. Save the sheet under routeUsed group
       await fetch(`/api/files/${file._id}/save-sheet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName, routeUsed: route })
+        body: JSON.stringify({
+          routeUsed: route,
+          sheetName: generatedSheetName
+        })
       });
+
       setDownloadReady(false);
       toast.success('Downloaded successfully');
+
     } catch (err) {
       toast.error('Download failed');
     } finally {
@@ -313,12 +325,22 @@ const handleUpload = async () => {
       setLoading(false);
     }
   };
+
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
       const data = await res.json();
-      // setHistoryData(data.downloadedSheets || []);
-      const sortedData = (data.downloadedSheets || []).sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Flatten the grouped sheets into a single array
+      const flatData = (data.downloadedSheets || []).flatMap(group =>
+        (group.sheets || []).map(sheet => ({
+          routeUsed: group.routeUsed,
+          sheetName: sheet.sheetName,
+          downloadedAt: sheet.downloadedAt
+        }))
+      );
+      // Sort by downloadedAt descending
+      const sortedData = flatData.sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Update state
       setHistoryData(sortedData);
     } catch (err) {
       toast.error("Failed to fetch history");
@@ -463,7 +485,7 @@ const handleUpload = async () => {
                 f ? (
                   <div key={i}>
                     <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}
-                    <span className=" ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
+                      <span className=" ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
                   </div>
                 ) : null
               )}
@@ -578,7 +600,7 @@ const handleUpload = async () => {
                   >
                     <div>
                       <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
-                      <div className="text-sm text-white">File: {entry.fileName}</div>
+                      <div className="text-sm text-white">Sheet: {entry.sheetName}</div>
                       <div className="text-sm text-white">
                         Processed on {new Date(entry.downloadedAt).toISOString().split('T')[0]}
                       </div>
