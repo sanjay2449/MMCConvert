@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTrash } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
-
 const functionRoutesForReckonDesktopHostedToXero = {
   Masters: {
     "Chart of Accounts": 'coa', // Reckon to Xero
@@ -37,7 +36,6 @@ const functionRoutesForReckonDesktopHostedToXero = {
     "Transfer": "bankTransfer", // Reckon to Xero
   },
 };
-
 const multiFileInputConfig = {
   "Name": 2,
   "Name1": 4,
@@ -46,19 +44,16 @@ const multiFileLabels = {
   "Name": ["A", "B"],
   "Name1": ["A", "B", "C", "D"],
 };
-
 const sectionKeyMap = {
   masters: "Masters",
   openData: "Open Data",
   transaction: "Transaction",
 };
-
 const sectionsForReckonDesktopHostedToXero = {
   masters: Object.keys(functionRoutesForReckonDesktopHostedToXero["Masters"]),
   openData: Object.keys(functionRoutesForReckonDesktopHostedToXero["Open Data"]),
   transaction: Object.keys(functionRoutesForReckonDesktopHostedToXero["Transaction"]),
 };
-
 const infoObject = {
   "Charts of Account": 'QBO',
   Customer: 'QBO',
@@ -70,7 +65,7 @@ const infoObject = {
   "Opening Balance": 'QBO',
   Invoice: 'QBO',
   "Adjustment Note": 'QBO',
-  Bill: 'QBO',
+  "Bill": 'QBO',
   "Supplier Credit": 'QBO',
   Cheque: 'TOOL',
   Deposit: 'TOOL',
@@ -84,13 +79,10 @@ const infoObject = {
   Estimates: 'TOOL',
   "Purchase Order": 'TOOL',
 };
-
 const ReckonDesktopHostedToXero = () => {
   const { state } = useLocation();
   const { id } = useParams();
   const file = state?.file;
-
-
   const [openSection, setOpenSection] = useState('');
   const [selectedFunction, setSelectedFunction] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -110,8 +102,6 @@ const ReckonDesktopHostedToXero = () => {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState('');
   const [multipleDownloadLinks, setMultipleDownloadLinks] = useState(null); // ✅ NEW
-
-
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
   const countryRoute = {
@@ -119,9 +109,7 @@ const ReckonDesktopHostedToXero = () => {
   }[rawCountry] || rawCountry?.toLowerCase().replace(/\s+/g, '');
   const combinedRoutePrefix = `excel-${countryRoute}-${softwareType}`;
   const currentFunctionRoutes = functionRoutesForReckonDesktopHostedToXero;
-
   const getCurrencyPath = () => file?.currencyStatus?.toLowerCase() === 'multi currency' ? 'multicurrency' : 'singlecurrency';
-
   const handleFunctionClick = (func) => {
     setSelectedFunction(func);
     setSelectedFiles([]);
@@ -133,12 +121,10 @@ const ReckonDesktopHostedToXero = () => {
   const handleMultiFileChange = (file, index) => {
     const allowedExtensions = ['.csv', '.CSV'];
     const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-
     if (!allowedExtensions.includes(ext)) {
       toast.error("Only CSV files (.csv) are allowed");
       return;
     }
-
     const newFiles = [...selectedFiles];
     newFiles[index] = file;
     setSelectedFiles(newFiles);
@@ -146,24 +132,18 @@ const ReckonDesktopHostedToXero = () => {
     setConvertComplete(false);
     setDownloadReady(false);
   };
-
   const handleUpload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
     if (!route) return;
-
     const requiredFiles = multiFileInputConfig[selectedFunction] || 1;
     const hasAllFiles = selectedFiles.length === requiredFiles && selectedFiles.every(f => f);
-
     if (!hasAllFiles) {
       toast.error(`Please upload ${requiredFiles} valid Excel file(s)`);
       return;
     }
-
     setLoading(true);
     setUploadProgress(0);
-
     const formData = new FormData();
-
     // ✅ Append files based on single vs multiple
     if (requiredFiles > 1) {
       selectedFiles.forEach((file) => {
@@ -172,9 +152,7 @@ const ReckonDesktopHostedToXero = () => {
     } else {
       formData.append("file", selectedFiles[0]); // field name 'file' for single
     }
-
     formData.append("currencyCode", currencyCode);
-
     try {
       const xhr = new XMLHttpRequest();
       xhr.open('POST', `/api/${combinedRoutePrefix}/${getCurrencyPath()}/upload-${route}`);
@@ -214,12 +192,10 @@ const ReckonDesktopHostedToXero = () => {
         body: JSON.stringify({ currencyCode }),
       });
       if (!res.ok) throw new Error('Convert failed');
-
       const data = await res.json();
       // if (data.fileName) {
       //   setConvertedFileName(data.fileName);
       // }
-
       // ✅ Handle single and multi file
       if (data.fileName) {
         setConvertedFileName(data.fileName);
@@ -228,7 +204,6 @@ const ReckonDesktopHostedToXero = () => {
         setMultipleDownloadLinks(data.downloadLinks);
         setConvertedFileName(''); // optional reset
       }
-
       toast.success('Converted successfully');
       setConvertComplete(true);
       setDownloadReady(true);
@@ -238,24 +213,17 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-
-
-  // 
   const handleDownload = async () => {
     setShowDownloadConfirm(true);
   };
-
   const confirmDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-
     if (!route || !countryRoute || (!convertedFileName && !multipleDownloadLinks)) {
       toast.error("Missing download information");
       return;
     }
-
     setShowDownloadConfirm(false);
     setLoading(true);
-
     try {
       if (multipleDownloadLinks) {
         // ✅ Download all links
@@ -272,12 +240,9 @@ const ReckonDesktopHostedToXero = () => {
         const response = await fetch(
           `/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`
         );
-
         if (!response.ok) throw new Error("Download failed");
-
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
-
         const link = document.createElement("a");
         link.href = url;
         // link.setAttribute("download", convertedFileName);
@@ -285,17 +250,14 @@ const ReckonDesktopHostedToXero = () => {
         document.body.appendChild(link);
         link.click();
         link.remove();
-
         // Save download history
         await fetch(`/api/files/${file._id}/save-sheet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sheetName: convertedFileName, routeUsed: route }),
         });
-
         toast.success("Downloaded successfully");
       }
-
       setDownloadReady(true);
     } catch (error) {
       toast.error("Download error");
@@ -304,7 +266,6 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
@@ -325,30 +286,23 @@ const ReckonDesktopHostedToXero = () => {
       toast.error("Failed to fetch history");
     }
   };
-
   const handleHistoryDownload = async (entry) => {
     const currencyPath = getCurrencyPath();
-
     try {
       // `entry.routeUsed` is something like 'invoice' — no need to strip anything
       const route = entry.routeUsed;
-
       const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`);
       if (!response.ok) throw new Error("Download failed");
-
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-
       // Recreate filename if it's missing
       const fileName = entry.fileName || `${file?.fileName || 'Export'}__${route}.xlsx`;
-
       link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
       link.remove();
-
       toast.success("Downloaded again");
     } catch (error) {
       toast.error("Download failed");
@@ -363,7 +317,6 @@ const ReckonDesktopHostedToXero = () => {
         body: JSON.stringify({ index })
       });
       if (!res.ok) throw new Error("Delete failed");
-
       toast.success("Entry deleted");
       fetchHistory(); // refresh list
     } catch (error) {
@@ -371,7 +324,6 @@ const ReckonDesktopHostedToXero = () => {
       console.error(error);
     }
   };
-
   const handleReset = () => {
     setSelectedFunction('');
     setCurrencyCode('');
@@ -409,7 +361,6 @@ const ReckonDesktopHostedToXero = () => {
       </div>
     </div>
   );
-
   return (
     <div className="flex flex-col h-screen gradient-bg text-white overflow-hidden">
       <Toaster position="top-right" />
@@ -419,7 +370,6 @@ const ReckonDesktopHostedToXero = () => {
         country: file?.countryName,
         currencyStatus: file?.currencyStatus,
       }} />
-
       <div className="flex flex-1 overflow-hidden custom-scroll">
         <aside className="w-64 gradient-bg p-1 ml-3 border-r border-[#1c2a4d] flex flex-col overflow-y-auto h-full custom-scroll">
           <button
@@ -539,7 +489,6 @@ const ReckonDesktopHostedToXero = () => {
             >
               ℹ️
             </button>
-
           </div>
         </main>
       </div>
@@ -635,12 +584,10 @@ const ReckonDesktopHostedToXero = () => {
           </div>
         </div>
       )}
-
       {showInfoModal && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
           {/* Modal box */}
           <div className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
-
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 text-white text-2xl hover:text-red-400"
@@ -649,7 +596,6 @@ const ReckonDesktopHostedToXero = () => {
             >
               <FaTimes />
             </button>
-
             {/* Modal Content */}
             <div className="text-center mt-4">
               <h2 className="text-3xl font-bold mb-6 underline font-serif">Information</h2>
@@ -661,10 +607,8 @@ const ReckonDesktopHostedToXero = () => {
                 <br /><br />
                 You can also view previously downloaded files in the History section.
               </p>
-
               <div className="text-white">
                 <h2 className="text-3xl font-bold mb-6 text-center underline font-serif">Information Table</h2>
-
                 <div className="border border-gray-500 rounded-lg overflow-hidden">
                   <table className="w-full table-auto border-collapse text-sm">
                     <thead className="bg-blue-700">
@@ -692,97 +636,3 @@ const ReckonDesktopHostedToXero = () => {
   );
 };
 export default ReckonDesktopHostedToXero;
-
-
-
-
-
-// const confirmDownload = async () => {
-//   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-//   if (!route) return;
-//   setLoading(true);
-//   try {
-//     const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
-//     if (!res.ok) throw new Error('Download failed');
-//     const blob = await res.blob();
-//     const url = window.URL.createObjectURL(blob);
-//     const link = document.createElement('a');
-//     link.href = url;
-
-//     const now = new Date();
-//     const pad = (n) => String(n).padStart(2, '0');
-//     const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
-//     const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
-//     const namePart = sanitize(file?.fileName);
-//     const softwarePart = sanitize(file?.softwareType);
-//     const countryPart = sanitize(file?.countryName);
-//     const routePart = sanitize(route);
-
-//     const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
-
-//     link.setAttribute('download', fileName);
-//     document.body.appendChild(link);
-//     link.click();
-//     link.remove();
-
-//     await fetch(`/api/files/${file._id}/save-sheet`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ fileName, routeUsed: route })
-//     });
-//     setDownloadReady(false);
-//     toast.success('Downloaded successfully');
-//   } catch (err) {
-//     toast.error('Download failed');
-//   } finally {
-//     setShowDownloadConfirm(false);
-//     setLoading(false);
-//   }
-// };
-
-
-
-  // const confirmDownload = async () => {
-
-  //   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-
-  //     if (!route || !countryRoute || !convertedFileName) {
-  //   toast.error("Missing download information");
-  //   return;
-  // }
-  //   setLoading(true);
-  //   try {
-  //     // const response = await fetch(`/api/${combinedRoutePrefix}/download-${route}/${convertedFileName}`);
-  //     const response = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
-
-  //     if (!response.ok) throw new Error("Download failed");
-
-  //     const blob = await response.blob();
-  //     const url = window.URL.createObjectURL(blob);
-
-  //     const link = document.createElement("a");
-  //     link.href = url;
-  //     link.setAttribute("download", convertedFileName);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     link.remove();
-
-  //     await fetch(`/api/files/${file._id}/save-sheet`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ fileName: convertedFileName, routeUsed: route })
-  //     });
-
-  //     setDownloadReady(true);
-  //     toast.success("Downloaded successfully");
-  //   } catch (error) {
-  //     toast.error("Download error");
-  //     console.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
-
-  // 
