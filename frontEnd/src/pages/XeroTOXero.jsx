@@ -7,34 +7,35 @@ import Navbar from '../components/Navbar';
 
 const functionRoutesForXeroToXero = {
   Masters: {
-    "Chart of Accounts": "",
-    "Customer Master": "",
+    "Chart of Accounts": "coa",
+    "Customer Master": "contact",
     "Vendor Master": "",
-    "Item Master": "",
-    "Job/Tracking Class": "",
+    "Item Master": "items",
+    "Job/Tracking Class": "class",
   },
   "Open Data": {
-    "AR": "",
-    "AP": "",
+    "AR": "ar",
+    "AP": "ap",
   },
   Transaction: {
-    "Invoice": "",
-    "Manual Journal": "",
-    "Spend money ": "",
-    "Receive money": "",
-    "Bill payment": "",
-    "Transfer": "",
-    "Bill-Direct": "",
-    "Auth Bill": "",
-    "Paid-Bill": "",
-    "Paid-Invoice": "",
-    "Auth Invoice": "",
-    "Invoice payment": "",
-    "Paid credit note": "",
-    "Auth Credit note": "",
-    "Auth bill credit": "",
-    "Paid bill credit": "",
-    "Conversion balance": "",
+    "Invoice": "invoice",
+    "Creditnote": "creditnote",
+    "Manual Journal": "manualJournal",
+    "Spend money": "spendmoney",
+    "Receive money": "receivemoney",
+    "Bill payment": "billpayment",
+    "Transfer": "transfer",
+    "Bill-Direct": "bill",
+    "Auth Bill": "authbill",
+    "Paid-Bill": "billpaid",
+    "Paid-Invoice": "paidinvoice",
+    "Auth Invoice": "authinvoice",
+    "Invoice payment": "invoicepayment",
+    "Paid credit note": "paidcreditnote",
+    "Auth Credit note": "authcreditnote",
+    "Auth bill credit": "authbillcredit",
+    "Paid bill credit": "paidbillcredit",
+    "Conversion balance": "conversionbalance",
   },
 };
 
@@ -74,17 +75,17 @@ const sectionsForXeroToXero = {
 };
 
 const infoObject = {
-  "Charts of Account": 'QBO',
-  Customer: 'QBO',
-  Supplier: 'QBO',
-  Class: 'QBO',
-  Items: 'QBO',
-  "Open AR": 'QBO',
-  "Open AP": 'QBO',
-  "Opening Balance": 'QBO',
+  "Charts of Account": 'Xero',
+  Customer: 'Xero',
+  Supplier: 'Xero',
+  Class: 'Xero',
+  Items: 'Xero',
+  "Open AR": 'Xero',
+  "Open AP": 'Xero',
+  "Opening Balance": 'Xero',
   Invoice: 'QBO',
   "Adjustment Note": 'QBO',
-  Bill: 'QBO',
+  Bill: 'QBO',  
   "Supplier Credit": 'QBO',
   Cheque: 'TOOL',
   Deposit: 'TOOL',
@@ -140,45 +141,42 @@ const XeroToXero = () => {
     setDownloadReady(false);
     setCurrencyCode('');
   };
-  const csvSheetFunctions = ["Chart of Accounts", "Customer Master", "Vendor Master", "Item Master", "Job/Tracking Class"];
-  const excelSheetFunctions = ["Manual Journal", "Spend money", "Receive money", "Bill payment", "Transfer"];
+  const csvSheetFunctions = ["Chart of Accounts", "Customer Master", "Vendor Master", "Item Master", "Job/Tracking Class", "Conversion balance", "Invoice", "Creditnote", "Bill-Direct" , "Invoice payment"];
+  const excelSheetFunctions = ["AR", "AP", "Manual Journal", "Receive money","Spend money", "Bill payment", "Transfer","Paid-Bill", "Auth Bill", "Paid-Invoice", "Auth Invoice", "Paid credit note", "Auth Credit note", "Auth bill credit", "Paid bill credit"];
 
   const handleMultiFileChange = (file, index) => {
-    if (!file) return;
+  if (!file) return;
+ 
+  const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+  const isCSV = ext === '.csv';
+  const isXLSX = ext === '.xlsx' || ext === '.xls'; // ✅ Fixed here
 
-    const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-    const isCSV = ext === '.csv';
-    const isXLSX = ext === '.xlsx';
+  const shouldBeCSV = csvSheetFunctions.includes(selectedFunction);
+  const shouldBeExcel = excelSheetFunctions.includes(selectedFunction);
 
-    const shouldBeCSV = csvSheetFunctions.includes(selectedFunction);
-    const shouldBeExcel = excelSheetFunctions.includes(selectedFunction);
+  if (shouldBeCSV && !isCSV) {
+    toast.error("This function only accepts .csv files");
+    return;
+  }
 
-    if (shouldBeCSV && !isCSV) {
-      toast.error("This function only accepts .csv files");
-      return;
-    }
+  if (shouldBeExcel && !isXLSX) {
+    toast.error("This function only accepts .xls or .xlsx files");
+    return;
+  }
 
-    if (shouldBeExcel && !isXLSX) {
-      toast.error("This function only accepts .xlsx files");
-      return;
-    }
+  if (!shouldBeCSV && !shouldBeExcel) {
+    toast.error("Unsupported file type or unknown function");
+    return;
+  }
 
-    // Optional: Reject anything else if the function isn't explicitly listed
-    if (!shouldBeCSV && !shouldBeExcel) {
-      toast.error("Unsupported file type or unknown function");
-      return;
-    }
-
-    const newFiles = [...selectedFiles];
-    newFiles[index] = file;
-    setSelectedFiles(newFiles);
-    setUploadComplete(false);
-    setConvertComplete(false);
-    setDownloadReady(false);
-  };
-
-
-  const handleUpload = async () => {
+  const newFiles = [...selectedFiles];
+  newFiles[index] = file;
+  setSelectedFiles(newFiles);
+  setUploadComplete(false);
+  setConvertComplete(false);
+  setDownloadReady(false);
+};
+const handleUpload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
     if (!route) return;
 
@@ -196,12 +194,17 @@ const XeroToXero = () => {
     const formData = new FormData();
 
     // ✅ Append files based on single vs multiple
+
     if (requiredFiles > 1) {
-      selectedFiles.forEach((file) => {
-        formData.append("files", file); // field name 'files' for multiple
+      selectedFiles.forEach((file, index) => {
+        if (index === 0) {
+          formData.append("file", file); // First file
+        } else if (index === 1) {
+          formData.append("file2", file); // Second file
+        }
       });
     } else {
-      formData.append("file", selectedFiles[0]); // field name 'file' for single
+      formData.append("file", selectedFiles[0]); // Single file
     }
 
     formData.append("currencyCode", currencyCode);
@@ -280,7 +283,8 @@ const XeroToXero = () => {
       const countryPart = sanitize(file?.countryName);
       const routePart = sanitize(route);
 
-      const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.xlsx`;
+      // ✅ Changed extension to .csv instead of .xlsx
+      const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
 
       link.setAttribute('download', fileName);
       document.body.appendChild(link);
@@ -301,6 +305,7 @@ const XeroToXero = () => {
       setLoading(false);
     }
   };
+
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
@@ -317,9 +322,7 @@ const XeroToXero = () => {
     const currencyPath = getCurrencyPath();
 
     try {
-      // `entry.routeUsed` is something like 'invoice' — no need to strip anything
       const route = entry.routeUsed;
-
       const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`);
       if (!response.ok) throw new Error("Download failed");
 
@@ -328,8 +331,9 @@ const XeroToXero = () => {
       const link = document.createElement("a");
       link.href = url;
 
-      // Recreate filename if it's missing
-      const fileName = entry.fileName || `${file?.fileName || 'Export'}__${route}.xlsx`;
+      // ✅ Ensure file extension is .csv
+      const defaultFileName = `${file?.fileName || 'Export'}__${route}.csv`;
+      const fileName = entry.fileName?.endsWith(".csv") ? entry.fileName : defaultFileName;
 
       link.setAttribute("download", fileName);
       document.body.appendChild(link);
@@ -342,6 +346,7 @@ const XeroToXero = () => {
       console.error("Error in handleHistoryDownload:", error);
     }
   };
+
   const handleHistoryDelete = async (index) => {
     try {
       const res = await fetch(`/api/files/${file._id}/delete-sheet`, {
@@ -450,46 +455,13 @@ const XeroToXero = () => {
               {selectedFiles.map((f, i) =>
                 f ? (
                   <div key={i}>
-                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}</p>
-                    <p><span className="font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
+                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}
+                      <span className="font-semibold text-white ml-3">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
                   </div>
                 ) : null
               )}
             </div>
           )}
-          {/* {selectedFunction && (
-            <>
-              {multiFileInputConfig[selectedFunction] ? (
-                <div className="grid gap-4">
-                  {[...Array(multiFileInputConfig[selectedFunction])].map((_, index) => (
-                    <div key={index} className="w-full">
-                      <label className="block text-sm mb-1 font-semibold font-serif text-gray-300">
-                        {multiFileLabels[selectedFunction]?.[index] || `Upload File ${index + 1}`}
-                      </label>
-                      <input
-                        type="file"
-                        accept=".csv, .CSV"
-                        onChange={(e) => handleMultiFileChange(e.target.files[0], index)}
-                        className="block w-full text-sm text-gray-100 bg-[#1c2a4d] rounded border border-gray-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <label htmlFor="dropzone-file" className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]">
-                  <p className="text-lg">Drag & Drop or Click to Upload</p>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    accept=".csv, .CSV"
-                    className="hidden"
-                    onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
-                  />
-                </label>
-              )}
-            </>
-          )} */}
-
           {selectedFunction && (
             <>
               {multiFileInputConfig[selectedFunction] ? (
@@ -505,7 +477,7 @@ const XeroToXero = () => {
                           csvSheetFunctions.includes(selectedFunction)
                             ? '.csv, .CSV'
                             : excelSheetFunctions.includes(selectedFunction)
-                              ? '.xlsx, .XLSX'
+                              ? '.xlsx, .XLSX .xls, .XLS'
                               : ''
                         }
                         onChange={(e) => handleMultiFileChange(e.target.files[0], index)}
@@ -527,8 +499,8 @@ const XeroToXero = () => {
                       csvSheetFunctions.includes(selectedFunction)
                         ? '.csv, .CSV'
                         : excelSheetFunctions.includes(selectedFunction)
-                          ? '.xlsx, .XLSX'
-                          : ''
+                          ? '.xlsx, .XLSX, .xls, .XLS'
+                          : ' '
                     }
                     className="hidden"
                     onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
@@ -537,7 +509,6 @@ const XeroToXero = () => {
               )}
             </>
           )}
-
           {/* {loading && <div className="mt-4 text-center text-sm text-blue-400">Processing...</div>} */}
           {loading && (
             <div className="flex justify-center mt-4">

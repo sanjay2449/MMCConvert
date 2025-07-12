@@ -32,7 +32,7 @@ function App() {
         <Route path="/file/qbotoqbo/:id" element={<QboToQbo />} />
         <Route path="/file/sageonetoqbo/:id" element={<SageOneToQbo />} />
         <Route path="/file/xerotoxero/:id" element={<XeroTOXero />} />
-        <Route path="/file/reckondesktophostedtoxero/:id" element={<ReckonDesktopHostedToXero />} />
+        <Route path="/file/reckondesktoptoxero/:id" element={<ReckonDesktopHostedToXero />} />
         {/* <Route path="/file/:id" element={<FileView />} /> */}
       </Routes>
     </BrowserRouter>

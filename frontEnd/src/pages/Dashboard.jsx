@@ -116,8 +116,8 @@ const Dashboard = () => {
                         navigate(`/file/sageonetoqbo/${file._id}`, { state: { file } });
                       } else if (type === 'xero to xero') {
                         navigate(`/file/xerotoxero/${file._id}`, { state: { file } });
-                      } else if (type === 'reckon desktop/hosted to xero') {
-                        navigate(`/file/reckondesktophostedtoxero/${file._id}`, { state: { file } });
+                      } else if (type === 'reckon desktop to xero') {
+                        navigate(`/file/reckondesktoptoxero/${file._id}`, { state: { file } });
                       } else {
                         alert("Unsupported software type: " + file.softwareType);
                         alert("type: " + type);

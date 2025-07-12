@@ -5,7 +5,7 @@ const types = [
   { name: "QBO To QBO", image: "../../public/QBOQBO.png" },
   { name: "Sage One To QBO", image: "../../public/SAGEQBO.png" },
   { name: "Wave To QBO", image: "../../public/WAVEQBO.png" },
-  { name: "Reckon Desktop/Hosted To Xero", image: "../../public/RECKONXERO.png" },
+  { name: "Reckon Desktop To Xero", image: "../../public/RECKONXERO.png" },
   { name: "Xero To Xero", image: "../../public/XEROXERO.png" },
   { name: "Wave To Xero", image: "../../public/WAVEXERO.png "},
 ];

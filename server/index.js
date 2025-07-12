@@ -13,6 +13,10 @@ import fileRoutesSheet from './routes/fileRoutesSheet.js'; // Import file routes
 import file from './routes/files.js';
 import fileShowRoutes from './routes/fileShowRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import { router } from './routes/rtxRoutes.js';
+import xtxRoutes from './routes/xtxRoutes.js' ; 
+import stqRoutes from './routes/stqRoutes.js';
+
 
 // other setup ...
 
@@ -41,9 +45,19 @@ app.use('/api/excel-australia-qbotoqbo/multicurrency', ausMultiCurrencyRoutes);
 app.use('/api/excel-usa-qbotoqbo/singlecurrency', USARoutes);  
 app.use('/api/excel-usa-qbotoqbo/multicurrency', USAMultiCurrencyRoutes); 
 
+// Import Australia-specific Excel Routes For Reckon Desktop to Xero conversion
+app.use('/api/excel-australia-reckondesktoptoxero/singlecurrency',router);
+
+ // Import Australia-specific Excel Routes For Xero to Xero conversion
+app.use('/api/excel-australia-xerotoxero/singlecurrency', xtxRoutes);
+
+ // Import Australia-specific Excel Routes For Sage one To Qbo conversion
+app.use('/api/excel-australia-sageonetoqbo/singlecurrency', stqRoutes); 
+
+
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ MongoDB connected');
     app.listen(PORT, () => {

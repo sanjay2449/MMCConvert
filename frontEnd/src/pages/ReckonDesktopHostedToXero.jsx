@@ -7,34 +7,34 @@ import Navbar from '../components/Navbar';
 
 const functionRoutesForReckonDesktopHostedToXero = {
   Masters: {
-    "Chart of Accounts": 'chartofaccounts', // Reckon to Xero
-    "Customer Master": 'customermaster', // Reckon to Xero
-    "Vendor Master": 'vendormaster', // Reckon to Xero
-    "Item Master": 'itemmaster', // Reckon to Xero
-    "Tracking Class": 'trackingclass', // Reckon to Xero
+    "Chart of Accounts": 'coa', // Reckon to Xero
+    "Customer Master": 'customer', // Reckon to Xero
+    "Vendor Master": 'vendor', // Reckon to Xero
+    "Item Master": 'item', // Reckon to Xero
+    "Tracking Class": 'tracking', // Reckon to Xero
   },
   "Open Data": {
-    "AR(Open invoices)": 'aropeninvoices', //Reckon to Xero
-    "AP(Open Bills)": 'apopenbills', //Reckon to Xero
+    "AR(Open invoices)": 'arInvoice', //Reckon to Xero  
+    "AP(Open Bills)": 'apBill', //Reckon to Xero 
   },
   Transaction: {
     "Invoice": 'invoice',// Reckon to Xero
-    "Adjustment Note": 'adjustmentnote',// Reckon to Xero
+    "Adjustment Note": 'adjustmentNote',// Reckon to Xero
     "Bill": "bill",// Reckon to Xero
-    "Bill credit": "billcredit",// Reckon to Xero
-    "Sales Receipt": "salesreceipt",// Reckon to Xero
-    "Manual Journal": "manualjournal",// Reckon to Xero
-    "Spend money": "spendmoney",// Reckon to Xero
-    "Receive money": "receivemoney",// Reckon to Xero
-    "Invoice Payment": "invoicepayment",// Reckon to Xero
-    "Bill Payment": "billpayment",// Reckon to Xero
+    "Bill credit": "billCredit",// Reckon to Xero
+    "Sales Receipt": "salesReceipt",// Reckon to Xero
+    "Manual Journal": "manualJournal",// Reckon to Xero
+    "Spend money": "spendMoney",// Reckon to Xero
+    "Receive money": "receiveMoney",// Reckon to Xero
+    "Invoice Payment": "invoicePayment",// Reckon to Xero
+    "Bill Payment": "billPayment",// Reckon to Xero
     "Paycheque": "paycheque",// Reckon to Xero
-    "Liability Cheque": "liabilitycheque",// Reckon to Xero
-    "Inventory Adjust": "inventoryadjust",// Reckon to Xero
-    "Conversion Balance": "conversionbalance",// Reckon to Xero
-    "Receive OverPayment Money": "receiveoverpaymentmoney",// Reckon to Xero
-    "Spend OverPayment Money": "spendoverpaymentmoney", // Reckon to Xero
-    Transfer: "transfer", // Reckon to Xero
+    "Liability Cheque": "liabiltycheque",// Reckon to Xero
+    "Inventory Adjust": "inventoryAdjust",// Reckon to Xero
+    "Conversion Balance": "conversionBalance",// Reckon to Xero
+    "Receive OverPayment Money": "receiveOverpayment",// Reckon to Xero
+    "Spend OverPayment Money": "spendOverpayment", // Reckon to Xero
+    "Transfer": "bankTransfer", // Reckon to Xero
   },
 };
 
@@ -90,6 +90,7 @@ const ReckonDesktopHostedToXero = () => {
   const { id } = useParams();
   const file = state?.file;
 
+
   const [openSection, setOpenSection] = useState('');
   const [selectedFunction, setSelectedFunction] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -101,11 +102,14 @@ const ReckonDesktopHostedToXero = () => {
   const [historyData, setHistoryData] = useState([]);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showDownloadConfirm, setShowDownloadConfirm] = useState(false);
+  const [convertedFileName, setConvertedFileName] = useState(''); //✅ NEW
   const [uploadProgress, setUploadProgress] = useState(0);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [selectedSection, setSelectedSection] = useState('');
+  const [multipleDownloadLinks, setMultipleDownloadLinks] = useState(null); // ✅ NEW
 
 
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
@@ -210,6 +214,21 @@ const ReckonDesktopHostedToXero = () => {
         body: JSON.stringify({ currencyCode }),
       });
       if (!res.ok) throw new Error('Convert failed');
+
+      const data = await res.json();
+      // if (data.fileName) {
+      //   setConvertedFileName(data.fileName);
+      // }
+
+      // ✅ Handle single and multi file
+      if (data.fileName) {
+        setConvertedFileName(data.fileName);
+        setMultipleDownloadLinks(null);
+      } else if (data.downloadLinks) {
+        setMultipleDownloadLinks(data.downloadLinks);
+        setConvertedFileName(''); // optional reset
+      }
+
       toast.success('Converted successfully');
       setConvertComplete(true);
       setDownloadReady(true);
@@ -220,57 +239,87 @@ const ReckonDesktopHostedToXero = () => {
     }
   };
 
+
+  // 
   const handleDownload = async () => {
     setShowDownloadConfirm(true);
   };
+
   const confirmDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-    if (!route) return;
+
+    if (!route || !countryRoute || (!convertedFileName && !multipleDownloadLinks)) {
+      toast.error("Missing download information");
+      return;
+    }
+
+    setShowDownloadConfirm(false);
     setLoading(true);
+
     try {
-      const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
-      if (!res.ok) throw new Error('Download failed');
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
+      if (multipleDownloadLinks) {
+        // ✅ Download all links
+        Object.values(multipleDownloadLinks).forEach(link => {
+          const a = document.createElement("a");
+          a.href = link;
+          a.setAttribute("download", "");
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+        toast.success("All files downloading...");
+      } else {
+        const response = await fetch(
+          `/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`
+        );
 
-      const now = new Date();
-      const pad = (n) => String(n).padStart(2, '0');
-      const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
-      const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
-      const namePart = sanitize(file?.fileName);
-      const softwarePart = sanitize(file?.softwareType);
-      const countryPart = sanitize(file?.countryName);
-      const routePart = sanitize(route);
+        if (!response.ok) throw new Error("Download failed");
 
-      const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.xlsx`;
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
 
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+        const link = document.createElement("a");
+        link.href = url;
+        // link.setAttribute("download", convertedFileName);
+        link.setAttribute("download", convertedFileName.endsWith('.csv') ? convertedFileName : `${convertedFileName}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
 
-      await fetch(`/api/files/${file._id}/save-sheet`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName, routeUsed: route })
-      });
-      setDownloadReady(false);
-      toast.success('Downloaded successfully');
-    } catch (err) {
-      toast.error('Download failed');
+        // Save download history
+        await fetch(`/api/files/${file._id}/save-sheet`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheetName: convertedFileName, routeUsed: route }),
+        });
+
+        toast.success("Downloaded successfully");
+      }
+
+      setDownloadReady(true);
+    } catch (error) {
+      toast.error("Download error");
+      console.error(error);
     } finally {
-      setShowDownloadConfirm(false);
       setLoading(false);
     }
   };
+
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
       const data = await res.json();
-      // setHistoryData(data.downloadedSheets || []);
-      const sortedData = (data.downloadedSheets || []).sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Flatten the grouped sheets into a single array
+      const flatData = (data.downloadedSheets || []).flatMap(group =>
+        (group.sheets || []).map(sheet => ({
+          routeUsed: group.routeUsed,
+          sheetName: sheet.sheetName,
+          downloadedAt: sheet.downloadedAt
+        }))
+      );
+      // Sort by downloadedAt descending
+      const sortedData = flatData.sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+      // Update state
       setHistoryData(sortedData);
     } catch (err) {
       toast.error("Failed to fetch history");
@@ -527,7 +576,7 @@ const ReckonDesktopHostedToXero = () => {
                   >
                     <div>
                       <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
-                      <div className="text-sm text-white">File: {entry.fileName}</div>
+                      <div className="text-sm text-white">Sheet: {entry.sheetName}</div>
                       <div className="text-sm text-white">
                         Processed on {new Date(entry.downloadedAt).toISOString().split('T')[0]}
                       </div>
@@ -643,3 +692,97 @@ const ReckonDesktopHostedToXero = () => {
   );
 };
 export default ReckonDesktopHostedToXero;
+
+
+
+
+
+// const confirmDownload = async () => {
+//   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+//   if (!route) return;
+//   setLoading(true);
+//   try {
+//     const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}`);
+//     if (!res.ok) throw new Error('Download failed');
+//     const blob = await res.blob();
+//     const url = window.URL.createObjectURL(blob);
+//     const link = document.createElement('a');
+//     link.href = url;
+
+//     const now = new Date();
+//     const pad = (n) => String(n).padStart(2, '0');
+//     const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+//     const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+//     const namePart = sanitize(file?.fileName);
+//     const softwarePart = sanitize(file?.softwareType);
+//     const countryPart = sanitize(file?.countryName);
+//     const routePart = sanitize(route);
+
+//     const fileName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
+
+//     link.setAttribute('download', fileName);
+//     document.body.appendChild(link);
+//     link.click();
+//     link.remove();
+
+//     await fetch(`/api/files/${file._id}/save-sheet`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ fileName, routeUsed: route })
+//     });
+//     setDownloadReady(false);
+//     toast.success('Downloaded successfully');
+//   } catch (err) {
+//     toast.error('Download failed');
+//   } finally {
+//     setShowDownloadConfirm(false);
+//     setLoading(false);
+//   }
+// };
+
+
+
+  // const confirmDownload = async () => {
+
+  //   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+
+  //     if (!route || !countryRoute || !convertedFileName) {
+  //   toast.error("Missing download information");
+  //   return;
+  // }
+  //   setLoading(true);
+  //   try {
+  //     // const response = await fetch(`/api/${combinedRoutePrefix}/download-${route}/${convertedFileName}`);
+  //     const response = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
+
+  //     if (!response.ok) throw new Error("Download failed");
+
+  //     const blob = await response.blob();
+  //     const url = window.URL.createObjectURL(blob);
+
+  //     const link = document.createElement("a");
+  //     link.href = url;
+  //     link.setAttribute("download", convertedFileName);
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+
+  //     await fetch(`/api/files/${file._id}/save-sheet`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ fileName: convertedFileName, routeUsed: route })
+  //     });
+
+  //     setDownloadReady(true);
+  //     toast.success("Downloaded successfully");
+  //   } catch (error) {
+  //     toast.error("Download error");
+  //     console.error(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+
+  // 

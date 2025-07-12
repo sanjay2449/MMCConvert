@@ -7,32 +7,32 @@ import Navbar from '../components/Navbar';
 
 const functionRoutesForSageOneToQbo = {
   Masters: {
-    "Chart of Accounts": "",
-    "Customer Master": "",
-    "Vendor Master": "",
-    "Item Master": "",
+    "Chart of Accounts": "coa",
+    "Customer Master": "customersage",
+    "Vendor Master": "supplier",
+    "Item Master": "Item",
   },
   "Open Data": {
-    "AR": "",
-    "AP": "",
-    "Opening Balance": "",
+    "AR": "AR",
+    "AP": "AP",
+    "Opening Balance": "openingBalance",
   },
   Transaction: {
-    "Invoice": "",
-    "Credit Note": "",
-    "Bill": "",
-    "Vendor credit": "",
-    "Expense": "",
-    "Deposit": "",
-    "Bill Payment": "",
-    "Invoice payment": "",
-    "Journal Entry": "",
+    "Tax Invoice": "taxInvoice",
+    "Credit Note": "creditNote",
+    "Bill": "supplierbill",
+    "Vendor credit": "vendorcredit",
+    "Expense": "accountpayment",
+    "Deposit": "accountreceipt",
+    "Bill Payment": "supplierPayment",
+    "Invoice payment": "customerreceipt",
+    "Journal Entry": "journal",
   },
 };
 
 const multiFileInputConfig = {
   "Chart of Accounts": 2,
-  "Invoice": 4,
+  "Tax Invoice": 4,
   "Credit Note": 4,
   "Bill": 3,
   "Vendor credit": 3,
@@ -43,14 +43,15 @@ const multiFileInputConfig = {
 };
 const multiFileLabels = {
   "Chart of Accounts": ["COA Sheet", "Bank / Credit Card"],
-  "Invoice": ["Items Sheet", "COA Sheet", "Tax Sheet", "..............."],
+  "Tax Invoice": ["Items Sheet", "COA Sheet", "Tax Sheet", "Tax invoice"],
   "Credit Note": ["Credit Note", "Items Sheet", "COA Sheet", "Tax Sheet"],
   "Bill": ["Supplier Sheet", "COA Sheet", "Tax Sheet"],
-  "Vendor credit": ["COA Sheet", "Tax Sheet", "................."],
+  "Vendor credit": ["Invoice Sheet", "COA Sheet", "Tax Sheet"],
   "Bill Payment": ["Main Sheet", "Supplier Sheet", "COA Sheet"],
   "Deposit": ["Account Receipt", "COA Sheet", "Tax Sheet"],
-  "Expense": ["COA Sheet", "Tax Sheet", "................."],
+  "Expense": ["Invoice Sheet", "COA Sheet", "Tax Sheet"],
   "Invoice payment": ["Main Sheet", "COA Sheet"],
+  "Account Payment": ["Invoice Sheet", "COA Sheet", "Tax Sheet"],
 };
 
 const sectionKeyMap = {
@@ -148,59 +149,103 @@ const SageOneToQbo = () => {
     setDownloadReady(false);
   };
 
-  const handleUpload = async () => {
-    const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-    if (!route) return;
+const handleUpload = async () => {
+  const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+  if (!route) return;
 
-    const requiredFiles = multiFileInputConfig[selectedFunction] || 1;
-    const hasAllFiles = selectedFiles.length === requiredFiles && selectedFiles.every(f => f);
+  const requiredFiles = multiFileInputConfig[selectedFunction] || 1;
+  const hasAllFiles = selectedFiles.length === requiredFiles && selectedFiles.every(f => f);
 
-    if (!hasAllFiles) {
-      toast.error(`Please upload ${requiredFiles} valid Excel file(s)`);
-      return;
-    }
-    setLoading(true);
-    setUploadProgress(0);
-    const formData = new FormData();
-    // ✅ Append files based on single vs multiple
-    if (requiredFiles > 1) {
-      selectedFiles.forEach((file) => {
-        formData.append("files", file); // field name 'files' for multiple
-      });
+  if (!hasAllFiles) {
+    toast.error(`Please upload ${requiredFiles} valid Excel file(s)`);
+    return;
+  }
+
+  setLoading(true);
+  setUploadProgress(0);
+  const formData = new FormData();
+
+  // 🧠 Smart field naming based on selectedFunction
+  if (requiredFiles > 1) {
+    if (selectedFunction === "Chart of Accounts") {
+      formData.append("coa", selectedFiles[0]);
+      formData.append("bankcard", selectedFiles[1]);
+    } else if (selectedFunction === "Bill Payment") {
+      formData.append("payment", selectedFiles[0]);
+      formData.append("supplier", selectedFiles[1]);
+      formData.append("coa", selectedFiles[2]);
+    } else if (selectedFunction === "Tax Invoice") {
+      formData.append("item", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+      formData.append("tax", selectedFiles[2]);
+      formData.append("invoice", selectedFiles[3]);
+    } else if (selectedFunction === "Credit Note") {
+      formData.append("invoice", selectedFiles[0]);
+      formData.append("item", selectedFiles[1]);
+      formData.append("coa", selectedFiles[2]);
+      formData.append("tax", selectedFiles[3]);
+    } else if (selectedFunction === "Invoice payment") {
+      formData.append("payment", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+    } else if (selectedFunction === "Bill") {
+      formData.append("invoice", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+      formData.append("tax", selectedFiles[2]);
+    } else if (selectedFunction === "Expense") {
+      formData.append("invoice", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+      formData.append("tax", selectedFiles[2]);
+    } else if (selectedFunction === "Deposit") {
+      formData.append("deposit", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+      formData.append("tax", selectedFiles[2]);
+    } else if (selectedFunction === "Vendor credit") {
+      formData.append("invoice", selectedFiles[0]);
+      formData.append("coa", selectedFiles[1]);
+      formData.append("tax", selectedFiles[2]);
     } else {
-      formData.append("file", selectedFiles[0]); // field name 'file' for single
+      // fallback for unknown multi-file inputs
+      selectedFiles.forEach((file, index) => {
+        formData.append(`file${index + 1}`, file);
+      });
     }
+  } else {
+    formData.append("file", selectedFiles[0]); // single file
+  }
 
-    formData.append("currencyCode", currencyCode);
+  formData.append("currencyCode", currencyCode);
 
-    try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', `/api/${combinedRoutePrefix}/${getCurrencyPath()}/upload-${route}`);
-      xhr.upload.onprogress = (event) => {
-        if (event.lengthComputable) {
-          const percent = Math.round((event.loaded / event.total) * 100);
-          setUploadProgress(percent);
-        }
-      };
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          toast.success('Uploaded successfully');
-          setUploadComplete(true);
-        } else {
-          toast.error('Upload failed');
-        }
-        setLoading(false);
-      };
-      xhr.onerror = () => {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `/api/${combinedRoutePrefix}/${getCurrencyPath()}/upload-${route}`);
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        setUploadProgress(percent);
+      }
+    };
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        toast.success('Uploaded successfully');
+        setUploadComplete(true);
+      } else {
         toast.error('Upload failed');
-        setLoading(false);
-      };
-      xhr.send(formData);
-    } catch (err) {
+      }
+      setLoading(false);
+    };
+    xhr.onerror = () => {
       toast.error('Upload failed');
       setLoading(false);
-    }
-  };
+    };
+    xhr.send(formData);
+  } catch (err) {
+    toast.error('Upload failed');
+    setLoading(false);
+  }
+};
+
+
+
 
   const handleConvert = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
@@ -417,8 +462,8 @@ const SageOneToQbo = () => {
               {selectedFiles.map((f, i) =>
                 f ? (
                   <div key={i}>
-                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}</p>
-                    <p><span className="font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
+                    <p><span className="font-semibold text-white">File {i + 1}:</span> {f.name}
+                    <span className=" ml-3 font-semibold text-white">Size:</span> {(f.size / 1024).toFixed(2)} KB</p>
                   </div>
                 ) : null
               )}
