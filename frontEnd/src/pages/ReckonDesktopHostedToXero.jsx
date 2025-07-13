@@ -218,54 +218,87 @@ const ReckonDesktopHostedToXero = () => {
   };
   const confirmDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+
     if (!route || !countryRoute || (!convertedFileName && !multipleDownloadLinks)) {
       toast.error("Missing download information");
       return;
     }
-    setShowDownloadConfirm(false);
     setLoading(true);
     try {
       if (multipleDownloadLinks) {
-        // ✅ Download all links
-        Object.values(multipleDownloadLinks).forEach(link => {
-          const a = document.createElement("a");
-          a.href = link;
-          a.setAttribute("download", "");
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-        });
-        toast.success("All files downloading...");
-      } else {
-        const response = await fetch(
-          `/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`
+        // ✅ Properly download all files using fetch
+        await Promise.all(
+          Object.entries(multipleDownloadLinks).map(async ([key, url]) => {
+            try {
+              const response = await fetch(url);
+              if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
+              const blob = await response.blob();
+              const blobUrl = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = blobUrl;
+              // Sanitize and generate filename
+              const now = new Date();
+              const pad = (n) => String(n).padStart(2, "0");
+              const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+              const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+              const baseFileName = sanitize(file?.fileName || key || "Download");
+              const downloadFileName = `${baseFileName}__${sanitize(route)}__${isoDate}.csv`;
+              a.setAttribute("download", downloadFileName);
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+            } catch (err) {
+              console.error(`Error downloading ${url}`, err);
+              toast.error(`Failed to download ${key}`);
+            }
+          })
         );
-        if (!response.ok) throw new Error("Download failed");
-        const blob = await response.blob();
+        toast.success("All files downloaded");
+      } else {
+        // ✅ Single file download (same as before)
+        const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
+        if (!res.ok) {
+          const errorMsg = await res.text();
+          toast.error(errorMsg || "Download failed");
+          return;
+        }
+        const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        // link.setAttribute("download", convertedFileName);
-        link.setAttribute("download", convertedFileName.endsWith('.csv') ? convertedFileName : `${convertedFileName}.csv`);
+        const now = new Date();
+        const pad = (n) => String(n).padStart(2, "0");
+        const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+        const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+        const namePart = sanitize(file?.fileName);
+        const softwarePart = sanitize(file?.softwareType);
+        const countryPart = sanitize(file?.countryName);
+        const routePart = sanitize(route);
+        const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}${convertedFileName.endsWith(".csv") ? ".csv" : ".xlsx"}`;
+        link.setAttribute("download", generatedSheetName);
         document.body.appendChild(link);
         link.click();
         link.remove();
-        // Save download history
         await fetch(`/api/files/${file._id}/save-sheet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sheetName: convertedFileName, routeUsed: route }),
+          body: JSON.stringify({
+            routeUsed: route,
+            sheetName: generatedSheetName,
+          }),
         });
         toast.success("Downloaded successfully");
       }
-      setDownloadReady(true);
+      setDownloadReady(false);
     } catch (error) {
       toast.error("Download error");
       console.error(error);
     } finally {
+      setShowDownloadConfirm(false);
       setLoading(false);
     }
   };
+
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
@@ -286,29 +319,33 @@ const ReckonDesktopHostedToXero = () => {
       toast.error("Failed to fetch history");
     }
   };
+
+
   const handleHistoryDownload = async (entry) => {
-    const currencyPath = getCurrencyPath();
     try {
-      // `entry.routeUsed` is something like 'invoice' — no need to strip anything
-      const route = entry.routeUsed;
-      const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`);
+      const encodedSheetName = encodeURIComponent(entry.sheetName);
+      const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
       if (!response.ok) throw new Error("Download failed");
+  
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
+  
       const link = document.createElement("a");
       link.href = url;
-      // Recreate filename if it's missing
-      const fileName = entry.fileName || `${file?.fileName || 'Export'}__${route}.xlsx`;
-      link.setAttribute("download", fileName);
+      link.setAttribute("download", entry.sheetName); // use original saved name
       document.body.appendChild(link);
       link.click();
       link.remove();
+  
       toast.success("Downloaded again");
     } catch (error) {
       toast.error("Download failed");
       console.error("Error in handleHistoryDownload:", error);
     }
   };
+  
+
+
   const handleHistoryDelete = async (index) => {
     try {
       const res = await fetch(`/api/files/${file._id}/delete-sheet`, {

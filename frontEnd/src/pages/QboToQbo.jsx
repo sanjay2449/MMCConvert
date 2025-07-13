@@ -313,36 +313,31 @@ const QboToQbo = () => {
     }
   };
 
-
   const handleHistoryDownload = async (entry) => {
-    const currencyPath = getCurrencyPath();
-
     try {
-      // `entry.routeUsed` is something like 'invoice' — no need to strip anything
-      const route = entry.routeUsed;
-
-      const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`);
+      const encodedSheetName = encodeURIComponent(entry.sheetName);
+      const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
       if (!response.ok) throw new Error("Download failed");
-
+  
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
+  
       const link = document.createElement("a");
       link.href = url;
-
-      // Recreate filename if it's missing
-      const fileName = entry.fileName || `${file?.fileName || 'Export'}__${route}.xlsx`;
-
-      link.setAttribute("download", fileName);
+      link.setAttribute("download", entry.sheetName); // use original saved name
       document.body.appendChild(link);
       link.click();
       link.remove();
-
+  
       toast.success("Downloaded again");
     } catch (error) {
       toast.error("Download failed");
       console.error("Error in handleHistoryDownload:", error);
     }
   };
+  
+  
+  
   const handleHistoryDelete = async (index) => {
     try {
       const res = await fetch(`/api/files/${file._id}/delete-sheet`, {
