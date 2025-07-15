@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTrash } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
+import { useRef } from 'react';
+
 const functionRoutesForReckonDesktopHostedToXero = {
   Masters: {
     "Chart of Accounts": 'coa', // Reckon to Xero
@@ -94,14 +96,18 @@ const ReckonDesktopHostedToXero = () => {
   const [historyData, setHistoryData] = useState([]);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showDownloadConfirm, setShowDownloadConfirm] = useState(false);
-  const [convertedFileName, setConvertedFileName] = useState(''); //✅ NEW
+  // const [convertedFileName, setConvertedFileName] = useState(''); //✅ NEW
+  const [convertedFileName, setConvertedFileName] = useState(() => {
+    return localStorage.getItem('convertedFileName') || '';
+  });  // by yash
   const [uploadProgress, setUploadProgress] = useState(0);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const [selectedSection, setSelectedSection] = useState('');
   const [multipleDownloadLinks, setMultipleDownloadLinks] = useState(null); // ✅ NEW
+  const fileInputRef = useRef(null);
+
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
   const countryRoute = {
@@ -110,7 +116,10 @@ const ReckonDesktopHostedToXero = () => {
   const combinedRoutePrefix = `excel-${countryRoute}-${softwareType}`;
   const currentFunctionRoutes = functionRoutesForReckonDesktopHostedToXero;
   const getCurrencyPath = () => file?.currencyStatus?.toLowerCase() === 'multi currency' ? 'multicurrency' : 'singlecurrency';
+
+
   const handleFunctionClick = (func) => {
+    handleReset();
     setSelectedFunction(func);
     setSelectedFiles([]);
     setUploadComplete(false);
@@ -199,10 +208,13 @@ const ReckonDesktopHostedToXero = () => {
       // ✅ Handle single and multi file
       if (data.fileName) {
         setConvertedFileName(data.fileName);
+        localStorage.setItem('convertedFileName', data.fileName); // by yash
         setMultipleDownloadLinks(null);
       } else if (data.downloadLinks) {
         setMultipleDownloadLinks(data.downloadLinks);
         setConvertedFileName(''); // optional reset
+        localStorage.removeItem('convertedFileName'); // by yash
+
       }
       toast.success('Converted successfully');
       setConvertComplete(true);
@@ -216,6 +228,7 @@ const ReckonDesktopHostedToXero = () => {
   const handleDownload = async () => {
     setShowDownloadConfirm(true);
   };
+
   const confirmDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
 
@@ -223,49 +236,70 @@ const ReckonDesktopHostedToXero = () => {
       toast.error("Missing download information");
       return;
     }
+
     setLoading(true);
     try {
       if (multipleDownloadLinks) {
-        // ✅ Properly download all files using fetch
+        const now = new Date();
+        const pad = (n) => String(n).padStart(2, "0");
+        const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+        const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+
         await Promise.all(
           Object.entries(multipleDownloadLinks).map(async ([key, url]) => {
             try {
               const response = await fetch(url);
               if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
+
               const blob = await response.blob();
               const blobUrl = window.URL.createObjectURL(blob);
               const a = document.createElement("a");
               a.href = blobUrl;
-              // Sanitize and generate filename
-              const now = new Date();
-              const pad = (n) => String(n).padStart(2, "0");
-              const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
-              const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
-              const baseFileName = sanitize(file?.fileName || key || "Download");
-              const downloadFileName = `${baseFileName}__${sanitize(route)}__${isoDate}.csv`;
-              a.setAttribute("download", downloadFileName);
+
+              // ✅ Uniform filename structure
+              const namePart = sanitize(file?.fileName);
+              const softwarePart = sanitize(file?.softwareType);
+              const countryPart = sanitize(file?.countryName);
+              const routePart = sanitize(route);
+              const sheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
+
+              a.setAttribute("download", sheetName);
               document.body.appendChild(a);
               a.click();
               a.remove();
+
+              // ✅ Save each downloaded sheet to history
+              await fetch(`/api/files/${file._id}/save-sheet`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  routeUsed: route,
+                  sheetName,
+                }),
+              });
+
             } catch (err) {
               console.error(`Error downloading ${url}`, err);
               toast.error(`Failed to download ${key}`);
             }
           })
         );
+
         toast.success("All files downloaded");
       } else {
-        // ✅ Single file download (same as before)
+        // ✅ Single file logic
         const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
         if (!res.ok) {
           const errorMsg = await res.text();
           toast.error(errorMsg || "Download failed");
           return;
         }
+
         const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
+
         const now = new Date();
         const pad = (n) => String(n).padStart(2, "0");
         const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
@@ -275,10 +309,12 @@ const ReckonDesktopHostedToXero = () => {
         const countryPart = sanitize(file?.countryName);
         const routePart = sanitize(route);
         const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}${convertedFileName.endsWith(".csv") ? ".csv" : ".xlsx"}`;
+
         link.setAttribute("download", generatedSheetName);
         document.body.appendChild(link);
         link.click();
         link.remove();
+
         await fetch(`/api/files/${file._id}/save-sheet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -287,8 +323,10 @@ const ReckonDesktopHostedToXero = () => {
             sheetName: generatedSheetName,
           }),
         });
+
         toast.success("Downloaded successfully");
       }
+
       setDownloadReady(false);
     } catch (error) {
       toast.error("Download error");
@@ -298,7 +336,6 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
@@ -319,33 +356,53 @@ const ReckonDesktopHostedToXero = () => {
       toast.error("Failed to fetch history");
     }
   };
-
-
   const handleHistoryDownload = async (entry) => {
+    const currencyPath = getCurrencyPath();
+
+    if (!entry?.sheetName || !file?._id || !entry?.routeUsed) {
+      toast.error("Invalid download entry");
+      return;
+    }
+
+    const route = entry.routeUsed;
+    const sheetName = entry.sheetName.trim();
+
+    // Use exact name from DB without adding timestamp or modifying it
+    const encodedFileName = encodeURIComponent(sheetName);
+    const downloadUrl = `/api/${combinedRoutePrefix}/${currencyPath}/download-${route}/${convertedFileName}`;
+
+    console.log("⬇️ Downloading from history:", downloadUrl);
+
     try {
-      const encodedSheetName = encodeURIComponent(entry.sheetName);
-      const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
-      if (!response.ok) throw new Error("Download failed");
-  
+      const response = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Accept: "application/octet-stream",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Download failed: ${errorText}`);
+      }
+
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-  
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", entry.sheetName); // use original saved name
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-  
-      toast.success("Downloaded again");
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.href = blobUrl;
+      anchor.setAttribute("download", sheetName); // use exact original name
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+
+      window.URL.revokeObjectURL(blobUrl);
+      toast.success("✅ File downloaded from history");
     } catch (error) {
-      toast.error("Download failed");
-      console.error("Error in handleHistoryDownload:", error);
+      console.error("❌ Error in handleHistoryDownload:", error);
+      toast.error("Download from history failed");
     }
   };
-  
-
-
   const handleHistoryDelete = async (index) => {
     try {
       const res = await fetch(`/api/files/${file._id}/delete-sheet`, {
@@ -368,10 +425,12 @@ const ReckonDesktopHostedToXero = () => {
     setUploadComplete(false);
     setConvertComplete(false);
     setDownloadReady(false);
+    setUploadProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
   };
+
   const renderSection = (name, label) => (
     <div key={name} className="transition-all duration-300">
       <button
@@ -466,6 +525,7 @@ const ReckonDesktopHostedToXero = () => {
                       <input
                         type="file"
                         accept=".csv, .CSV"
+                        ref={fileInputRef}
                         onChange={(e) => handleMultiFileChange(e.target.files[0], index)}
                         className="block w-full text-sm text-gray-100 bg-[#1c2a4d] rounded border border-gray-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                       />
@@ -479,6 +539,7 @@ const ReckonDesktopHostedToXero = () => {
                     id="dropzone-file"
                     type="file"
                     accept=".csv, .CSV"
+                    ref={fileInputRef}
                     className="hidden"
                     onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
                   />

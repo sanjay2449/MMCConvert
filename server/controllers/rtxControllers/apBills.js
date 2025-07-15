@@ -85,6 +85,7 @@ const convertAPBill = async (req, res) => {
 
     return res.json({
       message: 'AP Bill data converted successfully.',
+      fileName: fileName, 
       downloadLink: `/download-ap-bill/${fileName}`
     });
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTrash } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
+import { useRef } from 'react';
 
 const functionRoutesForQboToQbo = {
   Masters: {
@@ -111,7 +112,7 @@ const QboToQbo = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
-
+  const fileInputRef = useRef(null);
 
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
@@ -125,6 +126,7 @@ const QboToQbo = () => {
   const getCurrencyPath = () => file?.currencyStatus?.toLowerCase() === 'multi currency' ? 'multicurrency' : 'singlecurrency';
 
   const handleFunctionClick = (func) => {
+    handleReset();
     setSelectedFunction(func);
     setSelectedFiles([]);
     setUploadComplete(false);
@@ -313,30 +315,76 @@ const QboToQbo = () => {
     }
   };
 
+  // const handleHistoryDownload = async (entry) => {
+  //   try {
+  //     const encodedSheetName = encodeURIComponent(entry.sheetName);
+  //     const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
+  //     if (!response.ok) throw new Error("Download failed");
+
+  //     const blob = await response.blob();
+  //     const url = window.URL.createObjectURL(blob);
+
+  //     const link = document.createElement("a");
+  //     link.href = url;
+  //     link.setAttribute("download", entry.sheetName); 
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+
+  //     toast.success("Downloaded again");
+  //   } catch (error) {
+  //     toast.error("Download failed");
+  //     console.error("Error in handleHistoryDownload:", error);
+  //   }
+  // };
+
   const handleHistoryDownload = async (entry) => {
+    const currencyPath = getCurrencyPath();
+  
+    if (!entry?.sheetName || !file?._id || !entry?.routeUsed) {
+      toast.error("Invalid download entry");
+      return;
+    }
+  
     try {
-      const encodedSheetName = encodeURIComponent(entry.sheetName);
-      const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
+      const route = entry.routeUsed;
+      
+      const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        }
+      });
+  
       if (!response.ok) throw new Error("Download failed");
   
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
   
+      if (blob.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+        console.warn("Unexpected MIME type:", blob.type);
+        toast.error("Invalid file format");
+        return;
+      }
+  
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", entry.sheetName); // use original saved name
+  
+      // Use saved filename if available, else fallback
+      const fileName = entry.sheetName || `${file?.fileName || 'Export'}__${route}.xlsx`;
+  
+      link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
       link.remove();
+      window.URL.revokeObjectURL(url);
   
-      toast.success("Downloaded again");
+      toast.success("Downloaded again successfully");
     } catch (error) {
-      toast.error("Download failed");
       console.error("Error in handleHistoryDownload:", error);
+      toast.error("Download failed");
     }
   };
-  
-  
   
   const handleHistoryDelete = async (index) => {
     try {
@@ -362,10 +410,12 @@ const QboToQbo = () => {
     setUploadComplete(false);
     setConvertComplete(false);
     setDownloadReady(false);
+    setUploadProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
   };
+  
   const renderSection = (name, label) => (
     <div key={name} className="transition-all duration-300">
       <button
@@ -462,6 +512,7 @@ const QboToQbo = () => {
                       <input
                         type="file"
                         accept=".xlsx"
+                        ref={fileInputRef}
                         onChange={(e) => handleMultiFileChange(e.target.files[0], index)}
                         className="block w-full text-sm text-gray-100 bg-[#1c2a4d] rounded border border-gray-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                       />
@@ -475,6 +526,7 @@ const QboToQbo = () => {
                     id="dropzone-file"
                     type="file"
                     accept=".xlsx"
+                    ref={fileInputRef}
                     className="hidden"
                     onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
                   />
