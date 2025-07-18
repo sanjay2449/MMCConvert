@@ -59,29 +59,29 @@ const sectionsForReckonDesktopHostedToXero = {
   transaction: Object.keys(functionRoutesForReckonDesktopHostedToXero["Transaction"]),
 };
 const infoObject = {
-  "Charts of Account": 'QBO',
-  Customer: 'QBO',
-  Supplier: 'QBO',
-  Class: 'QBO',
-  Items: 'QBO',
-  "Open AR": 'QBO',
-  "Open AP": 'QBO',
-  "Opening Balance": 'QBO',
-  Invoice: 'QBO',
-  "Adjustment Note": 'QBO',
-  "Bill": 'QBO',
-  "Supplier Credit": 'QBO',
-  Cheque: 'TOOL',
-  Deposit: 'TOOL',
-  Journal: 'TOOL',
-  "Credit Card Charge (Expense)": 'TOOL',
-  Transfer: 'TOOL',
-  "Bill Payment": 'TOOL',
-  "Invoice Payment": 'TOOL',
-  "Bill Payment Credit Card": 'TOOL',
-  "Journal Entry": 'QBO',
-  Estimates: 'TOOL',
-  "Purchase Order": 'TOOL',
+  // "Charts of Account": 'QBO',
+  // Customer: 'QBO',
+  // Supplier: 'QBO',
+  // Class: 'QBO',
+  // Items: 'QBO',
+  // "Open AR": 'QBO',
+  // "Open AP": 'QBO',
+  // "Opening Balance": 'QBO',
+  // Invoice: 'QBO',
+  // "Adjustment Note": 'QBO',
+  // "Bill": 'QBO',
+  // "Supplier Credit": 'QBO',
+  // Cheque: 'TOOL',
+  // Deposit: 'TOOL',
+  // Journal: 'TOOL',
+  // "Credit Card Charge (Expense)": 'TOOL',
+  // Transfer: 'TOOL',
+  // "Bill Payment": 'TOOL',
+  // "Invoice Payment": 'TOOL',
+  // "Bill Payment Credit Card": 'TOOL',
+  // "Journal Entry": 'QBO',
+  // Estimates: 'TOOL',
+  // "Purchase Order": 'TOOL',
 };
 const ReckonDesktopHostedToXero = () => {
   const { state } = useLocation();
@@ -778,8 +778,6 @@ const handleDownload = () => {
               <p className="text-lg leading-7 text-gray-200 mb-6">
                 Welcome to the <span className='font-semibold underline text-xl'>RECKON DESKTOP HOSTED to XERO</span> converter panel.
                 Select a function from the sidebar, upload the required files, and follow the steps to convert and download.
-                <br /><br />
-                Multi-currency files may require specifying a currency code.
                 <br /><br />
                 You can also view previously downloaded files in the History section.
               </p>
