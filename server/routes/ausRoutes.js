@@ -27,7 +27,7 @@ import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } f
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/australiaControllers/journalEntry.js";
 import{ downloadEstimates, processEstimates, uploadEstimates } from "../controllers/australiaControllers/estimates.js"; 
 import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/australiaControllers/purchaseOrder.js"
-import { downloadTrackedInvoice, processTrackedInvoice, uploadTrackedInvoice } from "../controllers/australiaControllers/trackedinvoice.js";
+import { downloadTrackedInvoice, processTrackedInvoice, uploadTrackedInvoice } from "../controllers/australiaControllers/trackedInvoice.js";
 
 // Utility to wrap async route handlers and catch errors
 const asyncHandler = (fn) => (req, res, next) =>
