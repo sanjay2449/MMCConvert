@@ -87,6 +87,11 @@ const mapReckonToXero = (reckonData) => {
       mappedRow.Dashboard = 'Yes';
     }
 
+    if(reckonRow[Type] === 'Suspense'){
+      mappedRow.Type = 'Current Liability';
+     
+    }
+
     return mappedRow;
   });
 };

@@ -26,7 +26,8 @@ const allowedARColumns = [
   'InventoryItemCode', '*Description', '*Quantity', '*UnitAmount',
   'Discount', '*AccountCode', '*TaxType', 'TaxAmount',
   'TrackingName1', 'TrackingOption1', 'TrackingName2', 'TrackingOption2',
-  'Currency', 'BrandingTheme'
+  'Currency', 'BrandingTheme','Status',               
+  'LineAmountTypes'
 ];
 
 // Helper to clean values
@@ -47,25 +48,34 @@ const uploadARInvoice = (req, res) => {
   res.json({ message: 'Reckon AR Invoice file uploaded successfully.' });
 };
 
-// Conversion handler
 const convertARInvoice = async (req, res) => {
   try {
-    if (!existsSync(uploadedARFilePath)) {
+    if (!fs.existsSync(uploadedARFilePath)) {
       return res.status(400).json({ error: 'Uploaded AR file not found.' });
     }
 
     const reckonRows = await parseCSV(uploadedARFilePath);
 
-    const convertedRows = reckonRows.map((reckonRow) => {
+     // 🔸 Filter out rows where 'Type' is blank or empty
+    const filteredRows = reckonRows.filter(row => {
+      const typeVal = (row['Type'] || '').trim();
+      return typeVal !== '';
+    });
+
+    const invoiceNumberCounts = {}; // Track invoice number occurrences
+
+    const convertedRows = filteredRows.map((reckonRow) => {
       const xeroRow = {};
 
       Object.entries(reckonToXeroARMapping).forEach(([reckonKey, xeroKey]) => {
         let value = cleanValue(reckonRow[reckonKey]);
 
+        // Force Quantity to at least 1
         if (xeroKey === '*Quantity') {
           value = parseFloat(value) || 1;
         }
 
+        // Force Description to `.`
         if (xeroKey === '*Description') {
           value = '.';
         }
@@ -73,12 +83,32 @@ const convertARInvoice = async (req, res) => {
         xeroRow[xeroKey] = value;
       });
 
+      // Handle missing InvoiceNumber using Trans #
+      if (!xeroRow['*InvoiceNumber']) {
+        xeroRow['*InvoiceNumber'] = cleanValue(reckonRow['Trans #']) || 'UNKNOWN';
+      }
+
+      // Count and modify duplicate InvoiceNumbers
+      const invoiceKey = xeroRow['*InvoiceNumber'];
+      if (invoiceNumberCounts[invoiceKey]) {
+        invoiceNumberCounts[invoiceKey] += 1;
+        // Append Trans# to make unique
+        const transNumber = cleanValue(reckonRow['Trans #']) || 'DUP';
+        xeroRow['*InvoiceNumber'] = `${invoiceKey}_${transNumber}`;
+      } else {
+        invoiceNumberCounts[invoiceKey] = 1;
+      }
+
+      // Add all required columns
       allowedARColumns.forEach(col => {
         if (!(col in xeroRow)) xeroRow[col] = null;
       });
 
+      // Static values
       xeroRow['*AccountCode'] = '9999';
       xeroRow['*TaxType'] = 'BAS Excluded';
+      xeroRow['Status'] = 'DRAFT';
+      xeroRow['LineAmountTypes'] = 'Exclusive';
 
       return xeroRow;
     });
@@ -86,17 +116,16 @@ const convertARInvoice = async (req, res) => {
     const parser = new Parser({ fields: allowedARColumns });
     const csvOutput = parser.parse(convertedRows);
 
-    const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR || 'conversions/downloads');
-    mkdirSync(outputDir, { recursive: true });
+    const outputDir = path.resolve(process.cwd(), DOWNLOAD_DIR);
+    fs.mkdirSync(outputDir, { recursive: true });
 
     const fileName = 'converted_ar_invoice.csv';
-    const outputPath = join(outputDir, fileName);
+    const outputPath = path.join(outputDir, fileName);
 
-    writeFileSync(outputPath, csvOutput);
+    fs.writeFileSync(outputPath, csvOutput);
 
     return res.json({
       message: 'AR Invoice data converted successfully.',
-         fileName: fileName, 
       downloadLink: `/download-ar-invoice/${fileName}`
     });
 
@@ -107,24 +136,12 @@ const convertARInvoice = async (req, res) => {
 };
 
 
-// CSV parser
-function parseCSV(filePath) {
-  return new Promise((resolve, reject) => {
-    const results = [];
-    createReadStream(filePath)
-      .pipe(csvParser())
-      .on('data', (data) => results.push(data))
-      .on('end', () => resolve(results))
-      .on('error', reject);
-  });
-}
-
 // Download handler
 const downloadARInvoice = (req, res) => {
   const fileName = req.params.filename;
-  const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+  const filePath = path.join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-  if (!existsSync(filePath)) {
+  if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: 'File not found' });
   }
 
@@ -135,6 +152,18 @@ const downloadARInvoice = (req, res) => {
     }
   });
 };
+
+// CSV parser
+function parseCSV(filePath) {
+  return new Promise((resolve, reject) => {
+    const results = [];
+    fs.createReadStream(filePath)
+      .pipe(csvParser())
+      .on('data', (data) => results.push(data))
+      .on('end', () => resolve(results))
+      .on('error', reject);
+  });
+}
 
 
 export  {

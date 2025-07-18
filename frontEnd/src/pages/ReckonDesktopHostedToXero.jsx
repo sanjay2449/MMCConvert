@@ -37,6 +37,7 @@ const functionRoutesForReckonDesktopHostedToXero = {
     "Receive OverPayment Money": "receiveOverpayment",// Reckon to Xero
     "Spend OverPayment Money": "spendOverpayment", // Reckon to Xero
     "Transfer": "bankTransfer", // Reckon to Xero
+    // "All Type": "allType", // Reckon to Xero
   },
 };
 const multiFileInputConfig = {
@@ -243,6 +244,7 @@ const ReckonDesktopHostedToXero = () => {
     "Spend money",
     "Receive money",
     "Transfer",
+    "All Type",
   ];
   // ✅ function to handle single download
   const handleSingleDownload = () => {
@@ -301,59 +303,6 @@ const ReckonDesktopHostedToXero = () => {
     }
   };
   // ✅ function to confirm multi download
-  // const confirmMultiDownload = async () => {
-  //   alert("Multi download is not implemented yet. Please use single download for now.");
-  //   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-  //   if (!route || !countryRoute || !multipleDownloadLinks) {
-  //     toast.error("Missing download information");
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   try {
-  //     const now = new Date();
-  //     const pad = (n) => String(n).padStart(2, "0");
-  //     const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
-  //     const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
-
-  //     await Promise.all(
-  //       Object.entries(multipleDownloadLinks).map(async ([key, url]) => {
-  //         const response = await fetch(url);
-  //         if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
-
-  //         const blob = await response.blob();
-  //         const blobUrl = window.URL.createObjectURL(blob);
-  //         const a = document.createElement("a");
-  //         a.href = blobUrl;
-
-  //         const namePart = sanitize(file?.fileName);
-  //         const softwarePart = sanitize(file?.softwareType);
-  //         const countryPart = sanitize(file?.countryName);
-  //         const routePart = sanitize(route);
-  //         const sheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
-
-  //         a.setAttribute("download", sheetName);
-  //         document.body.appendChild(a);
-  //         a.click();
-  //         a.remove();
-
-  //         await fetch(`/api/files/${file._id}/save-sheet`, {
-  //           method: "POST",
-  //           headers: { "Content-Type": "application/json" },
-  //           body: JSON.stringify({ routeUsed: route, sheetName }),
-  //         });
-  //       })
-  //     );
-  //     toast.success("All files downloaded");
-  //     setDownloadReady(false);
-  //   } catch (error) {
-  //     toast.error("Multi download failed");
-  //     console.error(error);
-  //   } finally {
-  //     setShowMultiDownloadConfirm(false);
-  //     setLoading(false);
-  //   }
-  // };
-
   const confirmMultiDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
   
@@ -365,7 +314,7 @@ const ReckonDesktopHostedToXero = () => {
     setLoading(true);
     try {
       // 🔁 If it's manualJournal, hit the special route for ZIP
-      if (route === "manualJournal"  || route === "receiveMoney" ||  route === "spendMoney"  || route === "salesReceipt"  || route === "bankTransfer") {
+      if (route === "manualJournal"  || route === "receiveMoney" ||  route === "spendMoney"  || route === "salesReceipt"  || route === "bankTransfer" || route === "allType") {
         const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/conversion_data.zip`);
         if (!res.ok) throw new Error("Download failed");
   
@@ -418,7 +367,7 @@ const ReckonDesktopHostedToXero = () => {
 const handleDownload = () => {
   if (["manualJournal"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["receiveMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) ||
     ["spendMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["salesReceipt"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
-    || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
+    || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["allType"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
   ) { 
     confirmMultiDownload(); // Skip modal OR use a separate modal
   } else {

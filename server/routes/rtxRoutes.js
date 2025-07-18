@@ -114,6 +114,8 @@ router.post('/upload-inventoryAdjust', upload.single('file'), uploadInventoryAdj
 router.post('/upload-spendOverpayment', upload.single('file'), uploadSpendOverpayment);
 router.post('/upload-receiveOverpayment', upload.single('file'), uploadReceiveOverpayment);
 router.post('/upload-bankTransfer', upload.single('file'), uploadBankTransfer);
+router.post('/upload-allType', upload.single('file'), uploadBankTransfer);
+
 
 // Convert routes
 router.post('/process-coa', convertCOA);
@@ -140,6 +142,7 @@ router.post('/process-inventoryAdjust', convertInventoryAdjust);
 router.post('/process-spendOverpayment', convertSpendOverpayment);
 router.post('/process-receiveOverpayment', convertReceiveOverpayment);
 router.post('/process-bankTransfer', convertBankTransfer);
+router.post('/process-allType', convertBankTransfer);
 
 // Download routes
 router.get('/download-coa/:filename', downloadCOA);
@@ -167,5 +170,6 @@ router.get('/download-inventoryAdjust/:filename', downloadInventoryAdjust);
 router.get('/download-spendOverpayment/:filename', downloadSpendOverpayment);
 router.get('/download-receiveOverpayment/:filename', downloadReceiveOverpayment);
 router.get('/download-bankTransfer/:filename', downloadBankTransfer);
+router.get('/download-allType/:filename', downloadBankTransfer);
 
 export { router };

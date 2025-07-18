@@ -4,13 +4,19 @@ import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
 
-const conversionBalanceMapping = {
-  'ACCOUNT': 'Account Code',
-  'DATE': 'Conversion Date',
-
-};
-
+// Final output column headers
 const allowedConversionColumns = ['Account Code', 'Balance', 'Conversion Date'];
+
+// Mapping for special accounts
+const accountNameToCode = {
+  'accounts receivable': '610',
+  'trade receivables': '610',
+  'accounts payable': '800',
+  'trade creditors': '800',
+  'tax payable': '820',
+  'opening bal equity': '3000',
+  'retained earnings': '960'
+};
 
 let uploadedConversionBalancePath = '';
 
@@ -22,77 +28,82 @@ const uploadConversionBalance = (req, res) => {
 
 const convertConversionBalance = async (req, res) => {
   try {
-    if (!existsSync(uploadedConversionBalancePath)) {
+    if (!fs.existsSync(uploadedConversionBalancePath)) {
       return res.status(400).json({ error: 'Uploaded conversion balance file not found.' });
     }
 
-    const originalRows = await parseCSV(uploadedConversionBalancePath);
-    const cleanedRows = [];
+    const rawRows = await parseCSV(uploadedConversionBalancePath);
+    if (!rawRows.length) return res.status(400).json({ error: 'CSV is empty or invalid format' });
 
-    const cleanNumber = (value) => {
-      if (typeof value === 'string') {
-        return parseFloat(value.replace(/,/g, '').trim()) || 0;
-      }
-      return parseFloat(value) || 0;
+    const headers = Object.keys(rawRows[0]);
+    const accountCol = headers[0];
+    const secondColHeader = headers[1]?.trim();
+    const thirdColHeader = headers[2]?.trim();
+
+    // Convert date like 'Jun 30, 24' to '2024-06-30'
+    const conversionDate = convertDate(secondColHeader);
+
+    const cleanNumber = (val) => {
+      if (typeof val === 'string') return parseFloat(val.replace(/,/g, '').trim()) || 0;
+      return parseFloat(val) || 0;
     };
 
-    for (const row of originalRows) {
-        let debit = cleanNumber(row['DR'] || row['Debit']);
-        let credit = cleanNumber(row['CR'] || row['Credit']);
-      
-        const balance = +(debit - credit).toFixed(2);
-        if (balance === 0) continue;
-      
-        let accountRaw = (row['ACCOUNT'] || '').trim();
-        let accountCode = '';
-        const lowerRaw = accountRaw.toLowerCase();
-      
-        // Step 1: Handle known keywords
-        if (lowerRaw.includes('accounts receivable'  && 'trade receivables')) {
-          accountCode = '610';
-        } else if (lowerRaw.includes('accounts payable' && 'trade creditors')) {
-          accountCode = '800';
-        } else if (lowerRaw.includes('retained earnings')) {
-          accountCode = '960';
-        } else if (accountRaw.includes(':')) {
-          // Step 2: After colon, extract alphanumeric starting with number
-          const afterColon = accountRaw.split(':').pop() || '';
-          const match = afterColon.trim().match(/\b\d\w*\b/);
-          accountCode = match ? match[0] : '';
-        } else {
-          // Step 3: Extract from full string
-          const match = accountRaw.match(/\b\d\w*\b/);
-          accountCode = match ? match[0] : '';
+    const cleanedRows = [];
+
+    for (const row of rawRows) {
+      const name = (row[accountCol] || '').toString().trim();
+      const debit = cleanNumber(row[secondColHeader]);
+      const credit = cleanNumber(row[thirdColHeader]);
+
+      const balance = +(debit - credit).toFixed(2);
+      if (balance === 0 || !name) continue;
+
+      let accountCode = '';
+
+      // Try mapped names first
+      const lowered = name.toLowerCase();
+      for (const keyword in accountNameToCode) {
+        if (lowered.includes(keyword)) {
+          accountCode = accountNameToCode[keyword];
+          break;
         }
-      
-        if (!accountCode) continue;
-      
-        const xeroRow = {
-          'Account Code': accountCode,
-          'Balance': balance,
-          'Conversion Date': row['DATE'] || ''
-        };
-      
-        cleanedRows.push(xeroRow);
       }
-      
-      
-      
+
+      // If no mapping found, extract numeric account code from the front
+  if (!accountCode) {
+  const parts = name.split(':');
+  const lastPart = parts[parts.length - 1];
+  const match = lastPart.match(/\b\d+\b/);
+  accountCode = match ? match[0] : '';
+
+  // Fallback: use starting number if nothing found
+  if (!accountCode) {
+    const startMatch = name.match(/^\d+/);
+    accountCode = startMatch ? startMatch[0] : '';
+  }
+}
+      if (!accountCode) continue;
+
+      cleanedRows.push({
+        'Account Code': accountCode,
+        'Balance': balance,
+        'Conversion Date': conversionDate
+      });
+    }
 
     const parser = new Parser({ fields: allowedConversionColumns });
     const csvOutput = parser.parse(cleanedRows);
 
-    const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR);
-    mkdirSync(outputDir, { recursive: true });
+    const outputDir = path.resolve(process.cwd(), DOWNLOAD_DIR);
+    fs.mkdirSync(outputDir, { recursive: true });
 
     const fileName = 'converted_conversion_balance.csv';
-    const outputPath = join(outputDir, fileName);
-    writeFileSync(outputPath, csvOutput);
+    const outputPath = path.join(outputDir, fileName);
+    fs.writeFileSync(outputPath, csvOutput);
 
     return res.json({
       message: 'Conversion Balance data converted successfully.',
-      downloadLink: `/download-conversion-balance/${fileName}`,
-      fileName
+      downloadLink: `/download-conversion-balance/${fileName}`
     });
 
   } catch (error) {
@@ -103,9 +114,9 @@ const convertConversionBalance = async (req, res) => {
 
 const downloadConversionBalance = (req, res) => {
   const fileName = req.params.filename;
-  const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+  const filePath = path.join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-  if (!existsSync(filePath)) {
+  if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: 'File not found' });
   }
 
@@ -120,12 +131,25 @@ const downloadConversionBalance = (req, res) => {
 function parseCSV(filePath) {
   return new Promise((resolve, reject) => {
     const results = [];
-    createReadStream(filePath)
+    fs.createReadStream(filePath)
       .pipe(csvParser())
       .on('data', (data) => results.push(data))
       .on('end', () => resolve(results))
       .on('error', reject);
   });
+}
+
+// Convert 'Jun 30, 24' → '2024-06-30'
+function convertDate(dateStr) {
+  try {
+    const parsed = new Date(dateStr);
+    const yyyy = parsed.getFullYear();
+    const mm = String(parsed.getMonth() + 1).padStart(2, '0');
+    const dd = String(parsed.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  } catch {
+    return '';
+  }
 }
 
 export  {

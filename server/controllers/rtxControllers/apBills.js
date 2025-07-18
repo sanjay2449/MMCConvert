@@ -8,7 +8,7 @@ import { DOWNLOAD_DIR } from '../../config/config.mjs';
 // Mapping Reckon fields to Xero fields
 const reckonToXeroAPBillMapping = {
   'Name': '*ContactName',
-  'Trans #': 'POCountry',
+  'Trans #': 'Trans #',
   'Num': '*InvoiceNumber',
   'Date': '*InvoiceDate',
   'Due Date': '*DueDate',
@@ -22,7 +22,8 @@ const allowedAPBillColumns = [
   '*InvoiceNumber','*InvoiceDate', '*DueDate','Total',
   'InventoryItemCode', '*Description', '*Quantity', '*UnitAmount',
   '*AccountCode', '*TaxType', 'TaxAmount','TrackingName1',
-  'TrackingOption1', 'TrackingName2','TrackingOption2', 'Currency',
+  'TrackingOption1', 'TrackingName2','TrackingOption2', 'Currency',  'Status',      
+  'LineAmountTypes' ,'Trans #',
 ];
 
 // Helper function to clean values
@@ -43,16 +44,24 @@ const uploadAPBill = (req, res) => {
   res.json({ message: 'Reckon AP Bill file uploaded successfully.' });
 };
 
-// Convert handler
+
 const convertAPBill = async (req, res) => {
   try {
-    if (!existsSync(uploadedAPBillPath)) {
+    if (!fs.existsSync(uploadedAPBillPath)) {
       return res.status(400).json({ error: 'Uploaded AP Bill file not found.' });
     }
 
     const reckonRows = await parseCSV(uploadedAPBillPath);
 
-    const convertedRows = reckonRows.map((reckonRow) => {
+    // 🔸 Filter out rows where 'Type' is blank or empty
+    const filteredRows = reckonRows.filter(row => {
+      const typeVal = (row['Type'] || '').trim();
+      return typeVal !== '';
+    });
+
+    const invoiceNumberCounts = {};
+
+    const convertedRows = filteredRows.map((reckonRow) => {
       const xeroRow = {};
 
       Object.entries(reckonToXeroAPBillMapping).forEach(([reckonKey, xeroKey]) => {
@@ -60,11 +69,28 @@ const convertAPBill = async (req, res) => {
         xeroRow[xeroKey] = value;
       });
 
+      if (!xeroRow['*InvoiceNumber']) {
+        xeroRow['*InvoiceNumber'] = cleanValue(reckonRow['Trans #']) || 'UNKNOWN';
+      }
+
+      const invoiceKey = xeroRow['*InvoiceNumber'];
+      if (invoiceNumberCounts[invoiceKey]) {
+        invoiceNumberCounts[invoiceKey] += 1;
+        const transNumber = cleanValue(reckonRow['Trans #']) || 'DUP';
+        xeroRow['*InvoiceNumber'] = `${invoiceKey}_${transNumber}`;
+      } else {
+        invoiceNumberCounts[invoiceKey] = 1;
+      }
+
+      // Fixed/default values
       xeroRow['*Quantity'] = 1;
       xeroRow['*Description'] = '.';
       xeroRow['*AccountCode'] = '9999';
       xeroRow['*TaxType'] = 'BAS Excluded';
+      xeroRow['Status'] = 'DRAFT';
+      xeroRow['LineAmountTypes'] = 'Exclusive';
 
+      // Ensure all allowed columns are present
       allowedAPBillColumns.forEach(col => {
         if (!(col in xeroRow)) xeroRow[col] = null;
       });
@@ -75,17 +101,15 @@ const convertAPBill = async (req, res) => {
     const parser = new Parser({ fields: allowedAPBillColumns });
     const csvOutput = parser.parse(convertedRows);
 
-    const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR);
-    mkdirSync(outputDir, { recursive: true });
+    const outputDir = path.resolve(process.cwd(), DOWNLOAD_DIR);
+    fs.mkdirSync(outputDir, { recursive: true });
 
     const fileName = 'converted_ap_bills.csv';
-    const outputPath = join(outputDir, fileName);
-
-    writeFileSync(outputPath, csvOutput);
+    const outputPath = path.join(outputDir, fileName);
+    fs.writeFileSync(outputPath, csvOutput);
 
     return res.json({
-      message: 'AP Bill data converted successfully.',
-      fileName: fileName, 
+      message: 'AP Bill data converted successfully (rows with blank Type removed).',
       downloadLink: `/download-ap-bill/${fileName}`
     });
 
@@ -95,12 +119,13 @@ const convertAPBill = async (req, res) => {
   }
 };
 
+
 // Download handler
 const downloadAPBill = (req, res) => {
   const fileName = req.params.filename;
-  const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+  const filePath = path.join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-  if (!existsSync(filePath)) {
+  if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: 'File not found' });
   }
 
@@ -116,12 +141,13 @@ const downloadAPBill = (req, res) => {
 function parseCSV(filePath) {
   return new Promise((resolve, reject) => {
     const results = [];
-    createReadStream(filePath)
+    fs.createReadStream(filePath)
       .pipe(csvParser())
       .on('data', (data) => results.push(data))
       .on('end', () => resolve(results))
       .on('error', reject);
   });
 }
+
 
 export  { uploadAPBill, convertAPBill, downloadAPBill };
