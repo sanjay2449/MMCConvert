@@ -116,7 +116,8 @@ const convertSpendOverpayment = async (req, res) => {
   
       return res.json({
         message: 'Spend Overpayment file converted successfully.',
-        downloadLink: '/download-spend-overpayment/converted_spend_overpayment.csv'
+        downloadLink: '/download-spend-overpayment/converted_spend_overpayment.csv',
+        fileName
       });
   
     } catch (error) {

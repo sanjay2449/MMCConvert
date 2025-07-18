@@ -3,6 +3,8 @@ import { resolve as _resolve, join } from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
+import archiver from 'archiver';
+// const archiver = require('archiver');
 
 const allowedBankTransferColumns = [
   'Bank Transfer Date', 'Amount', 'Reference',
@@ -230,21 +232,48 @@ const convertBankTransfer = async (req, res) => {
   }
 };
 
-const downloadBankTransfer = (req, res) => {
-  const fileName = req.params.filename;
-  const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+// const downloadBankTransfer = (req, res) => {
+//   const fileName = req.params.filename;
+//   const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-  if (!existsSync(filePath)) {
-    return res.status(404).json({ error: 'File not found' });
-  }
+//   if (!existsSync(filePath)) {
+//     return res.status(404).json({ error: 'File not found' });
+//   }
 
-  res.download(filePath, fileName, (err) => {
-    if (err) {
-      console.error('Download error:', err);
-      res.status(500).json({ error: 'Download failed' });
+//   res.download(filePath, fileName, (err) => {
+//     if (err) {
+//       console.error('Download error:', err);
+//       res.status(500).json({ error: 'Download failed' });
+//     }
+//   });
+// };
+
+const downloadBankTransfer =  (_req, res) => {
+
+  const files = [
+    "converted_bank_transfer.csv",
+    "converted_ar_transfer.csv",
+    "converted_ap_transfer.csv",
+    "transfer_spend_money.csv"
+  ];
+
+  const zipName = 'conversion_data.zip';
+  res.setHeader('Content-Disposition', `attachment; filename=${zipName}`);
+  res.setHeader('Content-Type', 'application/zip');
+
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.pipe(res);
+
+  files.forEach(file => {
+    const filePath = join(process.cwd(), DOWNLOAD_DIR, file);
+    if (existsSync(filePath)) {
+      archive.append(createReadStream(filePath), { name: file });
     }
   });
+
+  archive.finalize();
 };
+
 
 export  {
   uploadBankTransfer,

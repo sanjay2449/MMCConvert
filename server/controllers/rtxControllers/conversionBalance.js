@@ -91,7 +91,8 @@ const convertConversionBalance = async (req, res) => {
 
     return res.json({
       message: 'Conversion Balance data converted successfully.',
-      downloadLink: `/download-conversion-balance/${fileName}`
+      downloadLink: `/download-conversion-balance/${fileName}`,
+      fileName
     });
 
   } catch (error) {

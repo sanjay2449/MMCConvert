@@ -16,6 +16,7 @@ import userRoutes from './routes/userRoutes.js';
 import { router } from './routes/rtxRoutes.js';
 import xtxRoutes from './routes/xtxRoutes.js' ; 
 import stqRoutes from './routes/stqRoutes.js';
+import xtxMultiRoutes from './routes/xtxMultiRoutes.js';
 
 
 // other setup ...
@@ -50,6 +51,7 @@ app.use('/api/excel-australia-reckondesktoptoxero/singlecurrency',router);
 
  // Import Australia-specific Excel Routes For Xero to Xero conversion
 app.use('/api/excel-australia-xerotoxero/singlecurrency', xtxRoutes);
+app.use('/api/excel-australia-xerotoxero/multicurrency', xtxMultiRoutes);
 
  // Import Australia-specific Excel Routes For Sage one To Qbo conversion
 app.use('/api/excel-australia-sageonetoqbo/singlecurrency', stqRoutes); 

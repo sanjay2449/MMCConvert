@@ -268,6 +268,7 @@ const convertManualJournal = async (req, res) => {
         arManual: `/download-manual-journal/converted_ar_manual.csv`,
         apManual: `/download-manual-journal/converted_ap_manual.csv`
       }
+      
     });
 
   } catch (error) {
@@ -286,7 +287,7 @@ const downloadManualJournal =  (_req, res) => {
     'converted_ap_manual.csv',
   ];
 
-  const zipName = 'manual_conversion_data.zip';
+  const zipName = 'conversion_data.zip';
   res.setHeader('Content-Disposition', `attachment; filename=${zipName}`);
   res.setHeader('Content-Type', 'application/zip');
 

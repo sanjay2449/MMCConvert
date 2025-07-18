@@ -113,19 +113,22 @@ const convertCOA = async (req, res) => {
     
     await new Promise((resolve, reject) => {
       createReadStream(uploadedReckonFilePath)
+      
         .pipe(csv())
         .on('data', (row) => reckonData.push(row))
         .on('end', resolve)
         .on('error', reject);
     });
-
-    await new Promise((resolve, reject) => {
-      createReadStream(XERO_FILE_PATH)
-        .pipe(csv())
-        .on('data', (row) => xeroReferenceData.push(row))
-        .on('end', resolve)
-        .on('error', reject);
-    });
+  console.log("Uploaded Customer File Path: ", uploadedReckonFilePath);
+if (existsSync(XERO_FILE_PATH)) {
+  await new Promise((resolve, reject) => {
+    createReadStream(XERO_FILE_PATH)
+      .pipe(csv())
+      .on('data', (row) => xeroReferenceData.push(row))
+      .on('end', resolve)
+      .on('error', reject);
+  });
+} 
 
     const mappedData = mapReckonToXero(reckonData);
     const parser = new Parser();
@@ -134,14 +137,15 @@ const convertCOA = async (req, res) => {
     const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR || 'conversions/downloads');
     mkdirSync(outputDir, { recursive: true });
 
-    const fileName = `${CONVERTED_FILE_NAME}.csv`;
+    const fileName = 'converted_COA.csv';
     const outputPath = join(outputDir, fileName);
 
     writeFileSync(outputPath, csvData);
 
     return res.json({
       message: 'Chart of Accounts data converted successfully.',
-      downloadLink: `/download-coa/${fileName}`
+      downloadLink: `/download-coa/${fileName}`,
+      fileName
     });
 
   } catch (error) {

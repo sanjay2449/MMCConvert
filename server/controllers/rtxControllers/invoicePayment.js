@@ -80,7 +80,8 @@ const convertInvoicePayment = async (req, res) => {
 
     return res.json({
       message: 'Invoice Payment data converted successfully.',
-      downloadLink: `/download-invoice-payment/${fileName}`
+      downloadLink: `/download-invoice-payment/${fileName}`,
+      fileName
     });
 
   } catch (error) {

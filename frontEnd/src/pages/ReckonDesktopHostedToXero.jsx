@@ -5,6 +5,7 @@ import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTra
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import { useRef } from 'react';
+import { useEffect } from 'react';
 
 const functionRoutesForReckonDesktopHostedToXero = {
   Masters: {
@@ -30,7 +31,7 @@ const functionRoutesForReckonDesktopHostedToXero = {
     "Invoice Payment": "invoicePayment",// Reckon to Xero
     "Bill Payment": "billPayment",// Reckon to Xero
     "Paycheque": "paycheque",// Reckon to Xero
-    "Liability Cheque": "liabiltycheque",// Reckon to Xero
+    "Liability Cheque": "liabilitycheque",// Reckon to Xero
     "Inventory Adjust": "inventoryAdjust",// Reckon to Xero
     "Conversion Balance": "conversionBalance",// Reckon to Xero
     "Receive OverPayment Money": "receiveOverpayment",// Reckon to Xero
@@ -96,10 +97,20 @@ const ReckonDesktopHostedToXero = () => {
   const [historyData, setHistoryData] = useState([]);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showDownloadConfirm, setShowDownloadConfirm] = useState(false);
-  // const [convertedFileName, setConvertedFileName] = useState(''); //✅ NEW
+  const [showSingleDownloadConfirm, setShowSingleDownloadConfirm] = useState(false);
+  const [showMultiDownloadConfirm, setShowMultiDownloadConfirm] = useState(false);
   const [convertedFileName, setConvertedFileName] = useState(() => {
     return localStorage.getItem('convertedFileName') || '';
   });  // by yash
+
+  useEffect(() => {
+    // Set default converted file name if not already set
+    if (!localStorage.getItem('convertedFileName')) {
+      localStorage.setItem('convertedFileName', 'converted_COA.csv');
+    }
+  }, []);
+
+  
   const [uploadProgress, setUploadProgress] = useState(0);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -225,81 +236,145 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-  const handleDownload = async () => {
-    setShowDownloadConfirm(true);
+
+  const multiSheetFunctions = [
+    "Sales Receipt",
+    "Manual Journal",
+    "Spend money",
+    "Receive money",
+    "Transfer",
+  ];
+  // ✅ function to handle single download
+  const handleSingleDownload = () => {
+    setShowSingleDownloadConfirm(true);
   };
-
-  const confirmDownload = async () => {
+// ✅ function to handle multi download
+  const handleMultiDownload = () => {
+    setShowMultiDownloadConfirm(true);
+  };
+// ✅ function to confirm single download
+  const confirmSingleDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-
-    if (!route || !countryRoute || (!convertedFileName && !multipleDownloadLinks)) {
+    if (!route || !countryRoute || !convertedFileName) {
       toast.error("Missing download information");
       return;
     }
-
     setLoading(true);
     try {
-      if (multipleDownloadLinks) {
-        const now = new Date();
-        const pad = (n) => String(n).padStart(2, "0");
-        const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
-        const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+      const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
+      if (!res.ok) throw new Error(await res.text());
 
-        await Promise.all(
-          Object.entries(multipleDownloadLinks).map(async ([key, url]) => {
-            try {
-              const response = await fetch(url);
-              if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
 
-              const blob = await response.blob();
-              const blobUrl = window.URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = blobUrl;
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+      const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
+      const namePart = sanitize(file?.fileName);
+      const softwarePart = sanitize(file?.softwareType);
+      const countryPart = sanitize(file?.countryName);
+      const routePart = sanitize(route);
+      const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}${convertedFileName.endsWith(".csv") ? ".csv" : ".xlsx"}`;
 
-              // ✅ Uniform filename structure
-              const namePart = sanitize(file?.fileName);
-              const softwarePart = sanitize(file?.softwareType);
-              const countryPart = sanitize(file?.countryName);
-              const routePart = sanitize(route);
-              const sheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
+      link.setAttribute("download", generatedSheetName);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
 
-              a.setAttribute("download", sheetName);
-              document.body.appendChild(a);
-              a.click();
-              a.remove();
+      await fetch(`/api/files/${file._id}/save-sheet`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ routeUsed: route, sheetName: generatedSheetName }),
+      });
 
-              // ✅ Save each downloaded sheet to history
-              await fetch(`/api/files/${file._id}/save-sheet`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  routeUsed: route,
-                  sheetName,
-                }),
-              });
+      toast.success("Downloaded successfully");
+      setDownloadReady(false);
+    } catch (error) {
+      toast.error("Download error");
+      console.error(error);
+    } finally {
+      setShowSingleDownloadConfirm(false);
+      setLoading(false);
+    }
+  };
+  // ✅ function to confirm multi download
+  // const confirmMultiDownload = async () => {
+  //   alert("Multi download is not implemented yet. Please use single download for now.");
+  //   const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+  //   if (!route || !countryRoute || !multipleDownloadLinks) {
+  //     toast.error("Missing download information");
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   try {
+  //     const now = new Date();
+  //     const pad = (n) => String(n).padStart(2, "0");
+  //     const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  //     const sanitize = (str) => (str || "Unknown").replace(/[^a-zA-Z0-9]/g, "").slice(0, 20);
 
-            } catch (err) {
-              console.error(`Error downloading ${url}`, err);
-              toast.error(`Failed to download ${key}`);
-            }
-          })
-        );
+  //     await Promise.all(
+  //       Object.entries(multipleDownloadLinks).map(async ([key, url]) => {
+  //         const response = await fetch(url);
+  //         if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
 
-        toast.success("All files downloaded");
-      } else {
-        // ✅ Single file logic
-        const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/${convertedFileName}`);
-        if (!res.ok) {
-          const errorMsg = await res.text();
-          toast.error(errorMsg || "Download failed");
-          return;
-        }
+  //         const blob = await response.blob();
+  //         const blobUrl = window.URL.createObjectURL(blob);
+  //         const a = document.createElement("a");
+  //         a.href = blobUrl;
 
+  //         const namePart = sanitize(file?.fileName);
+  //         const softwarePart = sanitize(file?.softwareType);
+  //         const countryPart = sanitize(file?.countryName);
+  //         const routePart = sanitize(route);
+  //         const sheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.csv`;
+
+  //         a.setAttribute("download", sheetName);
+  //         document.body.appendChild(a);
+  //         a.click();
+  //         a.remove();
+
+  //         await fetch(`/api/files/${file._id}/save-sheet`, {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({ routeUsed: route, sheetName }),
+  //         });
+  //       })
+  //     );
+  //     toast.success("All files downloaded");
+  //     setDownloadReady(false);
+  //   } catch (error) {
+  //     toast.error("Multi download failed");
+  //     console.error(error);
+  //   } finally {
+  //     setShowMultiDownloadConfirm(false);
+  //     setLoading(false);
+  //   }
+  // };
+
+  const confirmMultiDownload = async () => {
+    const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
+  
+    if (!route || !countryRoute) {
+      toast.error("Missing route information");
+      return;
+    }
+  
+    setLoading(true);
+    try {
+      // 🔁 If it's manualJournal, hit the special route for ZIP
+      if (route === "manualJournal"  || route === "receiveMoney" ||  route === "spendMoney"  || route === "salesReceipt"  || route === "bankTransfer") {
+        const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/conversion_data.zip`);
+        if (!res.ok) throw new Error("Download failed");
+  
         const blob = await res.blob();
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+  
+        // 📦 Generate dynamic filename for the ZIP
         const now = new Date();
         const pad = (n) => String(n).padStart(2, "0");
         const isoDate = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}__${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
@@ -308,34 +383,50 @@ const ReckonDesktopHostedToXero = () => {
         const softwarePart = sanitize(file?.softwareType);
         const countryPart = sanitize(file?.countryName);
         const routePart = sanitize(route);
-        const generatedSheetName = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}${convertedFileName.endsWith(".csv") ? ".csv" : ".xlsx"}`;
-
-        link.setAttribute("download", generatedSheetName);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-
+        const zipFilename = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.zip`;
+  
+        a.setAttribute("download", zipFilename);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(blobUrl);
+  
+        // 💾 Save to history
         await fetch(`/api/files/${file._id}/save-sheet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             routeUsed: route,
-            sheetName: generatedSheetName,
+            sheetName: zipFilename,
           }),
         });
-
-        toast.success("Downloaded successfully");
+  
+        toast.success("Downloaded ZIP successfully");
+      } else {
+        toast.error("Unsupported multi-download route");
       }
-
+  
       setDownloadReady(false);
-    } catch (error) {
-      toast.error("Download error");
-      console.error(error);
+    } catch (err) {
+      console.error("Download error", err);
+      toast.error("Multi Download failed");
     } finally {
-      setShowDownloadConfirm(false);
+      setShowDownloadConfirm(false); // or setShowMultiDownloadConfirm(false) if you're using a separate modal
       setLoading(false);
     }
   };
+const handleDownload = () => {
+  if (["manualJournal"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["receiveMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) ||
+    ["spendMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["salesReceipt"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
+    || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
+  ) { 
+    confirmMultiDownload(); // Skip modal OR use a separate modal
+  } else {
+    setShowDownloadConfirm(true); // default modal for single file
+  }
+};
+  
+
   const fetchHistory = async () => {
     try {
       const res = await fetch(`/api/files/${file._id}`);
@@ -577,7 +668,18 @@ const ReckonDesktopHostedToXero = () => {
                 {uploadComplete ? 'Uploaded' : loading ? 'Uploading...' : 'Upload'}
               </button>
               <button onClick={handleConvert} disabled={!uploadComplete || convertComplete || loading} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded disabled:opacity-50">{convertComplete ? 'Converted' : loading ? 'Converting...' : 'Convert'}</button>
-              <button onClick={handleDownload} disabled={!downloadReady || loading} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50">Download</button>
+              {/* <button onClick={handleDownload} disabled={!downloadReady || loading} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50">Download</button> */}
+              <button
+                onClick={() =>
+                  multiSheetFunctions.includes(selectedFunction)
+                    ? handleMultiDownload()
+                    : handleSingleDownload()
+                }
+                disabled={!downloadReady || loading}
+                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50"
+              >
+                Download
+              </button>
             </div>
             {/* Floating Info Button */}
             <button
@@ -590,7 +692,7 @@ const ReckonDesktopHostedToXero = () => {
           </div>
         </main>
       </div>
-      {showDownloadConfirm && (
+      {/* {showDownloadConfirm && (
         <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
           <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
             <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
@@ -601,7 +703,34 @@ const ReckonDesktopHostedToXero = () => {
             </div>
           </div>
         </div>
+      )} */}
+
+      {showSingleDownloadConfirm && (
+        <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
+          <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
+            <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
+            <p>Download file for <strong>{selectedFunction}</strong>?</p>
+            <div className="flex justify-end gap-4 mt-6">
+              <button onClick={() => setShowSingleDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
+              <button onClick={confirmSingleDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download</button>
+            </div>
+          </div>
+        </div>
       )}
+
+      {showMultiDownloadConfirm && (
+        <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
+          <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
+            <h2 className="text-lg font-semibold mb-4">Confirm Multi-sheet Download</h2>
+            <p>This will download multiple CSV files for <strong>{selectedFunction}</strong>.</p>
+            <div className="flex justify-end gap-4 mt-6">
+              <button onClick={() => setShowMultiDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
+              <button onClick={confirmMultiDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download All</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showHistoryModal && (
         <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
           <div className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">

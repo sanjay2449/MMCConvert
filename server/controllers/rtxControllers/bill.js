@@ -156,7 +156,8 @@ const convertBill = async (req, res) => {
 
         return res.json({
             message: 'Bill data converted successfully.',
-            downloadLink: `/download-bill/${fileName}`
+            downloadLink: `/download-bill/${fileName}`,
+            fileName
         });
 
     } catch (error) {

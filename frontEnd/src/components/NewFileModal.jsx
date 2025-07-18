@@ -53,7 +53,7 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
 
   // 🔽 Show both currencies only for QBO TO QBO and XERO TO XERO
   const currencyOptions =
-    softwareKey === "qbo to qbo"
+    softwareKey === "qbo to qbo" || softwareKey === "xero to xero"
       ? ["Single Currency", "Multi Currency"]
       : ["Single Currency"];
 

@@ -3,6 +3,8 @@ import { resolve as _resolve, join } from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
+import archiver from 'archiver';
+// const archiver = require('archiver');
 
 const reckonToXeroTaxMapping = {
   GST: 'GST on Expenses',
@@ -259,22 +261,47 @@ const convertSpendMoney = async (req, res) => {
   }
 };
 
-const downloadSpendMoney = (req, res) => {
-  const fileName = req.params.filename;
-  const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+// const downloadSpendMoney = (req, res) => {
+//   const fileName = req.params.filename;
+//   const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-  if (!existsSync(filePath)) {
-    return res.status(404).json({ error: 'File not found' });
-  }
+//   if (!existsSync(filePath)) {
+//     return res.status(404).json({ error: 'File not found' });
+//   }
 
-  res.download(filePath, fileName, (err) => {
-    if (err) {
-      console.error('Error downloading:', err);
-      res.status(500).json({ error: 'Download failed' });
+//   res.download(filePath, fileName, (err) => {
+//     if (err) {
+//       console.error('Error downloading:', err);
+//       res.status(500).json({ error: 'Download failed' });
+//     }
+//   });
+// };
+
+const downloadSpendMoney =  (_req, res) => {
+
+  const files = [
+    "converted_spend_money.csv",
+    "converted_ar_spend_money.csv",
+    "converted_ap_spend_money.csv",
+    "converted_transfer.csv",
+  ];
+
+  const zipName = 'conversion_data.zip';
+  res.setHeader('Content-Disposition', `attachment; filename=${zipName}`);
+  res.setHeader('Content-Type', 'application/zip');
+
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.pipe(res);
+
+  files.forEach(file => {
+    const filePath = join(process.cwd(), DOWNLOAD_DIR, file);
+    if (existsSync(filePath)) {
+      archive.append(createReadStream(filePath), { name: file });
     }
   });
-};
 
+  archive.finalize();
+};
 
 
 const parseCSV = (filePath) => new Promise((resolve, reject) => {

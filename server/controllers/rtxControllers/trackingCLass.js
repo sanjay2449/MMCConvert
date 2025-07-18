@@ -60,7 +60,8 @@ const convertTracking = async (req, res) => {
 
     return res.json({
       message: 'Tracking data converted successfully.',
-      downloadLink: `/download-tracking/${fileName}`
+      downloadLink: `/download-tracking/${fileName}`,
+      fileName
     });
 
   } catch (error) {

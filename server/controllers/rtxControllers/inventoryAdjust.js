@@ -116,7 +116,8 @@ const convertInventoryAdjust = async (req, res) => {
 
     return res.json({
       message: 'Inventory Adjustment data converted successfully.',
-      downloadLink: `/download-inventory-adjust/${fileName}`
+      downloadLink: `/download-inventory-adjust/${fileName}`,
+      fileName
     });
 
   } catch (error) {

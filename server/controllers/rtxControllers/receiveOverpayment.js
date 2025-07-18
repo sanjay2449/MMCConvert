@@ -106,7 +106,8 @@ const convertReceiveOverpayment = async (req, res) => {
 
         return res.json({
             message: 'Receive Overpayment file converted successfully.',
-            downloadLink: '/download-receive-overpayment/converted_receive_overpayment.csv'
+            downloadLink: '/download-receive-overpayment/converted_receive_overpayment.csv',
+            fileName
         });
 
     } catch (error) {

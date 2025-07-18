@@ -155,7 +155,8 @@ const convertInvoice = async (req, res) => {
 
         return res.json({
             message: 'Invoice data converted successfully.',
-            downloadLink: `/download-invoice/${fileName}`
+            downloadLink: `/download-invoice/${fileName}`,
+            fileName
         });
 
     } catch (error) {

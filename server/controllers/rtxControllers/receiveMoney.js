@@ -3,10 +3,10 @@ import { resolve as _resolve, join ,} from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
-// import archiver from 'archiver';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const archiver = require('archiver');
+import archiver from 'archiver';
+// const archiver = require('archiver');
 
 // Mappings
 const reckonToXeroTaxMapping = {
@@ -290,25 +290,53 @@ message: 'All files converted.',
 };
 
 
-const downloadReceiveMoney = (req, res) => {
-    const fileName = req.params.filename;
-    const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+// const downloadReceiveMoney = (req, res) => {
+//     const fileName = req.params.filename;
+//     const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-    if (!existsSync(filePath)) {
-        return res.status(404).json({ error: 'File not found' });
+//     if (!existsSync(filePath)) {
+//         return res.status(404).json({ error: 'File not found' });
+//     }
+
+//     // ✅ Set correct headers for CSV
+//     res.setHeader('Content-Type', 'text/csv');
+//     res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+//     res.send(filePath, fileName, err => {
+//         if (err) {
+//             console.error('Download error:', err);
+//             res.status(500).json({ error: 'Download failed' });
+//         }
+//     });
+// };
+
+const downloadReceiveMoney =  (_req, res) => {
+
+  const files = [
+    "converted_receive_money.csv",
+    "converted_ar_receive_money.csv",
+    "converted_ap_receive_money.csv",
+    "converted_receive_transfer.csv"
+  ];
+
+  const zipName = 'conversion_data.zip';
+  res.setHeader('Content-Disposition', `attachment; filename=${zipName}`);
+  res.setHeader('Content-Type', 'application/zip');
+
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.pipe(res);
+
+  files.forEach(file => {
+    const filePath = join(process.cwd(), DOWNLOAD_DIR, file);
+    if (existsSync(filePath)) {
+      archive.append(createReadStream(filePath), { name: file });
     }
+  });
 
-    // ✅ Set correct headers for CSV
-    res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-
-    res.send(filePath, fileName, err => {
-        if (err) {
-            console.error('Download error:', err);
-            res.status(500).json({ error: 'Download failed' });
-        }
-    });
+  archive.finalize();
 };
+
+
 const parseCSV = (filePath) => new Promise((resolve, reject) => {
     const results = [];
     createReadStream(filePath)

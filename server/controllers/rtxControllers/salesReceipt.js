@@ -3,6 +3,9 @@ import { resolve as _resolve, join } from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
+import archiver from 'archiver';
+// const archiver = require('archiver');
+
 
 const salesReceiptMapping = {
     'Source Name': '*ContactName',
@@ -158,17 +161,18 @@ const convertSalesReceipt = async (req, res) => {
         const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR);
         mkdirSync(outputDir, { recursive: true });
 
-        const salesReceiptFileName = 'converted_sales_receipt.csv';
-        const bankFileName = 'converted_bank_data.csv';
+        // const salesReceiptFileName = 'converted_sales_receipt.csv';
+        // const bankFileName = 'converted_bank_data.csv';
 
-        writeFileSync(join(outputDir, salesReceiptFileName), csvSalesReceipt);
-        writeFileSync(join(outputDir, bankFileName), csvBank);
+        writeFileSync(join(outputDir,  'converted_sales_receipt.csv'), csvSalesReceipt);
+        writeFileSync(join(outputDir, 'converted_bank_data.csv'), csvBank);
+        
 
         return res.json({
             message: 'Sales Receipt and Bank data converted successfully.',
             downloadLinks: {
-                salesReceipt: `/download-sales-receipt/${salesReceiptFileName}`,
-                bankData: `/download-sales-receipt/${bankFileName}`
+                salesReceipt: `/download-sales-receipt/ converted_sales_receipt.csv`,
+                bankData: `/download-sales-receipt/converted_bank_data.csv`
             }
         });
 
@@ -178,21 +182,47 @@ const convertSalesReceipt = async (req, res) => {
     }
 };
 
-const downloadSalesReceipt = (req, res) => {
-    const fileName = req.params.filename;
-    const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
+// const downloadSalesReceipt = (req, res) => {
+//     const fileName = req.params.filename;
+//     const filePath = join(process.cwd(), DOWNLOAD_DIR, fileName);
 
-    if (!existsSync(filePath)) {
-        return res.status(404).json({ error: 'File not found' });
+//     if (!existsSync(filePath)) {
+//         return res.status(404).json({ error: 'File not found' });
+//     }
+
+//     res.download(filePath, fileName, (err) => {
+//         if (err) {
+//             console.error('Error downloading:', err);
+//             res.status(500).json({ error: 'Download failed' });
+//         }
+//     });
+// };
+
+
+const downloadSalesReceipt =  (_req, res) => {
+
+  const files = [
+    'converted_sales_receipt.csv',
+    'converted_bank_data.csv' 
+  ];
+
+  const zipName = 'conversion_data.zip';
+  res.setHeader('Content-Disposition', `attachment; filename=${zipName}`);
+  res.setHeader('Content-Type', 'application/zip');
+
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.pipe(res);
+
+  files.forEach(file => {
+    const filePath = join(process.cwd(), DOWNLOAD_DIR, file);
+    if (existsSync(filePath)) {
+      archive.append(createReadStream(filePath), { name: file });
     }
+  });
 
-    res.download(filePath, fileName, (err) => {
-        if (err) {
-            console.error('Error downloading:', err);
-            res.status(500).json({ error: 'Download failed' });
-        }
-    });
+  archive.finalize();
 };
+
 
 function parseCSV(filePath) {
     return new Promise((resolve, reject) => {

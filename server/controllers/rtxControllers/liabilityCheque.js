@@ -106,13 +106,14 @@ const convertLiabilityCheque = async (req, res) => {
     const outputDir = _resolve(process.cwd(), DOWNLOAD_DIR);
     mkdirSync(outputDir, { recursive: true });
 
-    const outputFile = 'converted_liability_cheque.csv';
-    const filePath = join(outputDir, outputFile);
+    const fileName = 'converted_liability_cheque.csv';
+    const filePath = join(outputDir, fileName);
     writeFileSync(filePath, new Parser({ fields: allowedLiabilityChequeColumns }).parse(finalRows));
 
     return res.json({
       message: 'Liability Cheque file converted successfully.',
-      downloadLink: `/download-liability-cheque/${outputFile}`
+      downloadLink: `/download-liability-cheque/${fileName}`,
+      fileName
     });
 
   } catch (err) {
