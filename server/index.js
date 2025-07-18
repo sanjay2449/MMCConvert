@@ -18,7 +18,6 @@ import xtxRoutes from './routes/xtxRoutes.js' ;
 import stqRoutes from './routes/stqRoutes.js';
 import xtxMultiRoutes from './routes/xtxMultiRoutes.js';
 
-
 // other setup ...
 
 // Load environment variables from .env file
@@ -56,6 +55,18 @@ app.use('/api/excel-australia-xerotoxero/multicurrency', xtxMultiRoutes);
  // Import Australia-specific Excel Routes For Sage one To Qbo conversion
 app.use('/api/excel-australia-sageonetoqbo/singlecurrency', stqRoutes); 
 
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Setup __dirname in ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static HTML page
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'status.html'));
+});
 
 
 // MongoDB connection
