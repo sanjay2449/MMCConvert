@@ -735,6 +735,18 @@ const SageOneToQbo = () => {
           </div>
         </div>
       )}
+      <footer className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-gray-300 text-sm py-4 border-t border-blue-700">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
+            <span className="text-gray-400">|</span>
+            <span className="italic">Sage One → QBO</span>
+          </div>
+          <div className="text-xs text-gray-500 tracking-wider">
+            © {new Date().getFullYear()} MMC Convert. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

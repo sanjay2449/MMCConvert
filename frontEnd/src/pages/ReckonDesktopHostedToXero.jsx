@@ -111,7 +111,7 @@ const ReckonDesktopHostedToXero = () => {
     }
   }, []);
 
-  
+
   const [uploadProgress, setUploadProgress] = useState(0);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -250,11 +250,11 @@ const ReckonDesktopHostedToXero = () => {
   const handleSingleDownload = () => {
     setShowSingleDownloadConfirm(true);
   };
-// ✅ function to handle multi download
+  // ✅ function to handle multi download
   const handleMultiDownload = () => {
     setShowMultiDownloadConfirm(true);
   };
-// ✅ function to confirm single download
+  // ✅ function to confirm single download
   const confirmSingleDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
     if (!route || !countryRoute || !convertedFileName) {
@@ -305,24 +305,24 @@ const ReckonDesktopHostedToXero = () => {
   // ✅ function to confirm multi download
   const confirmMultiDownload = async () => {
     const route = currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction];
-  
+
     if (!route || !countryRoute) {
       toast.error("Missing route information");
       return;
     }
-  
+
     setLoading(true);
     try {
       // 🔁 If it's manualJournal, hit the special route for ZIP
-      if (route === "manualJournal"  || route === "receiveMoney" ||  route === "spendMoney"  || route === "salesReceipt"  || route === "bankTransfer" || route === "allType") {
+      if (route === "manualJournal" || route === "receiveMoney" || route === "spendMoney" || route === "salesReceipt" || route === "bankTransfer" || route === "allType") {
         const res = await fetch(`/api/${combinedRoutePrefix}/${getCurrencyPath()}/download-${route}/conversion_data.zip`);
         if (!res.ok) throw new Error("Download failed");
-  
+
         const blob = await res.blob();
         const blobUrl = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = blobUrl;
-  
+
         // 📦 Generate dynamic filename for the ZIP
         const now = new Date();
         const pad = (n) => String(n).padStart(2, "0");
@@ -333,13 +333,13 @@ const ReckonDesktopHostedToXero = () => {
         const countryPart = sanitize(file?.countryName);
         const routePart = sanitize(route);
         const zipFilename = `${namePart}__${softwarePart}__${countryPart}__${routePart}__${isoDate}.zip`;
-  
+
         a.setAttribute("download", zipFilename);
         document.body.appendChild(a);
         a.click();
         a.remove();
         window.URL.revokeObjectURL(blobUrl);
-  
+
         // 💾 Save to history
         await fetch(`/api/files/${file._id}/save-sheet`, {
           method: "POST",
@@ -349,12 +349,12 @@ const ReckonDesktopHostedToXero = () => {
             sheetName: zipFilename,
           }),
         });
-  
+
         toast.success("Downloaded ZIP successfully");
       } else {
         toast.error("Unsupported multi-download route");
       }
-  
+
       setDownloadReady(false);
     } catch (err) {
       console.error("Download error", err);
@@ -364,17 +364,6 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-// const handleDownload = () => {
-//   if (["manualJournal"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["receiveMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) ||
-//     ["spendMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["salesReceipt"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
-//     || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["allType"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
-//   ) { 
-//     confirmMultiDownload(); // Skip modal OR use a separate modal
-//   } else {
-//     setShowDownloadConfirm(true); // default modal for single file
-//   }
-// };
-  
 
   const fetchHistory = async () => {
     try {
@@ -806,6 +795,19 @@ const ReckonDesktopHostedToXero = () => {
           </div>
         </div>
       )}
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-gray-300 text-sm py-4 border-t border-blue-700">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
+            <span className="text-gray-400">|</span>
+            <span className="italic">Reckon Desktop Hosted → Xero</span>
+          </div>
+          <div className="text-xs text-gray-500 tracking-wider">
+            © {new Date().getFullYear()} MMC Convert. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

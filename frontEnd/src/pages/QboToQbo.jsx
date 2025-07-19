@@ -317,52 +317,52 @@ const QboToQbo = () => {
 
   const handleHistoryDownload = async (entry) => {
     const currencyPath = getCurrencyPath();
-  
+
     if (!entry?.sheetName || !file?._id || !entry?.routeUsed) {
       toast.error("Invalid download entry");
       return;
     }
-  
+
     try {
       const route = entry.routeUsed;
-      
+
       const response = await fetch(`/api/${combinedRoutePrefix}/${currencyPath}/download-${route}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         }
       });
-  
+
       if (!response.ok) throw new Error("Download failed");
-  
+
       const blob = await response.blob();
-  
+
       if (blob.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
         console.warn("Unexpected MIME type:", blob.type);
         toast.error("Invalid file format");
         return;
       }
-  
+
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-  
+
       // Use saved filename if available, else fallback
       const fileName = entry.sheetName || `${file?.fileName || 'Export'}__${route}.xlsx`;
-  
+
       link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
-  
+
       toast.success("Downloaded again successfully");
     } catch (error) {
       console.error("Error in handleHistoryDownload:", error);
       toast.error("Download failed");
     }
   };
-  
+
   const handleHistoryDelete = async (index) => {
     try {
       const res = await fetch(`/api/files/${file._id}/delete-sheet`, {
@@ -392,7 +392,7 @@ const QboToQbo = () => {
       fileInputRef.current.value = null;
     }
   };
-  
+
   const renderSection = (name, label) => (
     <div key={name} className="transition-all duration-300">
       <button
@@ -699,7 +699,18 @@ const QboToQbo = () => {
           </div>
         </div>
       )}
-
+      <footer className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-gray-300 text-sm py-4 border-t border-blue-700">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
+            <span className="text-gray-400">|</span>
+            <span className="italic">QBO → QBO</span>
+          </div>
+          <div className="text-xs text-gray-500 tracking-wider">
+            © {new Date().getFullYear()} MMC Convert. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
