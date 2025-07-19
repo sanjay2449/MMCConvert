@@ -1,6 +1,5 @@
-
-import { existsSync, mkdirSync, writeFileSync, createReadStream } from 'fs';
-import { resolve as _resolve, join } from 'path';
+import fs from 'fs';
+import path from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
@@ -110,7 +109,8 @@ const convertAPBill = async (req, res) => {
 
     return res.json({
       message: 'AP Bill data converted successfully (rows with blank Type removed).',
-      downloadLink: `/download-ap-bill/${fileName}`
+      downloadLink: `/download-ap-bill/${fileName}`,
+      fileName
     });
 
   } catch (error) {

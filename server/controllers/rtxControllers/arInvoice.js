@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync, writeFileSync, createReadStream } from 'fs';
-import { resolve as _resolve, join } from 'path';
+import fs from 'fs';
+import path from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
@@ -126,7 +126,8 @@ const convertARInvoice = async (req, res) => {
 
     return res.json({
       message: 'AR Invoice data converted successfully.',
-      downloadLink: `/download-ar-invoice/${fileName}`
+      downloadLink: `/download-ar-invoice/${fileName}`,
+      fileName
     });
 
   } catch (err) {

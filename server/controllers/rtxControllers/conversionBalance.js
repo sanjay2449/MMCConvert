@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync, writeFileSync, createReadStream } from 'fs';
-import { resolve as _resolve, join } from 'path';
+import fs from 'fs';
+import path from 'path';
 import csvParser from 'csv-parser';
 import { Parser } from 'json2csv';
 import { DOWNLOAD_DIR } from '../../config/config.mjs';
@@ -103,7 +103,8 @@ const convertConversionBalance = async (req, res) => {
 
     return res.json({
       message: 'Conversion Balance data converted successfully.',
-      downloadLink: `/download-conversion-balance/${fileName}`
+      downloadLink: `/download-conversion-balance/${fileName}`,
+      fileName
     });
 
   } catch (error) {

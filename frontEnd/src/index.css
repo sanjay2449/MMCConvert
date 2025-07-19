@@ -21,9 +21,9 @@
 }
 
 .gradient-bg {
-  background: linear-gradient(-45deg, #0f172a, #101f46, #1c3a69, #054c8f);
+  background: linear-gradient(-45deg, #08215e, #1b2644, #021b44, #0460b63a);
   background-size: 400% 400%;
-  animation: gradientMove 10s ease infinite;
+  animation: gradientMove 5s ease infinite;
 }
 
 /* .gradient-bg {
