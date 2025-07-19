@@ -5,6 +5,7 @@ import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTra
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import { useRef } from 'react';
+import { FaCode } from 'react-icons/fa';
 
 const functionRoutesForXeroToXero = {
   Masters: {
@@ -753,6 +754,7 @@ const XeroToXero = () => {
           <div className="flex items-center gap-2">
             <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
             <span className="text-gray-400">|</span>
+            <FaCode className="text-blue-400" />
             <span className="italic">Xero → Xero</span>
           </div>
           <div className="text-xs text-gray-500 tracking-wider">

@@ -6,6 +6,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { FaCode } from 'react-icons/fa';
 
 const functionRoutesForReckonDesktopHostedToXero = {
   Masters: {
@@ -630,18 +631,6 @@ const ReckonDesktopHostedToXero = () => {
           </div>
         </main>
       </div>
-      {/* {showDownloadConfirm && (
-        <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
-          <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
-            <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
-            <p>Are you sure you want to download the file for <strong>{selectedFunction}</strong>?</p>
-            <div className="flex justify-end gap-4 mt-6">
-              <button onClick={() => setShowDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
-              <button onClick={confirmDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download</button>
-            </div>
-          </div>
-        </div>
-      )} */}
 
       {showSingleDownloadConfirm && (
         <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
@@ -801,6 +790,7 @@ const ReckonDesktopHostedToXero = () => {
           <div className="flex items-center gap-2">
             <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
             <span className="text-gray-400">|</span>
+            <FaCode className="text-blue-400" />
             <span className="italic">Reckon Desktop Hosted → Xero</span>
           </div>
           <div className="text-xs text-gray-500 tracking-wider">

@@ -4,7 +4,7 @@ import NewFileModal from '../components/NewFileModal';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-
+import { FaCode } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
@@ -74,11 +74,12 @@ const Dashboard = () => {
   const completedFiles = files.filter(f => f.status === 'completed');
 
   return (
-    <div className="min-h-screen gradient-bg text-white">
+    <div className="min-h-screen flex flex-col gradient-bg text-white">
       <Navbar user={user} />
-      <div className="min-h-screen gradient-bg text-white px-10 py-8">
+      <div className="flex-grow px-10 py-8 overflow-auto">
         <Toaster position="top-right" />
         <NewFileModal isOpen={modalOpen} setIsOpen={setModalOpen} onAddFile={handleCreate} />
+
 
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold flex items-center gap-2">
@@ -179,6 +180,23 @@ const Dashboard = () => {
           </div>
         </section>
       </div>
+      {/* 🔻 Fixed Footer Section 🔻 */}
+      <footer className="bg-[#0f172a] border-t border-blue-800 text-gray-400 text-sm py-4 fixed bottom-0 left-0 w-full z-50">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
+            <span className="text-gray-400">|</span>
+            <FaCode className="text-blue-400" />
+            <span className="italic">Dashboard</span>
+          </div>
+          <div className="text-xs text-gray-500 tracking-wider">
+            © {new Date().getFullYear()} MMC Convert. All rights reserved.
+          </div>
+        </div>
+      </footer>
+      {/* 🔺 End Footer Section 🔺 */}
+
+
     </div>
   );
 };
