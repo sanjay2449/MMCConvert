@@ -89,7 +89,7 @@ const Dashboard = () => {
             onClick={() => setModalOpen(true)}
             className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm font-medium"
           >
-            + New Action
+            + Create New File
           </button>
         </div>
 

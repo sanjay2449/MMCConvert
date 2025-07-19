@@ -364,16 +364,16 @@ const ReckonDesktopHostedToXero = () => {
       setLoading(false);
     }
   };
-const handleDownload = () => {
-  if (["manualJournal"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["receiveMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) ||
-    ["spendMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["salesReceipt"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
-    || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["allType"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
-  ) { 
-    confirmMultiDownload(); // Skip modal OR use a separate modal
-  } else {
-    setShowDownloadConfirm(true); // default modal for single file
-  }
-};
+// const handleDownload = () => {
+//   if (["manualJournal"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["receiveMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) ||
+//     ["spendMoney"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["salesReceipt"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
+//     || ["bankTransfer"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction]) || ["allType"].includes(currentFunctionRoutes[sectionKeyMap[openSection]]?.[selectedFunction])
+//   ) { 
+//     confirmMultiDownload(); // Skip modal OR use a separate modal
+//   } else {
+//     setShowDownloadConfirm(true); // default modal for single file
+//   }
+// };
   
 
   const fetchHistory = async () => {
