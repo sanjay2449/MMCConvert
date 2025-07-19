@@ -360,7 +360,7 @@ const ReckonDesktopHostedToXero = () => {
       console.error("Download error", err);
       toast.error("Multi Download failed");
     } finally {
-      setShowDownloadConfirm(false); // or setShowMultiDownloadConfirm(false) if you're using a separate modal
+      setShowMultiDownloadConfirm(false); // or setShowMultiDownloadConfirm(false) if you're using a separate modal
       setLoading(false);
     }
   };

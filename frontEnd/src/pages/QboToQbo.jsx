@@ -315,29 +315,6 @@ const QboToQbo = () => {
     }
   };
 
-  // const handleHistoryDownload = async (entry) => {
-  //   try {
-  //     const encodedSheetName = encodeURIComponent(entry.sheetName);
-  //     const response = await fetch(`/downloads/${file._id}/${encodedSheetName}`);
-  //     if (!response.ok) throw new Error("Download failed");
-
-  //     const blob = await response.blob();
-  //     const url = window.URL.createObjectURL(blob);
-
-  //     const link = document.createElement("a");
-  //     link.href = url;
-  //     link.setAttribute("download", entry.sheetName); 
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     link.remove();
-
-  //     toast.success("Downloaded again");
-  //   } catch (error) {
-  //     toast.error("Download failed");
-  //     console.error("Error in handleHistoryDownload:", error);
-  //   }
-  // };
-
   const handleHistoryDownload = async (entry) => {
     const currencyPath = getCurrencyPath();
   
