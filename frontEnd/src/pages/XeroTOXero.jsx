@@ -755,7 +755,8 @@ const XeroToXero = () => {
             <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
             <span className="text-gray-400">|</span>
             <FaCode className="text-blue-400" />
-            <span className="italic">Xero → Xero</span>
+            <span className="italic font-serif">{file?.softwareType}</span>
+            <span className="italic">{file?.countryName}</span>
           </div>
           <div className="text-xs text-gray-500 tracking-wider">
             © {new Date().getFullYear()} MMC Convert. All rights reserved.

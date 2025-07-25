@@ -187,7 +187,7 @@ const Dashboard = () => {
             <span className="text-blue-400 font-bold tracking-wide">MMC Convert</span>
             <span className="text-gray-400">|</span>
             <FaCode className="text-blue-400" />
-            <span className="italic">Dashboard</span>
+            <span className="italic font-serif">User Dashboard</span>
           </div>
           <div className="text-xs text-gray-500 tracking-wider">
             © {new Date().getFullYear()} MMC Convert. All rights reserved.
@@ -195,8 +195,6 @@ const Dashboard = () => {
         </div>
       </footer>
       {/* 🔺 End Footer Section 🔺 */}
-
-
     </div>
   );
 };
