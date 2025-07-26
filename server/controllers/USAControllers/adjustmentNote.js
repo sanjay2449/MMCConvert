@@ -7,7 +7,7 @@ const type = "Adjustmentnote";
 const { excelFilePath, outputJsonPath, modifiedExcelPath } = getPaths(type);
 
 const changeColumnName = {
-    "Num": "Adjustment Note No",
+    "No.": "Adjustment Note No",
     "Name": "Customer",
     "Date": "Adjustment Note Date",
     "Service Date": "Service Date",
@@ -85,6 +85,46 @@ function processData(data) {
     });
 }
 
+function processAdjustmentMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        // Fill missing values
+        if (row["Product/Service Tax Amount"] === undefined || row["Product/Service Tax Amount"] === "") {
+            row["Product/Service Tax Amount"] = 0;
+        }
+        if (!row["Product/Service Quantity"]) {
+            row["Product/Service Quantity"] = 1;
+        }
+        if (!row["Product/Service Tax Code"]) {
+            row["Product/Service Tax Code"] = "Out Of Scope";
+            row["Product/Service Tax Amount"] = 0;
+        }
+
+        // Remove minus sign from Product/Service Quantity
+        if (typeof row["Product/Service Quantity"] === "string" || typeof row["Product/Service Quantity"] === "number") {
+            row["Product/Service Quantity"] = row["Product/Service Quantity"].toString().replace("-", "");
+        }
+
+        // Calculate Amount and Rate
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+        if (row["Currency Code"] === currencyCode) {
+            row["Product/Service Amount"] = (debit - credit).toFixed(2);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Product/Service Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+
+        const amount = parseFloat(row["Product/Service Amount"]) || 0;
+        const quantity = parseFloat(row["Product/Service Quantity"]) || 1;
+        row["Product/Service Rate"] = quantity !== 0 ? (amount / quantity).toFixed(2) : 0;
+
+        const taxAmount = parseFloat(row["Product/Service Tax Amount"]);
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 function removeInvalidRows(data) {
     return data.filter(row => {
         const accountName = (row["Account"] || "").toLowerCase();
@@ -125,7 +165,7 @@ export async function uploadAdjustmentNote(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅ Global Adjustmnet Note file saved at:", excelFilePath);
+        console.log("✅USA Adjustmnet Note file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -148,7 +188,32 @@ export async function processAdjustmentNote(req, res) {
         const numberFields = ["Product/Service Amount", "Product/Service Rate", "Product/Service Tax Amount"];
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields);
 
-        console.log("✅ Global Adjustment Note Excel processed.");
+        console.log("✅USA Adjustment Note Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+// ⚙️ Process Controller
+export async function processMultiCurrencyAdjustment(req, res) {
+    const { currencyCode } = req.body;
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+        jsonData = renameColumns(jsonData, changeColumnName);
+        // jsonData = processData(jsonData);
+        jsonData = processAdjustmentMultiCurrencyData(jsonData, currencyCode);
+        jsonData = removeInvalidRows(jsonData);
+        jsonData = normalizeInvoiceNumbers(jsonData);
+        jsonData = sortByInvoiceNo(jsonData);
+        jsonData = filterColumns(jsonData);
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Product/Service Amount", "Product/Service Rate", "Product/Service Tax Amount"];
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields);
+
+        console.log("✅USA MultiCurrency Adjustment Note Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

@@ -1,6 +1,6 @@
 import { move, pathExists } from "fs-extra";
 import ExcelJS from "exceljs";
-import {readExcelToJson} from "../../utils/excelReader.js";
+import { readExcelToJson } from "../../utils/excelReader.js";
 import { writeJsonToExcel, saveJsonToFile } from "../../utils/excelWriter.js";
 import { getPaths } from "../../utils/filePaths.js";
 
@@ -14,6 +14,7 @@ const changeColumnName = {
     "Due Date": "Due Date",
     "Memo/Description": "Product/Service Description",
     "Open Balance": "Product/Service Amount",
+    "Foreign Open Balance": "Foreign Open Balance",
     "Class": "Product/Service Class",
     "Currency": "Currency",
     "Exchange Rate": "Exchange Rate",
@@ -26,6 +27,7 @@ const changeColumnNameForAdjustmentNote = {
     "Invoice Date": "Adjustment Note Date",
     "Memo/Description": "Product/Service Description",
     "Open Balance": "Product/Service Amount",
+    "Foreign Open Balance": "Foreign Open Balance",
     "Class": "Product/Service Class",
     "Currency": "Currency",
     "Exchange Rate": "Exchange Rate",
@@ -69,6 +71,20 @@ function assignInvoiceType(data) {
     });
 }
 
+function assignMultiCurrencyInvoiceType(data) {
+    return data.map(row => {
+        let amount = parseFloat(row["Foreign Open Balance"]) || 0;
+        row["Type"] = amount < 0 ? "Adjustment note" : "Invoice";
+        amount = Math.abs(amount);
+        const formattedAmount = Number(amount.toFixed(2));
+        row["Product/Service Amount"] = formattedAmount;
+        row["Product/Service Rate"] = formattedAmount;
+        row["Product/Service Quantity"] = 1;
+        row["Product/Service"] = "Sales";
+        return row;
+    });
+}
+
 function normalizeInvoiceNumbers(data) {
     return data.map(row => {
         let invoiceNo = row["Invoice No"]?.toString().trim() || "";
@@ -83,7 +99,7 @@ export async function uploadOpenAR(req, res) {
 
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅Global Open-AR file saved at:", excelFilePath);
+        console.log("✅USA Open-AR file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -139,7 +155,62 @@ export async function processOpenAR(req, res) {
 
         await workbook.xlsx.writeFile(modifiedExcelPath);
 
-        console.log("✅Global Open-AR Excel processed with 2 sheets.");
+        console.log("✅USA Open-AR Excel processed with 2 sheets.");
+        res.send("Excel processed and split into Invoices and Adjustment Notes.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+export async function processMultiCurrencyOpenAR(req, res) {
+    try {
+        const jsonData = await readExcelToJson(excelFilePath);
+        const renamedData = renameColumns(jsonData, changeColumnName);
+        const withType = assignMultiCurrencyInvoiceType(renamedData);
+        const normalizedData = normalizeInvoiceNumbers(withType);
+
+        // Split by Type
+        const invoiceData = normalizedData.filter(row => row.Type === "Invoice");
+        const adjustmentNoteDataRaw = normalizedData.filter(row => row.Type === "Adjustment note");
+
+        // Rename for adjustment notes
+        const adjustmentNoteData = renameColumns(adjustmentNoteDataRaw, changeColumnNameForAdjustmentNote);
+
+        // Filter columns
+        const filteredInvoiceData = invoiceData.map(row => {
+            const filtered = {};
+            for (const col of allowedInvoiceColumns) {
+                filtered[col] = row[col] ?? "";
+            }
+            return filtered;
+        });
+
+        const filteredAdjustmentNoteData = adjustmentNoteData.map(row => {
+            const filtered = {};
+            for (const col of allowedAdjustmentNoteColumns) {
+                filtered[col] = row[col] ?? "";
+            }
+            return filtered;
+        });
+
+        // Save combined JSON
+        await saveJsonToFile([...filteredInvoiceData, ...filteredAdjustmentNoteData], outputJsonPath);
+
+        // Create Excel with 2 sheets
+        const workbook = new ExcelJS.Workbook();
+
+        const invoiceSheet = workbook.addWorksheet("Invoices");
+        invoiceSheet.columns = allowedInvoiceColumns.map(header => ({ header, key: header }));
+        invoiceSheet.addRows(filteredInvoiceData);
+
+        const adjustmentSheet = workbook.addWorksheet("Adjustment Notes");
+        adjustmentSheet.columns = allowedAdjustmentNoteColumns.map(header => ({ header, key: header }));
+        adjustmentSheet.addRows(filteredAdjustmentNoteData);
+
+        await workbook.xlsx.writeFile(modifiedExcelPath);
+
+        console.log("✅USA MultiCurrency Open-AR Excel processed with 2 sheets.");
         res.send("Excel processed and split into Invoices and Adjustment Notes.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

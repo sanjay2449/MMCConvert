@@ -106,6 +106,46 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        if (row["Tax Amount"] === undefined || row["Tax Amount"] === "") {
+            row["Tax Amount"] = 0;
+        }
+        if (!row["Quantity"]) {
+            row["Quantity"] = 1;
+        }
+        if (!row["Tax Code"]) {
+            row["Tax Code"] = "Out Of Scope";
+            row["Tax Amount"] = 0;
+        }
+
+        row["Tax Amount"] = Math.abs(parseFloat(row["Tax Amount"]) || 0).toFixed(4);
+
+        if (typeof row["Quantity"] === "string" || typeof row["Quantity"] === "number") {
+            row["Quantity"] = row["Quantity"].toString().replace("-", "");
+        }
+
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+
+        // Logic for handling Base Currency (Amount = Debit - Credit)
+        if (row["Currency Code"] === currencyCode) {
+            row["Amount"] = (credit - debit).toFixed(2);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+
+        const amount = parseFloat(row["Line Amount"]) || 0;
+        const quantity = parseFloat(row["Quantity"]) || 1;
+        row["Unit Price/Rate"] = quantity !== 0 ? (amount / quantity).toFixed(4) : 0;
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 function removeInvalidRows(data) {
     return data.filter(row => {
         const accountName = (row["Account"] || "").toLowerCase();
@@ -138,7 +178,7 @@ export async function uploadSupplierCredit(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅Global Supplier Credit file saved at:", excelFilePath);
+        console.log("✅USASupplier Credit file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -165,7 +205,37 @@ export async function processSupplierCredit(req, res) {
         const dateFields = ["Date"];
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
-        console.log("✅Global Supplier Credit Excel processed.");
+        console.log("✅USASupplier Credit Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+// ⚙️ Process MultiCurrencyController
+export async function processMultiCurrencySupplierCredit(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        // 👇 Correct sequence as per your instruction
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = sortByInvoiceNo(jsonData);
+        // jsonData = fillDownDueDate(jsonData);
+        // jsonData = processData(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode); // 🟰 Pass currencyCode to processData
+        jsonData = removeInvalidRows(jsonData);
+        jsonData = normalizeInvoiceNumbers(jsonData);
+        jsonData = filterColumns(jsonData);
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Amount", "Tax Amount", "Unit Price/Rate"];
+        const dateFields = ["Date"];
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("✅USAMultiCurrency Supplier Credit Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);
