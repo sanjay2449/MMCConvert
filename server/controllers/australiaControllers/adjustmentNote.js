@@ -108,7 +108,7 @@ function processAdjustmentMultiCurrencyData(data, currencyCode) {
         const debit = parseFloat(row["Debit"] || 0);
         const credit = parseFloat(row["Credit"] || 0);
         if (row["Currency Code"] === currencyCode) {
-            row["Product/Service Amount"] = (credit - debit).toFixed(2);
+            row["Product/Service Amount"] = (debit - credit).toFixed(2);
         } else {
             // Logic for handling foreign currencies (Amount = Foreign Amount)
             row["Product/Service Amount"] = parseFloat(row["Foreign Amount"]);

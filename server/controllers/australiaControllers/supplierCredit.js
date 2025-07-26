@@ -130,10 +130,10 @@ function processMultiCurrencyData(data, currencyCode) {
 
         // Logic for handling Base Currency (Amount = Debit - Credit)
         if (row["Currency Code"] === currencyCode) {
-            row["Line Amount"] = (debit - credit).toFixed(4);
+            row["Amount"] = (credit - debit).toFixed(2);
         } else {
             // Logic for handling foreign currencies (Amount = Foreign Amount)
-            row["Line Amount"] = parseFloat(row["Foreign Amount"]);
+            row["Amount"] = parseFloat(row["Foreign Amount"]);
         }
 
         const amount = parseFloat(row["Line Amount"]) || 0;
