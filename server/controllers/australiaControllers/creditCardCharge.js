@@ -1,5 +1,5 @@
 import { move, pathExists } from "fs-extra";
-import {readExcelToJson} from "../../utils/excelReader.js";
+import { readExcelToJson } from "../../utils/excelReader.js";
 import { writeJsonToExcel, saveJsonToFile } from "../../utils/excelWriter.js";
 import { getPaths } from "../../utils/filePaths.js";
 
@@ -99,13 +99,42 @@ function processData(data) {
         if (!row["Expense Tax Code"]) {
             row["Expense Tax Code"] = "Out Of Scope";
             row["Expense Account Tax Amount"] = 0;
-        }     
+        }
 
         row["Global Tax Calculation"] = "TaxExcluded";
 
         return row;
     });
 }
+
+function processMultiCurrencyData(data) {
+    return data.map(row => {
+        if (row["Expense Account Tax Amount"] === undefined || row["Expense Account Tax Amount"] === "") {
+            row["Expense Account Tax Amount"] = 0;
+        }
+        if (!row["Expense Tax Code"]) {
+            row["Expense Tax Code"] = "Out Of Scope";
+            row["Expense Account Tax Amount"] = 0;
+        }
+
+        
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+
+        // Logic for handling Base Currency (Amount = Debit - Credit)
+        if (row["Currency Code"] === currencyCode) {
+            row["Expense Line Amount"] = (debit - credit).toFixed(4);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Expense Line Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 
 // 🟩 Upload Controller
 export async function uploadCreditCardCharge(req, res) {
@@ -136,6 +165,31 @@ export async function processCreditCardCharge(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("✅Australia Credit Card Charge (Expense) Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+// ⚙️ Process Controller
+export async function processMultiCurrencyCreditCardCharge(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addDepositNumber(jsonData);
+        jsonData = filterColumns(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode); // 🟰 Pass currencyCode to processData
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Expense Account Tax Amount", "Exchange Rate", "Expense Line Amount"];
+        const dateFields = ["Payment Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("✅Australia MultiCurrency Credit Card Charge (Expense) Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

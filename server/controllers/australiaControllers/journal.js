@@ -1,5 +1,5 @@
 import { move, pathExists } from "fs-extra";
-import {readExcelToJson} from "../../utils/excelReader.js";
+import { readExcelToJson } from "../../utils/excelReader.js";
 import { writeJsonToExcel, saveJsonToFile } from "../../utils/excelWriter.js";
 import { getPaths } from "../../utils/filePaths.js";
 
@@ -97,6 +97,24 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data) {
+    return data.map(row => {
+        const debit = parseFloat(row["JournalLineDebitAmount"]) || 0;
+        const credit = parseFloat(row["JournalLineCreditAmount"]) || 0;
+
+        // const amount = debit - credit;
+        
+        // Logic for handling Base Currency (Amount = Debit - Credit)
+        if (row["Currency Code"] === currencyCode) {
+            row["Amount"] = (debit - credit).toFixed(4);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+        row["Amount"] = isNaN(amount) ? "" : amount.toFixed(2);
+        return row;
+    });
+}
 
 // 🟩 Upload Controller
 export async function uploadJournal(req, res) {
@@ -127,6 +145,29 @@ export async function processJournal(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("✅Australia Journal Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+// ⚙️ Process Controller
+export async function processMultiCurrencyJournal(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addJournalNumber(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+        jsonData = filterColumns(jsonData);
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Amount", "Exchange Rate"];
+        const dateFields = ["Journal Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("✅Australia MultiCurrency Journal Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

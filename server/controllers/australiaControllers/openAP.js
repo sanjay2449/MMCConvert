@@ -18,6 +18,7 @@ const changeColumnName = {
     "Location": "Location",
     "Memo/Description": "Memo",
     "Open Balance": "LineAmount",
+    "Foreign Open Balance": "Foreign Open Balance",
     "Currency": "Currency",
     "Exchange rate": "Exchange rate",
 };
@@ -31,6 +32,7 @@ const changeBillCreditColumnName = {
     "Account": "Expense Account",
     "Memo": "Expense Description",
     "LineAmount": "Expense Line Amount",
+    "Foreign Open Balance": "Foreign Open Balance",
     "Currency": "Currency Code",
     "Exchange rate": "Exchange rate",
 };
@@ -60,6 +62,18 @@ function renameColumns(data, changeMap) {
 function assignBillType(data) {
     return data.map(row => {
         let amount = parseFloat(row["LineAmount"]) || 0;
+        row["Type"] = amount < 0 ? "Bill credit" : "Bill";
+        amount = Math.abs(amount);
+        row["LineAmount"] = Number(amount.toFixed(2));
+        row["Account"] = "Retained earnings";
+        row["LineDescription"] = row["Memo"] || "";
+        return row;
+    });
+}
+
+function assignMultiCurrencyBillType(data) {
+    return data.map(row => {
+        let amount = parseFloat(row["Foreign Open Balance"]) || 0;
         row["Type"] = amount < 0 ? "Bill credit" : "Bill";
         amount = Math.abs(amount);
         row["LineAmount"] = Number(amount.toFixed(2));
@@ -146,6 +160,68 @@ export async function processOpenAP(req, res) {
         await workbook.xlsx.writeFile(modifiedExcelPath);
 
         console.log("✅Australia Open-AP Excel processed into 2 sheets.");
+        res.send("Excel processed into Bills and Bill Credits.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send(`Error processing Excel file: ${error.message}`);
+    }
+}
+
+// ⚙️ Process Controller (2 sheets by Type)
+export async function processMultiCurrencyOpenAP(req, res) {
+    try {
+        const jsonData = await readExcelToJson(excelFilePath);
+
+        // Step 1: Rename columns to internal format
+        const renamedData = renameColumns(jsonData, changeColumnName);
+
+        // Step 2: Assign type, transform line amount, etc.
+        const typedData = assignMultiCurrencyBillType(renamedData);
+
+        // Step 3: Normalize BillNo
+        const normalizedData = normalizeBillNumbers(typedData);
+
+        // Step 4: Split by type
+        const billData = normalizedData.filter(row => row.Type === "Bill");
+        const billCreditDataRaw = normalizedData.filter(row => row.Type === "Bill credit");
+
+        // Step 5: Rename columns for Bill Credit sheet
+        const billCreditData = renameColumns(billCreditDataRaw, changeBillCreditColumnName);
+
+        // Step 6: Filter final columns
+        const filteredBillData = billData.map(row => {
+            const filtered = {};
+            for (const col of allowedBillColumns) {
+                filtered[col] = row[col] ?? "";
+            }
+            return filtered;
+        });
+
+        const filteredBillCreditData = billCreditData.map(row => {
+            const filtered = {};
+            for (const col of allowedBillCreditColumns) {
+                filtered[col] = row[col] ?? "";
+            }
+            return filtered;
+        });
+
+        // Step 7: Save combined JSON
+        await saveJsonToFile([...filteredBillData, ...filteredBillCreditData], outputJsonPath);
+
+        // Step 8: Write to Excel with 2 sheets
+        const workbook = new ExcelJS.Workbook();
+
+        const billSheet = workbook.addWorksheet("Bills");
+        billSheet.columns = allowedBillColumns.map(header => ({ header, key: header }));
+        billSheet.addRows(filteredBillData);
+
+        const creditSheet = workbook.addWorksheet("Bill Credits");
+        creditSheet.columns = allowedBillCreditColumns.map(header => ({ header, key: header }));
+        creditSheet.addRows(filteredBillCreditData);
+
+        await workbook.xlsx.writeFile(modifiedExcelPath);
+
+        console.log("✅Australia MultiCurrency Open-AP Excel processed into 2 sheets.");
         res.send("Excel processed into Bills and Bill Credits.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

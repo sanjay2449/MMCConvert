@@ -85,6 +85,32 @@ function processData(data) {
         return row;
     });
 }
+function processMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        if (row["Expense Account Tax Amount"] === undefined || row["Expense Account Tax Amount"] === "") {
+            row["Expense Account Tax Amount"] = 0;
+        }
+        if (!row["Expense Tax Code"]) {
+            row["Expense Tax Code"] = "Out Of Scope";
+            row["Expense Account Tax Amount"] = 0;
+        }     
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+
+        // Logic for handling Base Currency (Amount = Debit - Credit)
+        if (row["Currency Code"] === currencyCode) {
+            row["Line Amount"] = (debit - credit).toFixed(4);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Line Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+
+        return row;
+    });
+}
 
 // 🟩 Upload Controller
 export async function uploadCheque(req, res) {
@@ -115,6 +141,31 @@ export async function processCheque(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("✅Australia Cheque Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+
+// ⚙️ Process Controller
+export async function processMultiCurrencyCheque(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addChequeNumber(jsonData);
+        jsonData = filterColumns(jsonData);                  
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+        
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Expense Line Amount", "Expense Account Tax Amount", "Exchange Rate"];
+        const dateFields = ["Payment Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("✅Australia MultiCurrency Cheque Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

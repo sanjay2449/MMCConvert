@@ -103,6 +103,29 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data) {
+    return data.map(row => {
+        if (!row["Line Tax Code"]) {
+            row["Line Tax Code"] = "Out Of Scope";
+        }     
+
+        const debit = parseFloat(row["Debit"] || 0);
+        const credit = parseFloat(row["Credit"] || 0);
+
+        // Logic for handling Base Currency (Amount = Debit - Credit)
+        if (row["Currency Code"] === currencyCode) {
+            row["Line Amount"] = (debit - credit).toFixed(4);
+        } else {
+            // Logic for handling foreign currencies (Amount = Foreign Amount)
+            row["Line Amount"] = parseFloat(row["Foreign Amount"]);
+        }
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 // 🟩 Upload Controller
 export async function uploadDeposit(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
@@ -126,13 +149,40 @@ export async function processDeposit(req, res) {
         jsonData = filterColumns(jsonData);
         jsonData = processData(jsonData);
 
-
         await saveJsonToFile(jsonData, outputJsonPath);
         const numberFields = ["Line Amount", "Exchange Rate"];
         const dateFields = ["Date"]
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("✅Australia Deposit Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+
+// ⚙️ Process Controller
+export async function processMultiCurrencyDeposit(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addDepositNumber(jsonData);
+        jsonData = filterColumns(jsonData);
+        // jsonData = processData(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+
+        
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Line Amount", "Exchange Rate"];
+        const dateFields = ["Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("✅Australia MultiCurrency Deposit Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);
