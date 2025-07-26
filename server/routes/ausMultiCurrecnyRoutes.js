@@ -25,8 +25,8 @@ import { downloadInvoicePayment, processInvoicePayment, uploadInvoicePayment } f
 import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/australiaControllers/billPaymentCreditCard.js";
 import { downloadOpeningBalance, processOpeningBalance, uploadOpeningBalance } from "../controllers/australiaControllers/openingBalance.js";
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/australiaControllers/journalEntry.js";
-import{ downloadEstimates, processEstimates, uploadEstimates } from "../controllers/australiaControllers/estimates.js"; 
-import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/australiaControllers/purchaseOrder.js"
+import { downloadEstimates, processEstimates, uploadEstimates } from "../controllers/australiaControllers/estimates.js";
+import { downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/australiaControllers/purchaseOrder.js"
 
 
 // Utility to wrap async route handlers and catch errors
@@ -109,6 +109,6 @@ router.get("/download-invoicepayment", asyncHandler(downloadInvoicePayment));
 router.get("/download-billpaymentcreditcard", asyncHandler(downloadBillPaymentCreditCard));
 router.get("/download-openingbalance", asyncHandler(downloadOpeningBalance));
 router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
-router.get("/download-estimates", asyncHandler(downloadEstimates)); 
-router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder)); 
+router.get("/download-estimates", asyncHandler(downloadEstimates));
+router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder));
 export default router;
