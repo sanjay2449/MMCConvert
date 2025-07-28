@@ -193,7 +193,7 @@ const Navbar = ({ userDetail }) => {
       <AnimatePresence>
         {showLogoutConfirm && (
           <motion.div
-            className="fixed inset-0 gradient-bg bg-opacity-60 flex items-center justify-center z-[9999]"
+            className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] bg-opacity-60 flex items-center justify-center z-[9999]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

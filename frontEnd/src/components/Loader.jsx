@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 gradient-bg flex flex-col items-center justify-center z-[9999]">
+    <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] flex flex-col items-center justify-center z-[9999]">
       {/* Gradient border wrapper */}
       <div className="bg-gradient-to-r from-blue-400 via-red-500 to-pink-500 p-[3px] rounded-full mb-4">
         {/* Inner white circle to simulate border */}

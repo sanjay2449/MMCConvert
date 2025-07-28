@@ -201,8 +201,8 @@ const AdminDashboard = () => {
                                 )}
                                 {/* Add User Modal */}
                                 {isModalOpen && (
-                                        <div className="fixed inset-0 z-50 gradient-bg bg-opacity-40 flex justify-center items-center">
-                                                <div className="gradient-bg rounded-xl shadow-lg p-6 relative w-full max-w-md">
+                                        <div className="fixed inset-0 z-50 bg-gradient-to-r from-[#0b1a3b] to-[#112240] bg-opacity-40 flex justify-center items-center">
+                                                <div className="gradient-bg rounded-4xl shadow-lg p-5 relative w-full max-w-md">
                                                         <button
                                                                 onClick={handleCloseModal}
                                                                 className="absolute top-3 right-4 text-2xl text-white hover:text-red-400"

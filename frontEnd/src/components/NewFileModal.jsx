@@ -70,7 +70,7 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 gradient-bg" aria-hidden="true" />
+            <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240]" aria-hidden="true" />
           </Transition.Child>
 
           <div className="fixed inset-0 flex items-center justify-center p-4">

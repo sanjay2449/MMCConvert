@@ -619,7 +619,7 @@ const QboToQbo = () => {
         </div>
       )}
       {showHistoryModal && (
-        <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] bg-opacity-60 z-50 flex items-center justify-center">
           <div
             ref={historyRef}
             className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
@@ -637,7 +637,7 @@ const QboToQbo = () => {
                 historyData.map((entry, index) => (
                   <div
                     key={index}
-                    className="gradient-bg text-white rounded-lg px-4 py-3 mb-4 flex justify-between items-center shadow-md"
+                    className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-white rounded-lg px-4 py-3 mb-4 flex justify-between items-center shadow-md"
                   >
                     <div>
                       <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
@@ -675,7 +675,7 @@ const QboToQbo = () => {
         </div>
       )}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] bg-opacity-60 z-50 flex items-center justify-center">
           <div className="gradient-bg text-white rounded-xl p-6 w-full max-w-sm shadow-2xl border border-gray-300">
             <h3 className="text-xl font-semibold mb-4">Confirm Deletion</h3>
             <p className="mb-6 text-sm text-white">Are you sure you want to delete this entry?</p>

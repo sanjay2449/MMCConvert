@@ -36,7 +36,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="h-100 w-100 rounded-4xl flex items-center justify-center gradient-bg relative overflow-hidden">
+    <div className="h-100 w-100 rounded-4xl flex items-center justify-center bg-gradient-to-r from-[#0b1a3b] to-[#112240] relative overflow-hidden">
       {/* Animated Background Blobs */}
       <motion.div
         className="absolute top-0 left-0 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob"

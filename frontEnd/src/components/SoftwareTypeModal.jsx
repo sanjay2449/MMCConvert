@@ -23,7 +23,7 @@ export default function SoftwareTypeModal({ isOpen, onSelect, onClose }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 gradient-bg" />
+          <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240]" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -57,7 +57,7 @@ export default function SoftwareTypeModal({ isOpen, onSelect, onClose }) {
                           alt={type.name}
                           className="h-40 w-full object-cover"
                         />
-                        <div className="gradient-bg text-center font-semibold text-white">
+                        <div className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-center font-semibold text-white">
                           {type.name}
                         </div>
                       </div>
