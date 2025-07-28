@@ -60,7 +60,7 @@ const Navbar = ({ userDetail }) => {
   }, []);
 
   return (
-    <nav className="gradient-bg text-white shadow-md sticky top-0 z-50">
+    <nav className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-white shadow-md sticky top-0 z-50">
       <ToastContainer />
       <div className="px-6 py-4 flex justify-between items-center">
 
@@ -80,7 +80,7 @@ const Navbar = ({ userDetail }) => {
           <div className="flex items-center justify-center flex-wrap gap-6 mt-1 text-sm">
             {/* File Name */}
             {userDetail?.name && (
-              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+              <div className="flex items-center gap-1 gradient-bg px-2 py-1 rounded-md">
                 <span className="text-yellow-400">📁</span>
                 <span className="text-gray-200">File Name:</span>
                 <span className="text-white font-medium">{userDetail.name}</span>
@@ -89,7 +89,7 @@ const Navbar = ({ userDetail }) => {
 
             {/* Country */}
             {userDetail?.country && (
-              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+              <div className="flex items-center gap-1 gradient-bg px-2 py-1 rounded-md">
                 <span className="text-green-400">🌍</span>
                 <span className="text-gray-200">Country:</span>
                 <span className="text-white font-medium">{userDetail.country}</span>
@@ -98,7 +98,7 @@ const Navbar = ({ userDetail }) => {
 
             {/* Currency Status */}
             {userDetail?.currencyStatus && (
-              <div className="flex items-center gap-1 bg-blue-800 px-2 py-1 rounded-md">
+              <div className="flex items-center gap-1 gradient-bg px-2 py-1 rounded-md">
                 <span className="text-purple-400">💱</span>
                 <span className="text-gray-200">Currency Status:</span>
                 <span className="text-white font-medium">{userDetail.currencyStatus}</span>
@@ -123,7 +123,7 @@ const Navbar = ({ userDetail }) => {
           >
             <button
               onClick={() => setShowLogoutConfirm(true)}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full shadow-md transition-all"
+              className="flex items-center gap-2 gradient-bg px-4 py-2 rounded-full shadow-md transition-all"
             >
               <img
                 src={`https://ui-avatars.com/api/?name=${user?.name || 'User'}`}
@@ -138,7 +138,7 @@ const Navbar = ({ userDetail }) => {
               {showDetails && (
                 <motion.div
                   ref={detailRef}
-                  className="absolute top-14 right-0 gradient-bg text-white shadow-xl rounded-xl p-4 w-80 z-50"
+                  className="absolute top-14 right-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-white shadow-xl rounded-xl p-4 w-80 z-50"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
