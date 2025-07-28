@@ -195,7 +195,6 @@ export async function uploadBill(req, res) {
 // ⚙️ Process Controller
 export async function processMultiCurrencyBill(req, res) {
     const { currencyCode } = req.body;  // Currency code passed from frontend
-
     try {
         let jsonData = await readExcelToJson(excelFilePath);
 

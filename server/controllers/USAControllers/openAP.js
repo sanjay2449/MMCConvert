@@ -169,6 +169,8 @@ export async function processOpenAP(req, res) {
 
 // ⚙️ Process Controller (2 sheets by Type)
 export async function processMultiCurrencyOpenAP(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+
     try {
         const jsonData = await readExcelToJson(excelFilePath);
 
@@ -176,7 +178,7 @@ export async function processMultiCurrencyOpenAP(req, res) {
         const renamedData = renameColumns(jsonData, changeColumnName);
 
         // Step 2: Assign type, transform line amount, etc.
-        const typedData = assignMultiCurrencyBillType(renamedData);
+        const typedData = assignMultiCurrencyBillType(renamedData, currencyCode);
 
         // Step 3: Normalize BillNo
         const normalizedData = normalizeBillNumbers(typedData);

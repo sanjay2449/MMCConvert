@@ -1,0 +1,82 @@
+[
+  {
+    "Transfer Funds From": "BANCOS:Cta.Otros Ingresos-21-302-0332488",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 53409,
+    "Date": 44377,
+    "Privatenote": "Contra parte de EOS Honduras mes de Junio",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "3984"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Funds To": "BANCOS:Cta.BeneficiosLab-21-302-0332496",
+    "Transfer Amount": 36500,
+    "Date": 44377,
+    "Privatenote": "Beneficios Laborales de el mes de Junio",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "3985"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Funds To": "BANCOS:Cta.BeneficiosLab-21-302-0332496",
+    "Transfer Amount": 2484,
+    "Date": 44377,
+    "Privatenote": "Seguro de vida de los empleados de EOS.",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "3986"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Transf-USD-22-302-0013169",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 197925.93,
+    "Date": 44384,
+    "Privatenote": "Tranferiancia a la cuenta de gastos operativos de el mes de Julio",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "4163"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Transf-USD-22-302-0013169",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 990.62,
+    "Date": 44384,
+    "Privatenote": "Tranferencia de fondo a la cuenta de gastos operativos de fondo no ejecutados.",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "4164"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Transf-USD-22-302-0013169",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 197422.47,
+    "Date": 44419,
+    "Privatenote": "Gastos Operativos de el mes de Agosto",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "4263"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Transf-USD-22-302-0013169",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 147119.54,
+    "Date": 44441,
+    "Privatenote": "Transferencia  de fondo para gastos operativos de el mes de Septiembre ($ 6141.65)",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "4446"
+  },
+  {
+    "Transfer Funds From": "BANCOS:Cta.Otros Ingresos-21-302-0332488",
+    "Transfer Funds To": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Transfer Amount": 78243,
+    "Date": 44530,
+    "Privatenote": "Contra Parte de EOS de el mes de Noviembre.",
+    "Currency Code": "HNL",
+    "Exchange Rate": 0,
+    "Ref no.": "5228"
+  }
+]

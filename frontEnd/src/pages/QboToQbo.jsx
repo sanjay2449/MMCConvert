@@ -118,8 +118,8 @@ const QboToQbo = () => {
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
   const countryRoute = {
-    Australia: 'australia',
-    USA: 'usa',
+    "Australia (AU)": 'australia',
+    "The United States of America (USA)": 'usa',
   }[rawCountry] || rawCountry?.toLowerCase().replace(/\s+/g, '');
   const combinedRoutePrefix = `excel-${countryRoute}-${softwareType}`;
   const currentFunctionRoutes = functionRoutesForQboToQbo;

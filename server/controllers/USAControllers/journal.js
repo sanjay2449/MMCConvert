@@ -97,16 +97,16 @@ function processData(data) {
     });
 }
 
-function processMultiCurrencyData(data) {
+function processMultiCurrencyData(data, currencyCode) {
     return data.map(row => {
         const debit = parseFloat(row["JournalLineDebitAmount"]) || 0;
         const credit = parseFloat(row["JournalLineCreditAmount"]) || 0;
 
-        // const amount = debit - credit;
+        const amount = debit - credit;
         
         // Logic for handling Base Currency (Amount = Debit - Credit)
         if (row["Currency Code"] === currencyCode) {
-            row["Amount"] = (debit - credit).toFixed(4);
+            row["Amount"] = amount.toFixed(2);
         } else {
             // Logic for handling foreign currencies (Amount = Foreign Amount)
             row["Amount"] = parseFloat(row["Foreign Amount"]);

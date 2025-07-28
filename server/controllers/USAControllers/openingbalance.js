@@ -58,7 +58,7 @@ function processData(data) {
         const credit = parseFloat(row["Credit"]) || 0;
         const amount = debit - credit;
 
-        row["Amount"] = isNaN(amount) ? "" : amount.toFixed(2);
+        row["Amount"] = amount.toFixed(2);
         row["Journal No"] = "Opening balance";
 
         // 🛠 Replace Account values if matched

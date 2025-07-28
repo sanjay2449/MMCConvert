@@ -16,7 +16,7 @@ const changeColumnName = {
     "Open Balance": "Product/Service Amount",
     "Foreign Open Balance": "Foreign Open Balance",
     "Class": "Product/Service Class",
-    "Currency": "Currency",
+    "Currency": "Currency Code",
     "Exchange Rate": "Exchange Rate",
     "Terms": "Terms"
 };
@@ -29,7 +29,7 @@ const changeColumnNameForAdjustmentNote = {
     "Open Balance": "Product/Service Amount",
     "Foreign Open Balance": "Foreign Open Balance",
     "Class": "Product/Service Class",
-    "Currency": "Currency",
+    "Currency": "Currency Code",
     "Exchange Rate": "Exchange Rate",
     "Terms": "Terms"
 };
@@ -43,7 +43,7 @@ const allowedInvoiceColumns = [
 const allowedAdjustmentNoteColumns = [
     "Adjustment Note No", "Customer", "Adjustment Note Date", "Product/Service",
     "Product/Service Description", "Product/Service Quantity", "Product/Service Rate",
-    "Product/Service Amount", "Product/Service Class", "Currency", "Exchange Rate", "Terms"
+    "Product/Service Amount", "Product/Service Class", "Currency Code", "Exchange Rate", "Terms"
 ];
 
 function renameColumns(data, changeMap) {
@@ -164,10 +164,11 @@ export async function processOpenAR(req, res) {
 }
 
 export async function processMultiCurrencyOpenAR(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
     try {
         const jsonData = await readExcelToJson(excelFilePath);
         const renamedData = renameColumns(jsonData, changeColumnName);
-        const withType = assignMultiCurrencyInvoiceType(renamedData);
+        const withType = assignMultiCurrencyInvoiceType(renamedData, currencyCode);
         const normalizedData = normalizeInvoiceNumbers(withType);
 
         // Split by Type

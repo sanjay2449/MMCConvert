@@ -22,9 +22,10 @@ const changeColumnName = {
         "PurchaseOrderLineClassRefFullName": "Expense Class",
         "PurchaseOrderLineTaxCodeRefFullName": "Expense Tax Code",
         "PurchaseOrderLineItemRefFullName": "Product/Service",
+        "PurchaseOrderLineMemo": "Product/Service Description",
         "PurchaseOrderLineQty": "Product/Service Quantity",
         "PurchaseOrderLineUnitPrice": "Product/Service Rate",
-        "PurchaseOrderLineTaxCodeRefFullName": "Product/Service Tax Code",
+        "PurchaseOrderLineAmount": "Product/Service Amount",
         "ClassRefFullName": "Product/Service Class",
         "CurrencyRefListID": "Currency Code",
         "ExchangeRate": "Exchange Rate",
@@ -127,6 +128,7 @@ function processData(data) {
                 row["Expense Line Amount"] = row["Product/Service Amount"];
 
                 row["Expense Tax Code"] = row["Product/Service Tax Code"];
+
                 return row;
         });
 }
@@ -136,7 +138,7 @@ export async function uploadPurchaseOrder(req, res) {
         if (!req.file) return res.status(400).send("No file uploaded");
         try {
                 await move(req.file.path, excelFilePath, { overwrite: true });
-                console.log("Global Purchase Order file saved at:", excelFilePath);
+                console.log("Australia Purchase Order file saved at:", excelFilePath);
                 res.send({ message: "File uploaded and saved successfully" });
         } catch (err) {
                 console.error("❌ File move error:", err.message);
@@ -160,7 +162,7 @@ export async function processPurchaseOrder(req, res) {
 
                 await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
-                console.log("Global Purchase Order Excel processed.");
+                console.log("✅Australia Purchase Order Excel processed.");
                 res.send("Excel processed successfully with all business rules applied.");
         } catch (error) {
                 console.error("❌ Error processing Excel:", error.message);
