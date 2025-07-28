@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTrash } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
-import { useRef } from 'react';
 import { FaCode } from 'react-icons/fa';
+import { useRef } from 'react';
+import { useOutsideAndEscape } from "./useOutsideAndEscape";
+
 
 const functionRoutesForSageOneToQbo = {
   Masters: {
@@ -129,7 +131,11 @@ const SageOneToQbo = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const fileInputRef = useRef(null);
+  const infoRef = useRef(null);
+  const historyRef = useRef(null);
 
+  useOutsideAndEscape(infoRef, () => setShowInfoModal(false));
+  useOutsideAndEscape(historyRef, () => setShowHistoryModal(false));
 
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
@@ -630,7 +636,9 @@ const SageOneToQbo = () => {
       )}
       {showHistoryModal && (
         <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
+          <div
+            ref={historyRef}
+            className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
             <button
               className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
               onClick={() => setShowHistoryModal(false)}
@@ -711,7 +719,9 @@ const SageOneToQbo = () => {
       {showInfoModal && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
           {/* Modal box */}
-          <div className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
+          <div
+            ref={infoRef}
+            className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
 
             {/* Close Button */}
             <button

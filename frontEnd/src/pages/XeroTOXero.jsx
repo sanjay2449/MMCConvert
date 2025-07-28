@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { FaFolderOpen, FaChevronDown, FaChevronRight, FaTimes, FaDownload, FaTrash } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
-import { useRef } from 'react';
 import { FaCode } from 'react-icons/fa';
+import { useRef } from 'react';
+import { useOutsideAndEscape } from "./useOutsideAndEscape";
+
 
 const functionRoutesForXeroToXero = {
   Masters: {
@@ -64,16 +66,16 @@ const fileLabels = {
   // Open Data
   "AR": ["Upload Open AR Sheet [EXCEL SHEET]"],
   "AP": ["Upload Open AP Sheet [EXCEL SHEET]"],
-  
+
   // Transactions
   "Invoice": ["Upload Invoice Sheet [EXCEL SHEET]"],
   "Creditnote": ["Upload Credit Note Sheet [EXCEL SHEET]"],
-  "Manual Journal" : ["Upload Manual Journal Sheet [EXCEL SHEET]"],
+  "Manual Journal": ["Upload Manual Journal Sheet [EXCEL SHEET]"],
   "Spend money": ["Upload Spend Money Sheet [EXCEL SHEET]"],
   "Receive money": ["Upload Receive Money Sheet [EXCEL SHEET]"],
   "Bill payment": ["Upload Bill Payment Sheet [EXCEL SHEET]"],
   "Transfer": ["Upload Transfer Sheet [EXCEL SHEET]"],
-  "Bill-Direct" : ["Upload Bill-Direct Sheet [EXCEL SHEET]"],
+  "Bill-Direct": ["Upload Bill-Direct Sheet [EXCEL SHEET]"],
   "Auth Bill": ["Upload Bill No [EXCEL SHEET]", "Upload Auth_BIll [EXCEL SHEET]"],
   "Paid-Bill": ["Upload Bill No [EXCEL SHEET]", "Upload Paid_Bill [EXCEL SHEET]"],
   "Paid-Invoice": ["Upload Invoice No [EXCEL SHEET]", "Upload Paid_Invoice [EXCEL SHEET]"],
@@ -146,7 +148,11 @@ const XeroToXero = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const fileInputRef = useRef(null);
+  const infoRef = useRef(null);
+  const historyRef = useRef(null);
 
+  useOutsideAndEscape(infoRef, () => setShowInfoModal(false));
+  useOutsideAndEscape(historyRef, () => setShowHistoryModal(false));
 
   const softwareType = file?.softwareType?.toLowerCase().replace(/\s+/g, '');
   const rawCountry = file?.countryName?.trim();
@@ -649,7 +655,9 @@ const XeroToXero = () => {
       {
         showHistoryModal && (
           <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
-            <div className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
+            <div
+              ref={historyRef}
+              className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
               <button
                 className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
                 onClick={() => setShowHistoryModal(false)}
@@ -735,7 +743,9 @@ const XeroToXero = () => {
         showInfoModal && (
           <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
             {/* Modal box */}
-            <div className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
+            <div
+              ref={infoRef}
+              className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
 
               {/* Close Button */}
               <button
