@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div className="fixed inset-0 gradient-bg flex flex-col items-center justify-center z-[9999]">
       {/* Gradient border wrapper */}
-      <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 p-[3px] rounded-full mb-4">
+      <div className="bg-gradient-to-r from-blue-400 via-red-500 to-pink-500 p-[3px] rounded-full mb-4">
         {/* Inner white circle to simulate border */}
         <div className="gradient-bg rounded-full w-30 h-30 overflow-hidden shadow-lg">
           <img

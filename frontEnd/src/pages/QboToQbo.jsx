@@ -40,17 +40,49 @@ const functionRoutesForQboToQbo = {
   TrackedFiles: {
     "Tracked Item": 'trackeditem',
     "Tracked Invoice": "trackedinvoice",
-    // "Tracked Bill": "trackedbill",
   },
 };
 
 const multiFileInputConfig = {
   "Tracked Invoice": 2,
-  "Tracked Bill": 2,
 };
-const multiFileLabels = {
-  "Tracked Invoice": ["Invoice Sheet", "Item Sheet"],
-  // "Tracked Bill": ["Bill Sheet", "COA Sheet"],
+
+const fileLabels = {
+  // Masters
+  "Charts of Account": ["Upload Chart of Account Sheet [EXCEL SHEET]"],
+  "Customer": ["Upload Customer Sheet [EXCEL SHEET]"],
+  "Supplier": ["Upload Supplier Sheet [EXCEL SHEET]"],
+  "Class": ["Upload Class Sheet [EXCEL SHEET]"],
+  "Items": ["Upload Items Sheet [EXCEL SHEET]"],
+
+  // Open Data
+  "Open AR": ["Upload Open AR Sheet [EXCEL SHEET]"],
+  "Open AP": ["Upload Open AP Sheet [EXCEL SHEET]"],
+  "Opening Balance": ["Upload Opening Balance Sheet [EXCEL SHEET]"],
+
+  // Transactions
+  "Invoice": ["Upload Invoice Sheet [EXCEL SHEET]"],
+  "Adjustment Note": ["Upload Adjustment Note Sheet [EXCEL SHEET]"],
+  "Bill": ["Upload Bill Sheet [EXCEL SHEET]"],
+  "Supplier Credit": ["Upload Supplier Credit Sheet [EXCEL SHEET]"],
+  "Cheque": ["Upload Cheque Sheet [EXCEL SHEET]"],
+  "Deposit": ["Upload Deposit Sheet [EXCEL SHEET]"],
+  "Journal": ["Upload Journal Sheet [EXCEL SHEET]"],
+  "Credit Card Charge (Expense)": ["Upload Expense Sheet [EXCEL SHEET]"],
+  "Transfer": ["Upload Transfer Sheet [EXCEL SHEET]"],
+  "Bill Payment": ["Upload Bill Payment Sheet [EXCEL SHEET]"],
+  "Invoice Payment": ["Upload Invoice Payment Sheet [EXCEL SHEET]"],
+  "Bill Payment Credit Card": ["Upload Bill Payment by Card Sheet [EXCEL SHEET]"],
+  "Journal Entry": ["Upload Journal Entry Sheet [EXCEL SHEET]"],
+  "Estimates": ["Upload Estimates Sheet [EXCEL SHEET]"],
+  "Purchase Order": ["Upload Purchase Order Sheet [EXCEL SHEET]"],
+
+  // Tracked Files (Multi-File Example)
+  "Tracked Invoice": [
+    "Upload Invoice Sheet [EXCEL SHEET]",
+    "Upload COA Sheet [EXCEL SHEET]"
+  ],
+  "Tracked Item": ["Upload Tracked Item Sheet [EXCEL SHEET]"]
 };
 
 const sectionKeyMap = {
@@ -480,12 +512,13 @@ const QboToQbo = () => {
           )}
           {selectedFunction && (
             <>
-              {multiFileInputConfig[selectedFunction] ? (
+              {selectedFunction && fileLabels[selectedFunction]?.length > 1 ? (
+                // MULTI-FILE upload
                 <div className="grid gap-4">
-                  {[...Array(multiFileInputConfig[selectedFunction])].map((_, index) => (
+                  {fileLabels[selectedFunction].map((label, index) => (
                     <div key={index} className="w-full">
                       <label className="block text-base font-semibold font-serif mb-1 text-gray-300">
-                        {multiFileLabels[selectedFunction]?.[index] || `Upload File ${index + 1}`}
+                        {label}
                       </label>
                       <input
                         type="file"
@@ -497,27 +530,40 @@ const QboToQbo = () => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <label htmlFor="dropzone-file" className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]">
-                  <p className="text-lg">Drag & Drop or Click to Upload</p>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    accept=".xlsx"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
-                  />
-                </label>
+              ) : selectedFunction && (
+                // SINGLE-FILE upload with label ABOVE input box
+                <div className="w-full">
+                  <label className="block text-base font-semibold font-serif mb-2 text-gray-300">
+                    {fileLabels[selectedFunction]?.[0] || "Upload File [EXCEL SHEET]"}
+                  </label>
+                  <label
+                    htmlFor="dropzone-file"
+                    className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]"
+                  >
+                    <p className="text-base text-gray-400">Drag & Drop or Click to Upload</p>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      accept=".xlsx"
+                      ref={fileInputRef}
+                      className="hidden"
+                      onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
+                    />
+                  </label>
+                </div>
               )}
             </>
           )}
-          {/* {loading && <div className="mt-4 text-center text-sm text-blue-400">Processing...</div>} */}
           {loading && (
             <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-400"></div>
+              <div className="flex space-x-3">
+                <span className="w-4 h-4 bg-blue-500 rounded-full animate-pulse shadow-md shadow-blue-400"></span>
+                <span className="w-4 h-4 bg-purple-500 rounded-full animate-pulse [animation-delay:-0.15s] shadow-md shadow-purple-400"></span>
+                <span className="w-4 h-4 bg-pink-500 rounded-full animate-pulse [animation-delay:-0.3s] shadow-md shadow-pink-400"></span>
+              </div>
             </div>
           )}
+
           {uploadProgress > 0 && uploadProgress < 100 && (
             <div className="w-full bg-gray-600 rounded-full mt-4">
               <div className="bg-blue-500 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full" style={{ width: `${uploadProgress}%` }}>{uploadProgress}%</div>
@@ -526,7 +572,6 @@ const QboToQbo = () => {
           <div className="flex justify-center mt-6">
             <Toaster position="top-right" />
             <div className="flex gap-4">
-              {/* <button onClick={handleUpload} disabled={!selectedFile || uploadComplete || loading} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded disabled:opacity-50">{uploadComplete ? 'Uploaded' : loading ? 'Uploading...' : 'Upload'}</button> */}
               <button
                 onClick={handleUpload}
                 disabled={
@@ -552,7 +597,6 @@ const QboToQbo = () => {
             >
               ℹ️
             </button>
-
           </div>
         </main>
       </div>

@@ -52,16 +52,38 @@ const multiFileInputConfig = {
   "Paid bill credit": 2,
   "Conversion balance": 2,
 };
-const multiFileLabels = {
-  "Auth Bill": ["Bill No", "Auth_BIll"],
-  "Paid-Bill": ["Bill No", "Paid_Bill"],
-  "Paid-Invoice": ["Invoice No", "Paid_Invoice"],
-  "Auth Invoice": ["Invoice No", "Auth_Invoice"],
-  "Paid credit note": ["Invoice No", "Paid Credit Note"],
-  "Auth Credit note": ["Invoice No", "Auth Credit Note"],
-  "Auth bill credit": ["Bill No", "Auth Bill Credit"],
-  "Paid bill credit": ["Bill No", "Paid Bill Credit"],
-  "Conversion balance": ["COA Sheet", "Trial Balance"],
+
+const fileLabels = {
+  // Masters
+  "Chart of Accounts": ["Upload Chart of Accounts Sheet [EXCEL SHEET]"],
+  "Customer Master": ["Upload Customer Sheet [EXCEL SHEET]"],
+  "Vender Master": ["Upload Supplier Sheet [EXCEL SHEET]"],
+  "Item Master": ["Upload Items Sheet [EXCEL SHEET]"],
+  "Job/Tracking Class": ["Upload Class Sheet [EXCEL SHEET]"],
+
+  // Open Data
+  "AR": ["Upload Open AR Sheet [EXCEL SHEET]"],
+  "AP": ["Upload Open AP Sheet [EXCEL SHEET]"],
+  
+  // Transactions
+  "Invoice": ["Upload Invoice Sheet [EXCEL SHEET]"],
+  "Creditnote": ["Upload Credit Note Sheet [EXCEL SHEET]"],
+  "Manual Journal" : ["Upload Manual Journal Sheet [EXCEL SHEET]"],
+  "Spend money": ["Upload Spend Money Sheet [EXCEL SHEET]"],
+  "Receive money": ["Upload Receive Money Sheet [EXCEL SHEET]"],
+  "Bill payment": ["Upload Bill Payment Sheet [EXCEL SHEET]"],
+  "Transfer": ["Upload Transfer Sheet [EXCEL SHEET]"],
+  "Bill-Direct" : ["Upload Bill-Direct Sheet [EXCEL SHEET]"],
+  "Auth Bill": ["Upload Bill No [EXCEL SHEET]", "Upload Auth_BIll [EXCEL SHEET]"],
+  "Paid-Bill": ["Upload Bill No [EXCEL SHEET]", "Upload Paid_Bill [EXCEL SHEET]"],
+  "Paid-Invoice": ["Upload Invoice No [EXCEL SHEET]", "Upload Paid_Invoice [EXCEL SHEET]"],
+  "Auth Invoice": ["Upload Invoice No [EXCEL SHEET]", "Upload Auth_Invoice [EXCEL SHEET]"],
+  "Invoice payment": ["Upload Invoice Payment Sheet [EXCEL SHEET]"],
+  "Paid credit note": ["Upload Invoice No [EXCEL SHEET]", "Upload Paid Credit Note [EXCEL SHEET]"],
+  "Auth Credit note": ["Upload Invoice No [EXCEL SHEET]", "Upload Auth Credit Note [EXCEL SHEET]"],
+  "Auth bill credit": ["Upload Bill No [EXCEL SHEET]", "Upload Auth Bill Credit [EXCEL SHEET]"],
+  "Paid bill credit": ["Upload Bill No [EXCEL SHEET]", "Upload Paid Bill Credit [EXCEL SHEET]"],
+  "Conversion balance": ["Upload COA Sheet [EXCEL SHEET]", "Upload Trial Balance [EXCEL SHEET]"],
 };
 
 const sectionKeyMap = {
@@ -513,12 +535,13 @@ const XeroToXero = () => {
           )}
           {selectedFunction && (
             <>
-              {multiFileInputConfig[selectedFunction] ? (
+              {selectedFunction && fileLabels[selectedFunction]?.length > 1 ? (
+                // MULTI-FILE upload
                 <div className="grid gap-4">
-                  {[...Array(multiFileInputConfig[selectedFunction])].map((_, index) => (
+                  {fileLabels[selectedFunction].map((label, index) => (
                     <div key={index} className="w-full">
-                      <label className="block text-sm mb-1 font-semibold font-serif text-gray-300">
-                        {multiFileLabels[selectedFunction]?.[index] || `Upload File ${index + 1}`}
+                      <label className="block text-base font-semibold font-serif mb-1 text-gray-300">
+                        {label}
                       </label>
                       <input
                         type="file"
@@ -536,31 +559,36 @@ const XeroToXero = () => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <label
-                  htmlFor="dropzone-file"
-                  className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]"
-                >
-                  <p className="text-lg">Drag & Drop or Click to Upload</p>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    accept={
-                      csvSheetFunctions.includes(selectedFunction)
-                        ? '.csv, .CSV'
-                        : excelSheetFunctions.includes(selectedFunction)
-                          ? '.xlsx, .XLSX, .xls, .XLS'
-                          : ' '
-                    }
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
-                  />
-                </label>
+              ) : selectedFunction && (
+                // SINGLE-FILE upload with label ABOVE input box
+                <div className="w-full">
+                  <label className="block text-base font-semibold font-serif mb-2 text-gray-300">
+                    {fileLabels[selectedFunction]?.[0] || "Upload File [EXCEL SHEET]"}
+                  </label>
+                  <label
+                    htmlFor="dropzone-file"
+                    className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]"
+                  >
+                    <p className="text-base text-gray-400">Drag & Drop or Click to Upload</p>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      accept={
+                        csvSheetFunctions.includes(selectedFunction)
+                          ? '.csv, .CSV'
+                          : excelSheetFunctions.includes(selectedFunction)
+                            ? '.xlsx, .XLSX .xls, .XLS'
+                            : ''
+                      }
+                      ref={fileInputRef}
+                      className="hidden"
+                      onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
+                    />
+                  </label>
+                </div>
               )}
             </>
           )}
-          {/* {loading && <div className="mt-4 text-center text-sm text-blue-400">Processing...</div>} */}
           {loading && (
             <div className="flex justify-center mt-4">
               <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-400"></div>
@@ -604,151 +632,159 @@ const XeroToXero = () => {
           </div>
         </main>
       </div>
-      {showDownloadConfirm && (
-        <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
-          <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
-            <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
-            <p>Are you sure you want to download the file for <strong>{selectedFunction}</strong>?</p>
-            <div className="flex justify-end gap-4 mt-6">
-              <button onClick={() => setShowDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
-              <button onClick={confirmDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download</button>
+      {
+        showDownloadConfirm && (
+          <div className="fixed inset-0 bg-[#0b1a3b]/80 z-50 flex justify-center items-center">
+            <div className="bg-[#112240] p-6 rounded-xl max-w-sm w-full text-white">
+              <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
+              <p>Are you sure you want to download the file for <strong>{selectedFunction}</strong>?</p>
+              <div className="flex justify-end gap-4 mt-6">
+                <button onClick={() => setShowDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
+                <button onClick={confirmDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download</button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      {showHistoryModal && (
-        <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
-            <button
-              className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
-              onClick={() => setShowHistoryModal(false)}
-            >
-              <FaTimes />
-            </button>
-            <h2 className="text-2xl font-bold mb-6 text-white border-b border-blue-300 pb-2 font-serif">
-              {file?.fileName || 'File'} History
-            </h2>
-            <div className="max-h-[400px] overflow-y-auto pr-2 custom-scroll">
-              {historyData.length > 0 ? (
-                historyData.map((entry, index) => (
-                  <div
-                    key={index}
-                    className="gradient-bg text-white rounded-lg px-4 py-3 mb-4 flex justify-between items-center shadow-md"
-                  >
-                    <div>
-                      <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
-                      <div className="text-sm text-white">Sheet: {entry.sheetName}</div>
-                      <div className="text-sm text-white">
-                        Processed on {new Date(entry.downloadedAt).toISOString().split('T')[0]}
+        )
+      }
+      {
+        showHistoryModal && (
+          <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
+            <div className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
+              <button
+                className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
+                onClick={() => setShowHistoryModal(false)}
+              >
+                <FaTimes />
+              </button>
+              <h2 className="text-2xl font-bold mb-6 text-white border-b border-blue-300 pb-2 font-serif">
+                {file?.fileName || 'File'} History
+              </h2>
+              <div className="max-h-[400px] overflow-y-auto pr-2 custom-scroll">
+                {historyData.length > 0 ? (
+                  historyData.map((entry, index) => (
+                    <div
+                      key={index}
+                      className="gradient-bg text-white rounded-lg px-4 py-3 mb-4 flex justify-between items-center shadow-md"
+                    >
+                      <div>
+                        <div className="font-semibold text-lg font-serif">Function: {entry.routeUsed}</div>
+                        <div className="text-sm text-white">Sheet: {entry.sheetName}</div>
+                        <div className="text-sm text-white">
+                          Processed on {new Date(entry.downloadedAt).toISOString().split('T')[0]}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"
+                          title="Download"
+                          onClick={() => handleHistoryDownload(entry)}
+                        >
+                          <FaDownload />
+                        </button>
+                        <button
+                          className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"
+                          title="Delete"
+                          onClick={() => {
+                            setDeleteIndex(index);
+                            setShowDeleteConfirm(true);
+                          }}
+                        >
+                          <FaTrash />
+                        </button>
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"
-                        title="Download"
-                        onClick={() => handleHistoryDownload(entry)}
-                      >
-                        <FaDownload />
-                      </button>
-                      <button
-                        className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"
-                        title="Delete"
-                        onClick={() => {
-                          setDeleteIndex(index);
-                          setShowDeleteConfirm(true);
-                        }}
-                      >
-                        <FaTrash />
-                      </button>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-white">No download history available.</p>
-              )}
+                  ))
+                ) : (
+                  <p className="text-white">No download history available.</p>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      {showDeleteConfirm && (
-        <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="gradient-bg text-white rounded-xl p-6 w-full max-w-sm shadow-2xl border border-gray-300">
-            <h3 className="text-xl font-semibold mb-4">Confirm Deletion</h3>
-            <p className="mb-6 text-sm text-white">Are you sure you want to delete this entry?</p>
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setShowDeleteConfirm(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-[#0b1a4b] px-4 py-2 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  handleHistoryDelete(deleteIndex);
-                  setShowDeleteConfirm(false);
-                  setDeleteIndex(null);
-                }}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-              >
-                Delete
-              </button>
+        )
+      }
+      {
+        showDeleteConfirm && (
+          <div className="fixed inset-0 gradient-bg bg-opacity-60 z-50 flex items-center justify-center">
+            <div className="gradient-bg text-white rounded-xl p-6 w-full max-w-sm shadow-2xl border border-gray-300">
+              <h3 className="text-xl font-semibold mb-4">Confirm Deletion</h3>
+              <p className="mb-6 text-sm text-white">Are you sure you want to delete this entry?</p>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="bg-gray-300 hover:bg-gray-400 text-[#0b1a4b] px-4 py-2 rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    handleHistoryDelete(deleteIndex);
+                    setShowDeleteConfirm(false);
+                    setDeleteIndex(null);
+                  }}
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
-      {showInfoModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          {/* Modal box */}
-          <div className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
+      {
+        showInfoModal && (
+          <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+            {/* Modal box */}
+            <div className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
 
-            {/* Close Button */}
-            <button
-              className="absolute top-4 right-4 text-white text-2xl hover:text-red-400"
-              onClick={() => setShowInfoModal(false)}
-              title="Close"
-            >
-              <FaTimes />
-            </button>
+              {/* Close Button */}
+              <button
+                className="absolute top-4 right-4 text-white text-2xl hover:text-red-400"
+                onClick={() => setShowInfoModal(false)}
+                title="Close"
+              >
+                <FaTimes />
+              </button>
 
-            {/* Modal Content */}
-            <div className="text-center mt-4">
-              <h2 className="text-3xl font-bold mb-6 underline font-serif">Information</h2>
-              <p className="text-lg leading-7 text-gray-200 mb-6">
-                Welcome to the <span className='font-semibold underline text-xl'>XERO to XERO</span> converter panel.
-                Select a function from the sidebar, upload the required files, and follow the steps to convert and download.
-                <br /><br />
-                Multi-currency files may require specifying a currency code.
-                <br /><br />
-                You can also view previously downloaded files in the History section.
-              </p>
+              {/* Modal Content */}
+              <div className="text-center mt-4">
+                <h2 className="text-3xl font-bold mb-6 underline font-serif">Information</h2>
+                <p className="text-lg leading-7 text-gray-200 mb-6">
+                  Welcome to the <span className='font-semibold underline text-xl'>XERO to XERO</span> converter panel.
+                  Select a function from the sidebar, upload the required files, and follow the steps to convert and download.
+                  <br /><br />
+                  Multi-currency files may require specifying a currency code.
+                  <br /><br />
+                  You can also view previously downloaded files in the History section.
+                </p>
 
-              <div className="text-white">
-                <h2 className="text-3xl font-bold mb-6 text-center underline font-serif">Information Table</h2>
+                <div className="text-white">
+                  <h2 className="text-3xl font-bold mb-6 text-center underline font-serif">Information Table</h2>
 
-                <div className="border border-gray-500 rounded-lg overflow-hidden">
-                  <table className="w-full table-auto border-collapse text-sm">
-                    <thead className="bg-blue-700">
-                      <tr>
-                        <th className="p-3 border font-serif text-lg border-gray-600">Function</th>
-                        <th className="p-3 border font-serif text-lg border-gray-600">Sheet By Xero/TOOL</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Object.entries(infoObject).map(([key, value], index) => (
-                        <tr key={index} className="odd:bg-[#112240] even:bg-[#1c2a4d]">
-                          <td className="p-2 border border-gray-600">{key}</td>
-                          <td className="p-2 border border-gray-600">{value}</td>
+                  <div className="border border-gray-500 rounded-lg overflow-hidden">
+                    <table className="w-full table-auto border-collapse text-sm">
+                      <thead className="bg-blue-700">
+                        <tr>
+                          <th className="p-3 border font-serif text-lg border-gray-600">Function</th>
+                          <th className="p-3 border font-serif text-lg border-gray-600">Sheet By Xero/TOOL</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {Object.entries(infoObject).map(([key, value], index) => (
+                          <tr key={index} className="odd:bg-[#112240] even:bg-[#1c2a4d]">
+                            <td className="p-2 border border-gray-600">{key}</td>
+                            <td className="p-2 border border-gray-600">{value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
       <footer className="bg-gradient-to-r from-[#0b1a3b] to-[#112240] text-gray-300 text-sm py-4 border-t border-blue-700">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-2">
@@ -763,7 +799,7 @@ const XeroToXero = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </div >
   );
 };
 export default XeroToXero;

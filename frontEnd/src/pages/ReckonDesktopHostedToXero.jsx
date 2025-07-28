@@ -45,9 +45,47 @@ const multiFileInputConfig = {
   "Name": 2,
   "Name1": 4,
 };
-const multiFileLabels = {
-  "Name": ["A", "B"],
-  "Name1": ["A", "B", "C", "D"],
+const fileLabels = {
+  // Masters
+  "Chart of Accounts": ["Upload Chart of Account Sheet [CSV SHEET]"],
+  "Customer Master": ["Upload Customer Sheet [CSV SHEET]"],
+  "Vendor Master": ["Upload Supplier Sheet [CSV SHEET]"],
+  "Item Master": ["Upload Item Sheet [CSV SHEET]"],
+  "Tracking Class": ["Upload Class Sheet [CSV SHEET]"],
+
+  // Open Data
+  "AR(Open invoices)": ["Upload Open Invoices AR Sheet [CSV SHEET]"],
+  "AP(Open Bills)": ["Upload Open Bills AP Sheet [CSV SHEET]"],
+  // "Opening Balance": ["Upload Opening Balance Sheet [CSV SHEET]"],
+
+  // Transactions
+  "Invoice": ["Upload Invoice Sheet [CSV SHEET]"],
+  "Adjustment Note": ["Upload Adjustment Note Sheet [CSV SHEET]"],
+  "Bill": ["Upload Bill Sheet [CSV SHEET]"],
+  "Bill credit": ["Upload Bill Credit Sheet [CSV SHEET]"],
+  "Sales Receipt": ["Upload Sales Receipt [CSV SHEET]"],
+  "Manual Journal": ["Upload Manual Journal  [CSV SHEET]"],
+  "Spend money": ["Upload Spend money [CSV SHEET]"],
+  "Receive money": ["Upload Receive money [CSV SHEET]"],
+  "Invoice Payment": ["Upload  Invoice Payment [CSV SHEET]"],
+  "Bill Payment": ["Upload Bill Payment [CSV SHEET]"],
+  "Paycheque": ["Upload Paycheque [CSV SHEET]"],
+  "Liability Cheque": ["Upload Liability Cheque [CSV SHEET]"],
+  "Inventory Adjust": ["Upload Inventory Adjust [CSV SHEET]"],
+  "Conversion Balance": ["Upload Conversion Balance [CSV SHEET]"],
+  "Receive OverPayment Money": ["Upload Receive OverPayment Money [CSV SHEET]"],
+  "Spend OverPayment Money": ["Upload Spend OverPayment Money [CSV SHEET]"],
+  "Transfer": ["Upload Transfer [CSV SHEET]"],
+
+  // Tracked Files (Multi-File Example)
+  "Name": [
+    "Upload A [CSV SHEET]",
+    "Upload B [CSV SHEET]"
+  ],
+  "Name1": [
+    "Upload A [CSV SHEET]",
+    "Upload B [CSV SHEET]"
+  ],
 };
 const sectionKeyMap = {
   masters: "Masters",
@@ -545,12 +583,13 @@ const ReckonDesktopHostedToXero = () => {
           )}
           {selectedFunction && (
             <>
-              {multiFileInputConfig[selectedFunction] ? (
+              {selectedFunction && fileLabels[selectedFunction]?.length > 1 ? (
+                // MULTI-FILE upload
                 <div className="grid gap-4">
-                  {[...Array(multiFileInputConfig[selectedFunction])].map((_, index) => (
+                  {fileLabels[selectedFunction].map((label, index) => (
                     <div key={index} className="w-full">
-                      <label className="block text-sm mb-1 font-semibold font-serif text-gray-300">
-                        {multiFileLabels[selectedFunction]?.[index] || `Upload File ${index + 1}`}
+                      <label className="block text-base font-semibold font-serif mb-1 text-gray-300">
+                        {label}
                       </label>
                       <input
                         type="file"
@@ -562,25 +601,37 @@ const ReckonDesktopHostedToXero = () => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <label htmlFor="dropzone-file" className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]">
-                  <p className="text-lg">Drag & Drop or Click to Upload</p>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    accept=".csv, .CSV"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
-                  />
-                </label>
+              ) : selectedFunction && (
+                // SINGLE-FILE upload with label ABOVE input box
+                <div className="w-full">
+                  <label className="block text-base font-semibold font-serif mb-2 text-gray-300">
+                    {fileLabels[selectedFunction]?.[0] || "Upload File [EXCEL SHEET]"}
+                  </label>
+                  <label
+                    htmlFor="dropzone-file"
+                    className="cursor-pointer flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg bg-[#162447] hover:bg-[#1f2e54]"
+                  >
+                    <p className="text-base text-gray-400">Drag & Drop or Click to Upload</p>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      accept=".csv, .CSV"
+                      ref={fileInputRef}
+                      className="hidden"
+                      onChange={(e) => handleMultiFileChange(e.target.files[0], 0)}
+                    />
+                  </label>
+                </div>
               )}
             </>
           )}
-          {/* {loading && <div className="mt-4 text-center text-sm text-blue-400">Processing...</div>} */}
           {loading && (
             <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-400"></div>
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
+              </div>
             </div>
           )}
           {uploadProgress > 0 && uploadProgress < 100 && (
