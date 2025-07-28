@@ -112,8 +112,8 @@ const AdminDashboard = () => {
                 navigate('/');
         };
         return (
-                <div className="min-h-screen flex flex-col justify-between gradient-bg">
-                        <div className="flex-grow p-8 relative">
+                <div className="min-h-screen flex flex-col justify-between bg-gradient-to-r from-[#0b1a3b] to-[#112240]">
+                        <div className="flex-grow p-8 relative ">
                                 {/* 🔒 Logout Button (Top Left) */}
                                 <button
                                         onClick={logout}
