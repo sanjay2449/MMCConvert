@@ -11,10 +11,10 @@
     "LineDescription": "",
     "LineAmount": 3000,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
-    "BillNo": "",
+    "BillNo": "041024-1234",
     "Supplier": "XPD GLOBAL",
     "BillDate": "10/04/2024",
     "DueDate": "10/04/2024",
@@ -25,7 +25,7 @@
     "LineDescription": "",
     "LineAmount": 4074.84,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
     "BillNo": "XFT C25A/19",
@@ -39,7 +39,7 @@
     "LineDescription": "",
     "LineAmount": 120,
     "Currency": "EUR",
-    "Exchange rate": ""
+    "Exchange Rate": "1.05"
   },
   {
     "BillNo": "XFT C25A/56",
@@ -53,7 +53,7 @@
     "LineDescription": "",
     "LineAmount": 10500,
     "Currency": "EUR",
-    "Exchange rate": ""
+    "Exchange Rate": "1.14"
   },
   {
     "BillNo": "S00014832/B",
@@ -67,7 +67,7 @@
     "LineDescription": "",
     "LineAmount": 8430,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
     "BillNo": "QUOTE_328015",
@@ -81,7 +81,7 @@
     "LineDescription": "",
     "LineAmount": 12815.56,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
     "BillNo": "S00015039",
@@ -95,7 +95,7 @@
     "LineDescription": "",
     "LineAmount": 13840,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
     "BillNo": "2099",
@@ -109,10 +109,10 @@
     "LineDescription": "",
     "LineAmount": 4700,
     "Currency": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
-    "Ref No": "",
+    "Ref No": "041024-1235",
     "Vendor": "XPD GLOBAL",
     "Payment Date": "10/04/2024",
     "Expense Account": "Retained earnings",
@@ -120,10 +120,10 @@
     "Expense Description": "",
     "Expense Line Amount": 4124.84,
     "Currency Code": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
-    "Ref No": "",
+    "Ref No": "BillDate-1236",
     "Vendor": "INTERWORLD FREIGHT USA",
     "Payment Date": "23/01/2025",
     "Expense Account": "Retained earnings",
@@ -131,10 +131,10 @@
     "Expense Description": "",
     "Expense Line Amount": 0.25,
     "Currency Code": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   },
   {
-    "Ref No": "",
+    "Ref No": "BillDate-1237",
     "Vendor": "SHANDONG DINGXIN ELECTRONIC GLASS GROUP",
     "Payment Date": "27/12/2024",
     "Expense Account": "Retained earnings",
@@ -142,6 +142,6 @@
     "Expense Description": "",
     "Expense Line Amount": 1235.8,
     "Currency Code": "USD",
-    "Exchange rate": ""
+    "Exchange Rate": "1.00"
   }
 ]

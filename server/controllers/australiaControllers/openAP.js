@@ -20,7 +20,7 @@ const changeColumnName = {
     "Open Balance": "LineAmount",
     "Foreign Open Balance": "Foreign Open Balance",
     "Currency": "Currency",
-    "Exchange rate": "Exchange rate",
+    "Exchange Rate": "Exchange Rate",
 };
 
 const changeBillCreditColumnName = {
@@ -34,17 +34,17 @@ const changeBillCreditColumnName = {
     "LineAmount": "Expense Line Amount",
     "Foreign Open Balance": "Foreign Open Balance",
     "Currency": "Currency Code",
-    "Exchange rate": "Exchange rate",
+    "Exchange Rate": "Exchange Rate",
 };
 
 const allowedBillColumns = [
     "BillNo", "Supplier", "BillDate", "DueDate", "Terms", "Location", "Memo",
-    "Account", "LineDescription", "LineAmount", "Currency", "Exchange rate"
+    "Account", "LineDescription", "LineAmount", "Currency", "Exchange Rate"
 ];
 
 const allowedBillCreditColumns = [
     "Ref No", "Vendor", "Payment Date", "Expense Account", "Terms", "Expense Description",
-    "Expense Line Amount", "Currency Code", "Exchange rate"
+    "Expense Line Amount", "Currency Code", "Exchange Rate"
 ];
 
 // Utility functions
@@ -67,6 +67,13 @@ function assignBillType(data) {
         row["LineAmount"] = Number(amount.toFixed(2));
         row["Account"] = "Retained earnings";
         row["LineDescription"] = row["Memo"] || "";
+
+        // ✅ Format exchange rate
+        if (row["Exchange Rate"]) {
+            const rate = parseFloat(row["Exchange Rate"]);
+            if (!isNaN(rate)) row["Exchange Rate"] = rate.toFixed(2);
+        }
+
         return row;
     });
 }
@@ -79,14 +86,44 @@ function assignMultiCurrencyBillType(data) {
         row["LineAmount"] = Number(amount.toFixed(2));
         row["Account"] = "Retained earnings";
         row["LineDescription"] = row["Memo"] || "";
+
+        // ✅ Format exchange rate
+        if (row["Exchange Rate"]) {
+            const rate = parseFloat(row["Exchange Rate"]);
+            if (!isNaN(rate)) row["Exchange Rate"] = rate.toFixed(2);
+        }
+
         return row;
     });
 }
 
+
 function normalizeBillNumbers(data) {
+    let counter = 1234; // Starting point for numeric series
+
     return data.map(row => {
-        let billNo = row["BillNo"]?.toString().trim() || "";
-        row["BillNo"] = billNo.slice(0, 21);
+        let billNo = row["BillNo"]?.toString().trim();
+
+        if (!billNo) {
+            const rawDate = row["BillDate"];
+            let formattedDate = "nodate";
+
+            if (rawDate) {
+                const dateObj = new Date(rawDate);
+                if (!isNaN(dateObj.getTime())) {
+                    const day = String(dateObj.getDate()).padStart(2, '0');
+                    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                    const year = String(dateObj.getFullYear()).slice(-2);
+                    formattedDate = `${day}${month}${year}`;
+                }
+            }
+
+            // Generate using counter
+            billNo = `${formattedDate}-${counter}`;
+            counter++;
+        }
+
+        row["BillNo"] = billNo.slice(0, 21); // Enforce max length
         return row;
     });
 }
