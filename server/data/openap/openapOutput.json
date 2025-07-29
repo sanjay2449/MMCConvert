@@ -37,7 +37,7 @@
     "Memo": "",
     "Account": "Retained earnings",
     "LineDescription": "",
-    "LineAmount": 120,
+    "LineAmount": 126.13,
     "Currency": "EUR",
     "Exchange Rate": "1.05"
   },
@@ -51,7 +51,7 @@
     "Memo": "",
     "Account": "Retained earnings",
     "LineDescription": "",
-    "LineAmount": 10500,
+    "LineAmount": 11940.98,
     "Currency": "EUR",
     "Exchange Rate": "1.14"
   },
@@ -123,7 +123,7 @@
     "Exchange Rate": "1.00"
   },
   {
-    "Ref No": "BillDate-1236",
+    "Ref No": "nodate-1236",
     "Vendor": "INTERWORLD FREIGHT USA",
     "Payment Date": "23/01/2025",
     "Expense Account": "Retained earnings",
@@ -134,7 +134,7 @@
     "Exchange Rate": "1.00"
   },
   {
-    "Ref No": "BillDate-1237",
+    "Ref No": "nodate-1237",
     "Vendor": "SHANDONG DINGXIN ELECTRONIC GLASS GROUP",
     "Payment Date": "27/12/2024",
     "Expense Account": "Retained earnings",
