@@ -8,20 +8,53 @@ import QboToQbo from './pages/QboToQbo';
 import SageOneToQbo from './pages/SageOneToQbo';
 import XeroTOXero from './pages/XeroTOXero';
 import ReckonDesktopHostedToXero from './pages/ReckonDesktopHostedToXero';
-import Loader from './components/Loader'; // 👈 import Loader
+import Loader from './components/Loader';
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 3000);
+  //   return () => clearTimeout(timeout);
+  // }, []);
+  // if (loading) return <Loader />;
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 3000); // Adjust loading time if needed
+    const verifyToken = async () => {
+      try {
+        const storedToken = localStorage.getItem('token');
+        if (!storedToken) {
+          setToken(null);
+          return setLoading(false);
+        }
 
-    return () => clearTimeout(timeout);
+        const res = await fetch('http://localhost:5000/api/auth/verify', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${storedToken}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setToken(storedToken);
+        } else {
+          localStorage.removeItem('token');
+          setToken(null);
+        }
+      } catch (err) {
+        console.error("Token verification failed:", err);
+        setToken(null);
+        localStorage.removeItem('token');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyToken();
   }, []);
-
   if (loading) return <Loader />;
 
   return (
