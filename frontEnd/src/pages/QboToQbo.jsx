@@ -601,7 +601,7 @@ const QboToQbo = () => {
               className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
               title="Information"
             >
-              ℹ️
+              <img src="/info.png" alt="Info" className="w-8 h-8" />
             </button>
           </div>
         </main>
@@ -719,14 +719,11 @@ const QboToQbo = () => {
             {/* Modal Content */}
             <div className="text-center mt-4">
               <h2 className="text-3xl font-bold mb-6 underline font-serif">Information</h2>
-              <p className="text-lg leading-7 text-gray-200 mb-6">
+              <p className="text-lg leading-7 text-gray-200 mb-3 font-serif">
                 Welcome to the <span className='font-semibold underline text-xl'>QBO to QBO</span> converter panel.
-                Select a function from the sidebar, upload the required files, and follow the steps to convert and download.
-                <br /><br />
-                Multi-currency files may require specifying a currency code.
-                <br /><br />
-                You can also view previously downloaded files in the History section.
-              </p>
+                Select a function from the sidebar, upload the required files, and follow the steps to convert and download.</p>
+                <p className='text-lg leading-7 text-gray-200 mb-3 font-serif'>Multi-currency files may require specifying a currency code.</p>
+               <p className='text-lg leading-7 text-gray-200 mb-3 font-serif'> You can also view previously downloaded files in the History section.</p>
 
               <div className="text-white">
                 <h2 className="text-3xl font-bold mb-6 text-center underline font-serif">Information Table</h2>
@@ -742,8 +739,8 @@ const QboToQbo = () => {
                     <tbody>
                       {Object.entries(infoObject).map(([key, value], index) => (
                         <tr key={index} className="odd:bg-[#112240] even:bg-[#1c2a4d]">
-                          <td className="p-2 border border-gray-600">{key}</td>
-                          <td className="p-2 border border-gray-600">{value}</td>
+                          <td className="p-2 border border-gray-600 font-serif">{key}</td>
+                          <td className="p-2 border border-gray-600 font-serif">{value}</td>
                         </tr>
                       ))}
                     </tbody>

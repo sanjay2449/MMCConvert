@@ -125,7 +125,7 @@ const infoObject = {
   "Paid-CreditNote": 'Tool [EXCEL SHEET]',
   "Auth-BillCredit": 'Tool [EXCEL SHEET]',
   "Paid-BillCredit": 'Tool [EXCEL SHEET]',
-  "Conversion Balance":'Xero/Tool [CSV SHEET]'
+  "Conversion Balance": 'Xero/Tool [CSV SHEET]'
 };
 
 const XeroToXero = () => {
@@ -634,7 +634,7 @@ const XeroToXero = () => {
               className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
               title="Information"
             >
-              ℹ️
+              <img src="/info.png" alt="Info" className="w-8 h-8" />
             </button>
 
           </div>
@@ -743,7 +743,7 @@ const XeroToXero = () => {
 
       {
         showInfoModal && (
-          <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 font-serif">
             {/* Modal box */}
             <div
               ref={infoRef}

@@ -148,7 +148,7 @@ const ReckonDesktopHostedToXero = () => {
 
   useOutsideAndEscape(infoRef, () => setShowInfoModal(false));
   useOutsideAndEscape(historyRef, () => setShowHistoryModal(false));
-  
+
   useEffect(() => {
     // Set default converted file name if not already set
     if (!localStorage.getItem('convertedFileName')) {
@@ -683,7 +683,7 @@ const ReckonDesktopHostedToXero = () => {
               className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
               title="Information"
             >
-              ℹ️
+              <img src="/info.png" alt="Info" className="w-8 h-8" />
             </button>
           </div>
         </main>
@@ -718,8 +718,8 @@ const ReckonDesktopHostedToXero = () => {
       {showHistoryModal && (
         <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] bg-opacity-60 z-50 flex items-center justify-center">
           <div
-          ref={historyRef}
-           className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
+            ref={historyRef}
+            className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
             <button
               className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
               onClick={() => setShowHistoryModal(false)}
@@ -814,7 +814,7 @@ const ReckonDesktopHostedToXero = () => {
             {/* Modal Content */}
             <div className="text-center mt-4">
               <h2 className="text-3xl font-bold mb-6 underline font-serif">Information</h2>
-              <p className="text-lg leading-7 text-gray-200 mb-6">
+              <p className="text-lg leading-7 text-gray-200 mb-3 font-serif">
                 Welcome to the <span className='font-semibold underline text-xl'>RECKON DESKTOP HOSTED to XERO</span> converter panel.
                 Select a function from the sidebar, upload the required files, and follow the steps to convert and download.
                 <br /><br />
@@ -833,8 +833,8 @@ const ReckonDesktopHostedToXero = () => {
                     <tbody>
                       {Object.entries(infoObject).map(([key, value], index) => (
                         <tr key={index} className="odd:bg-[#112240] even:bg-[#1c2a4d]">
-                          <td className="p-2 border border-gray-600">{key}</td>
-                          <td className="p-2 border border-gray-600">{value}</td>
+                          <td className="p-2 border border-gray-600 font-serif">{key}</td>
+                          <td className="p-2 border border-gray-600 font-serif">{value}</td>
                         </tr>
                       ))}
                     </tbody>
