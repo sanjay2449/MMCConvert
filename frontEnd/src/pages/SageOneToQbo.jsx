@@ -38,8 +38,8 @@ const multiFileInputConfig = {
   "Chart of Accounts": 2,
   "Tax Invoice": 4,
   "Credit Note": 4,
-  "Bill": 3,
-  "Vendor credit": 3,
+  "Bill": 4,
+  "Vendor credit": 4,
   "Bill Payment": 3,
   "Deposit": 3,
   "Expense": 3,
@@ -62,8 +62,8 @@ const fileLabels = {
   // Transactions
   "Tax Invoice": ["Upload Item Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]", "Upload Tax invoice [EXCEL SHEET]"],
   "Credit Note": ["Upload Credit Note [EXCEL SHEET]", "Upload Item Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]"],
-  "Bill": ["Upload Supplier Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]"],
-  "Vendor credit": ["Upload Invoice Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]"],
+  "Bill": ["Upload Supplier Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]", "Upload Item Sheet [EXCEL SHEET]"],
+  "Vendor credit": ["Upload Invoice Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]", "Upload Item Sheet [EXCEL SHEET]"],
   "Expense": ["Upload Invoice Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]"],
   "Deposit": ["Upload Account Receipt [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]", "Upload Tax Sheet [EXCEL SHEET]"],
   "Bill Payment": ["Upload Main Sheet [EXCEL SHEET]", "Upload Supplier Sheet [EXCEL SHEET]", "Upload COA Sheet [EXCEL SHEET]"],
@@ -214,6 +214,7 @@ const SageOneToQbo = () => {
         formData.append("invoice", selectedFiles[0]);
         formData.append("coa", selectedFiles[1]);
         formData.append("tax", selectedFiles[2]);
+        formData.append("item", selectedFiles[3]);
       } else if (selectedFunction === "Expense") {
         formData.append("invoice", selectedFiles[0]);
         formData.append("coa", selectedFiles[1]);
@@ -226,6 +227,7 @@ const SageOneToQbo = () => {
         formData.append("invoice", selectedFiles[0]);
         formData.append("coa", selectedFiles[1]);
         formData.append("tax", selectedFiles[2]);
+        formData.append("item", selectedFiles[3]);
       } else {
         // fallback for unknown multi-file inputs
         selectedFiles.forEach((file, index) => {
