@@ -110,7 +110,7 @@ const Dashboard = () => {
     const regex = new RegExp(`(${term})`, 'gi');
     return text.split(regex).map((part, i) =>
       part.toLowerCase() === term.toLowerCase() ? (
-        <mark key={i} className="bg-[#0f172a] text-white rounded px-1">
+        <mark key={i} className="bg-yellow-400 text-white rounded px-1">
           {part}
         </mark>
       ) : (
@@ -124,7 +124,7 @@ const Dashboard = () => {
     <div className="min-h-screen flex flex-col gradient-bg text-white">
       <Navbar user={user} />
       <div className="flex-grow px-10 py-8 overflow-auto">
-      {/* Header */}
+        {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <FaFolder className="text-yellow-400" />
@@ -133,42 +133,58 @@ const Dashboard = () => {
         </div>
 
         {/* Summary Boxes */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div
-            onClick={() => runningRef.current?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-[#0f172a] rounded-lg shadow flex flex-col items-center">
-            <span className="text-sm text-gray-400">Running Files</span>
-            <span className="text-2xl font-bold">{runningFiles.length}</span>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="sticky top-0 z-40 bg-[#0f172a] py-4 px-6 rounded-b-xl shadow-md border-b border-gray-700 mb-4"
+        >
+          <div className="flex flex-wrap gap-4 items-center justify-between">
+            {/* Running Files */}
+            <div
+              onClick={() => runningRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#0f172a] hover:bg-[#1e293b] cursor-pointer rounded-xl shadow-md flex flex-col items-center px-6 py-4 transition-all duration-200"
+            >
+              <span className="text-sm text-gray-400">Running Files</span>
+              <span className="text-2xl font-bold text-yellow-400">{runningFiles.length}</span>
+            </div>
+
+            {/* Completed Files */}
+            <div
+              onClick={() => completedRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#0f172a] hover:bg-[#1e293b] cursor-pointer rounded-xl shadow-md flex flex-col items-center px-6 py-4 transition-all duration-200"
+            >
+              <span className="text-sm text-gray-400">Completed Files</span>
+              <span className="text-2xl font-bold text-green-400">{completedFiles.length}</span>
+            </div>
+
+            {/* Search + Button */}
+            <div className="flex flex-col md:flex-row gap-4 flex-grow justify-end items-center">
+              <input
+                type="text"
+                placeholder="Search by Name or Software-type..."
+                className="bg-gray-800 border border-gray-600 px-4 py-2 rounded-lg text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-72"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+              />
+              <button
+                onClick={() => setModalOpen(true)}
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium text-white transition duration-300 w-full md:w-auto"
+              >
+                + Create New File
+              </button>
+            </div>
           </div>
-          <div
-            onClick={() => completedRef.current?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-[#0f172a] rounded-lg shadow flex flex-col items-center">
-            <span className="text-sm text-gray-400">Completed Files</span>
-            <span className="text-2xl font-bold">{completedFiles.length}</span>
-          </div>
-          <div className="flex flex-wrap gap-4 justify-between items-center">
-            <input
-              type="text"
-              placeholder="Search by Name or Software-type..."
-              className="bg-gray-800 border border-gray-600 px-2 py-3 rounded w-full md:w-75 text-sm text-white"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-            />
-          </div>
-          <Toaster position="top-right" />
+
+          {/* Modal + Toast */}
           <NewFileModal isOpen={modalOpen} setIsOpen={setModalOpen} onAddFile={handleCreate} />
-          <button
-            onClick={() => setModalOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm font-medium"
-          >
-            + Create New File
-          </button>
-        </div>
+          <Toaster position="top-right" />
+        </motion.div>
 
         {/* Running Files */}
         <section
           ref={runningRef}
-          className="mb-8 gradient-bg border-2 border-gray-700 p-6 rounded-3xl shadow-lg">
+          className="mb-4 gradient-bg border-2 border-gray-700 p-6 rounded-b-3xl shadow-lg">
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 underline">
             <FaRocket className="text-pink-400" />
             Running Files
@@ -183,7 +199,7 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="gradient-bg p-4 rounded-xl shadow-lg border-l-4 border-yellow-500"
+                className="gradient-bg p-4 rounded-b-xl shadow-lg border-l-4 border-yellow-500 "
               >
                 <p className="text-lg font-semibold font-serif underline mb-1">
                   {highlightMatch(file.fileName, debouncedSearchTerm)}
@@ -250,7 +266,7 @@ const Dashboard = () => {
         {/* Completed Files */}
         <section
           ref={completedRef}
-          className='mb-8 gradient-bg border-2 border-gray-700 p-6 rounded-3xl shadow-lg'>
+          className='mb-8 gradient-bg border-2 border-gray-700 p-6 rounded-b-3xl shadow-lg'>
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 underline">
             <FaCheck className="text-green-400" />
             Completed Files
@@ -265,7 +281,7 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#0f172a] p-4 rounded-xl shadow-lg border-l-4 border-green-500"
+                className="bg-[#0f172a] p-4 rounded-b-xl shadow-lg border-l-4 border-green-500"
               >
                 <p className="text-lg font-semibold font-serif line-through mb-1">
                   {highlightMatch(file.fileName, debouncedSearchTerm)}

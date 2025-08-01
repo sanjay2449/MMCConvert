@@ -13,14 +13,6 @@ import Loader from './components/Loader';
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  //   return () => clearTimeout(timeout);
-  // }, []);
-  // if (loading) return <Loader />;
   useEffect(() => {
     const verifyToken = async () => {
       try {
@@ -30,7 +22,7 @@ function App() {
           return setLoading(false);
         }
 
-        const res = await fetch('http://localhost:5000/api/auth/verify', {
+        const res = await fetch('/api/auth/verify', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${storedToken}`,
