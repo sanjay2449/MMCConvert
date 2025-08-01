@@ -508,7 +508,7 @@ const ReckonDesktopHostedToXero = () => {
   const renderSection = (name, label) => (
     <div key={name} className="transition-all duration-300">
       <button
-        className="w-full flex items-center justify-between py-2 mt-4 text-left font-semibold text-white hover:text-blue-300"
+        className="w-full sm:w-auto flex items-center justify-between py-2 mt-4 text-left font-semibold text-white hover:text-blue-300"
         onClick={() => setOpenSection(openSection === name ? '' : name)}
       >
         <div className="flex items-center gap-2">
@@ -540,14 +540,14 @@ const ReckonDesktopHostedToXero = () => {
         country: file?.countryName,
         currencyStatus: file?.currencyStatus,
       }} />
-      <div className="flex flex-1 overflow-hidden custom-scroll">
-        <aside className="w-64 gradient-bg p-1 ml-3 border-r border-[#1c2a4d] flex flex-col overflow-y-auto h-full custom-scroll">
+      <div className="flex flex-col sm:flex-row flex-1 overflow-hidden custom-scroll">
+        <aside className="w-full sm:w-64 gradient-bg p-2 sm:ml-3 border-r border-[#1c2a4d] flex flex-col overflow-y-auto h-auto sm:h-full custom-scroll">
           <button
             onClick={() => {
               fetchHistory();
               setShowHistoryModal(true);
             }}
-            className="text-left py-2 px-3 text-white hover:text-blue-300 flex gap-2 items-center"
+            className="w-full sm:w-auto text-left py-2 px-3 text-white hover:text-blue-300 flex gap-2 items-center"
           >
             <FaFolderOpen /> History
           </button>
@@ -561,7 +561,7 @@ const ReckonDesktopHostedToXero = () => {
               Selected Function: <span className="text-gray-300 font-semibold font-serif">{selectedFunction || ' '}</span>
             </h1>
             {(selectedFunction || selectedFile) && (
-              <button className="text-red-400 hover:text-red-600 text-lg" onClick={handleReset} title="Clear">
+              <button className="text-red-400 hover:text-red-600 text-lg w-full sm:w-auto" onClick={handleReset} title="Clear">
                 <FaTimes />
               </button>
             )}
@@ -647,7 +647,7 @@ const ReckonDesktopHostedToXero = () => {
           )}
           <div className="flex justify-center mt-6">
             <Toaster position="top-right" />
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               {/* <button onClick={handleUpload} disabled={!selectedFile || uploadComplete || loading} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded disabled:opacity-50">{uploadComplete ? 'Uploaded' : loading ? 'Uploading...' : 'Upload'}</button> */}
               <button
                 onClick={handleUpload}
@@ -659,11 +659,11 @@ const ReckonDesktopHostedToXero = () => {
                     ? selectedFiles.length !== multiFileInputConfig[selectedFunction] || selectedFiles.some(f => !f)
                     : !selectedFiles[0])
                 }
-                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded disabled:opacity-50"
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded disabled:opacity-50 w-full sm:w-auto"
               >
                 {uploadComplete ? 'Uploaded' : loading ? 'Uploading...' : 'Upload'}
               </button>
-              <button onClick={handleConvert} disabled={!uploadComplete || convertComplete || loading} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded disabled:opacity-50">{convertComplete ? 'Converted' : loading ? 'Converting...' : 'Convert'}</button>
+              <button onClick={handleConvert} disabled={!uploadComplete || convertComplete || loading} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded disabled:opacity-50 w-full sm:w-auto">{convertComplete ? 'Converted' : loading ? 'Converting...' : 'Convert'}</button>
               {/* <button onClick={handleDownload} disabled={!downloadReady || loading} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50">Download</button> */}
               <button
                 onClick={() =>
@@ -672,7 +672,7 @@ const ReckonDesktopHostedToXero = () => {
                     : handleSingleDownload()
                 }
                 disabled={!downloadReady || loading}
-                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50"
+                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded disabled:opacity-50 w-full sm:w-auto"
               >
                 Download
               </button>
@@ -680,11 +680,16 @@ const ReckonDesktopHostedToXero = () => {
             {/* Floating Info Button */}
             <button
               onClick={() => setShowInfoModal(true)}
-              className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
+              className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 sm:p-4 rounded-full shadow-lg z-50 transition-all duration-200 w-14 h-14 sm:w-auto sm:h-auto flex items-center justify-center"
               title="Information"
             >
-              <img src="/info.png" alt="Info" className="w-8 h-8" />
+              <img
+                src="/info.png"
+                alt="Info"
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              />
             </button>
+
           </div>
         </main>
       </div>
@@ -695,8 +700,8 @@ const ReckonDesktopHostedToXero = () => {
             <h2 className="text-lg font-semibold mb-4">Confirm Download</h2>
             <p>Download file for <strong>{selectedFunction}</strong>?</p>
             <div className="flex justify-end gap-4 mt-6">
-              <button onClick={() => setShowSingleDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
-              <button onClick={confirmSingleDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download</button>
+              <button onClick={() => setShowSingleDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded w-full sm:w-auto">Cancel</button>
+              <button onClick={confirmSingleDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded w-full sm:w-auto">Yes, Download</button>
             </div>
           </div>
         </div>
@@ -708,8 +713,8 @@ const ReckonDesktopHostedToXero = () => {
             <h2 className="text-lg font-semibold mb-4">Confirm Multi-sheet Download</h2>
             <p>This will download multiple CSV files for <strong>{selectedFunction}</strong>.</p>
             <div className="flex justify-end gap-4 mt-6">
-              <button onClick={() => setShowMultiDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
-              <button onClick={confirmMultiDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Yes, Download All</button>
+              <button onClick={() => setShowMultiDownloadConfirm(false)} className="bg-gray-400 text-black px-4 py-2 rounded w-full sm:w-auto">Cancel</button>
+              <button onClick={confirmMultiDownload} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded w-full sm:w-auto">Yes, Download All</button>
             </div>
           </div>
         </div>
@@ -721,7 +726,7 @@ const ReckonDesktopHostedToXero = () => {
             ref={historyRef}
             className="gradient-bg rounded-2xl p-6 w-[95%] max-w-3xl shadow-2xl relative border border-blue-400">
             <button
-              className="absolute top-3 right-4 text-white text-xl hover:text-red-400"
+              className="absolute top-3 right-4 text-white text-xl hover:text-red-400 w-full sm:w-auto"
               onClick={() => setShowHistoryModal(false)}
             >
               <FaTimes />
@@ -745,14 +750,14 @@ const ReckonDesktopHostedToXero = () => {
                     </div>
                     <div className="flex gap-2">
                       <button
-                        className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"
+                        className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full w-full sm:w-auto"
                         title="Download"
                         onClick={() => handleHistoryDownload(entry)}
                       >
                         <FaDownload />
                       </button>
                       <button
-                        className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"
+                        className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full w-full sm:w-auto"
                         title="Delete"
                         onClick={() => {
                           setDeleteIndex(index);
@@ -779,7 +784,7 @@ const ReckonDesktopHostedToXero = () => {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-[#0b1a4b] px-4 py-2 rounded"
+                className="bg-gray-300 hover:bg-gray-400 text-[#0b1a4b] px-4 py-2 rounded w-full sm:w-auto"
               >
                 Cancel
               </button>
@@ -789,7 +794,7 @@ const ReckonDesktopHostedToXero = () => {
                   setShowDeleteConfirm(false);
                   setDeleteIndex(null);
                 }}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded w-full sm:w-auto"
               >
                 Delete
               </button>
@@ -805,7 +810,7 @@ const ReckonDesktopHostedToXero = () => {
             className="bg-[#0b1a3b] text-white rounded border border-gray-500 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 custom-scroll">
             {/* Close Button */}
             <button
-              className="absolute top-4 right-4 text-white text-2xl hover:text-red-400"
+              className="absolute top-4 right-4 text-white text-2xl hover:text-red-400 w-full sm:w-auto"
               onClick={() => setShowInfoModal(false)}
               title="Close"
             >
