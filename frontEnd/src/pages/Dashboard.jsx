@@ -1,6 +1,7 @@
 // import { useEffect, useState, useRef } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
-import { FaRocket, FaFolder, FaCheck, FaEye, FaCode } from 'react-icons/fa';
+// import { FaRocket, FaFolder, FaCheck, FaEye, FaCode, FaTimes } from 'react-icons/fa';
+import { FaRocket, FaFolder, FaCheck, FaEye, FaCode, FaTimes } from 'react-icons/fa';
 import NewFileModal from '../components/NewFileModal';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
@@ -12,6 +13,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 const Dashboard = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const runningRef = useRef(null);
   const completedRef = useRef(null);
   // Polyfill for smooth scrolling in older browsers
@@ -119,6 +121,48 @@ const Dashboard = () => {
     );
   };
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slideImages = [
+    { src: '/img1.png', caption: 'Step 1' },
+    { src: '/img2.png', caption: 'Step 2' },
+    { src: '/img3.png', caption: 'Step 3' },
+    { src: '/img4.png', caption: 'Step 4.' },
+    { src: '/img5.png', caption: 'Step 5' },
+    { src: '/img6.png', caption: 'Step 6' },
+    { src: '/img7.png', caption: 'Step 7' },
+    { src: '/img8.png', caption: 'Step 8' },
+    { src: '/img9.png', caption: 'Step 9' },
+    { src: '/img10.png', caption: 'Step 10.' },
+    { src: '/img11.png', caption: 'Step 11' },
+    { src: '/img12.png', caption: 'Step 12' },
+    { src: '/img13.png', caption: 'Step 13' },
+    { src: '/img14.png', caption: 'Step 14' },
+    { src: '/img15.png', caption: 'Step 15' },
+    { src: '/img16.png', caption: 'Step 16' },
+    { src: '/img17.png', caption: 'Step 17' },
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slideImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slideImages.length) % slideImages.length);
+  };
+
+  const touchStartXRef = useRef(null);
+
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartXRef.current - touchEndX;
+    if (diff > 50) nextSlide();
+    else if (diff < -50) prevSlide();
+  };
 
   return (
     <div className="min-h-screen flex flex-col gradient-bg text-white">
@@ -323,7 +367,6 @@ const Dashboard = () => {
           </div>
         </section>
       </div>
-
       {/* Footer */}
       <footer className="bg-[#0f172a] border-t border-blue-800 text-gray-400 text-sm py-4 fixed bottom-0 left-0 w-full z-50">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -337,7 +380,82 @@ const Dashboard = () => {
             © {new Date().getFullYear()} MMC Convert. All rights reserved.
           </div>
         </div>
+
+        <button
+          onClick={() => setShowInfoModal(true)}
+          className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
+          title="Get Started"
+        >
+          {/* <FaRocket className="bounce w-7 h-7 " />   */}
+          <img src="/getStarted.png" alt="Get Started" className="w-8 h-8" />
+        </button>
+
       </footer>
+
+      {/* Information Modal */}
+      {showInfoModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-0">
+          <div className="bg-[#0b1a3b] text-white w-screen h-screen rounded-none border-none shadow-none overflow-y-auto relative p-6 custom-scroll">
+
+            {/* Close Button */}
+            <button
+              className="absolute top-4 right-4 text-white text-2xl hover:text-red-400"
+              onClick={() => setShowInfoModal(false)}
+              title="Close"
+            >
+              <FaTimes />
+            </button>
+
+            {/* Modal Heading */}
+            <h2 className="text-3xl font-bold mb-2 underline text-center font-serif">How to Run This Project</h2>
+
+            {/* Slide Gallery */}
+            <div className="relative w-full overflow-hidden rounded-lg">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
+                {slideImages.map((item, index) => (
+                  <div key={index} className="w-full flex-shrink-0 flex flex-col items-center">
+                    <img
+                      src={item.src}
+                      alt={`Slide ${index + 1}`}
+                      className="w-full max-h-[70vh] object-contain rounded shadow-lg"
+                    />
+                    <p className="mt-4 text-white font-medium text-center">{item.caption}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center items-center gap-2 mt-6">
+                {slideImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-blue-500 scale-125' : 'bg-gray-500'
+                      }`}
+                  />
+                ))}
+              </div>
+              {/* Navigation buttons */}
+              <button
+                onClick={prevSlide}
+                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 z-10"
+              >
+                ‹
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 z-10"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

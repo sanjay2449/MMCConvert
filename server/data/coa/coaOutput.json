@@ -1,10 +1,894 @@
 [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
+  {
+    "Account No.": 100,
+    "Account": "CAJA",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 100.01,
+    "Account": "CAJA:Caja General",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 100.02,
+    "Account": "CAJA:Caja Chica",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101,
+    "Account": "BANCOS",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.01,
+    "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001083-2",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.02,
+    "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001077-8",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.03,
+    "Account": "BANCOS:(CERRADO)Cta. Cheq. 11-302-001084-0",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.04,
+    "Account": "BANCOS:(CERRADO)Cta. Ahorro 21-302-021225-3",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.05,
+    "Account": "BANCOS:(CERRADO)Cta. Ahorro 21-302-021274-1",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.06,
+    "Account": "BANCOS:(CERRADO)Cta. Ahorro USD 22-302-000859-9",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 101.07,
+    "Account": "BANCOS:Cta.Gastos Operat-21-302-0332470",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents",
+    "Description": "Gastos Operativos"
+  },
+  {
+    "Account No.": 101.08,
+    "Account": "BANCOS:Cta.Otros Ingresos-21-302-0332488",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents",
+    "Description": "Otros Ingresos"
+  },
+  {
+    "Account No.": 101.09,
+    "Account": "BANCOS:Cta.BeneficiosLab-21-302-0332496",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents",
+    "Description": "Beneficios Laborales"
+  },
+  {
+    "Account No.": 101.1,
+    "Account": "BANCOS:Cta.Transf-USD-22-302-0013169",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents",
+    "Description": "Transferencias de EOS en USD"
+  },
+  {
+    "Account No.": 101.11,
+    "Account": "BANCOS:Cta. Ahorro-USFS 21-302-039430-0",
+    "Type": "Cash and cash equivalents",
+    "Detail type": "Cash and cash equivalents"
+  },
+  {
+    "Account No.": 103.01,
+    "Account": "CUENTAS POR COBRAR",
+    "Type": "Accounts receivable (A/R)",
+    "Detail type": "Accounts receivable (A/R)"
+  },
+  {
+    "Account No.": 103.02,
+    "Account": "CUENTAS POR COBRAR:Cuentas Incobrales",
+    "Type": "Accounts receivable (A/R)",
+    "Detail type": "Accounts receivable (A/R)"
+  },
+  {
+    "Account No.": 102,
+    "Account": "ANTICIPOS",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 102.01,
+    "Account": "ANTICIPOS:Anticipos",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 102.02,
+    "Account": "ANTICIPOS:Impuestos sobre la Renta (Pago a la cuenta)",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets",
+    "Description": "Pago a ls cuenta"
+  },
+  {
+    "Account No.": 102.03,
+    "Account": "ANTICIPOS:Impuestos sobre Ventas (Pagado)",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104,
+    "Account": "INVENTARIO",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.01,
+    "Account": "INVENTARIO:Inventario - Analsis de Agua",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.02,
+    "Account": "INVENTARIO:Inventario  - Cloro Tabletas",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.03,
+    "Account": "INVENTARIO:Inventario - Cloro Granulado (en libras)",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.04,
+    "Account": "INVENTARIO:Inventario - Cloradores",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.05,
+    "Account": "INVENTARIO:Inventario - Fitros",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.06,
+    "Account": "INVENTARIO:Inventario - Reactivos y Kit Cloro",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 104.07,
+    "Account": "INVENTARIO:Inventario - Accesorios y Otras",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 105,
+    "Account": "OTROS ACTIVOS CIRCULANTES",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 105.01,
+    "Account": "Prestamos a Empleados",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 105.02,
+    "Account": "Deodores Varios",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 105.03,
+    "Account": "OTROS ACTIVOS CIRCULANTES:Prestamo EOS",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets",
+    "Description": "Prestamo Motocicleta"
+  },
+  {
+    "Account No.": 3004,
+    "Account": "Uncategorized Asset (Activo sin categorizado)",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 3011,
+    "Account": "Undeposited Funds",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 8965,
+    "Account": "Inventory Asset",
+    "Type": "Non-current assets",
+    "Detail type": "Other non-current assets"
+  },
+  {
+    "Account No.": 120,
+    "Account": "MOBILIARIO Y EQUIPO",
+    "Type": "Fixed Assets",
+    "Detail type": "Other fixed assets"
+  },
+  {
+    "Account No.": 120.01,
+    "Account": "Vehicilos y Motos",
+    "Type": "Fixed Assets",
+    "Detail type": "Other fixed assets"
+  },
+  {
+    "Account No.": 120.02,
+    "Account": "Mobiliario y Equipo de Oficina",
+    "Type": "Fixed Assets",
+    "Detail type": "Other fixed assets"
+  },
+  {
+    "Account No.": 120.03,
+    "Account": "Equipo de Laboratorio",
+    "Type": "Fixed Assets",
+    "Detail type": "Other fixed assets"
+  },
+  {
+    "Account No.": 121,
+    "Account": "DEPRECIACION ACUMULADA",
+    "Type": "Fixed Assets",
+    "Detail type": "Accumulated Depreciation"
+  },
+  {
+    "Account No.": 121.01,
+    "Account": "Depreciación Vehicilos y Motos",
+    "Type": "Fixed Assets",
+    "Detail type": "Accumulated Depreciation"
+  },
+  {
+    "Account No.": 121.02,
+    "Account": "Depreciación Mobiliario y Equipo de Oficina",
+    "Type": "Fixed Assets",
+    "Detail type": "Accumulated Depreciation"
+  },
+  {
+    "Account No.": 121.03,
+    "Account": "Depreciación Equipo de Laboratorio",
+    "Type": "Fixed Assets",
+    "Detail type": "Accumulated Depreciation"
+  },
+  {
+    "Account No.": 3012,
+    "Account": "Cuentas por Pagar",
+    "Type": "Accounts payable (A/P)",
+    "Detail type": "Accounts Payable (A/P)"
+  },
+  {
+    "Account No.": 200,
+    "Account": "ACREEDORES DIVERSOS",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 201,
+    "Account": "RETENCIONES POR PAGAR",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 201.01,
+    "Account": "RETENCIONES POR PAGAR:Benef. y Prest. Lab. de Empleados",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 201.02,
+    "Account": "RETENCIONES POR PAGAR:Fondos por Ejecutar",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 201.03,
+    "Account": "RETENCIONES POR PAGAR:Transferencias no Ejecutadas",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 201.04,
+    "Account": "RETENCIONES POR PAGAR:Seguros por Pagar",
+    "Type": "Non-current liabilities",
+    "Detail type": "Other non-current liabilities"
+  },
+  {
+    "Account No.": 300,
+    "Account": "PATRIMONIO",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 300.01,
+    "Account": "Donaciones de Equipos",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 300.02,
+    "Account": "Periodos Anteriores",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 300.03,
+    "Account": "Presente Periodo",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 300.04,
+    "Account": "Donaciones Recibidas",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 3005,
+    "Account": "Opening Balance Equity (Equilibrio de apertura)",
+    "Type": "Owner's equity",
+    "Detail type": "Owner's Equity"
+  },
+  {
+    "Account No.": 3001,
+    "Account": "Services (Servicos)",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3002,
+    "Account": "Uncategorized Income (Ingresos no categorizados)",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3006,
+    "Account": "Billable Expense Income",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3007,
+    "Account": "Sales of Product Income",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3008,
+    "Account": "Unapplied Cash Payment Income",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3014,
+    "Account": "Discounts given",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 3015,
+    "Account": "Shipping Income",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400,
+    "Account": "INGRESOS DEL PROGRAMA",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.01,
+    "Account": "Fondos p/Ejecucion Proyectos",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.02,
+    "Account": "Fondos p/Asistencia Tecnica y Capac.",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.03,
+    "Account": "Fondos p/Presupuesto Aprobado",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.04,
+    "Account": "Servicios - Asistencia Tecnica",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.05,
+    "Account": "Venta - Analsis de Agua",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.06,
+    "Account": "Venta - Cloro Tabletas",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.07,
+    "Account": "Venta - Cloro Granulado (en libras)",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.08,
+    "Account": "Venta - Cloradores",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.09,
+    "Account": "Venta - Fitros",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.1,
+    "Account": "Venta - Reactivos",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.11,
+    "Account": "Venta - Kit Cloro",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.12,
+    "Account": "Venta - Accesorios y Otras Ingresos",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.13,
+    "Account": "Fondos p/Interes de Prestamos",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.14,
+    "Account": "Fondos p/Interes de cuentas Bancarias",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.15,
+    "Account": "Fondos Misceláneos",
+    "Type": "Income",
+    "Detail type": "Revenue - General"
+  },
+  {
+    "Account No.": 400.16,
+    "Account": "INGRESOS DEL PROGRAMA:Ajuste por mantenimiento y Valor",
+    "Type": "Income",
+    "Detail type": "Revenue - General",
+    "Description": "Ajuste mantenimiento cuenta de Dólar"
+  },
+  {
+    "Account No.": 500,
+    "Account": "Cost of Goods Sold",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.01,
+    "Account": "Insumos Analsis de Agua",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.02,
+    "Account": "Insumos Cloro Tabletas",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.03,
+    "Account": "Insumos Cloro Granulado (en libras)",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.04,
+    "Account": "Insumos Cloradores",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.05,
+    "Account": "Insumos Fitros",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.06,
+    "Account": "Insumos Reactivos",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.07,
+    "Account": "Insumos Accesorio y Otros",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 500.08,
+    "Account": "Insumos Accesorios y Otras",
+    "Type": "Cost of sales",
+    "Detail type": "Cost of Sales"
+  },
+  {
+    "Account No.": 3003,
+    "Account": "Uncategorized Expense(Gastos no categorizados)",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 3009,
+    "Account": "Purchases",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 3013,
+    "Account": "Unapplied Cash Bill Payment Expense",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600,
+    "Account": "SUELDOS Y SALARIOS",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.01,
+    "Account": "Coordinacion",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.02,
+    "Account": "Contabilidad/Admin",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.03,
+    "Account": "Circuit Riders",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.031,
+    "Account": "Tecnicos de Carbono",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.04,
+    "Account": "Laboratorio y Salud",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.05,
+    "Account": "Honorarios Prof/Contratista",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.06,
+    "Account": "Bonus Empleados",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.07,
+    "Account": "Pago Terceavo Mes",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.08,
+    "Account": "Pago Catorceavo Mes",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.09,
+    "Account": "Cotizacion al I.H.S.S.",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.1,
+    "Account": "Seguro de Vida Empleados",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.11,
+    "Account": "Proyeccion Social",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 600.12,
+    "Account": "Prestaciones Liquidades",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 610,
+    "Account": "GASTOS DE PROYECTOS",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 610.01,
+    "Account": "Gastos para Ejecusion de Proyectos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 610.02,
+    "Account": "Programa de Salud e Higiene",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620,
+    "Account": "GASTOS DEL OFICINA",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.01,
+    "Account": "Aquiliar de Local",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.02,
+    "Account": "Mantienmento de Equipo de Oficina",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.03,
+    "Account": "Impuestos Sobre la Renta",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.04,
+    "Account": "Papeleria y Utiles de Oficina",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.05,
+    "Account": "Servicios Publicos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.06,
+    "Account": "Propaganda y Publicidad",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.07,
+    "Account": "Pagina Web",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 620.08,
+    "Account": "Otros Gastos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630,
+    "Account": "GASTOS DE TRANSPORTE",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.01,
+    "Account": "Gastos por Transporte",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.02,
+    "Account": "Repuestos y Mantienmento de Vehicilos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.03,
+    "Account": "Gastos de Viajes",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.04,
+    "Account": "Gastos de Capacitiacion",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.05,
+    "Account": "Combustibles y Lubricantes",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.06,
+    "Account": "Matricula de Vehiculos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 630.07,
+    "Account": "Gastos de Viaticos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses",
+    "Description": "Gastos de viaticos, alimentación, etc."
+  },
+  {
+    "Account No.": 630.08,
+    "Account": "Alquiler de Motocicleta",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640,
+    "Account": "GASTOS BANCARIO",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.01,
+    "Account": "Depreciaciones",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.02,
+    "Account": "Cargo por Chequera",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.03,
+    "Account": "Tasa de Seguridad",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.04,
+    "Account": "Comision Bancaria",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.05,
+    "Account": "Perdida por cuentas incobrables",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 640.06,
+    "Account": "Gasto Diferencial Cambiario",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses",
+    "Description": "Ajuste Tasa de Cambio"
+  },
+  {
+    "Account No.": 650,
+    "Account": "Reservas",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses",
+    "Description": "Fondos de reservas de años siguientes"
+  },
+  {
+    "Account No.": 650.01,
+    "Account": "Reservas:Reservas",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL)",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.01,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Equipo",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.02,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Suministros",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.03,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Contractual",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.04,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Otro",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.05,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Personal",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.06,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Costos Indirectos",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 660.07,
+    "Account": "SERVICIO FORESTAL (CUENTA PRINCIPAL):Servicio Forestal- Transporte",
+    "Type": "Expenses",
+    "Detail type": "Office/General Administrative Expenses"
+  },
+  {
+    "Account No.": 3010,
+    "Account": "Other Miscellaneous Expense",
+    "Type": "Other Expense",
+    "Detail type": "Other Miscellaneous Expense"
+  },
+  {
+    "Account No.": 3016,
+    "Account": "Reconciliation Discrepancies",
+    "Type": "Other Expense",
+    "Detail type": "Other Miscellaneous Expense"
+  }
 ]
