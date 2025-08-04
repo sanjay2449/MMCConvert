@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import smoothscroll from 'smoothscroll-polyfill';
+import { Player } from '@lottiefiles/react-lottie-player';
+import animationData from '../assets/heroAnimation.json';
 
 const Dashboard = () => {
 
@@ -166,6 +168,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col gradient-bg text-white">
+        <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+          <Player autoplay loop src={animationData} style={{ width: '100%', height: '100%' }} />
+        </div>
       <Navbar user={user} />
       <div className="flex-grow px-10 py-8 overflow-auto">
         {/* Header */}

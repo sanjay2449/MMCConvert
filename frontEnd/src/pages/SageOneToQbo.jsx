@@ -7,6 +7,8 @@ import Navbar from '../components/Navbar';
 import { FaCode } from 'react-icons/fa';
 import { useRef } from 'react';
 import { useOutsideAndEscape } from "./useOutsideAndEscape";
+import { Player } from '@lottiefiles/react-lottie-player';
+import animationData from '../assets/heroAnimation.json';
 
 
 const functionRoutesForSageOneToQbo = {
@@ -479,6 +481,9 @@ const SageOneToQbo = () => {
 
   return (
     <div className="flex flex-col h-screen gradient-bg text-white overflow-hidden">
+    <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <Player autoplay loop src={animationData} style={{ width: '100%', height: '100%' }} />
+      </div>
       <Toaster position="top-right" />
       <Navbar userDetail={{
         name: file?.fileName,
