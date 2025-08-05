@@ -168,7 +168,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col gradient-bg text-white">
-        <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+        <div className="fixed inset-0 z-0 opacity-50 pointer-events-none">
           <Player autoplay loop src={animationData} style={{ width: '100%', height: '100%' }} />
         </div>
       <Navbar user={user} />

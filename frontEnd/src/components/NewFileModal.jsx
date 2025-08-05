@@ -65,12 +65,12 @@ export default function NewFileModal({ isOpen, setIsOpen, onAddFile }) {
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
-            enterTo="opacity-100"
+            enterTo="opacity-60"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100"
+            leaveFrom="opacity-60"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240]" aria-hidden="true" />
+            <div className="fixed inset-0 bg-gradient-to-r from-[#0b1a3b] to-[#112240] opacity-60" aria-hidden="true" />
           </Transition.Child>
 
           <div className="fixed inset-0 flex items-center justify-center p-4">
