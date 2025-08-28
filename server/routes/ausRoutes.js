@@ -28,7 +28,7 @@ import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from ".
 import{ downloadEstimates, processEstimates, uploadEstimates } from "../controllers/australiaControllers/estimates.js"; 
 import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/australiaControllers/purchaseOrder.js"
 import { downloadTrackedInvoice, processTrackedInvoice, uploadTrackedInvoice } from "../controllers/australiaControllers/trackedInvoice.js";
-
+import { downloadTrackedAdjustmentNote, processTrackedAdjustmentNote, uploadTrackedAdjustmentNote } from "../controllers/australiaControllers/trackedAdjustmentNote.js";
 // Utility to wrap async route handlers and catch errors
 const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
@@ -39,7 +39,6 @@ router.post("/upload-customer", upload.single("file"), asyncHandler(uploadCustom
 router.post("/upload-supplier", upload.single("file"), asyncHandler(uploadSupplier));
 router.post("/upload-class", upload.single("file"), asyncHandler(uploadClass));
 router.post("/upload-item", upload.single("file"), asyncHandler(uploadItem));
-router.post("/upload-trackeditem", upload.single("file"), asyncHandler(uploadtrackedItem));
 router.post("/upload-openar", upload.single("file"), asyncHandler(uploadOpenAR));
 router.post("/upload-openap", upload.single("file"), asyncHandler(uploadOpenAP));
 router.post("/upload-invoice", upload.single("file"), asyncHandler(uploadInvoice));
@@ -60,7 +59,9 @@ router.post("/upload-estimates", upload.single("file"), asyncHandler(uploadEstim
 router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadPurchaseOrder));
 
 // Corrected: Accept 2 files for Tracked Invoice
+router.post("/upload-trackeditem", upload.single("file"), asyncHandler(uploadtrackedItem));
 router.post("/upload-trackedinvoice", upload.array("files", 2), asyncHandler(uploadTrackedInvoice));
+router.post("/upload-trackedadjustmentnote", upload.array("files", 2), asyncHandler(uploadTrackedAdjustmentNote));
 
 // Convert routes
 router.post("/process-coa", asyncHandler(processCoa));
@@ -88,6 +89,7 @@ router.post("/process-journalentry", asyncHandler(processJournalEntry));
 router.post("/process-estimates", asyncHandler(processEstimates));
 router.post("/process-purchaseorder", asyncHandler(processPurchaseOrder));
 router.post("/process-trackedinvoice", asyncHandler(processTrackedInvoice))
+router.post("/process-trackedadjustmentnote", asyncHandler(processTrackedAdjustmentNote))
 
 // Download routes
 router.get("/download-coa", asyncHandler(downloadCoa));
@@ -115,5 +117,6 @@ router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
 router.get("/download-estimates", asyncHandler(downloadEstimates)); 
 router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder)); 
 router.get("/download-trackedinvoice", asyncHandler(downloadTrackedInvoice));
+router.get("/download-trackedadjustmentnote", asyncHandler(downloadTrackedAdjustmentNote));
 
 export default router;

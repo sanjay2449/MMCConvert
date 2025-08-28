@@ -44,7 +44,7 @@ const functionRoutesForQboToQbo = {
   TrackedFiles: {
     "Tracked Item": 'trackeditem',
     "Tracked Invoice": "trackedinvoice",
-    "Tracked Adjustment Note": "trackedadjustment"
+    "Tracked Adjustment Note": "trackedadjustmentnote"
   },
 };
 
