@@ -211,7 +211,7 @@ export async function processMultiCurrencyBill(req, res) {
         const numberFields = ["Unit Price/Rate", "Line Amount", "Tax Amount"];
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields);
 
-        console.log("✅Global MultiCurrency Bill Excel processed.");
+        console.log("USA MultiCurrency Bill Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

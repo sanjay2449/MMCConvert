@@ -103,6 +103,18 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        if (!row["Line Tax Code"]) {
+            row["Line Tax Code"] = "Out Of Scope";
+        }     
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 // 🟩 Upload Controller
 export async function uploadDeposit(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
@@ -133,6 +145,31 @@ export async function processDeposit(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("USA Deposit Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+
+export async function processMutiCurrencyDeposit(req, res) {
+    const { currencyCode } = req.body;
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addDepositNumber(jsonData);
+        jsonData = filterColumns(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Line Amount", "Exchange Rate"];
+        const dateFields = ["Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("USA MultiCurrency Deposit Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

@@ -107,6 +107,22 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        if (row["Expense Account Tax Amount"] === undefined || row["Expense Account Tax Amount"] === "") {
+            row["Expense Account Tax Amount"] = 0;
+        }
+        if (!row["Expense Tax Code"]) {
+            row["Expense Tax Code"] = "Out Of Scope";
+            row["Expense Account Tax Amount"] = 0;
+        }     
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 // 🟩 Upload Controller
 export async function uploadCreditCardCharge(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
@@ -136,6 +152,29 @@ export async function processCreditCardCharge(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("USA Credit Card Charge (Expense) Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+export async function processMultiCCurrencyCreditCardCharge(req, res) {
+    const { currencyCode } = req.body;  // Currency code passed from frontend
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addDepositNumber(jsonData);
+        jsonData = filterColumns(jsonData);
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Expense Account Tax Amount", "Exchange Rate", "Expense Line Amount"];
+        const dateFields = ["Payment Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("USA MultiCureency Credit Card Charge (Expense) Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

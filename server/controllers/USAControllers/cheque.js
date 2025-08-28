@@ -86,6 +86,22 @@ function processData(data) {
     });
 }
 
+function processMultiCurrencyData(data, currencyCode) {
+    return data.map(row => {
+        if (row["Expense Account Tax Amount"] === undefined || row["Expense Account Tax Amount"] === "") {
+            row["Expense Account Tax Amount"] = 0;
+        }
+        if (!row["Expense Tax Code"]) {
+            row["Expense Tax Code"] = "Out Of Scope";
+            row["Expense Account Tax Amount"] = 0;
+        }     
+
+        row["Global Tax Calculation"] = "TaxExcluded";
+
+        return row;
+    });
+}
+
 // 🟩 Upload Controller
 export async function uploadCheque(req, res) {
     if (!req.file) return res.status(400).send("No file uploaded");
@@ -115,6 +131,29 @@ export async function processCheque(req, res) {
         await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("USA Cheque Excel processed.");
+        res.send("Excel processed successfully with all business rules applied.");
+    } catch (error) {
+        console.error("❌ Error processing Excel:", error.message);
+        res.status(500).send("Error processing Excel file.");
+    }
+}
+
+export async function processMultiCurrencyCheque(req, res) {
+    const { currencyCode } = req.body;
+    try {
+        let jsonData = await readExcelToJson(excelFilePath);
+
+        jsonData = renameColumns(jsonData, changeColumnName);
+        jsonData = addChequeNumber(jsonData);
+        jsonData = filterColumns(jsonData);                  
+        jsonData = processMultiCurrencyData(jsonData, currencyCode);
+        
+        await saveJsonToFile(jsonData, outputJsonPath);
+        const numberFields = ["Expense Line Amount", "Expense Account Tax Amount", "Exchange Rate"];
+        const dateFields = ["Payment Date"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+        console.log("USA MultiCurrency Cheque Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
     } catch (error) {
         console.error("❌ Error processing Excel:", error.message);

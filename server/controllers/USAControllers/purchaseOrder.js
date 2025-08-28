@@ -133,6 +133,30 @@ function processData(data) {
         });
 }
 
+function processMultiCurrencyData(data, currencyCode) {
+        return data.map(row => {
+                // if (row["Product/Service Tax Amount"] === undefined || row["Product/Service Tax Amount"] === "") {
+                //         row["Product/Service Tax Amount"] = 0;
+                // }
+                if (!row["Product/Service Tax Code"]) {
+                        row["Product/Service Tax Code"] = "Out Of Scope";
+                        // row["Product/Service Tax Amount"] = 0;
+                }
+                if (row["Product/Service Quantity"] === undefined || row["Product/Service Quantity"] === "") {
+                        row["Product/Service Quantity"] = 1;
+                }
+
+                row["Global Tax Calculation"] = "TaxExcluded";
+
+                row["Expense Description"] = row["Product/Service Description"];
+
+                row["Expense Line Amount"] = row["Product/Service Amount"];
+
+                row["Expense Tax Code"] = row["Product/Service Tax Code"];
+
+                return row;
+        });
+}
 // 🟩 Upload Controller
 export async function uploadPurchaseOrder(req, res) {
         if (!req.file) return res.status(400).send("No file uploaded");
@@ -163,6 +187,30 @@ export async function processPurchaseOrder(req, res) {
                 await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
                 console.log("✅Australia Purchase Order Excel processed.");
+                res.send("Excel processed successfully with all business rules applied.");
+        } catch (error) {
+                console.error("❌ Error processing Excel:", error.message);
+                res.status(500).send("Error processing Excel file.");
+        }
+}
+
+export async function processMultiCurrencyPurchaseOrder(req, res) {
+        const { currencyCode } = req.body;
+        try {
+                let jsonData = await readExcelToJson(excelFilePath);
+
+                jsonData = renameColumns(jsonData, changeColumnName);
+                jsonData = addDepositNumber(jsonData);
+                jsonData = filterColumns(jsonData);
+                jsonData = processMultiCurrencyData(jsonData, currencyCode);
+
+                await saveJsonToFile(jsonData, outputJsonPath);
+                const numberFields = ["Expense Account Tax Amount", "Exchange Rate", "Expense Line Amount"];
+                const dateFields = ["Purchase Order Date", "Due Date"]
+
+                await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
+
+                console.log("USA MultiCurrency Purchase Order Excel processed.");
                 res.send("Excel processed successfully with all business rules applied.");
         } catch (error) {
                 console.error("❌ Error processing Excel:", error.message);

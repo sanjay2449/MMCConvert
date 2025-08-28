@@ -4,7 +4,7 @@ import multer from "multer";
 const upload = multer({ dest: "uploads/" });
 
 // Importing all the necessary functions from the global QBO modules
-import { downloadCoa, processCoa } from "../controllers/USAControllers/chartOfAccount.js";
+import { downloadCoa, processCoa, uploadCoa } from "../controllers/USAControllers/chartOfAccount.js";
 import { downloadCustomer, processCustomer, uploadCustomer } from "../controllers/USAControllers/customer.js";
 import { downloadSupplier, processSupplier, uploadSupplier } from "../controllers/USAControllers/supplier.js";
 import { downloadClass, processClass, uploadClass } from "../controllers/USAControllers/class_job.js";
@@ -17,18 +17,17 @@ import { downloadInvoice, processMultiCurrencyInvoice, uploadInvoice } from "../
 import { downloadAdjustmentNote, processMultiCurrencyAdjustment, uploadAdjustmentNote } from "../controllers/USAControllers/adjustmentNote.js";
 import { downloadBill, processMultiCurrencyBill, uploadBill } from "../controllers/USAControllers/bill.js";
 import { downloadSupplierCredit, processMultiCurrencySupplierCredit, uploadSupplierCredit } from "../controllers/USAControllers/suppliercredit.js";
-import { downloadCheque, processCheque, uploadCheque } from "../controllers/USAControllers/cheque.js";
-import { downloadDeposit, processDeposit, uploadDeposit } from "../controllers/USAControllers/deposit.js";
+import { downloadCheque, processMultiCurrencyCheque, uploadCheque } from "../controllers/USAControllers/cheque.js";
+import { downloadDeposit, processMutiCurrencyDeposit, uploadDeposit } from "../controllers/USAControllers/deposit.js";
 import { downloadJournal, processMultiCurrencyJournal, uploadJournal } from "../controllers/USAControllers/journal.js";
-import { downloadCreditCardCharge, processCreditCardCharge, uploadCreditCardCharge } from "../controllers/USAControllers/creditCardCharge.js";
+import { downloadCreditCardCharge, processMultiCCurrencyCreditCardCharge, uploadCreditCardCharge } from "../controllers/USAControllers/creditCardCharge.js";
 import { downloadTransfer, processTransfer, uploadTransfer } from "../controllers/USAControllers/transfer.js";
 import { downloadBillPayment, processBillPayment, uploadBillPayment } from "../controllers/USAControllers/billPayment.js";
 import { downloadInvoicePayment, processInvoicePayment, uploadInvoicePayment } from "../controllers/USAControllers/invoicePayment.js";
 import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/USAControllers/billpaymentcreditcard.js";
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/USAControllers/journalEntry.js";
-import { downloadEstimates, processEstimates, uploadEstimates } from "../controllers/USAControllers/estimates.js";
-import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/USAControllers/purchaseOrder.js"
-import { uploadCoa } from "../controllers/australiaControllers/chartOfAccount.js";
+import { downloadEstimates, processMultiCurrencyEstimates, uploadEstimates } from "../controllers/USAControllers/estimates.js";
+import{ downloadPurchaseOrder, processMultiCurrencyPurchaseOrder, uploadPurchaseOrder } from "../controllers/USAControllers/purchaseOrder.js"
 
 // Utility to wrap async route handlers and catch errors
 const asyncHandler = (fn) => (req, res, next) =>
@@ -73,18 +72,18 @@ router.post("/process-invoice", asyncHandler(processMultiCurrencyInvoice));
 router.post("/process-adjustmentnote", asyncHandler(processMultiCurrencyAdjustment));
 router.post("/process-bill", asyncHandler(processMultiCurrencyBill));
 router.post("/process-suppliercredit", asyncHandler(processMultiCurrencySupplierCredit));
-router.post("/process-cheque", asyncHandler(processCheque));
-router.post("/process-deposit", asyncHandler(processDeposit));
+router.post("/process-cheque", asyncHandler(processMultiCurrencyCheque));
+router.post("/process-deposit", asyncHandler(processMutiCurrencyDeposit));
 router.post("/process-journal", asyncHandler(processMultiCurrencyJournal));
-router.post("/process-creditcardcharge", asyncHandler(processCreditCardCharge));
+router.post("/process-creditcardcharge", asyncHandler(processMultiCCurrencyCreditCardCharge));
 router.post("/process-transfer", asyncHandler(processTransfer));
 router.post("/process-billpayment", asyncHandler(processBillPayment));
 router.post("/process-invoicepayment", asyncHandler(processInvoicePayment));
 router.post("/process-billpaymentcreditcard", asyncHandler(processBillPaymentCreditCard));
 router.post("/process-openingbalance", asyncHandler(processOpeningBalance));
 router.post("/process-journalentry", asyncHandler(processJournalEntry));
-router.post("/process-estimates", asyncHandler(processEstimates));
-router.post("/process-purchaseorder", asyncHandler(processPurchaseOrder));
+router.post("/process-estimates", asyncHandler(processMultiCurrencyEstimates));
+router.post("/process-purchaseorder", asyncHandler(processMultiCurrencyPurchaseOrder));
 
 
 // Download routes for Global QBO data
