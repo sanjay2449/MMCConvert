@@ -26,8 +26,9 @@ import { downloadBillPayment, processBillPayment, uploadBillPayment } from "../c
 import { downloadInvoicePayment, processInvoicePayment, uploadInvoicePayment } from "../controllers/USAControllers/invoicePayment.js";
 import { downloadBillPaymentCreditCard, processBillPaymentCreditCard, uploadBillPaymentCreditCard } from "../controllers/USAControllers/billpaymentcreditcard.js";
 import { downloadJournalEntry, processJournalEntry, uploadJournalEntry } from "../controllers/USAControllers/journalEntry.js";
-import { downloadEstimates, processMultiCurrencyEstimates, uploadEstimates } from "../controllers/USAControllers/estimates.js";
-import{ downloadPurchaseOrder, processMultiCurrencyPurchaseOrder, uploadPurchaseOrder } from "../controllers/USAControllers/purchaseOrder.js"
+import { downloadEstimates, processEstimates, uploadEstimates } from "../controllers/USAControllers/estimates.js";
+import{ downloadPurchaseOrder, processPurchaseOrder, uploadPurchaseOrder } from "../controllers/USAControllers/purchaseOrder.js"
+import { downloadTrackedInvoice, processTrackedInvoice, uploadTrackedInvoice } from "../controllers/USAControllers/trackedInvoice.js";
 
 // Utility to wrap async route handlers and catch errors
 const asyncHandler = (fn) => (req, res, next) =>
@@ -59,6 +60,9 @@ router.post("/upload-journalentry", upload.single("file"), asyncHandler(uploadJo
 router.post("/upload-estimates", upload.single("file"), asyncHandler(uploadEstimates));
 router.post("/upload-purchaseorder", upload.single("file"), asyncHandler(uploadPurchaseOrder));
 
+// Corrected: Accept 2 files for Tracked Invoice
+router.post("/upload-trackedinvoice", upload.array("files", 2), asyncHandler(uploadTrackedInvoice));
+
 // Convert routes for Global QBO data
 router.post("/process-coa", asyncHandler(processCoa));
 router.post("/process-customer", asyncHandler(processCustomer));
@@ -82,8 +86,9 @@ router.post("/process-invoicepayment", asyncHandler(processInvoicePayment));
 router.post("/process-billpaymentcreditcard", asyncHandler(processBillPaymentCreditCard));
 router.post("/process-openingbalance", asyncHandler(processOpeningBalance));
 router.post("/process-journalentry", asyncHandler(processJournalEntry));
-router.post("/process-estimates", asyncHandler(processMultiCurrencyEstimates));
-router.post("/process-purchaseorder", asyncHandler(processMultiCurrencyPurchaseOrder));
+router.post("/process-estimates", asyncHandler(processEstimates));
+router.post("/process-purchaseorder", asyncHandler(processPurchaseOrder));
+router.post("/process-trackedinvoice", asyncHandler(processTrackedInvoice))
 
 
 // Download routes for Global QBO data
@@ -111,6 +116,7 @@ router.get("/download-openingbalance", asyncHandler(downloadOpeningBalance));
 router.get("/download-journalentry", asyncHandler(downloadJournalEntry));
 router.get("/download-estimates", asyncHandler(downloadEstimates));
 router.get("/download-purchaseorder", asyncHandler(downloadPurchaseOrder));
+router.get("/download-trackedinvoice", asyncHandler(downloadTrackedInvoice));
 
 
 export default router;

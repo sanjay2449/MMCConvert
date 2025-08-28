@@ -44,11 +44,13 @@ const functionRoutesForQboToQbo = {
   TrackedFiles: {
     "Tracked Item": 'trackeditem',
     "Tracked Invoice": "trackedinvoice",
+    "Tracked Adjustment Note": "trackedadjustment"
   },
 };
 
 const multiFileInputConfig = {
   "Tracked Invoice": 2,
+  "Tracked Adjustment Note": 2
 };
 
 const fileLabels = {
@@ -86,7 +88,11 @@ const fileLabels = {
     "Upload Invoice Sheet [EXCEL SHEET]",
     "Upload COA Sheet [EXCEL SHEET]"
   ],
-  "Tracked Item": ["Upload Tracked Item Sheet [EXCEL SHEET]"]
+  "Tracked Item": ["Upload Tracked Item Sheet [EXCEL SHEET]"],
+  "Tracked Adjustment Note": [
+    "Upload Adjustment Note Sheet [EXCEL SHEET]",
+    "Upload COA Sheet [EXCEL SHEET]"
+  ]
 };
 
 const sectionKeyMap = {
