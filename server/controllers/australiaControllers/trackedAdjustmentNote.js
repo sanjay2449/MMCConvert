@@ -181,7 +181,6 @@ export async function processTrackedAdjustmentNote(req, res) {
     invoiceData = filterColumns(invoiceData);
 
     // Step 4: Prepare removed data in journal format
-    // Step 4: Prepare removed data in journal format
     const renamedRemoved = renameColumns(removedItems, journalColumns);
     const filteredRemoved = renamedRemoved.map(row => {
       const filtered = {};
