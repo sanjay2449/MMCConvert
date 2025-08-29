@@ -154,7 +154,7 @@ const convertCreditNote = () => {
       'Product/Service Description': row['Line_Description'],
       'Product/Service Quantity': quantity,
       'Product/Service Rate': rate,
-      'Product/Service Amount': amount,
+      'Product/Service Amount': row['Line_Exclusive'],
       'Product/Service Tax Code': taxCode,
       'Product/Service Tax Amount': taxAmt,
       'Discountpercentage': row['DiscountPercentage'] || '',

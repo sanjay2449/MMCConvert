@@ -121,19 +121,22 @@ const convertTaxInvoice = () => {
     }
 
     const taxMatch = taxData.find(t => t.ID === row['Line_TaxTypeId']);
-    const taxCode = taxMatch ? taxMatch.Name : 'Out of Scope';
+    let taxCode = taxMatch ? taxMatch.Name : 'Out of Scope';
+    taxCode = taxCode.replace(/\bRate\b/gi, '').trim();  // ✅ VALID
+
+
 
     finalRows.push({
       'Invoice No': String(row['DocumentNumber']).slice(0, 21),
       'Customer': row['CustomerName'],
-      'Invoice Date': formatDate(row['Date']),
-      'Due Date': formatDate(row['DueDate']),
+      'Invoice Date': new Date(row['Date']),
+      'Due Date': new Date(row['DueDate']),
       'Global Tax Calculation': 'TaxExcluded',
       'Product/Service': product,
       'Product/Service Description': row['Line_Description'],
       'Product/Service Quantity': quantity,
       'Product/Service Rate': rate,
-      'Product/Service Amount': amount,
+      'Product/Service Amount': row['Line_Exclusive'],
       'Product/Service Tax Code': taxCode,
       'Product/Service Tax Amount': taxAmt,
       'Product/Service Class': '',

@@ -13,6 +13,7 @@ const __dirname = dirname(__filename);
 let uploadedInvoicePath = '';
 let uploadedCoaPath = '';
 let uploadedTaxPath = '';
+let uploadedItemPath = '';
 
 // ✅ Format date ➝ dd/mm/yyyy
 function formatDate(value) {
@@ -74,18 +75,21 @@ const handleSupplierBillUpload = (req, res) => {
   try {
     if (
       !req.files || !req.files.invoice ||
-      !req.files.coa || !req.files.tax
+      !req.files.coa || !req.files.tax ||
+      !req.files.item
     ) {
-      return res.status(400).json({ message: 'All 3 files (invoice, coa, tax) are required' });
+      return res.status(400).json({ message: 'All 4 files (invoice, coa, tax, item) are required' });
     }
 
     uploadedInvoicePath = req.files.invoice[0].path;
     uploadedCoaPath = req.files.coa[0].path;
     uploadedTaxPath = req.files.tax[0].path;
+    uploadedItemPath = req.files.item[0].path;
 
     console.log('✅ Supplier Bill Invoice path:', uploadedInvoicePath);
     console.log('✅ COA path:', uploadedCoaPath);
     console.log('✅ Tax path:', uploadedTaxPath);
+    console.log('✅ Item path:', uploadedItemPath);
 
     res.status(200).json({ message: 'Files uploaded successfully' });
   } catch (err) {
@@ -95,11 +99,13 @@ const handleSupplierBillUpload = (req, res) => {
 };
 
 // ✅ Convert Function
+// ✅ Convert Function
 const convertSupplierBill = () => {
   if (
     !fs.existsSync(uploadedInvoicePath) ||
     !fs.existsSync(uploadedCoaPath) ||
-    !fs.existsSync(uploadedTaxPath)
+    !fs.existsSync(uploadedTaxPath) ||
+    !fs.existsSync(uploadedItemPath)
   ) {
     throw new Error('Missing one or more uploaded files');
   }
@@ -107,8 +113,27 @@ const convertSupplierBill = () => {
   const invoiceData = readSheet(uploadedInvoicePath);
   const coaData = readSheet(uploadedCoaPath);
   const taxData = readSheet(uploadedTaxPath);
+  const itemData = readSheet(uploadedItemPath);
 
   const finalRows = [];
+
+  // ✅ Helper to convert to real Excel Date
+  function excelDate(value) {
+    try {
+      let date;
+      if (typeof value === 'number') {
+        const utcDays = value - 25569;
+        const utcValue = utcDays * 86400;
+        date = new Date(utcValue * 1000);
+      } else {
+        date = new Date(value);
+      }
+      if (isNaN(date.getTime())) return null;
+      return date;
+    } catch {
+      return null;
+    }
+  }
 
   invoiceData.forEach(row => {
     const quantity = row['Line_Quantity'] || 1;
@@ -117,13 +142,16 @@ const convertSupplierBill = () => {
     const lineType = row['LineType'];
     const selId = row['Line_SelectionId'];
 
-    // ✅ Get expense account
+    // ✅ Get expense account from COA or Item
     let account = 'Unknown';
     if (lineType === 1) {
       const match = coaData.find(acc => acc.ID === selId);
       account = match ? match.Name : 'Unknown Account';
-    } else {
-      account = 'Unknown Item'; // supplierbill has no item sheet
+    } else if (lineType === 0) {
+      const itemMatch = itemData.find(item => String(item.ID) === String(selId));
+      account = itemMatch
+        ? itemMatch['Code'] || itemMatch['Description'] || 'Unknown Item'
+        : 'Unknown Item';
     }
 
     // ✅ Tax Mapping
@@ -142,8 +170,8 @@ const convertSupplierBill = () => {
     finalRows.push({
       'Bill No': String(row['DocumentNumber']).slice(0, 21),
       'Supplier': row['SupplierName'],
-      'Bill Date': formatDate(row['Date']),
-      'Due Date': formatDate(row['DueDate']),
+      'Bill Date': excelDate(row['Date']),   // ✅ Date object
+      'Due Date': excelDate(row['DueDate']), // ✅ Date object
       'Memo': row['Message'] || '',
       'Global Tax Calculation': 'TaxExcluded',
       'Expense Account': account,
@@ -153,7 +181,8 @@ const convertSupplierBill = () => {
       'Expense Tax Code': taxCode || 'Out of Scope',
       'Expense Account Tax Amount': row['Line_Tax'] || 0,
       'Currency Code': row['Currency'] || '',
-      'Exchange Rate': row['Exchange rate'] || ''
+      'Exchange Rate': row['Exchange rate'] || '',
+      'Quantity': row['Line_Quantity'] || ''
     });
   });
 
@@ -164,13 +193,33 @@ const convertSupplierBill = () => {
   const outputPath = join(outputDir, outputFileName);
 
   const newWb = utils.book_new();
-  const newWs = utils.json_to_sheet(finalRows);
+  const newWs = utils.json_to_sheet(finalRows, { cellDates: true });
+
+  // ✅ Apply column widths
+  newWs['!cols'] = [
+    { wch: 15 }, // Bill No
+    { wch: 25 }, // Supplier
+    { wch: 12 }, // Bill Date
+    { wch: 12 }, // Due Date
+  ];
+
+  // ✅ Force date formatting (dd/mm/yyyy)
+  Object.keys(newWs).forEach(cell => {
+    if (cell.startsWith('C') || cell.startsWith('D')) { // C = Bill Date, D = Due Date
+      if (newWs[cell] && newWs[cell].v instanceof Date) {
+        newWs[cell].t = 'd';
+        newWs[cell].z = 'dd/mm/yyyy';
+      }
+    }
+  });
+
   utils.book_append_sheet(newWb, newWs, 'Supplier Bills');
   writeFile(newWb, outputPath);
 
   console.log('✅ Supplier Bill converted:', outputPath);
   return outputPath;
 };
+
 
 // ✅ Convert Handler
 const handleSupplierBillConvert = (req, res) => {

@@ -9,12 +9,13 @@ const { utils, writeFile, readFile } = xlsx;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// ✅ Upload Paths
+// Upload Paths
 let uploadedInvoicePath = '';
 let uploadedCoaPath = '';
 let uploadedTaxPath = '';
+let uploadedItemPath = '';
 
-// ✅ Format Excel date ➝ dd/mm/yyyy
+// Format Excel date ➝ dd/mm/yyyy
 function formatDate(value) {
   try {
     let date;
@@ -36,13 +37,13 @@ function formatDate(value) {
   }
 }
 
-// ✅ Read Excel into JSON
+// Read Excel into JSON
 function readSheet(filePath) {
   const wb = readFile(filePath);
   return utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
 }
 
-// ✅ Tax Mapping
+// Tax Mapping
 const embeddedTaxMapping = {
   'Standard Rate': 'Standard',
   'Old Standard Rate': 'Old Standard',
@@ -55,7 +56,7 @@ const embeddedTaxMapping = {
   'Change in Use': 'Change In Use'
 };
 
-// ✅ Upload Directory Setup
+// Upload Directory Setup
 const uploadDir = join('uploads', 'vendorcredit');
 mkdirSync(uploadDir, { recursive: true });
 
@@ -69,20 +70,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ✅ Upload Handler
+// Upload Handler
 const handleVendorCreditUpload = (req, res) => {
   try {
-    if (!req.files || !req.files.invoice || !req.files.coa || !req.files.tax) {
-      return res.status(400).json({ message: 'All 3 files (invoice, coa, tax) are required' });
+    if (!req.files || !req.files.invoice || !req.files.coa || !req.files.tax || !req.files.item) {
+      return res.status(400).json({ message: 'All 4 files (invoice, coa, tax, items) are required' });
     }
 
     uploadedInvoicePath = req.files.invoice[0].path;
     uploadedCoaPath = req.files.coa[0].path;
     uploadedTaxPath = req.files.tax[0].path;
+    uploadedItemPath = req.files.item[0].path;
 
     console.log('✅ Invoice:', uploadedInvoicePath);
     console.log('✅ COA:', uploadedCoaPath);
     console.log('✅ Tax:', uploadedTaxPath);
+    console.log('✅ Items:', uploadedItemPath);
 
     res.status(200).json({ message: 'Files uploaded successfully' });
   } catch (err) {
@@ -91,7 +94,7 @@ const handleVendorCreditUpload = (req, res) => {
   }
 };
 
-// ✅ Main Convert Function
+// Main Convert Function
 const convertVendorCredit = () => {
   if (!fs.existsSync(uploadedInvoicePath) || !fs.existsSync(uploadedCoaPath) || !fs.existsSync(uploadedTaxPath)) {
     throw new Error('Missing one or more uploaded files');
@@ -100,6 +103,7 @@ const convertVendorCredit = () => {
   const invoiceData = readSheet(uploadedInvoicePath);
   const coaData = readSheet(uploadedCoaPath);
   const taxData = readSheet(uploadedTaxPath);
+  const itemData = readSheet(uploadedItemPath);
 
   const finalRows = [];
 
@@ -111,12 +115,23 @@ const convertVendorCredit = () => {
     const selId = row['Line_SelectionId'];
 
     let account = 'Unknown';
-    if (lineType === 1) {
-      const match = coaData.find(acc => acc.ID === selId);
-      account = match ? match.Name : 'Unknown Account';
-    } else {
-      account = 'Unknown Item';
-    }
+    let description = '';
+
+if (lineType === 1) {
+  const match = coaData.find(acc => acc.ID === selId);
+  account = match ? match.Name : 'Unknown Account';
+  description = match?.Description || '';  // Optional: if COA me Description field hai
+} else if (lineType === 0) {
+  const itemMatch = itemData.find(item => String(item.ID) === String(selId));
+  if (itemMatch) {
+    account = itemMatch['Code'] || itemMatch['Description'] || 'Unknown Item';
+    description = itemMatch['Description'] || '';
+  } else {
+    account = 'Unknown Item';
+    description = '';
+  }
+}
+
 
     let taxCode = 'Out of Scope';
     if (row['Line_TaxTypeId']) {
@@ -135,13 +150,14 @@ const convertVendorCredit = () => {
       'Terms': '',
       'Global Tax Calculation': 'TaxExcluded',
       'Expense Account': account,
-      'Expense Description': row['Line_Description'],
+      'Expense Description': description,
       'Expense Line Amount': amount,
       'Expense Class': '',
       'Expense Tax Code': taxCode || 'Out of Scope',
       'Expense Account Tax Amount': row['Line_Tax'] || 0,
       'Currency Code': row['Currency'] || '',
-      'Exchange Rate': row['Exchange rate'] || ''
+      'Exchange Rate': row['Exchange rate'] || '',
+      'Quantity': row['Line_Quantity'] ||''
     });
   });
 
@@ -160,7 +176,7 @@ const convertVendorCredit = () => {
   return outputPath;
 };
 
-// ✅ Convert Handler
+// Convert Handler
 const handleVendorCreditConvert = (req, res) => {
   try {
     const outputPath = convertVendorCredit();
@@ -171,7 +187,7 @@ const handleVendorCreditConvert = (req, res) => {
   }
 };
 
-// ✅ Download Handler
+// Download Handler
 const downloadVendorCredit = (req, res) => {
   try {
     const convertedDir = join(__dirname, '..', 'converted');
@@ -192,7 +208,7 @@ const downloadVendorCredit = (req, res) => {
   }
 };
 
-// ✅ Export Handlers
+// Export Handlers
 export {
   handleVendorCreditUpload,
   handleVendorCreditConvert,

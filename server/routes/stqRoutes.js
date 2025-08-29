@@ -206,7 +206,9 @@ router.get('/download-customerreceipt', downloadCustomerReceipt);
 router.post('/upload-supplierbill', supplierBillUpload.fields([
   { name: 'invoice', maxCount: 1 },
   { name: 'coa', maxCount: 1 },
-  { name: 'tax', maxCount: 1 }
+  { name: 'tax', maxCount: 1 },
+  { name: 'item', maxCount: 1 } 
+  
 ]), handleSupplierBillUpload);
 router.post('/process-supplierbill', asyncHandler(handleSupplierBillConvert));
 router.get('/download-supplierbill', asyncHandler(downloadSupplierBill));
@@ -231,11 +233,13 @@ router.post('/process-accountreceipt', asyncHandler(handleAccountReceiptConvert)
 router.get('/download-accountreceipt', asyncHandler(downloadAccountReceipt));
 
 // 🔹 Vendor Credit Routes
-router.post('/upload-vendorcredit', vendorCreditUpload.fields([
+router.post('/upload-vendorcredit', upload.fields([
   { name: 'invoice', maxCount: 1 },
   { name: 'coa', maxCount: 1 },
-  { name: 'tax', maxCount: 1 }
+  { name: 'tax', maxCount: 1 },
+  { name: 'item', maxCount: 1 },
 ]), handleVendorCreditUpload);
+
 router.post('/process-vendorcredit', asyncHandler(handleVendorCreditConvert));
 router.get('/download-vendorcredit', asyncHandler(downloadVendorCredit));
 

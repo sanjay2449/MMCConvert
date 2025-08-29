@@ -92,7 +92,7 @@ const convertAP = () => {
       Amount: Math.abs(amount),
       Currency: '',
       ExchangeRate: '',
-      AccountCode: '32000'
+      AccountCode: 'Retained Earnings'
     };
 
     if (isCredit) {

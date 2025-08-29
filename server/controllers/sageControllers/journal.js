@@ -144,11 +144,11 @@ function isValidTransactionType(type) {
 function isValidRow(row) {
   const t = row['transactiontype'];
   const hasDate = row['accountdate'];
-  const hasRef = row['reference'];
   const hasAcc = row['accountdescription'];
   const hasAmt = row['debit'] || row['credit'];
-  return isValidTransactionType(t) && hasDate && hasRef && hasAcc && hasAmt;
+  return isValidTransactionType(t) && hasDate && hasAcc && hasAmt;
 }
+
 
 // ✅ Convert Function
 const convertJournal = () => {
@@ -183,7 +183,9 @@ const convertJournal = () => {
       'Name': row['bankcustomersupplier'] || '',
       'Tax Code': row['taxcode'] || '',
       'Currency Code': row['currency'] || '',
-      'Exchange Rate': row['exchangerate'] || ''
+      'Exchange Rate': row['exchangerate'] || '',
+      'Description':row['description'] ||''
+
     }));
 
     if (mapped.length === 0) {
@@ -195,7 +197,9 @@ const convertJournal = () => {
         'Name': '',
         'Tax Code': '',
         'Currency Code': '',
-        'Exchange Rate': ''
+        'Exchange Rate': '',
+        'Description':''
+
       });
     }
 

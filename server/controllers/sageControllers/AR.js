@@ -97,7 +97,7 @@ const convertAR = () => {
 
     const common = {
       'Customer': customer,
-      'Product/Service': 'Service',
+      'Product/Service': 'Sales',
       'Product/Service Description': comment,
       'Product/Service Quantity': 1,
       'Product/Service Rate': Math.abs(amount),
@@ -109,6 +109,7 @@ const convertAR = () => {
     let classified = false;
 
     if (docType === 2) {
+      // Invoice
       invoiceRows.push({
         'Invoice No': docNumber,
         'Customer': customer,
@@ -118,12 +119,23 @@ const convertAR = () => {
       });
       classified = true;
     } else if ([3, 4, 9].includes(docType)) {
-      creditMemoRows.push({
-        'Adjustment Note No': docNumber,
-        'Customer': customer,
-        'Adjustment Note Date': lineDate,
-        ...common
-      });
+      // ✅ Fix: Only treat as Credit Memo if amount is negative
+      if (amount < 0) {
+        creditMemoRows.push({
+          'Adjustment Note No': docNumber,
+          'Customer': customer,
+          'Adjustment Note Date': lineDate,
+          ...common
+        });
+      } else {
+        invoiceRows.push({
+          'Invoice No': docNumber,
+          'Customer': customer,
+          'Invoice Date': lineDate,
+          'Due Date': dueDate,
+          ...common
+        });
+      }
       classified = true;
     }
 
