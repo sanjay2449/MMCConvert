@@ -169,6 +169,8 @@ const QboToQbo = () => {
     "The United States of America (USA)": 'usa',
   }[rawCountry] || rawCountry?.toLowerCase().replace(/\s+/g, '');
   const combinedRoutePrefix = `excel-${countryRoute}-${softwareType}`;
+  console.log(combinedRoutePrefix);
+  
   const currentFunctionRoutes = functionRoutesForQboToQbo;
 
   const getCurrencyPath = () => file?.currencyStatus?.toLowerCase() === 'multi currency' ? 'multicurrency' : 'singlecurrency';
