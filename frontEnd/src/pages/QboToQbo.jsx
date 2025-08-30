@@ -254,6 +254,8 @@ const QboToQbo = () => {
       xhr.send(formData);
     } catch (err) {
       toast.error('Upload failed');
+      console.log(err);
+      
       setLoading(false);
     }
   };
@@ -278,6 +280,8 @@ const QboToQbo = () => {
       setDownloadReady(true);
     } catch (err) {
       toast.error('Convert failed');
+      console.log(err);
+      
     } finally {
       setLoading(false);
     }
@@ -338,6 +342,8 @@ const QboToQbo = () => {
 
     } catch (err) {
       toast.error('Download failed');
+      console.log(err);
+      
     } finally {
       setShowDownloadConfirm(false);
       setLoading(false);
@@ -362,6 +368,8 @@ const QboToQbo = () => {
       setHistoryData(sortedData);
     } catch (err) {
       toast.error("Failed to fetch history");
+      console.log(err);
+      
     }
   };
 
