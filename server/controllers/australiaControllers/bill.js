@@ -203,7 +203,8 @@ export async function processBill(req, res) {
 
         await saveJsonToFile(jsonData, outputJsonPath);
         const numberFields = ["Unit Price/Rate", "Line Amount", "Tax Amount"];
-        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields);
+        const dateFields = ["BillDate", "DueDate"]
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("✅Australia Bill Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
@@ -230,7 +231,8 @@ export async function processMultiCurrencyBill(req, res) {
 
         await saveJsonToFile(jsonData, outputJsonPath);
         const numberFields = ["Unit Price/Rate", "Line Amount", "Tax Amount"];
-        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields);
+        const dateFields = ["BillDate", "DueDate"];
+        await writeJsonToExcel(jsonData, modifiedExcelPath, numberFields, dateFields);
 
         console.log("Australia MultiCurrency Bill Excel processed.");
         res.send("Excel processed successfully with all business rules applied.");
