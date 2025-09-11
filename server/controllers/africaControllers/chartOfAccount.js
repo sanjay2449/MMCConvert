@@ -82,7 +82,7 @@ export async function uploadCoa(req, res) {
 
     try {
         await move(req.file.path, excelFilePath, { overwrite: true });
-        console.log("✅Australia COA file saved at:", excelFilePath);
+        console.log("✅ Africa COA file saved at:", excelFilePath);
         res.send({ message: "File uploaded and saved successfully" });
     } catch (err) {
         console.error("❌ File move error:", err.message);
@@ -120,7 +120,7 @@ export async function processCoa(req, res) {
         await saveJsonToFile(filteredData, outputJsonPath);
         await writeJsonToExcel(filteredData, modifiedExcelPath);
 
-        console.log("✅Australia COA Excel processed.");
+        console.log("✅ Africa COA Excel processed.");
         res.send("COA data processed and saved.");
     } catch (error) {
         console.error("❌ Error processing COA:", error.message);
@@ -141,7 +141,7 @@ export async function downloadCoa(req, res) {
             if (err) {
                 console.error("❌ Download error:", err.message);
             } else {
-                console.log("✅ Excel file downloaded.");
+                console.log("✅ Africa Excel file downloaded.");
             }
         });
     } catch (err) {
