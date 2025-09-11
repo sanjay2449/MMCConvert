@@ -9,6 +9,8 @@ import ausRoutes from './routes/ausRoutes.js'; // Import Australia-specific Exce
 import ausMultiCurrencyRoutes from './routes/ausMultiCurrecnyRoutes.js'; // Import Australia-specific Excel Routes For Multi Currency
 import USARoutes from './routes/USARoutes.js'; // Import Global Excel Routes For Single Currency
 import USAMultiCurrencyRoutes from './routes/USAMultiCurrencyRoutes.js'; // Import Global Excel Routes For Multi Currency
+import africaRoutes from './routes/africaRoutes.js'; // Import Global Excel Routes For Single Currency
+import africaMultiCurrencyRoutes from './routes/africaMultiCurrencyRoutes.js'; // Import Global Excel Routes For Multi Currency
 import fileRoutesSheet from './routes/fileRoutesSheet.js'; // Import file routes for saving downloaded sheets
 import file from './routes/files.js';
 import fileShowRoutes from './routes/fileShowRoutes.js';
@@ -44,6 +46,9 @@ app.use('/api/excel-australia-qbotoqbo/multicurrency', ausMultiCurrencyRoutes);
 // Excel processing routes For USA Qbo to Qbo conversion
 app.use('/api/excel-usa-qbotoqbo/singlecurrency', USARoutes);  
 app.use('/api/excel-usa-qbotoqbo/multicurrency', USAMultiCurrencyRoutes); 
+// Excel processing routes For Africa Qbo to Qbo conversion
+app.use('/api/excel-africa-qbotoqbo/singlecurrency', africaRoutes);  
+app.use('/api/excel-africa-qbotoqbo/multicurrency', africaMultiCurrencyRoutes); 
 
 // Import Australia-specific Excel Routes For Reckon Desktop to Xero conversion
 app.use('/api/excel-australia-reckondesktoptoxero/singlecurrency',router);
