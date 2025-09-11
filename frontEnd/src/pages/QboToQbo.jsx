@@ -167,8 +167,10 @@ const QboToQbo = () => {
   const countryRoute = {
     "Australia (AU)": 'australia',
     "The United States of America (USA)": 'usa',
+    "South Africa (SA)" : 'africa'
   }[rawCountry] || rawCountry?.toLowerCase().replace(/\s+/g, '');
   const combinedRoutePrefix = `excel-${countryRoute}-${softwareType}`;
+  
   console.log(combinedRoutePrefix);
   
   const currentFunctionRoutes = functionRoutesForQboToQbo;
